@@ -1,105 +1,62 @@
 "use client"
 
-import Image from 'next/image'
-import slider1 from '../../public/home/Group 544804/Group 544804@2x.png'
-import img1 from '../../public/home/Group 483641/Group 483641@2x.png'
-import img2 from '../../public/home/Group 498762/Group 498762@2x.png'
-import img3 from '../../public/home/Group 498555/Group 498555@2x.png'
-import success from '../../public/home/Group 405761/Group 405761@2x.png'
-import { useState } from 'react'
+import { useState } from 'react';
+import Home from './components/Home'
+import Demo from './components/Demo';
 
-export default function Home() {
+import phoneIcon from '../../public/home/Group 511824/Group 511824@2x.png'
+import partner from '../../public/home/Mask Group 29511/Mask Group 29511@2x.png'
+import investor from '../../public/home/Mask Group 29512/Mask Group 29512@2x.png'
+import Image from 'next/image';
+import Link from 'next/link';
 
-  const [empannelSuccess, setEmpannelSuccess] = useState(false);
+export default function HomePage() {
+
+  const [route, setRoute] = useState('Home');
+  const [login, setLogin] = useState(false);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between px-[80px] font-poppins">
-
-      <div className="flex h-screen gap-x-[40px] px-[10px] pt-[80px] items-center">
-        <div className=' flex flex-col gap-y-[10px]'>
-          <p className="text-[#0071E7] text-[26px] font-bold">Easy to use online platform</p>
-          <h1 className=" text-[45px] font-extrabold">That lets you <span className="text-[#0071E7]">service clients</span> from anywhere in the world</h1>
+    <main className={`flex h-screen flex-col items-center px-[80px] font-poppins ${(login)?' overflow-hidden':''}`}> 
+      <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`}>
+        <div className='w-full flex justify-between items-center h-[100px] px-[20px] z-[1]'>
+          <div className='text-[26px]'>FundsIndia</div>
+          <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
+            <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
+            <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
+            <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
+            <h6 className={` cursor-pointer ${(route=='Register With Us')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Register With Us')}}>Register With Us</h6>
+            <h6 className={` cursor-pointer ${(route=='Contact us')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Contact us')}}>Contact us</h6>
+            <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-[#0071E7] text-white rounded-[25px]'>Login</button>
+            <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-[#0071E7] text-[#0071E7] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
+          </div>
         </div>
-        <Image src={slider1} className='w-[525px] h-[555px]' />
+        {
+          (route==='Home' && <Home/>) || 
+          (route==='Why FundsIndiaPartner?' && <p>Why FundsIndiaPartner?</p>) || 
+          (route==='Demo' && <Demo/>) ||
+          (route==='Register With Us' && <p>Register With Us</p>) || 
+          (route==='Contact us' && <p>Contact us</p>) || 
+          (route==='Callback' && <p>Callback</p>)
+        }
       </div>
-
-      <div className="h-screen flex flex-col items-center justify-center px-[70px]">
-
-        <h2 className="text-[#0071E7] text-[35px] mb-[60px] font-bold">Connect <span className="text-black">and</span> Grow!</h2>
-        <div className="flex gap-x-[30px]">
-
-          <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
-            <Image src={img1} className='w-[105px] h-[78px]' />
-            <h5 className="text-[16px] font-semibold ">Shift your Business to higher levels of Success and Value</h5>
-            <p className="text-[14px] ">Innovative interface that guides you step-by-step and makes Partner services easy! Provide access to a wide range of value-added services to your clients and give them the investment edge they deserve.</p>
-          </div>
-          <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
-            <Image src={img2} className='w-[143px] h-[84px]' />
-            <h5 className="text-[16px] font-semibold ">Give your clients the online advantage</h5>
-            <p className="text-[14px] ">Provide a host of benefits when your clients access their investments on our easy to use online platform. All you need is an internet connection and a FundsIndiaPartner account.</p>
-          </div>
-          <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
-            <Image src={img3} className='w-[187px] h-[87px]' />
-            <h5 className="text-[16px] font-semibold ">Connect, Communicate & Collaborate</h5>
-            <p className="text-[14px] ">Connect with clients across geographical barriers, grow business, access cutting-edge advice delivery tools & services to increase the levels of success and value in your practice.</p>
-          </div>
-
-        </div>
-        
-      </div>
-
-      <div className="h-screen flex items-center justify-center  px-[40px]">
-      {
-        (!empannelSuccess) ?
-          <div className="w-[870px] h-[351px] flex flex-col p-[60px] pt-[50px] gap-y-[30px] bg-white rounded-[15px] shadow-lg items-center">
-            <h3 className=" text-[26px] font-semibold text-center">Empanel with us for <span className="text-[#0071E7]">FREE!</span></h3>
-            <div className="flex gap-x-[50px]">
-
-              <div className="flex flex-col gap-y-[25px] text-[14px]">
-                <input 
-                  placeholder="Name"
-                  className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                  type="text"
-                />
-                <input 
-                  placeholder="Email"
-                  className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                  type="email"
-                />
-                <input 
-                  placeholder="Captcha"
-                  className="h-[40px] w-[185px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px] mt-[5px]" 
-                  type="text"
-                />
-
+      {(login) &&
+        <div className='absolute w-screen h-screen bg-[rgba(0,0,0,0.22)] flex items-center justify-center' >
+          <div className='relative w-[840px] h-[450px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
+            <p className='absolute top-2 right-3 cursor-pointer font-medium' onClick={()=>{setLogin(false)}}>X</p>
+            <h2 className='text-[24px] font-semibold'>A revolutionary platform for all your investment needs</h2>
+            <div className='flex gap-x-[120px]'>
+              <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
+                <Image src={partner} className='w-[85px] h-[113px]' />
+                <Link href={'/register-with-us'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-[#0071E7] rounded-[25px] flex items-center justify-center'>Partner</Link>
               </div>
-              <div className="flex flex-col gap-y-[25px] text-[14px]">
-                <input 
-                  placeholder="Mobile Number"
-                  className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                  type="text"
-                />
-                <input 
-                  placeholder="Phone Number"
-                  className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                  type="text"
-                />
-                <button onClick={()=>{setEmpannelSuccess(true)}} className="bg-[#0071E7] h-[40px] w-[165px] rounded-[25px] text-white font-bold self-end">Submit</button>
-
+              <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
+                <Image src={investor} className='w-[97px] h-[115px]' />
+                <button className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-[#0071E7] rounded-[25px]'>Investor</button>
               </div>
-
             </div>
           </div>
-          :
-          <div className="w-[870px] h-[351px] flex flex-col py-[68px] px-[46px] gap-y-[15px] bg-white rounded-[15px] shadow-lg items-center">
-            <Image src={success} className='w-[113px] h-[132px]' />
-            <h3 className='text-[24px] text-[#00A345] font-semibold leading-[30px]'>Success</h3>
-            <p className='text-[16px] font-semibold text-center leading-[24px]'>Thanks for empanelling with us, we shall get in touch with you to complete the empanelment process.</p>
-          </div>
+        </div>
       }
-        
-      </div>
-
     </main>
   )
 }
