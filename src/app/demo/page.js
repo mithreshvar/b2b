@@ -1,6 +1,6 @@
 export default function Demo() {
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center px-[150px] font-poppins">
+        <div className="flex min-h-screen flex-col items-center justify-center px-[150px]">
 
             <div className="flex flex-col gap-y-[10px] items-center justify-center">
                 <h1 className="text-[45px] font-extrabold text-center">Schedule a <span className="text-[#0071E7]">DEMO</span></h1>
