@@ -15,6 +15,10 @@ module.exports = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
       },
+      colors: {
+        primary: '#0071E7', // Set the primary color to blue
+        textLight: '#6E6E72'
+      },
     },
   },
   plugins: [],
