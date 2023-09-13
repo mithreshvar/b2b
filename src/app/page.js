@@ -20,15 +20,15 @@ export default function Home() {
         <h2 className="text-[#0071E7] text-[35px] mb-[60px]">Connect <span className="text-black">and</span> Grow!</h2>
         <div className="flex gap-x-[100px]">
 
-          <div className="text-center gap-y-[20px] flex-col flex">
+          <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
             <h5 className="text-[16px] font-semibold ">Shift your Business to higher levels of Success and Value</h5>
             <p className="text-[14px] ">Innovative interface that guides you step-by-step and makes Partner services easy! Provide access to a wide range of value-added services to your clients and give them the investment edge they deserve.</p>
           </div>
-          <div className="text-center gap-y-[20px] flex-col flex">
+          <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
             <h5 className="text-[16px] font-semibold ">Give your clients the online advantage</h5>
             <p className="text-[14px] ">Provide a host of benefits when your clients access their investments on our easy to use online platform. All you need is an internet connection and a FundsIndiaPartner account.</p>
           </div>
-          <div className="text-center gap-y-[20px] flex-col flex">
+          <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
             <h5 className="text-[16px] font-semibold ">Connect, Communicate & Collaborate</h5>
             <p className="text-[14px] ">Connect with clients across geographical barriers, grow business, access cutting-edge advice delivery tools & services to increase the levels of success and value in your practice.</p>
           </div>
