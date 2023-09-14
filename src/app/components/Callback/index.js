@@ -23,14 +23,12 @@ function callback() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
-                <div className="w-[50%]">
-                    <div className="text-[45px] font-bold">
-                        <span className="text-[#0071E7]">Connect</span> And <span className="text-[#0071E7]">Grow</span>
-                    </div>
-                    <div className="text-[16px]">
-                        <span className="font-semibold">Are you looking to enhance your mutual fund business in today’s challenging times?<br/> Are your clients asking for online access to their investments?<br/> Are your service costs sky-rocketing?<br/> Do you wish to attract more and more affluent customers?</span><br/><br/> Presenting www.partner.fundsindia.com a premium destination that has been strategically tailored to give you all the advantages of an integrated online transaction platform, to complement your financial planning and Value added services to your clients.<br/><br/> With FundsindiaPartner have an effective way to attract, retain and service ideal clients in the digital age. A service that requires differentiation, strategy, and innovative content distribution
-                    </div>
+            <div className="flex h-screen flex-row items-center justify-center font-poppins mt-[-60px] ">
+                <div className="w-[50%] flex flex-col gap-y-[26px]">
+                    <h1 className="text-[45px] font-bold text-primary">Connect <span className="text-black">And</span> Grow</h1>
+                    <p className="text-[16px]">
+                        <span className="font-medium">Are you looking to enhance your mutual fund business in today’s challenging times?<br/> Are your clients asking for online access to their investments?<br/> Are your service costs sky-rocketing?<br/> Do you wish to attract more and more affluent customers?</span><br/><br/> Presenting www.partner.fundsindia.com a premium destination that has been strategically tailored to give you all the advantages of an integrated online transaction platform, to complement your financial planning and Value added services to your clients.<br/><br/> With FundsindiaPartner have an effective way to attract, retain and service ideal clients in the digital age. A service that requires differentiation, strategy, and innovative content distribution
+                    </p>
                 </div>
                 <div className="w-[50%] p-[63px]">
 
@@ -52,7 +50,7 @@ function callback() {
                             </div>
                             <div className="flex items-center justify-center mt-[30px]">
                                 <button onClick={()=>{setSuccess(true)}} className="w-[166px] bg-[#0071E7] text-[#FFFFFF] text-sm font-bold py-2 px-4 rounded-[25px]  hover:bg-[#0070E9]transition duration-300">Submit</button>
-                              </div>
+                            </div>
                         </>
                         :
                         <div className="flex flex-col h-full items-center justify-center">
@@ -63,8 +61,7 @@ function callback() {
                                 <div className='text-[16px] text-center font-semibold'>
                                         Thank You for showing interest in PartnerFundsindia. Our customer care people will contact to you soon.
                                 </div>
-                            </div>  
-                              
+                            </div>    
                         </div>
                         }
                     </div>

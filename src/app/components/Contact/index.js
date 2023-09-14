@@ -9,7 +9,7 @@ import office from '../../../../public/Contact/Group 512414.svg'
 export default function Contact() {
     return(
         <ThemeProvider theme={theme}>
-            <div className="h-screen text-center mt-[-100px] flex flex-col items-center justify-center">
+            <div className="h-screen text-center mt-[-85px] flex flex-col items-center justify-center">
                 <h1 className="text-[45px] font-extrabold">Contact <span className="text-primary">Us</span></h1>
                 <p className='text-[16px] font-medium mt-[40px]'>partner.fundsindia.com is a product of Wealth India Financial Services Private Limited, a company with a proven track record of innovation in the financial services industry and is known and respected in the financial markets for its expert knowledge levels, industry best practice, customer management skills, old fashioned true honesty and the goodwill of the customers.</p>
                 <div>
