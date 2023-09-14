@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Home from './components/Home'
 import Demo from './components/Demo';
+import Callback from './components/Callback';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
@@ -41,7 +42,7 @@ export default function HomePage() {
             (route==='Demo' && <Demo/>) ||
             (route==='Register With Us' && <p>Register With Us</p>) || 
             (route==='Contact us' && <p>Contact us</p>) || 
-            (route==='Callback' && <p>Callback</p>)
+            (route==='Callback' && <Callback />)
           }
         </div>
         {(login) &&

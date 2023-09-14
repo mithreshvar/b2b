@@ -1,18 +1,29 @@
 import Image from "next/image";
-import form from "./form/page";
-import captcha from "./captcha.png"
-import page3Img from './page3img.png';
-import page4Img from './page4img.png';
-import page5Img from './page5img.png';
-import page6Img from './page6img.png';
-import page2Img1 from './2ndpageassets/1.png'
-import page2Img2 from './2ndpageassets/2.png'
-import page2Img3 from './2ndpageassets/3.png'
-import page2Img4 from './2ndpageassets/4.png'
+import captcha from "../../../../public/callback/captcha.png"
+import page3Img from '../../../../public/callback/page3img.png';
+import page4Img from '../../../../public/callback/page4img.png';
+import page5Img from '../../../../public/callback/page5img.png';
+import page6Img from '../../../../public/callback/page6img.png';
+import page2Img1 from '../../../../public/callback/2ndpageassets/1.png'
+import page2Img2 from '../../../../public/callback/2ndpageassets/2.png'
+import page2Img3 from '../../../../public/callback/2ndpageassets/3.png'
+import page2Img4 from '../../../../public/callback/2ndpageassets/4.png'
+import tick from '../../../../public/callback/successmark.png';
+
+import { ThemeProvider } from '@mui/material/styles';
+import theme from "../../theme";
+import {
+    TextField,
+} from "@mui/material";
+import { useState } from "react";
+
 function callback() {
+
+    const[success, setSuccess] = useState(false);
+
     return (
-        <>
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins p-[100px]">
+        <ThemeProvider theme={theme}>
+            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%]">
                     <div className="text-[45px] font-bold">
                         <span className="text-[#0071E7]">Connect</span> And <span className="text-[#0071E7]">Grow</span>
@@ -22,49 +33,46 @@ function callback() {
                     </div>
                 </div>
                 <div className="w-[50%] p-[63px]">
-                <div className="w-[513px] h-[555px] bg-white p-8  items-center rounded-[15px] shadow-lg ">
-                <div className="text-[26px] font-bold mb-6 text-center">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
-                <div className="mb-4">
-                    <input className="w-full text-[14] text-[#6E6E72] px-3 py-2 border border-[#E4E5E5] rounded-[10px] focus:outline-none focus:border-indigo-500"
-                    type="text" id="name" name="name" placeholder="Name"/>
-                </div>
-                <div className="mb-4">
-                    <input className="w-full text-[#6E6E72] px-3 py-2 border border-[#E4E5E5] rounded-[10px] focus:outline-none focus:border-1px solid #E4E5E5"
-                    type="text" id="mobilenumber" name="mobilenumber" placeholder="Mobile Number"/>
-                </div>
-                <div className="mb-4">
-                    <input className="w-full text-[#6E6E72] px-3 py-2 border border-[#E4E5E5] rounded-[10px] focus:outline-none focus:border-indigo-500"
-                    type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number"/>
-                </div>
-                <div className="mb-4">
-                    <input className="w-full text-[#6E6E72] px-3 py-2 border border-[#E4E5E5] rounded-[10px] focus:outline-none focus:border-indigo-500"
-                    type="email" id="email" name="email" placeholder="Email"/>
-                </div>
-                <div className="mb-4">
-                    <input className="w-full h-[80px] text-[#6E6E72] px-3 py-2 border border-[#E4E5E5] rounded-[10px] focus:outline-none focus:border-indigo-500"
-                    type="text" id="comments" name="comments" placeholder="Comments"/>
-                </div>
-                <div className="flex flex-row">
-                    <div className="mb-4">
-                        <input className="w-full text-[#6E6E72] px-3 py-2 border border-[#E4E5E5] rounded-[10px] focus:outline-none focus:border-indigo-500"
-                        type="text" id="verficationcode" name="verficationcode" placeholder="Verfication Code"/>
+
+                    <div className="w-[513px] h-[555px] bg-white p-8  items-center rounded-[15px] shadow-lg ">
+                        {
+                        (!success) ?
+                        <>
+                            <div className="text-[26px] font-bold mb-6 text-center">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
+                            <div className="flex flex-col gap-y-[20px]">
+                                <TextField id="name" label="Name" sx={{width: '433px'}}/>
+                                <TextField  id="mobilenumber"  label="Mobile Number" sx={{width: '433px'}}/>
+                                <TextField  id="phonenumber"  label="Phone Number" sx={{width: '433px'}}/>
+                                <TextField   id="email"  label="Email" sx={{width: '433px'}}/>
+                                <TextField id="comments"  label="Comments" rows={3} sx={{width: '433px',height:'80px'}}/>
+                                <div className="flex flex-row">
+                                    <TextField  id="verficationcode"  label="Verfication Code" sx={{width: '271px'}}/>
+                                    <Image className="w-[144px] h-[36px] ml-[18px]" src={captcha}/>
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-center mt-[30px]">
+                                <button onClick={()=>{setSuccess(true)}} className="w-[166px] bg-[#0071E7] text-[#FFFFFF] text-sm font-bold py-2 px-4 rounded-[25px]  hover:bg-[#0070E9]transition duration-300">Submit</button>
+                              </div>
+                        </>
+                        :
+                        <div className="flex flex-col h-full items-center justify-center">
+                            <div className='flex justify-center'>
+                                <Image className="w-[113px] h-[133px]" src={tick}/>
+                            </div>
+                            <div  className='flex justify-center'>
+                                <div className='text-[16px] text-center font-semibold'>
+                                        Thank You for showing interest in PartnerFundsindia. Our customer care people will contact to you soon.
+                                </div>
+                            </div>  
+                              
+                        </div>
+                        }
                     </div>
-                    <div>
-                        <Image className="w-[144px] h-[36px] ml-[18px]" src={captcha}/>
-                    </div>
-                </div>
-                <div className="flex flex-rowitems-center justify-center">
-                    <button
-                    className="w-[166px] bg-[#0071E7] text-[#FFFFFF] text-sm font-bold py-2 px-4 rounded-[25px]  hover:bg-[#0070E9]transition duration-300"
-                    >Submit</button>
-                </div>
-                
-                </div>
                 </div>
             </div>
 
             {/* Second page will be here */}
-            <div className="flex min-h-screen flex-col items-center justify-center font-poppins p-[100px]">
+            <div className="flex min-h-screen flex-col items-center justify-center font-poppins">
                 <div className="items-center text-[35px] font-bold">
                     How it <span className="text-[#0071E7]">Works?</span>
                 </div>
@@ -106,19 +114,19 @@ function callback() {
                     </div>
                 </div>
 
-                <div className="h-[187px] min-w-full shadow-lg mt-[60px] rounded-[15px]">
+                <div className="h-[187px] w-[1080px] shadow-lg mt-[60px] rounded-[15px]">
                     <div className="text-center font-bold text-[30px] text-[#0071E7]">
                     Connect <span className="text-[#000000]">and</span> Grow!
                     </div>
                     <div className="mt-[31px] mb-[30px] ml-[38px] mr-[37px] text-[16px] text-center">
-                    FundsindiaPartner lets you connect with your clients across geographical regions, offering them products across the investment<br/> spectrum, giving them the best of both worlds - your planning & advice along with access to cutting-edge technology and services. <br/>Direct your browser to www.partner.fundsindia.com and get the online advantage to grow your business exponentially
+                    FundsindiaPartner lets you connect with your clients across geographical regions, offering them products across the investment spectrum, giving them the best of both worlds - your planning & advice along with access to cutting-edge technology and services.Direct your browser to www.partner.fundsindia.com and get the online advantage to grow your business exponentially
                     </div>
                 </div>
             </div>
 
             {/* 3rd page */}
 
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins p-[100px]">
+            <div className="flex min-h-screen flex-row items-center justify-center font-poppins">
                 <div className="w-[50%]">
                     <div className="text-[20px] font-bold text-[#0071E7]">
                         With Fundsindiapartner<br/> Get Low Cost High Value Solutions
@@ -163,7 +171,7 @@ function callback() {
             </div>
 
             {/* 4th page */}
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins p-[100px]">
+            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%] p-[63px]">
                     <Image src={page4Img}/>
                 </div>
@@ -199,7 +207,7 @@ function callback() {
 
             {/* 5th page */}
 
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins p-[100px]">
+            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%]">
                     <div className="text-[20px] font-bold text-[#0071E7]">
                         With Fundsindiapartner<br/> Get Low Cost High Value Solutions
@@ -216,7 +224,7 @@ function callback() {
 
             {/* 6th page */}
 
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins p-[100px]">
+            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%] p-[63px]">
                     <Image src={page6Img}/>
                 </div>
@@ -231,7 +239,7 @@ function callback() {
                 </div>
                 
             </div>
-        </>
+        </ThemeProvider>
     );
 }
 
