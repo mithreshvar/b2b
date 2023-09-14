@@ -40,7 +40,7 @@ export default function HomePage() {
               <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
               <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
               <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
-              <h6 className={` cursor-pointer ${(route=='Register With Us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Register With Us')}}>Register With Us</h6>
+              <h6 className={` cursor-pointer ${(route=='Register With Us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Register With Us')}}><Link href="/register-with-us">Register With Us</Link></h6>
               <h6 className={` cursor-pointer ${(route=='Contact us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Contact us')}}>Contact us</h6>
               <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-primary text-white rounded-[25px]'>Login</button>
               <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
