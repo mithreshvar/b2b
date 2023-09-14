@@ -19,15 +19,15 @@ export default function HomePage() {
     <main className={`flex h-screen flex-col items-center px-[80px] font-poppins ${(login)?' overflow-hidden':''}`}> 
       <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`}>
         <div className='w-full flex justify-between items-center h-[100px] px-[20px] z-[1]'>
-          <div className='text-[26px]'>FundsIndia</div>
+          <div className='text-[26px]'><Link href={'/'}>FundsIndia</Link></div>
           <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
-            <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
-            <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
-            <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
-            <h6 className={` cursor-pointer ${(route=='Register With Us')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Register With Us')}}>Register With Us</h6>
-            <h6 className={` cursor-pointer ${(route=='Contact us')?'text-[#0071E7]':''}`} onClick={()=>{setRoute('Contact us')}}>Contact us</h6>
+            <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
+            <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
+            <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
+            <h6 className={` cursor-pointer ${(route=='Register With Us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Register With Us')}}>Register With Us</h6>
+            <h6 className={` cursor-pointer ${(route=='Contact us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Contact us')}}>Contact us</h6>
             <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-[#0071E7] text-white rounded-[25px]'>Login</button>
-            <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-[#0071E7] text-[#0071E7] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
+            <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
           </div>
         </div>
         {

@@ -8,23 +8,29 @@ import img3 from '../../../../public/home/Group 498555/Group 498555@2x.png'
 import success from '../../../../public/home/Group 405761/Group 405761@2x.png'
 import { useState } from 'react'
 
+import { ThemeProvider } from '@mui/material/styles';
+import theme from "../../theme";
+import {
+    TextField,
+} from "@mui/material";
+
 export default function Home() {
 
     const [empannelSuccess, setEmpannelSuccess] = useState(false);
 
     return (
-        <div >
+        <ThemeProvider theme={theme}>
             <div className="flex h-screen gap-x-[40px] px-[10px] items-center mt-[-60px]">
                 <div className=' flex flex-col gap-y-[10px]'>
-                <p className="text-[#0071E7] text-[26px] font-bold">Easy to use online platform</p>
-                <h1 className=" text-[45px] font-extrabold">That lets you <span className="text-[#0071E7]">service clients</span> from anywhere in the world</h1>
+                <p className="text-primary text-[26px] font-bold">Easy to use online platform</p>
+                <h1 className=" text-[45px] font-extrabold">That lets you <span className="text-primary">service clients</span> from anywhere in the world</h1>
                 </div>
                 <Image src={slider1} className='w-[525px] h-[555px]' />
             </div>
 
             <div className="h-screen flex flex-col items-center justify-center px-[70px]">
 
-                <h2 className="text-[#0071E7] text-[35px] mb-[60px] font-bold">Connect <span className="text-black">and</span> Grow!</h2>
+                <h2 className="text-primary text-[35px] mb-[60px] font-bold">Connect <span className="text-black">and</span> Grow!</h2>
                 <div className="flex gap-x-[30px]">
 
                 <div className="text-center gap-y-[20px] flex-col flex border-[1px] border-[#F0F1F4] rounded-[20px] h-[365px] w-[340px] items-center justify-center px-[35px]">
@@ -51,39 +57,39 @@ export default function Home() {
             {
                 (!empannelSuccess) ?
                 <div className="w-[870px] h-[351px] flex flex-col p-[60px] pt-[50px] gap-y-[30px] rounded-[15px] shadow-lg items-center">
-                    <h3 className=" text-[26px] font-semibold text-center">Empanel with us for <span className="text-[#0071E7]">FREE!</span></h3>
+                    <h3 className=" text-[26px] font-semibold text-center">Empanel with us for <span className="text-primary">FREE!</span></h3>
                     <div className="flex gap-x-[50px]">
 
                     <div className="flex flex-col gap-y-[25px] text-[14px]">
-                        <input 
-                        placeholder="Name"
-                        className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                        type="text"
+                        <TextField
+                            id='name' 
+                            label="Name"
+                            sx={{width:'350px'}}
                         />
-                        <input 
-                        placeholder="Email"
-                        className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                        type="email"
+                        <TextField 
+                            id='email'
+                            label="Email"
+                            sx={{width:'350px'}}
                         />
-                        <input 
-                        placeholder="Captcha"
-                        className="h-[40px] w-[185px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px] mt-[5px]" 
-                        type="text"
+                        <TextField 
+                            id='captcha'
+                            label="Captcha"
+                            sx={{width:'185px'}}
                         />
 
                     </div>
                     <div className="flex flex-col gap-y-[25px] text-[14px]">
-                        <input 
-                        placeholder="Mobile Number"
-                        className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                        type="text"
+                        <TextField 
+                            id='mobile'
+                            label="Mobile Number"
+                            sx={{width:'350px'}} 
                         />
-                        <input 
-                        placeholder="Phone Number"
-                        className="h-[40px] w-[350px] rounded-[10px] border-[1px] border-[#E4E5E5] px-[20px]" 
-                        type="text"
+                        <TextField
+                            id='phone' 
+                            label="Phone Number"
+                            sx={{width:'350px'}}
                         />
-                        <button onClick={()=>{setEmpannelSuccess(true)}} className="bg-[#0071E7] h-[40px] w-[165px] rounded-[25px] text-white font-bold self-end">Submit</button>
+                        <button onClick={()=>{setEmpannelSuccess(true)}} className="bg-primary h-[40px] w-[165px] rounded-[25px] text-white font-bold self-end">Submit</button>
 
                     </div>
 
@@ -98,6 +104,6 @@ export default function Home() {
             }
                 
             </div>
-        </div>
+        </ThemeProvider>
     )
 }
