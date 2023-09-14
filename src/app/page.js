@@ -52,7 +52,7 @@ export default function HomePage() {
             (route==='Demo' && <Demo/>) ||
             (route==='Register With Us' && <p>Register With Us</p>) || 
             (route==='Contact us' && <Contact />) || 
-            (route==='Callback' && <p>Callback</p>)
+            (route==='Callback' && <Callback />)
           }
           <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
 
