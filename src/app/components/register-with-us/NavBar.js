@@ -14,7 +14,7 @@ export default function NavBar() {
       <AppBar position="static" sx={{height: '60px', backgroundColor: "white", px: '80px', boxShadow: '0px 3px 6px #0000001A'}}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "primary.main" }}>
-            FundsIndia
+            <Link href={'/'}>FundsIndia</Link>
           </Typography>
           <div className='font-poppins text-primary font-semibold'>Contact Us</div>
         </Toolbar>
