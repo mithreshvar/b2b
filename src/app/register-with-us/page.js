@@ -333,7 +333,7 @@
 // export default RegisterWithUs;
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "@/app/components/register-with-us/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../theme";
@@ -353,7 +353,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Image from 'next/image'
 
 // Create a reusable AddressFields component
-function AddressFields({ cityOptions, stateOptions, handleStateChange }) {
+function AddressFields({ cityOptions, stateOptions, setValueObject }) {
   const [addressLine1, setAddressLine1] = useState('');
   const [addressLine2, setAddressLine2] = useState('');
   const [addressLine3, setAddressLine3] = useState('');
@@ -364,6 +364,31 @@ function AddressFields({ cityOptions, stateOptions, handleStateChange }) {
   const [contactNoOffice, setContactNoOffice] = useState("");
   const [residence, setResidence] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+
+  useEffect(() => {
+    setValueObject({
+      addressLine1,
+      addressLine2,
+      addressLine3,
+      city,
+      state,
+      pincode,
+      email,
+      contactNoOffice,
+      residence,
+      mobileNumber
+    })
+  }, [addressLine1,
+    addressLine2,
+    addressLine3,
+    city,
+    state,
+    pincode,
+    email,
+    contactNoOffice,
+    residence,
+    mobileNumber]);
+
 
   return (
     <div className="flex flex-wrap gap-x-[50px] gap-y-[20px]">
@@ -414,7 +439,6 @@ function AddressFields({ cityOptions, stateOptions, handleStateChange }) {
         value={state}
         onChange={(event) => {
           setState(event.target.value);
-          handleStateChange(event.target.value); // Pass the state value to the parent component
         }}
         SelectProps={{
           IconComponent: () => (
@@ -470,14 +494,18 @@ function AddressFields({ cityOptions, stateOptions, handleStateChange }) {
 
 function RegisterWithUs() {
   const [isLogin, setIsLogin] = useState('login');
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [isIndividual, setIsIndividual] = useState('individual');
   const [name, setName] = useState('');
   const [dob, setDob] = useState(null);
   const [panNumber, setPanNumber] = useState('');
 
   const [isCorrespondence, setIsCorrespondence] = useState(false);
-  const [permanentAddressState, setPermanentAddressState] = useState('');
-  const [correspondenceAddressState, setCorrespondenceAddressState] = useState('');
+  const [permanentAddressObject, setPermanentAddressObject] = useState({});
+  const [correspondenceAddressObject, setCorrespondenceAddressObject] = useState({});
 
   const [arnNumber, setArnNumber] = useState('');
   const [issueDate, setIssueDate] = useState('');
@@ -489,6 +517,14 @@ function RegisterWithUs() {
   // Event handlers
   const handleIsLoginChange = (event) => {
     setIsLogin(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleIsIndividualChange = (event) => {
@@ -512,14 +548,36 @@ function RegisterWithUs() {
   };
 
   // Handle state change for permanent address
-  const handlePermanentAddressStateChange = (newState) => {
-    setPermanentAddressState(newState);
-  };
+  // const handlePermanentAddressStateChange = (newState) => {
+  //   setPermanentAddressState(newState);
+  // };
 
-  // Handle state change for correspondence address
-  const handleCorrespondenceAddressStateChange = (newState) => {
-    setCorrespondenceAddressState(newState);
+  // // Handle state change for correspondence address
+  // const handleCorrespondenceAddressStateChange = (newState) => {
+  //   setCorrespondenceAddressState(newState);
+  // };
+
+  const handleSubmit = () => {
+    console.log('Submit clicked');
+  
+    if (isLogin === 'login') {
+      console.log('Email:', email);
+      console.log('Password:', password);
+    } else {
+      console.log('Is Individual:', isIndividual);
+      console.log('Name:', name);
+      console.log('Date of Birth:', dob);
+      console.log('PAN Number:', panNumber);
+      console.log('Is Correspondence Same as Permanent:', isCorrespondence);
+      console.log('Permanent Address State:', permanentAddressObject);
+      console.log('Correspondence Address State:', correspondenceAddressObject);
+      console.log('ARN Number:', arnNumber);
+      console.log('Issue Date:', issueDate);
+      console.log('Expiry Date:', expiryDate);
+      console.log('Status:', status);
+    }
   };
+  
 
   const cities = ['Chennai', 'Coimbatore'];
   const states = ['Kerala', 'Tamil Nadu'];
@@ -548,7 +606,74 @@ function RegisterWithUs() {
           </button>
         </div>
 
-        {isLogin === 'register' && (
+        {isLogin === 'login' ?
+        
+        (
+          <div className="w-[481px] font-medium text-[14px] mt-[82px]">
+            <div>
+            This login is restricted to <span className="font-bold">Partners</span> only
+            If you are an investor and wish to access your account, please <span>click here</span>
+            </div>
+
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': {
+                        outline: 'none',
+                        border: 'none',
+                        '& .MuiInputBase-root': {
+                            height: '40px',
+                            borderRadius: '10px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            padding: '0px'
+                        },
+                        '& .MuiInputLabel-root': {
+                            color: '#6E6E72',
+                            fontSize: '14px',
+                            mt: '-5px',
+                            mx: 'auto',
+                            fontWeight: 500
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            mt: '2px',
+                            display: 'flex',
+                            color: 'primary.main',
+                        },
+                        '& .MuiInputAdornment-root': {
+                            mr: '15px', // Adjust the color of the InputAdornment
+                        },
+                    },
+                    py: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    rowGap: '20px',
+                }}
+            >
+              <div className="flex gap-[30px] flex-col">
+                <TextField
+                  id="email-input"
+                  label="Email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  sx={{ width: '380px' }}
+                />
+                <TextField
+                  id="password-input"
+                  type="password"
+                  label="Password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  sx={{ width: '380px' }}
+                />
+              </div>
+              <div className="-mt-[15px] font-medium text-right mr-[101px] text-primary">Forget password?</div>
+            </Box>
+
+          </div>
+        ) :
+        
+        (
           <div className="w-[859px]">
 
             {/* Individuality provider */}
@@ -634,7 +759,7 @@ function RegisterWithUs() {
               <AddressFields
                 cityOptions={cities}
                 stateOptions={states}
-                handleStateChange={handlePermanentAddressStateChange}
+                setValueObject={setPermanentAddressObject}
               />
 
               {/* Corresponding Address */}
@@ -662,9 +787,9 @@ function RegisterWithUs() {
                     Correspondence Address (For all Communication)
                     </div>
                     <AddressFields
-                    cityOptions={cities}
-                    stateOptions={states}
-                    handleStateChange={handleCorrespondenceAddressStateChange}
+                      cityOptions={cities}
+                      stateOptions={states}
+                      setValueObject={setCorrespondenceAddressObject}
                     />
                 </>
               )}
@@ -715,7 +840,7 @@ function RegisterWithUs() {
                     <div>
                         <a href="#" className="flex gap-[15px]">
                             <Image
-                                src='/mutualFundsSm.png'
+                                src='/mutualFunds.png'
                                 width={23}
                                 height={23}
                                 alt="mutual-funds"
@@ -726,7 +851,7 @@ function RegisterWithUs() {
                     <div className="mx-[30px] px-[30px] border-x-[1px] border-x-[#E4E5E5] ">
                         <a href="#" className="flex gap-[15px]">
                             <Image
-                                src='/mutualFundsSm.png'
+                                src='/fixedDeposit@2x.png'
                                 width={23}
                                 height={23}
                                 alt="fd-deposits"
@@ -737,7 +862,7 @@ function RegisterWithUs() {
                     <div>
                         <a href="#" className="flex gap-[15px]">
                             <Image
-                                src='/mutualFundsSm.png'
+                                src='/NPS@2x.png'
                                 width={23}
                                 height={23}
                                 alt="NPS-funds"
@@ -747,17 +872,25 @@ function RegisterWithUs() {
                     </div>
 
                 </div>
-
-                {/* Submit */}
-                <button className="bg-primary w-[230px] h-[50px] mt-[27px] text-white font-bold flex justify-center items-center rounded-[25px] text-[18px]">
-                    Submit
-                </button>
             </Box>
           </div>
         )}
+
+
+        {/* Submit */}
+        <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px]" : "mt-[27px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] mb-[15px]`} onClick={handleSubmit} >
+          {isLogin === "login" ? "Login" : "Submit"}
+        </button>
+
         <div className="border-t-[1px] border-t-[#E4E5E5] py-[10px] w-[827px] text-[#777777] text-[12px]">
-            <div>Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</div>
+            <div> Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</div>
             <div>© Wealth India Financial Services Pvt. Ltd. 2023</div>
+            { isLogin === "login" && (
+              <>
+                <div className="font-bold">Wealth India Financial Services Pvt. Ltd.,</div>
+                <div>No. 38 and 39, 3rd Floor, Uttam Building, Whites Road, Royapettah, Chennai, Tamil Nadu 600014</div>
+              </>
+            ) }
         </div>
       </div>
     </ThemeProvider>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Home from './components/Home'
 import Demo from './components/Demo';
+import Callback from './components/Callback';
 import Contact from './components/Contact';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
