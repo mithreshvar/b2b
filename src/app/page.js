@@ -3,15 +3,26 @@
 import { useState } from 'react';
 import Home from './components/Home'
 import Demo from './components/Demo';
+import Callback from './components/Callback';
+import Contact from './components/Contact';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
 import phoneIcon from '../../public/home/Group 511824/Group 511824@2x.png'
 import partner from '../../public/home/Mask Group 29511/Mask Group 29511@2x.png'
 import investor from '../../public/home/Mask Group 29512/Mask Group 29512@2x.png'
+
+import email from '../../public/Contact/Group 512412.svg'
+import phone from '../../public/Contact/Group 512413.svg'
+import office from '../../public/Contact/Group 512414.svg'
+import bulletin from '../../public/bulletin sm.svg'
+import fb from '../../public/home/Path 238656.svg'
+import x from '../../public/home/Path 238654.svg'
+
+import logo from '../../public/logo.svg'
 import Image from 'next/image';
 import Link from 'next/link';
-import { ThemeProvider } from '@mui/material';
+import { TextField, ThemeProvider } from '@mui/material';
 import theme from './theme';
 
 export default function HomePage() {
@@ -23,8 +34,8 @@ export default function HomePage() {
     <ThemeProvider theme={theme}>
       <main className={`flex h-screen flex-col items-center px-[80px] font-poppins ${(login)?' overflow-hidden':''}`}> 
         <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`}>
-          <div className='w-full flex justify-between items-center h-[100px] px-[20px] z-[1]'>
-            <div className='text-[26px]'><Link href={'/'}>FundsIndia</Link></div>
+          <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
+            <Link href={'/'}><Image src={logo} className='w-[165px] h-[47px]' /></Link>
             <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
               <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
               <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
@@ -40,9 +51,67 @@ export default function HomePage() {
             (route==='Why FundsIndiaPartner?' && <p>Why FundsIndiaPartner?</p>) || 
             (route==='Demo' && <Demo/>) ||
             (route==='Register With Us' && <p>Register With Us</p>) || 
-            (route==='Contact us' && <p>Contact us</p>) || 
-            (route==='Callback' && <p>Callback</p>)
+            (route==='Contact us' && <Contact />) || 
+            (route==='Callback' && <Callback />)
           }
+          <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
+
+            <Image src={logo} className='w-[165px] h-[47px]' />
+
+            <div className='flex w-full justify-around'>
+
+              <div className='flex gap-x-[50px]'>
+                <div className='text-[14px] flex flex-col gap-y-[20px] text-[#6E6E72]'>
+                  <h6 className='font-bold text-black mb-[10px]'>Wealth India Financial Services Pvt. Ltd.,</h6>
+                  <div className='flex gap-x-[13px] items-center'>
+                    <Image src={phone} className="w-[16px] h-[16px]" />
+                    <p>044 - 61104100</p>
+                  </div>
+                  <div className='flex gap-x-[13px] items-center'>
+                    <Image src={email} className="w-[16px] h-[14px]" />
+                    <p>contactpartner@fundsindia.com</p>
+                  </div>
+                  <div className='flex gap-x-[13px]'>
+                    <Image src={office} className="w-[16px] h-[20px]" />
+                    <p>3rd Floor, Uttam Building,<br/> No. 38 and 39, Whites Road, Royapettah.<br/> Chennai - 600014.</p>
+                  </div>
+                </div>
+                <div className='text-[14px] flex flex-col gap-y-[18px]'>
+                  <h6 className='font-bold text-[16px] mb-[10px]'>Quick Links</h6>
+                  <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
+                    <Image src={bulletin} className='h-[6px] w-[6px]'/>
+                    <p>Terms and Conditions</p>
+                  </div>
+                  <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
+                    <Image src={bulletin} className='h-[6px] w-[6px]'/>
+                    <p>Privacy Policy</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className='flex flex-col gap-y-[30px]'>
+                <h6 className='font-semibold text-[16px] '>Subscribe to our Newsletter</h6>
+                <div className='flex gap-x-[20px]'>
+                  <TextField id='email' label='Email' sx={{width:'304px'}} />
+                  <button className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
+                </div>
+                <div className='flex flex-col gap-y-[10px]'>
+                  <h6 className='text-[16px] font-semibold'>Follow us on</h6>
+                  <div className='flex gap-x-[12px]'>
+                    <Image src={fb} className='w-[27px] h-[27px]' />
+                    <Image src={x} className='w-[27px] h-[27px]' />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className='mt-[30px] border-t-[1px] border-[#E3E3E3] flex justify-between w-full font-medium text-[14px] h-[65px] items-center'>
+              <h6>Wealth India Financial Services Pvt. Ltd., 2023. All Rights Reserved</h6>
+              <h6>SEBI Reg. No. INZ000241638 | ARN - 69583</h6>
+            </div>
+
+          </div>
         </div>
         {(login) &&
           <div className='absolute w-screen h-screen bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
