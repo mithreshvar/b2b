@@ -1,338 +1,4 @@
-"use client"
-
-// import React, { useState } from "react";
-// import NavBar from "@/app/components/register-with-us/NavBar";
-// import { ThemeProvider } from '@mui/material/styles';
-// import theme from "../theme";
-// import { Box, FormControlLabel, MenuItem, Radio, TextField, Typography } from "@mui/material";
-// import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-
-// function RegisterWithUs() {
-//     const [isLogin, setIsLogin] = useState('login');
-//     const [isIndividual, setIsIndividual] = useState('individual');
-//     const [name, setName] = useState('');
-//     const [dob, setDob] = useState(null);
-//     const [panNumber, setPanNumber] = useState('');
-//     const [addressLine1, setAddressLine1] = useState('');
-//     const [addressLine2, setAddressLine2] = useState('');
-//     const [addressLine3, setAddressLine3] = useState('');
-//     const [city, setCity] = useState('');
-//     const [state, setState] = useState('');
-//     const [pincode, setPincode] = useState("");
-//     const [email, setEmail] = useState("");
-//     const [contactNoOffice, setContactNoOffice] = useState("");
-//     const [residence, setResidence] = useState("");
-//     const [mobileNumber, setMobileNumber] = useState("");
-
-//     const [isCorrespondence, setIsCorrespondence] = useState(null);
-
-
-//     // Event handlers
-//     const handleIsLoginChange = (event) => {
-//         setIsLogin(event.target.value);
-//     }
-
-//     const handleIsIndividualChange = (event) => {
-//         setIsIndividual(event.target.value);
-//     }
-
-//     const handleNameChange = (event) => {
-//         setName(event.target.value);
-//     }
-
-//     const handleDobChange = (dateTime) => {
-//         setDob(dateTime);
-//     }
-
-//     const handlePanNumberChange = (event) => {
-//         setPanNumber(event.target.value);
-//     }
-
-//     const handleAddressLine1Change = (event) => {
-//         setAddressLine1(event.target.value);
-//     }
-
-//     const handleAddressLine2Change = (event) => {
-//         setAddressLine2(event.target.value);
-//     }
-
-//     const handleAddressLine3Change = (event) => {
-//         setAddressLine3(event.target.value);
-//     }
-
-//     const handleCityChange = (event) => {
-//         setCity(event.target.value);
-//     }
-
-//     const handleStateChange = (event) => {
-//         setState(event.target.value);
-//     }
-
-//     const handlePincodeChange = (event) => {
-//         setPincode(event.target.value);
-//       };
-    
-//       const handleEmailChange = (event) => {
-//         setEmail(event.target.value);
-//       };
-    
-//       const handleContactNoOfficeChange = (event) => {
-//         setContactNoOffice(event.target.value);
-//       };
-    
-//       const handleResidenceChange = (event) => {
-//         setResidence(event.target.value);
-//       };
-    
-//       const handleMobileNumberChange = (event) => {
-//         setMobileNumber(event.target.value);
-//       };
-
-//       const handleIsCorrespondenceChange = (event) => {
-//         const newValue = event.target.value;
-//         setIsCorrespondence(isCorrespondence ===  newValue ? null : newValue);
-//       }
-
-//     const cities = ['Chennai', 'Coimbatore'];
-//     const states = ['Kerala', 'Tamil Nadu'];
-
-//     return (
-//         <ThemeProvider theme={theme}>
-//             <NavBar />
-//             <div className="pt-[30px] pl-[80px] font-poppins text-[14px]">
-
-//                 {/* Login selector */}
-//                 <div className="bg-[#F8F9FA] border-[#E4E5E5] border-[1px] rounded-[25px] w-[222px] h-[45px] p-[5px] flex">
-//                     <button className={`w-[96px] h-[35px] ${isLogin === 'login' ? 'bg-primary text-white font-semibold' : 'font-medium'} rounded-[25px]  flex justify-center items-center`} value="login" onClick={handleIsLoginChange}>
-//                         Login
-//                     </button>
-//                     <button className={`w-[116px] h-[35px] ${isLogin === 'register' ? 'bg-primary text-white font-semibold' : 'font-medium'} rounded-[25px]  flex justify-center items-center`} value="register" onClick={handleIsLoginChange}>
-//                         Register
-//                     </button>
-//                 </div>
-
-//                 {
-//                     isLogin === 'login' ?
-//                     <>
-//                     </>
-//                     :
-
-//                     <>
-//                         <div className="w-[859px]">
-//                             {/* Individuality provider */}
-//                             <div className="mt-[20px] text-textLight">Individuality</div>
-//                             <div className="mt-[10px] flex justify-start items-center gap-[20px] p-[1px]">
-//                                 <button className={`w-[141px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'individual' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'individual'} onClick={handleIsIndividualChange}> Individuals </button>
-//                                 <button className={`w-[178px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'non-individuals' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'non-individuals'} onClick={handleIsIndividualChange}> Non-Individuals </button>
-//                             </div>
-
-//                             <Box
-//                                 component="form"
-//                                 sx={{
-//                                     '& .MuiTextField-root': {
-//                                         outline: 'none',
-//                                         border: 'none',
-//                                         '& .MuiInputBase-root': {
-//                                             height: '40px',
-//                                             borderRadius: '10px',
-//                                             display: 'flex',
-//                                             alignItems: 'center',
-//                                             padding: '0px'
-//                                         },
-//                                         '& .MuiInputLabel-root': {
-//                                             color: '#6E6E72',
-//                                             fontSize: '14px',
-//                                             mt: '-5px',
-//                                             mx: 'auto',
-//                                             fontWeight: 500
-//                                         },
-//                                         '& .MuiInputLabel-root.Mui-focused': {
-//                                             mt: '2px',
-//                                             display: 'flex',
-//                                             color: 'primary.main',
-//                                         },
-//                                         '& .MuiInputAdornment-root': {
-//                                             mr: '15px', // Adjust the color of the InputAdornment
-//                                         },
-//                                     },
-//                                     py: '20px',
-//                                     display: 'flex',
-//                                     flexDirection: 'column',
-//                                     rowGap: '20px',
-//                                 }}
-//                             >
-//                                 <div className="flex gap-[50px]">
-//                                     <TextField
-//                                         id="name-input"
-//                                         label="Name"
-//                                         value={name}
-//                                         onChange={handleNameChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-//                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-//                                     <DatePicker
-//                                         id="dob-input"
-//                                         label="Date Of Birth / incorporation"
-//                                         format="DD MMM YYYY hh:mm A"
-//                                         value={dob}
-//                                         onChange={handleDobChange}
-//                                         sx={{width: '380px'}}
-//                                         slots={{
-                                            
-//                                             openPickerIcon: () => (< CalendarMonthIcon sx={{width: '20px', height: '20px', mr: '15px', color: 'primary.main'}}/>),
-//                                         }}
-//                                     />
-//                                     </LocalizationProvider>
-//                                 </div>
-//                                 <div>
-//                                     <TextField
-//                                         id="pan-input"
-//                                         label="PAN Number"
-//                                         value={panNumber}
-//                                         onChange={handlePanNumberChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-//                                 </div>
-
-//                                 {/* Registered Address */}
-//                                 <div className="-ml-[1px] font-semibold text-[18px]">
-//                                     Permanent / Registered Office Address
-//                                 </div>
-//                                 <div className="flex flex-wrap gap-x-[50px] gap-y-[20px]">
-//                                     <TextField
-//                                         id="address-1-input"
-//                                         label="Address Line 1"
-//                                         value={addressLine1}
-//                                         onChange={handleAddressLine1Change}
-//                                         sx={{ width: '810px' }}
-//                                     />
-//                                     <TextField
-//                                         id="address-2-input"
-//                                         label="Address Line 2"
-//                                         value={addressLine2}
-//                                         onChange={handleAddressLine2Change}
-//                                         sx={{ width: '810px' }}
-//                                     />
-//                                     <TextField
-//                                         id="address-3-input"
-//                                         label="Address Line 3"
-//                                         value={addressLine3}
-//                                         onChange={handleAddressLine3Change}
-//                                         sx={{ width: '810px' }}
-//                                     />
-//                                     <TextField
-//                                         id="city-select"
-//                                         select
-//                                         label="City"
-//                                         value={city}
-//                                         onChange={handleCityChange}
-//                                         SelectProps={{
-//                                             IconComponent: () => (
-//                                                 <ExpandMoreIcon sx={{ color: 'primary.main', mr: '15px' }} />
-//                                             ),
-//                                         }}
-//                                         sx={{ width: '380px' }}
-//                                     >
-//                                         {cities.map((city) => (
-//                                             <MenuItem key={city} value={city}>
-//                                                 {city}
-//                                             </MenuItem>
-//                                         ))}
-//                                     </TextField>
-//                                     <TextField
-//                                         id="state-select"
-//                                         select
-//                                         label="State"
-//                                         value={state}
-//                                         onChange={handleStateChange}
-//                                         SelectProps={{
-//                                             IconComponent: () => (
-//                                                 <ExpandMoreIcon sx={{ color: 'primary.main', mr: '15px' }} />
-//                                             ),  // Set the IconComponent to ExpandMoreIcon
-//                                         }}
-//                                         sx={{ width: '380px' }}
-//                                     >
-//                                         {states.map((state) => (
-//                                             <MenuItem key={state} value={state}>
-//                                                 {state}
-//                                             </MenuItem>
-//                                         ))}
-//                                     </TextField>
-//                                     <TextField
-//                                         id="pincode-input"
-//                                         label="Pincode"
-//                                         value={pincode}
-//                                         onChange={handlePincodeChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-
-//                                     <TextField
-//                                         id="email-input"
-//                                         label="Email"
-//                                         value={email}
-//                                         onChange={handleEmailChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-
-//                                     <TextField
-//                                         id="contact-no-office-input"
-//                                         label="Contact No. Office"
-//                                         value={contactNoOffice}
-//                                         onChange={handleContactNoOfficeChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-
-//                                     <TextField
-//                                         id="residence-input"
-//                                         label="Residence"
-//                                         value={residence}
-//                                         onChange={handleResidenceChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-
-//                                     <TextField
-//                                         id="mobile-number-input"
-//                                         label="Mobile Number"
-//                                         value={mobileNumber}
-//                                         onChange={handleMobileNumberChange}
-//                                         sx={{ width: '380px' }}
-//                                     />
-//                                 </div>
-
-//                                 {/* Corresponding Address */}
-//                                 <div>
-//                                     <FormControlLabel
-//                                         value="end"
-//                                         control={
-//                                         <Radio
-//                                             checked={isCorrespondence}
-//                                             onClick={handleIsCorrespondenceChange}
-//                                             value={true}
-//                                         />
-//                                         }
-//                                         label={
-//                                             <Typography variant="body1" sx={{ fontSize: '14px', fontWeight: 'medium' }}>
-//                                               Correspondence Address (For all Communication) Same as Permanent/Registered Office Address
-//                                             </Typography>
-//                                         }
-//                                     />
-//                                 </div>
-//                             </Box>
-//                         </div>
-//                     </>
-//             }
-//             </div>
-//         </ThemeProvider>
-//     );
-// }
-
-// export default RegisterWithUs;
-
-
+"use client";
 import React, { useEffect, useState } from "react";
 import NavBar from "@/app/components/register-with-us/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
@@ -341,6 +7,7 @@ import {
   Box,
   FormControlLabel,
   MenuItem,
+  Popover,
   Radio,
   TextField,
   Typography,
@@ -512,7 +179,8 @@ function RegisterWithUs() {
   const [expiryDate, setExpiryDate] = useState('');
   const [status, setStatus] = useState('');
 
-  
+  const [isSubmitted, setIsSubmitted] = useState(false);  
+  const [isError, setIsError] = useState(false);
 
   // Event handlers
   const handleIsLoginChange = (event) => {
@@ -558,6 +226,7 @@ function RegisterWithUs() {
   // };
 
   const handleSubmit = () => {
+    setIsSubmitted( isLogin==='register'? true : null);
     console.log('Submit clicked');
   
     if (isLogin === 'login') {
@@ -585,7 +254,11 @@ function RegisterWithUs() {
   return (
     <ThemeProvider theme={theme}>
       <NavBar />
-      <div className="pt-[30px] pl-[80px] font-poppins text-[14px]">
+      <div className="pt-[30px] px-[80px] font-poppins text-[14px]">
+
+        {
+          !isSubmitted?
+        <>
         {/* Login selector */}
         <div className="bg-[#F8F9FA] border-[#E4E5E5] border-[1px] rounded-[25px] w-[222px] h-[45px] p-[5px] flex">
           <button
@@ -612,44 +285,10 @@ function RegisterWithUs() {
           <div className="w-[481px] font-medium text-[14px] mt-[82px]">
             <div>
             This login is restricted to <span className="font-bold">Partners</span> only
-            If you are an investor and wish to access your account, please <span>click here</span>
+            If you are an investor and wish to access your account, please <a href="#" className="text-primary">click here</a>
             </div>
 
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': {
-                        outline: 'none',
-                        border: 'none',
-                        '& .MuiInputBase-root': {
-                            height: '40px',
-                            borderRadius: '10px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '0px'
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#6E6E72',
-                            fontSize: '14px',
-                            mt: '-5px',
-                            mx: 'auto',
-                            fontWeight: 500
-                        },
-                        '& .MuiInputLabel-root.Mui-focused': {
-                            mt: '2px',
-                            display: 'flex',
-                            color: 'primary.main',
-                        },
-                        '& .MuiInputAdornment-root': {
-                            mr: '15px', // Adjust the color of the InputAdornment
-                        },
-                    },
-                    py: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    rowGap: '20px',
-                }}
-            >
+            <div className="py-[20px] flex flex-col gap-x-[20px]">
               <div className="flex gap-[30px] flex-col">
                 <TextField
                   id="email-input"
@@ -667,8 +306,8 @@ function RegisterWithUs() {
                   sx={{ width: '380px' }}
                 />
               </div>
-              <div className="-mt-[15px] font-medium text-right mr-[101px] text-primary">Forget password?</div>
-            </Box>
+              <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[5px]">Forget password?</a>
+            </div>
 
           </div>
         ) :
@@ -683,42 +322,7 @@ function RegisterWithUs() {
                     <button className={`w-[178px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'non-individuals' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'non-individuals'} onClick={handleIsIndividualChange}> Non-Individuals </button>
                 </div>
 
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': {
-                        outline: 'none',
-                        border: 'none',
-                        '& .MuiInputBase-root': {
-                            height: '40px',
-                            borderRadius: '10px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '0px'
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#6E6E72',
-                            fontSize: '14px',
-                            mt: '-5px',
-                            mx: 'auto',
-                            fontWeight: 500
-                        },
-                        '& .MuiInputLabel-root.Mui-focused': {
-                            mt: '2px',
-                            display: 'flex',
-                            color: 'primary.main',
-                        },
-                        '& .MuiInputAdornment-root': {
-                            mr: '15px', // Adjust the color of the InputAdornment
-                        },
-                    },
-                    py: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    rowGap: '20px',
-                }}
-            >
-              <div className="flex gap-[50px]">
+            <div className="py-[20px] flex flex-wrap gap-y-[20px] gap-x-[50px]">
                 <TextField
                   id="name-input"
                   label="Name"
@@ -733,15 +337,36 @@ function RegisterWithUs() {
                     format="DD MMM YYYY hh:mm A"
                     value={dob}
                     onChange={handleDobChange}
+                    showDaysOutsideCurrentMonth={true}
+                    dayOfWeekFormatter={(day) => {
+                      switch(day){
+                        case "Su":
+                          return "Sun";
+                        case "Mo":
+                          return "Mon";
+                        case "Tu":
+                          return "Tue";
+                        case "We":
+                          return "Wed";
+                        case "Th":
+                          return "Thu";
+                        case "Fr":
+                          return "Fri";
+                        case "Sa":
+                          return "Sat";
+                      }
+                    }}
                     sx={{ width: '380px' }}
                     slots={{
                       openPickerIcon: () => (
-                        <CalendarMonthIcon sx={{ width: '20px', height: '20px', mr: '15px', color: 'primary.main' }} />
+                        <CalendarMonthIcon sx={{ width: '20px', height: '20px', color: 'primary.main' }} />
                       ),
+                    }}
+                    PopperProps={{
+                      sx: {'&.MuiPickersPopper-root': {border: '4px solid red'},},
                     }}
                   />
                 </LocalizationProvider>
-              </div>
               <div>
                 <TextField
                   id="pan-input"
@@ -751,7 +376,9 @@ function RegisterWithUs() {
                   sx={{ width: '380px' }}
                 />
               </div>
+            </div>
 
+            <div className="flex flex-col gap-y-[20px] gap-x-[50px]">
               {/* Registered Address */}
               <div className="-ml-[1px] font-semibold text-[18px]">
                 Permanent / Registered Office Address
@@ -823,7 +450,7 @@ function RegisterWithUs() {
                     />
                     <TextField
                         id="status-input"
-                        label="Status Date"
+                        label="Status"
                         value={status}
                         onChange={(event) => setStatus(event.target.value)}
                         sx={{ width: '380px' }}
@@ -840,7 +467,7 @@ function RegisterWithUs() {
                     <div>
                         <a href="#" className="flex gap-[15px]">
                             <Image
-                                src='/mutualFunds.png'
+                                src='/login/mutualFunds.png'
                                 width={23}
                                 height={23}
                                 alt="mutual-funds"
@@ -848,10 +475,10 @@ function RegisterWithUs() {
                             <span className="font-medium">Mutual Funds</span>
                         </a>
                     </div>
-                    <div className="mx-[30px] px-[30px] border-x-[1px] border-x-[#E4E5E5] ">
+                    <div className="mx-[30px] px-[30px] border-x-[1px] border-x-[#E4E5E5]">
                         <a href="#" className="flex gap-[15px]">
                             <Image
-                                src='/fixedDeposit@2x.png'
+                                src='/login/fixedDeposit@2x.png'
                                 width={23}
                                 height={23}
                                 alt="fd-deposits"
@@ -862,7 +489,7 @@ function RegisterWithUs() {
                     <div>
                         <a href="#" className="flex gap-[15px]">
                             <Image
-                                src='/NPS@2x.png'
+                                src='/login/NPS@2x.png'
                                 width={23}
                                 height={23}
                                 alt="NPS-funds"
@@ -870,29 +497,57 @@ function RegisterWithUs() {
                             <span className="font-medium">NPS</span>
                         </a>
                     </div>
-
                 </div>
-            </Box>
+              </div>
           </div>
         )}
 
-
         {/* Submit */}
-        <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px]" : "mt-[27px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] mb-[15px]`} onClick={handleSubmit} >
+        <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
           {isLogin === "login" ? "Login" : "Submit"}
         </button>
 
-        <div className="border-t-[1px] border-t-[#E4E5E5] py-[10px] w-[827px] text-[#777777] text-[12px]">
-            <div> Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</div>
+      </>
+      
+      : 
+
+      // Success Component
+      <>
+        <div className="w-[1120px] h-[189px] flex flex-col py-[68px] px-[46px] gap-y-[15px] rounded-[15px] shadow-lg items-center mt-[275px] mx-auto">
+          <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} className='w-[113px] h-[132px] absolute -mt-[150px]' />
+          <h3 className='text-[24px] text-[#00A345] font-semibold leading-[30px]'>Success</h3>
+          <p className='text-[16px] font-semibold text-center leading-[24px]'>Thanks for empanelling with us, we shall get in touch with you to complete the empanelment process.</p>
+        </div>
+      </>
+
+      }
+
+      <div className={`${isSubmitted ? "mt-[170px]" : "border-t-[1px] border-t-[#E4E5E5]"} py-[10px] w-[827px] text-[#777777] text-[12px]`}>
+            <div> &#8505; Mutual Fund investments are subject to market risks, read all scheme related documents carefully.</div>
             <div>© Wealth India Financial Services Pvt. Ltd. 2023</div>
             { isLogin === "login" && (
               <>
                 <div className="font-bold">Wealth India Financial Services Pvt. Ltd.,</div>
                 <div>No. 38 and 39, 3rd Floor, Uttam Building, Whites Road, Royapettah, Chennai, Tamil Nadu 600014</div>
+                <div>Tel : 61104100 Email : contactpartner@fundsindia.com</div>
               </>
             ) }
         </div>
       </div>
+
+      {
+        isError && 
+        <div className="w-[1320px] h-[93px] bg-[#FFF4ED] border-[1px] border-[#FF7922] rounded-t-[20px] mx-auto flex justify-center items-center">
+          <Image 
+            src="/login/error@2x.png"
+            width={50}
+            height={50}
+            alt="Error"
+            className="mr-[10px]"
+          />
+          <>Internal Server Error : Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</>
+        </div>
+      }
     </ThemeProvider>
   );
 }
