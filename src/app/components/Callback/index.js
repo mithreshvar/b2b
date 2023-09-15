@@ -32,24 +32,31 @@ function callback() {
                 </div>
                 <div className="w-[50%] p-[63px]">
 
-                    <div className="w-[513px] h-[555px] bg-white p-8  items-center rounded-[15px] shadow-lg ">
+                    <div className="w-[513px] h-[555px] bg-white p-[30px] px-[40px]  items-center rounded-[15px] shadow-lg ">
                         {
                         (!success) ?
                         <>
-                            <div className="text-[26px] font-bold mb-6 text-center">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
+                            <div className="text-[26px] font-semibold mb-[29px] text-center leading-[20px]">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
                             <div className="flex flex-col gap-y-[20px]">
                                 <TextField id="name" label="Name" sx={{width: '433px'}}/>
-                                <TextField  id="mobilenumber"  label="Mobile Number" sx={{width: '433px'}}/>
-                                <TextField  id="phonenumber"  label="Phone Number" sx={{width: '433px'}}/>
-                                <TextField   id="email"  label="Email" sx={{width: '433px'}}/>
-                                <TextField id="comments"  label="Comments" rows={3} sx={{width: '433px',height:'80px'}}/>
+                                <TextField id="mobilenumber" label="Mobile Number" sx={{width: '433px'}}/>
+                                <TextField id="phonenumber" label="Phone Number" sx={{width: '433px'}}/>
+                                <TextField id="email" label="Email" sx={{width: '433px'}}/>
+                                <TextField id="comments" label="Comments" rows={3} multiline sx={
+                                    {
+                                        width: '433px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                        }
+                                    }
+                                }/>
                                 <div className="flex flex-row">
                                     <TextField  id="verficationcode"  label="Verfication Code" sx={{width: '271px'}}/>
                                     <Image className="w-[144px] h-[36px] ml-[18px]" src={captcha}/>
                                 </div>
                             </div>
-                            <div className="flex items-center justify-center mt-[30px]">
-                                <button onClick={()=>{setSuccess(true)}} className="w-[166px] bg-[#0071E7] text-[#FFFFFF] text-sm font-bold py-2 px-4 rounded-[25px]  hover:bg-[#0070E9]transition duration-300">Submit</button>
+                            <div className="flex items-center justify-center mt-[30px]  text-[14px]">
+                                <button onClick={()=>{setSuccess(true)}} className="w-[166px] h-[40px] bg-primary text-white font-bold  rounded-[25px]  hover:bg-[#000000] duration-300">Submit</button>
                             </div>
                         </>
                         :
