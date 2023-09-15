@@ -30,7 +30,7 @@ function callback() {
                         <span className="font-medium">Are you looking to enhance your mutual fund business in today’s challenging times?<br/> Are your clients asking for online access to their investments?<br/> Are your service costs sky-rocketing?<br/> Do you wish to attract more and more affluent customers?</span><br/><br/> Presenting www.partner.fundsindia.com a premium destination that has been strategically tailored to give you all the advantages of an integrated online transaction platform, to complement your financial planning and Value added services to your clients.<br/><br/> With FundsindiaPartner have an effective way to attract, retain and service ideal clients in the digital age. A service that requires differentiation, strategy, and innovative content distribution
                     </p>
                 </div>
-                <div className="w-[50%] p-[63px]">
+                <div className="w-[50%] ml-[63px]">
 
                     <div className="w-[513px] h-[555px] bg-white p-[30px] px-[40px]  items-center rounded-[15px] shadow-lg ">
                         {
