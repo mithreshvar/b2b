@@ -19,6 +19,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
+import CustomSelectField from "../components/InputFields";
 
 // Create a reusable AddressFields component
 function AddressFields({ cityOptions, stateOptions, setValueObject }) {
@@ -81,46 +82,8 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
         onChange={(event) => setAddressLine3(event.target.value)}
         sx={{ width: '810px' }}
       />
-      <TextField
-        id="city-select"
-        select
-        label="City"
-        value={city}
-        onChange={(event) => setCity(event.target.value)}
-        SelectProps={{
-          IconComponent: () => (
-            <ExpandMoreIcon sx={{ color: 'primary.main', mr: '15px' }} />
-          ),
-        }}
-        sx={{ width: '380px' }}
-      >
-        {cityOptions.map((city) => (
-          <MenuItem key={city} value={city}>
-            {city}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="state-select"
-        select
-        label="State"
-        value={state}
-        onChange={(event) => {
-          setState(event.target.value);
-        }}
-        SelectProps={{
-          IconComponent: () => (
-            <ExpandMoreIcon sx={{ color: 'primary.main', mr: '15px' }} />
-          ), // Set the IconComponent to ExpandMoreIcon
-        }}
-        sx={{ width: '380px' }}
-      >
-        {stateOptions.map((state) => (
-          <MenuItem key={state} value={state}>
-            {state}
-          </MenuItem>
-        ))}
-      </TextField>
+      <CustomSelectField label="City" value={city} setValue={setCity} valueOptions={cityOptions} />
+      <CustomSelectField label="State" value={state} setValue={setState} valueOptions={stateOptions} />
       <TextField
         id="pincode-input"
         label="Pincode"

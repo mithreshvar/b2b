@@ -10,7 +10,8 @@ const theme = createTheme({
       }
   },
   typography: {
-    fontFamily: 'Poppins, sans-serif', // Set Poppins as the default font
+    fontFamily: 'Poppins, sans-serif',
+    fontSize: 14 // Set Poppins as the default font
   },
 
   components: {
