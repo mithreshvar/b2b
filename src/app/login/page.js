@@ -18,6 +18,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 
 // Create a reusable AddressFields component
 function AddressFields({ cityOptions, stateOptions, setValueObject }) {
@@ -159,8 +160,11 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
   );
 }
 
-function RegisterWithUs() {
-  const [isLogin, setIsLogin] = useState('login');
+function Login() {
+  const searchParams = useSearchParams()
+  const register = searchParams.get('register')
+  
+  const [isLogin, setIsLogin] = useState((register)?'register':'login');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -552,4 +556,4 @@ function RegisterWithUs() {
   );
 }
 
-export default RegisterWithUs;
+export default Login;

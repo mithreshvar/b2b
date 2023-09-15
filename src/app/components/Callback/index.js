@@ -1,14 +1,14 @@
 import Image from "next/image";
-import captcha from "../../../../public/callback/captcha.png"
-import page3Img from '../../../../public/callback/page3img.png';
-import page4Img from '../../../../public/callback/page4img.png';
-import page5Img from '../../../../public/callback/page5img.png';
-import page6Img from '../../../../public/callback/page6img.png';
-import page2Img1 from '../../../../public/callback/2ndpageassets/1.png'
-import page2Img2 from '../../../../public/callback/2ndpageassets/2.png'
-import page2Img3 from '../../../../public/callback/2ndpageassets/3.png'
-import page2Img4 from '../../../../public/callback/2ndpageassets/4.png'
-import tick from '../../../../public/callback/successmark.png';
+import captcha from "/public/callback/captcha.png"
+import page3Img from '/public/callback/page3img.png';
+import page4Img from '/public/callback/page4img.png';
+import page5Img from '/public/callback/page5img.png';
+import page6Img from '/public/callback/page6img.png';
+import page2Img1 from '/public/callback/2ndpageassets/1.png'
+import page2Img2 from '/public/callback/2ndpageassets/2.png'
+import page2Img3 from '/public/callback/2ndpageassets/3.png'
+import page2Img4 from '/public/callback/2ndpageassets/4.png'
+import tick from '/public/callback/successmark.png';
 
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../../theme";
@@ -30,26 +30,33 @@ function callback() {
                         <span className="font-medium">Are you looking to enhance your mutual fund business in today’s challenging times?<br/> Are your clients asking for online access to their investments?<br/> Are your service costs sky-rocketing?<br/> Do you wish to attract more and more affluent customers?</span><br/><br/> Presenting www.partner.fundsindia.com a premium destination that has been strategically tailored to give you all the advantages of an integrated online transaction platform, to complement your financial planning and Value added services to your clients.<br/><br/> With FundsindiaPartner have an effective way to attract, retain and service ideal clients in the digital age. A service that requires differentiation, strategy, and innovative content distribution
                     </p>
                 </div>
-                <div className="w-[50%] p-[63px]">
+                <div className="w-[50%] ml-[63px]">
 
-                    <div className="w-[513px] h-[555px] bg-white p-8  items-center rounded-[15px] shadow-lg ">
+                    <div className="w-[513px] h-[555px] bg-white p-[30px] px-[40px]  items-center rounded-[15px] shadow-lg ">
                         {
                         (!success) ?
                         <>
-                            <div className="text-[26px] font-bold mb-6 text-center">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
+                            <div className="text-[26px] font-semibold mb-[29px] text-center leading-[20px]">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
                             <div className="flex flex-col gap-y-[20px]">
                                 <TextField id="name" label="Name" sx={{width: '433px'}}/>
-                                <TextField  id="mobilenumber"  label="Mobile Number" sx={{width: '433px'}}/>
-                                <TextField  id="phonenumber"  label="Phone Number" sx={{width: '433px'}}/>
-                                <TextField   id="email"  label="Email" sx={{width: '433px'}}/>
-                                <TextField id="comments"  label="Comments" rows={3} sx={{width: '433px',height:'80px'}}/>
+                                <TextField id="mobilenumber" label="Mobile Number" sx={{width: '433px'}}/>
+                                <TextField id="phonenumber" label="Phone Number" sx={{width: '433px'}}/>
+                                <TextField id="email" label="Email" sx={{width: '433px'}}/>
+                                <TextField id="comments" label="Comments" rows={3} multiline sx={
+                                    {
+                                        width: '433px',
+                                        '& .MuiInputBase-root': {
+                                            height: '80px',
+                                        }
+                                    }
+                                }/>
                                 <div className="flex flex-row">
                                     <TextField  id="verficationcode"  label="Verfication Code" sx={{width: '271px'}}/>
                                     <Image className="w-[144px] h-[36px] ml-[18px]" src={captcha}/>
                                 </div>
                             </div>
-                            <div className="flex items-center justify-center mt-[30px]">
-                                <button onClick={()=>{setSuccess(true)}} className="w-[166px] bg-[#0071E7] text-[#FFFFFF] text-sm font-bold py-2 px-4 rounded-[25px]  hover:bg-[#0070E9]transition duration-300">Submit</button>
+                            <div className="flex items-center justify-center mt-[30px]  text-[14px]">
+                                <button onClick={()=>{setSuccess(true)}} className="w-[166px] h-[40px] bg-primary text-white font-bold  rounded-[25px]  hover:bg-[#000000] duration-300">Submit</button>
                             </div>
                         </>
                         :

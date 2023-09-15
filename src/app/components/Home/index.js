@@ -1,11 +1,11 @@
 "use client"
 
 import Image from 'next/image'
-import slider1 from '../../../../public/home/Group 544804/Group 544804@2x.png'
-import img1 from '../../../../public/home/Group 483641/Group 483641@2x.png'
-import img2 from '../../../../public/home/Group 498762/Group 498762@2x.png'
-import img3 from '../../../../public/home/Group 498555/Group 498555@2x.png'
-import success from '../../../../public/home/Group 405761/Group 405761@2x.png'
+import slider1 from '/public/home/Group 544804/Group 544804@2x.png'
+import img1 from '/public/home/Group 483641/Group 483641@2x.png'
+import img2 from '/public/home/Group 498762/Group 498762@2x.png'
+import img3 from '/public/home/Group 498555/Group 498555@2x.png'
+import success from '/public/home/Group 405761/Group 405761@2x.png'
 import { useState } from 'react'
 
 import { ThemeProvider } from '@mui/material/styles';
