@@ -24,15 +24,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TextField, ThemeProvider } from '@mui/material';
 import theme from './theme';
+import { useSearchParams } from 'next/navigation';
 
 export default function HomePage() {
-
-  const [route, setRoute] = useState('Home');
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')
+  const [route, setRoute] = useState(search || 'Home');
   const [login, setLogin] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
-      <main className={`flex h-screen flex-col items-center px-[80px] font-poppins ${(login)?' overflow-hidden':''}`}> 
+      <main className={`flex h-screen overflow-scroll flex-col items-center px-[80px] font-poppins bg-[url('../../public/app-background.png')] bg-cover bg-fixed ${(login)?' overflow-hidden':''}`}> 
         <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`}>
           <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
             <Link href={'/'}><Image src={logo} className='w-[165px] h-[47px]' /></Link>
@@ -40,8 +42,8 @@ export default function HomePage() {
               <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
               <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
               <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
-              <h6 className={` cursor-pointer ${(route=='Register With Us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Register With Us')}}><Link href="/register-with-us">Register With Us</Link></h6>
-              <h6 className={` cursor-pointer ${(route=='Contact us')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Contact us')}}>Contact us</h6>
+              <h6 className={'cursor-pointer '} ><Link href="/login?register=true">Register With Us</Link></h6>
+              <h6 className={` cursor-pointer ${(route=='Contact')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Contact')}}>Contact us</h6>
               <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-primary text-white rounded-[25px]'>Login</button>
               <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
             </div>
@@ -50,8 +52,7 @@ export default function HomePage() {
             (route==='Home' && <Home/>) || 
             (route==='Why FundsIndiaPartner?' && <p>Why FundsIndiaPartner?</p>) || 
             (route==='Demo' && <Demo/>) ||
-            (route==='Register With Us' && <p>Register With Us</p>) || 
-            (route==='Contact us' && <Contact />) || 
+            (route==='Contact' && <Contact />) || 
             (route==='Callback' && <Callback />)
           }
           <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
@@ -121,7 +122,7 @@ export default function HomePage() {
               <div className='flex gap-x-[120px]'>
                 <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
                   <Image src={partner} className='w-[85px] h-[113px]' />
-                  <Link href={'/register-with-us'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px] flex items-center justify-center'>Partner</Link>
+                  <Link href={'/login'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px] flex items-center justify-center'>Partner</Link>
                 </div>
                 <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
                   <Image src={investor} className='w-[97px] h-[115px]' />
