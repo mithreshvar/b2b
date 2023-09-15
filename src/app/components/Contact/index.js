@@ -2,9 +2,9 @@ import { ThemeProvider } from "@mui/material";
 import theme from '../../theme'
 import Image from "next/image";
 
-import email from '../../../../public/Contact/Group 512412.svg'
-import phone from '../../../../public/Contact/Group 512413.svg'
-import office from '../../../../public/Contact/Group 512414.svg'
+import email from '/public/Contact/Group 512412.svg'
+import phone from '/public/Contact/Group 512413.svg'
+import office from '/public/Contact/Group 512414.svg'
 
 export default function Contact() {
     return(

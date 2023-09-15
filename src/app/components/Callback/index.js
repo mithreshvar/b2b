@@ -1,14 +1,14 @@
 import Image from "next/image";
-import captcha from "../../../../public/callback/captcha.png"
-import page3Img from '../../../../public/callback/page3img.png';
-import page4Img from '../../../../public/callback/page4img.png';
-import page5Img from '../../../../public/callback/page5img.png';
-import page6Img from '../../../../public/callback/page6img.png';
-import page2Img1 from '../../../../public/callback/2ndpageassets/1.png'
-import page2Img2 from '../../../../public/callback/2ndpageassets/2.png'
-import page2Img3 from '../../../../public/callback/2ndpageassets/3.png'
-import page2Img4 from '../../../../public/callback/2ndpageassets/4.png'
-import tick from '../../../../public/callback/successmark.png';
+import captcha from "/public/callback/captcha.png"
+import page3Img from '/public/callback/page3img.png';
+import page4Img from '/public/callback/page4img.png';
+import page5Img from '/public/callback/page5img.png';
+import page6Img from '/public/callback/page6img.png';
+import page2Img1 from '/public/callback/2ndpageassets/1.png'
+import page2Img2 from '/public/callback/2ndpageassets/2.png'
+import page2Img3 from '/public/callback/2ndpageassets/3.png'
+import page2Img4 from '/public/callback/2ndpageassets/4.png'
+import tick from '/public/callback/successmark.png';
 
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../../theme";

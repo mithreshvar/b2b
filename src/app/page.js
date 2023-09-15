@@ -8,18 +8,18 @@ import Contact from './components/Contact';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
-import phoneIcon from '../../public/home/Group 511824/Group 511824@2x.png'
-import partner from '../../public/home/Mask Group 29511/Mask Group 29511@2x.png'
-import investor from '../../public/home/Mask Group 29512/Mask Group 29512@2x.png'
+import phoneIcon from '/public/home/Group 511824/Group 511824@2x.png'
+import partner from '/public/home/Mask Group 29511/Mask Group 29511@2x.png'
+import investor from '/public/home/Mask Group 29512/Mask Group 29512@2x.png'
 
-import email from '../../public/Contact/Group 512412.svg'
-import phone from '../../public/Contact/Group 512413.svg'
-import office from '../../public/Contact/Group 512414.svg'
-import bulletin from '../../public/bulletin sm.svg'
-import fb from '../../public/home/Path 238656.svg'
-import x from '../../public/home/Path 238654.svg'
+import email from '/public/Contact/Group 512412.svg'
+import phone from '/public/Contact/Group 512413.svg'
+import office from '/public/Contact/Group 512414.svg'
+import bulletin from '/public/bulletin sm.svg'
+import fb from '/public/home/Path 238656.svg'
+import x from '/public/home/Path 238654.svg'
 
-import logo from '../../public/logo.svg'
+import logo from '/public/logo.svg'
 import Image from 'next/image';
 import Link from 'next/link';
 import { TextField, ThemeProvider } from '@mui/material';

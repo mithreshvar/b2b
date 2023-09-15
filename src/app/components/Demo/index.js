@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import success from '../../../../public/home/Group 405761/Group 405761@2x.png'
+import success from '/public/home/Group 405761/Group 405761@2x.png'
 
 import { useState } from "react";
 
