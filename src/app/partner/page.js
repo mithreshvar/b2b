@@ -24,10 +24,16 @@ import ITripartite from '/public/partner/Tripartite';
 
 import back from '/public/partner/back.svg'
 import Dashboard from '../components/partner/Dashboard';
+import Registration from '../components/partner/Registration';
+import Report from '../components/partner/Report';
+import Dbf from '../components/partner/Dbf'
+import About from '../components/partner/About';
+import Manual from '../components/partner/Manual';
+import Phase3 from '../components/partner/Phase3';
 import Tripartite from '../components/partner/Tripartite';
 import PartnerHome from '../components/partner/PartnerHome';
-
-
+import Brokerage from '../components/partner/Brokerage';
+import Portfolio from '../components/partner/Portfolio';
 export default function NavBar() {
 
     const [active, setActive] = useState('dashboard');
@@ -117,23 +123,30 @@ export default function NavBar() {
                         <h6 className={`cursor-pointer ${active==='password' && 'font-semibold text-primary'}`} onClick={()=>{setActive('password')}} >Change Password</h6>
                     </div>
 
+                    <div className='flex gap-x-[14px] items-center relative '>
+                        {active === 'phase3' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
+                        <span className='cursor-pointer' onClick={()=>{setActive('phase3')}}><IPassword active={active} /></span>
+                        <h6 className={`cursor-pointer ${active==='phase3' && 'font-semibold text-primary'}`} onClick={()=>{setActive('phase3')}} > Phase 3</h6>
+                    </div>
+
                 </div>
 
                 {/* page segment */}
                 <div className='bg-[#F5F7FE] h-full w-[calc(100vw-250px)] z-0'>
 
                     {
-                        (active==='about' && <Dashboard /> )||
-                        (active==='brokerage' && <Dashboard /> )||
+                        (active==='about' && <About /> )||
+                        (active==='brokerage' && <Brokerage /> )||
                         (active==='dashboard' && <Dashboard /> )||
-                        (active==='dbf' && <Dashboard /> )||
+                        (active==='dbf' && <Dbf /> )||
                         (active==='home' && <PartnerHome /> )||
-                        (active==='manual' && <Dashboard /> )||
+                        (active==='manual' && <Manual /> )||
                         (active==='password' && <Dashboard /> )||
-                        (active==='portfolio' && <Dashboard /> )||
-                        (active==='registration' && <Dashboard /> )||
-                        (active==='reports' && <Dashboard /> )||
-                        (active==='tripartite' && <Tripartite /> )
+                        (active==='portfolio' && <Portfolio /> )||
+                        (active==='registration' && <Registration /> )||
+                        (active==='reports' && <Report /> )||
+                        (active==='tripartite' && <Tripartite /> )||
+                        (active==='phase3' && <Phase3 /> )
                     }
 
                 </div>
