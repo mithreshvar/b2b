@@ -12,7 +12,7 @@ function Registration() {
 
 
   return (
-    <>
+    <div className='p-[20px]'>
     {
       (!success) ?
       <div className='w-full p-[20px] bg-white rounded-[15px]'>
@@ -97,7 +97,7 @@ function Registration() {
       </div>
 
     }
-    </>
+    </div>
   )
 }
 

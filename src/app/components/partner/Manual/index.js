@@ -5,7 +5,7 @@ import Image from 'next/image';
 function manual() {
   const[success, setSuccess] = useState(false);
   return (
-    <>
+    <div className='p-[20px]'>
     
       <div className='w-full max-h-min rounded-[15px] bg-white p-[20px]'>
         <div className='text-[20px] leading-[20px] font-semibold'>
@@ -30,7 +30,7 @@ function manual() {
         </div>
         }
         </div>
-    </>
+    </div>
   )
 }
 
