@@ -24,6 +24,7 @@ import ITripartite from '/public/partner/Tripartite';
 
 import back from '/public/partner/back.svg'
 import Dashboard from '../components/partner/Dashboard';
+import Tripartite from '../components/partner/Tripartite';
 import PartnerHome from '../components/partner/PartnerHome';
 
 
@@ -132,7 +133,7 @@ export default function NavBar() {
                         (active==='portfolio' && <Dashboard /> )||
                         (active==='registration' && <Dashboard /> )||
                         (active==='reports' && <Dashboard /> )||
-                        (active==='tripartite' && <Dashboard /> )
+                        (active==='tripartite' && <Tripartite /> )
                     }
 
                 </div>
