@@ -10,7 +10,8 @@ const theme = createTheme({
       }
   },
   typography: {
-    fontFamily: 'Poppins, sans-serif', // Set Poppins as the default font
+    fontFamily: 'Poppins, sans-serif',
+    fontSize: 14 // Set Poppins as the default font
   },
 
   components: {
@@ -25,7 +26,7 @@ const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          height: '40px',
+          // height: '40px',
           display: 'flex',
           alignItems: 'center',
           padding: '0px'

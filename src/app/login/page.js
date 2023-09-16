@@ -3,22 +3,12 @@ import React, { useEffect, useState } from "react";
 import NavBar from "@/app/components/register-with-us/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../theme";
-import {
-  Box,
-  FormControlLabel,
-  MenuItem,
-  Popover,
-  Radio,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { ExpandMore as ExpandMoreIcon, RadioButtonUnchecked } from '@mui/icons-material';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { FormControlLabel, Radio, Typography, } from "@mui/material";
+import { RadioButtonUnchecked } from '@mui/icons-material';
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
+import { CustomSelectField, CustomTextField, CustomDatePicker, CustomPasswordField} from "../components/InputFields";
+import Link from "next/link";
 
 // Create a reusable AddressFields component
 function AddressFields({ cityOptions, stateOptions, setValueObject }) {
@@ -35,127 +25,135 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
 
   useEffect(() => {
     setValueObject({
-      addressLine1,
-      addressLine2,
-      addressLine3,
-      city,
-      state,
-      pincode,
-      email,
-      contactNoOffice,
-      residence,
-      mobileNumber
+      addressLine1, addressLine2, addressLine3, city, state, pincode, email, contactNoOffice, residence, mobileNumber
     })
-  }, [addressLine1,
-    addressLine2,
-    addressLine3,
-    city,
-    state,
-    pincode,
-    email,
-    contactNoOffice,
-    residence,
-    mobileNumber]);
+  }, [addressLine1, addressLine2, addressLine3, city, state, pincode, email, contactNoOffice, residence, mobileNumber]
+  );
+
+  // Error message states
+  const [addressLine1ErrorMessage, setAddressLine1ErrorMessage] = useState('');
+  const [addressLine2ErrorMessage, setAddressLine2ErrorMessage] = useState('');
+  const [addressLine3ErrorMessage, setAddressLine3ErrorMessage] = useState('');
+  const [pincodeErrorMessage, setPincodeErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [contactNoOfficeErrorMessage, setContactNoOfficeErrorMessage] = useState('');
+  const [residenceErrorMessage, setResidenceErrorMessage] = useState('');
+  const [mobileNumberErrorMessage, setMobileNumberErrorMessage] = useState('');
+
+  // handleChange functions
+  const handleAddressLine1Change = (event) => {
+    const value = event.target.value;
+    setAddressLine1(value);
+    
+    if (value === "") {
+      setAddressLine1ErrorMessage("Address Line 1 cannot be empty");
+    } else {
+      setAddressLine1ErrorMessage("");
+    }
+  };
+
+  const handleAddressLine2Change = (event) => {
+    const value = event.target.value;
+    setAddressLine2(value);
+  
+    if (value === "") {
+      setAddressLine2ErrorMessage("Address Line 2 cannot be empty");
+    } else {
+      setAddressLine2ErrorMessage("");
+    }
+  };
+  
+  const handleAddressLine3Change = (event) => {
+    const value = event.target.value;
+    setAddressLine3(value);
+  
+    if (value === "") {
+      setAddressLine3ErrorMessage("Address Line 3 cannot be empty");
+    } else {
+      setAddressLine3ErrorMessage("");
+    }
+  };
+  
+  const handlePincodeChange = (event) => {
+    const value = event.target.value;
+    setPincode(value);
+  
+    if (value === "") {
+      setPincodeErrorMessage("Pincode cannot be empty");
+    } else if (!/^\d{6}$/.test(value)) {
+      setPincodeErrorMessage("Pincode must be a 6-digit number");
+    } else {
+      setPincodeErrorMessage("");
+    }
+  };
+  
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  
+    if (value === "") {
+      setEmailErrorMessage("Email cannot be empty");
+    } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+      setEmailErrorMessage("Invalid email format");
+    } else {
+      setEmailErrorMessage("");
+    }
+  };
+  
+  const handleContactNoOfficeChange = (event) => {
+    const value = event.target.value;
+    setContactNoOffice(value);
+  
+    if (value === "") {
+      setContactNoOfficeErrorMessage("Contact No. (Office) cannot be empty");
+    } else if (!/^\d{10}$/.test(value)) {
+      setContactNoOfficeErrorMessage("Invalid contact number format (10 digits required)");
+    } else {
+      setContactNoOfficeErrorMessage("");
+    }
+  };
+  
+  const handleResidenceChange = (event) => {
+    const value = event.target.value;
+    setResidence(value);
+  
+    if (value === "") {
+      setResidenceErrorMessage("Residence cannot be empty");
+    } else {
+      setResidenceErrorMessage("");
+    }
+  };
+  
+  const handleMobileNumberChange = (event) => {
+    const value = event.target.value;
+    setMobileNumber(value);
+  
+    if (value === "") {
+      setMobileNumberErrorMessage("Mobile Number cannot be empty");
+    } else if (!/^\d{10}$/.test(value)) {
+      setMobileNumberErrorMessage("Invalid mobile number format (10 digits required)");
+    } else {
+      setMobileNumberErrorMessage("");
+    }
+  };
+  
+  
+  // Similarly, you can add validation logic for other fields as needed
+  
 
 
   return (
     <div className="flex flex-wrap gap-x-[50px] gap-y-[20px]">
-      <TextField
-        id="address-1-input"
-        label="Address Line 1"
-        value={addressLine1}
-        onChange={(event) => setAddressLine1(event.target.value)}
-        sx={{ width: '810px' }}
-      />
-      <TextField
-        id="address-2-input"
-        label="Address Line 2"
-        value={addressLine2}
-        onChange={(event) => setAddressLine2(event.target.value)}
-        sx={{ width: '810px' }}
-      />
-      <TextField
-        id="address-3-input"
-        label="Address Line 3"
-        value={addressLine3}
-        onChange={(event) => setAddressLine3(event.target.value)}
-        sx={{ width: '810px' }}
-      />
-      <TextField
-        id="city-select"
-        select
-        label="City"
-        value={city}
-        onChange={(event) => setCity(event.target.value)}
-        SelectProps={{
-          IconComponent: () => (
-            <ExpandMoreIcon sx={{ color: 'primary.main', mr: '15px' }} />
-          ),
-        }}
-        sx={{ width: '380px' }}
-      >
-        {cityOptions.map((city) => (
-          <MenuItem key={city} value={city}>
-            {city}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="state-select"
-        select
-        label="State"
-        value={state}
-        onChange={(event) => {
-          setState(event.target.value);
-        }}
-        SelectProps={{
-          IconComponent: () => (
-            <ExpandMoreIcon sx={{ color: 'primary.main', mr: '15px' }} />
-          ), // Set the IconComponent to ExpandMoreIcon
-        }}
-        sx={{ width: '380px' }}
-      >
-        {stateOptions.map((state) => (
-          <MenuItem key={state} value={state}>
-            {state}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="pincode-input"
-        label="Pincode"
-        value={pincode}
-        onChange={(event) => setPincode(event.target.value)}
-        sx={{ width: '380px' }}
-      />
-      <TextField
-        id="email-input"
-        label="Email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        sx={{ width: '380px' }}
-      />
-      <TextField
-        id="contact-no-office-input"
-        label="Contact No. Office"
-        value={contactNoOffice}
-        onChange={(event) => setContactNoOffice(event.target.value)}
-        sx={{ width: '380px' }}
-      />
-      <TextField
-        id="residence-input"
-        label="Residence"
-        value={residence}
-        onChange={(event) => setResidence(event.target.value)}
-        sx={{ width: '380px' }}
-      />
-      <TextField
-        id="mobile-number-input"
-        label="Mobile Number"
-        value={mobileNumber}
-        onChange={(event) => setMobileNumber(event.target.value)}
-        sx={{ width: '380px' }}
-      />
+      <CustomTextField label="Address Line 1" width="810px" value={addressLine1} errorMessage={addressLine1ErrorMessage} handleChange={handleAddressLine1Change} />
+      <CustomTextField label="Address Line 2" width="810px" value={addressLine2} errorMessage={addressLine2ErrorMessage} handleChange={handleAddressLine2Change} />
+      <CustomTextField label="Address Line 3" width="810px" value={addressLine3} errorMessage={addressLine3ErrorMessage} handleChange={handleAddressLine3Change} />
+      <CustomSelectField label="City" value={city} setValue={setCity} valueOptions={cityOptions} />
+      <CustomSelectField label="State" value={state} setValue={setState} valueOptions={stateOptions} />
+      <CustomTextField label="Pincode" value={pincode} errorMessage={pincodeErrorMessage} handleChange={handlePincodeChange} />
+      <CustomTextField label="Email" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
+      <CustomTextField label="Contact No. Office" value={contactNoOffice} errorMessage={contactNoOfficeErrorMessage} handleChange={handleContactNoOfficeChange} />
+      <CustomTextField label="Residence" value={residence} errorMessage={residenceErrorMessage} handleChange={handleResidenceChange} />
+      <CustomTextField label="Mobile Number" value={mobileNumber} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
     </div>
   );
 }
@@ -186,48 +184,29 @@ function Login() {
   const [isSubmitted, setIsSubmitted] = useState(false);  
   const [isError, setIsError] = useState(false);
 
+  //Field Specific Error Message
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [nameErrorMessage, setNameErrorMessage] = useState('');
+  const [panNumberErrorMessage, setPanNumberErrorMessage] = useState('');
+  const [arnNumberErrorMessage, setArnNumberErrorMessage] = useState('');
+  const [issueDateErrorMessage, setIssueDateErrorMessage] = useState('');
+  const [expiryDateErrorMessage, setExpiryDateErrorMessage] = useState('');
+  const [statusErrorMessage, setStatusErrorMessage] = useState('');
+
+
   // Event handlers
   const handleIsLoginChange = (event) => {
     setIsLogin(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
   };
 
   const handleIsIndividualChange = (event) => {
     setIsIndividual(event.target.value);
   };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleDobChange = (dateTime) => {
-    setDob(dateTime);
-  };
-
-  const handlePanNumberChange = (event) => {
-    setPanNumber(event.target.value);
-  };
-
   const handleIsCorrespondenceChange = () => {
     setIsCorrespondence(!isCorrespondence);
   };
-
-  // Handle state change for permanent address
-  // const handlePermanentAddressStateChange = (newState) => {
-  //   setPermanentAddressState(newState);
-  // };
-
-  // // Handle state change for correspondence address
-  // const handleCorrespondenceAddressStateChange = (newState) => {
-  //   setCorrespondenceAddressState(newState);
-  // };
 
   const handleSubmit = () => {
     setIsSubmitted( isLogin==='register'? true : null);
@@ -249,6 +228,86 @@ function Login() {
       console.log('Expiry Date:', expiryDate);
       console.log('Status:', status);
     }
+  };
+
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+    if (value === "") {
+      setNameErrorMessage("Name cannot be empty");
+    } else if (!/^[A-Za-z]+$/.test(value)) {
+      setNameErrorMessage("Name can contain only alphabets");
+    } else {
+      setNameErrorMessage("");
+    }
+  };
+  
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  
+    if (value === "") {
+      setEmailErrorMessage("Email cannot be empty");
+    } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+      setEmailErrorMessage("Invalid email format");
+    } else {
+      setEmailErrorMessage("");
+    }
+  };
+  
+  const handlePasswordChange = (event) => {
+    const value = event.target.value;
+    setPassword(value);
+  
+    if (value === "") {
+      setPasswordErrorMessage("Password cannot be empty");
+    } else if (value.length < 8) {
+      setPasswordErrorMessage("Password must be at least 8 characters long");
+    } else {
+      setPasswordErrorMessage("");
+    }
+  };
+  
+  const handlePanNumberChange = (event) => {
+    const value = event.target.value;
+    setPanNumber(value);
+  
+    if (value === "") {
+      setPanNumberErrorMessage("PAN Number cannot be empty");
+    } else if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value)) {
+      setPanNumberErrorMessage("Invalid PAN Number format");
+    } else {
+      setPanNumberErrorMessage("");
+    }
+  };
+  
+  const handleArnNumberChange = (event) => {
+    const value = event.target.value;
+    setArnNumber(value);
+  
+    if (value === "") {
+      setArnNumberErrorMessage("ARN Number cannot be empty");
+    } else if (!/^[A-Za-z0-9]+$/.test(value)) {
+      setArnNumberErrorMessage("ARN Number can only contain alphanumeric characters");
+    } else {
+      setArnNumberErrorMessage("");
+    }
+  }
+
+  const handleIssueDateChange = (date) => {
+    setIssueDate(date);
+    // Add issue date validation logic here if needed
+  };
+
+  const handleExpiryDateChange = (date) => {
+    setExpiryDate(date);
+    // Add expiry date validation logic here if needed
+  };
+
+  const handleStatusChange = (event) => {
+    const value = event.target.value;
+    setStatus(value);
+    // Add status validation logic here if needed
   };
   
 
@@ -294,21 +353,8 @@ function Login() {
 
             <div className="py-[20px] flex flex-col gap-x-[20px]">
               <div className="flex gap-[30px] flex-col">
-                <TextField
-                  id="email-input"
-                  label="Email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  sx={{ width: '380px' }}
-                />
-                <TextField
-                  id="password-input"
-                  type="password"
-                  label="Password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  sx={{ width: '380px' }}
-                />
+                <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
+                <CustomPasswordField label="Password" type="password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
               </div>
               <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[5px]">Forget password?</a>
             </div>
@@ -326,59 +372,11 @@ function Login() {
                     <button className={`w-[178px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'non-individuals' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'non-individuals'} onClick={handleIsIndividualChange}> Non-Individuals </button>
                 </div>
 
-            <div className="py-[20px] flex flex-wrap gap-y-[20px] gap-x-[50px]">
-                <TextField
-                  id="name-input"
-                  label="Name"
-                  value={name}
-                  onChange={handleNameChange}
-                  sx={{ width: '380px' }}
-                />
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    id="dob-input"
-                    label="Date Of Birth / incorporation"
-                    format="DD MMM YYYY hh:mm A"
-                    value={dob}
-                    onChange={handleDobChange}
-                    showDaysOutsideCurrentMonth={true}
-                    dayOfWeekFormatter={(day) => {
-                      switch(day){
-                        case "Su":
-                          return "Sun";
-                        case "Mo":
-                          return "Mon";
-                        case "Tu":
-                          return "Tue";
-                        case "We":
-                          return "Wed";
-                        case "Th":
-                          return "Thu";
-                        case "Fr":
-                          return "Fri";
-                        case "Sa":
-                          return "Sat";
-                      }
-                    }}
-                    sx={{ width: '380px' }}
-                    slots={{
-                      openPickerIcon: () => (
-                        <CalendarMonthIcon sx={{ width: '20px', height: '20px', color: 'primary.main' }} />
-                      ),
-                    }}
-                    PopperProps={{
-                      sx: {'&.MuiPickersPopper-root': {border: '4px solid red'},},
-                    }}
-                  />
-                </LocalizationProvider>
+              <div className="py-[20px] flex flex-wrap gap-y-[20px] gap-x-[50px]">
+                <CustomTextField label="Name" type="text" value={name} errorMessage={nameErrorMessage} handleChange={handleNameChange} />
+                <CustomDatePicker label="Date Of Birth / incorporation" value={dob} setValue={setDob} disableFuture={true} />
               <div>
-                <TextField
-                  id="pan-input"
-                  label="PAN Number"
-                  value={panNumber}
-                  onChange={handlePanNumberChange}
-                  sx={{ width: '380px' }}
-                />
+              <CustomTextField label="PAN Number" type="text" value={panNumber} errorMessage={panNumberErrorMessage} handleChange={handlePanNumberChange} />
               </div>
             </div>
 
@@ -431,34 +429,10 @@ function Login() {
                     Registration Details
                 </div>
                 <div className="flex flex-wrap gap-x-[50px] gap-y-[20px]">
-                    <TextField
-                        id="arn-input"
-                        label="ARN Number"
-                        value={arnNumber}
-                        onChange={(event) => setArnNumber(event.target.value)}
-                        sx={{ width: '380px' }}
-                    />
-                    <TextField
-                        id="issue-input"
-                        label="Issue Date"
-                        value={issueDate}
-                        onChange={(event) => setIssueDate(event.target.value)}
-                        sx={{ width: '380px' }}
-                    />
-                    <TextField
-                        id="expiry-input"
-                        label="Expiry Date"
-                        value={expiryDate}
-                        onChange={(event) => setExpiryDate(event.target.value)}
-                        sx={{ width: '380px' }}
-                    />
-                    <TextField
-                        id="status-input"
-                        label="Status"
-                        value={status}
-                        onChange={(event) => setStatus(event.target.value)}
-                        sx={{ width: '380px' }}
-                    />
+                  <CustomTextField label="ARN Number" type="text" value={arnNumber} errorMessage={arnNumberErrorMessage} handleChange={handleArnNumberChange} />
+                  <CustomTextField label="Issue Date" type="text" value={issueDate} errorMessage={issueDateErrorMessage} handleChange={handleIssueDateChange} />
+                  <CustomTextField label="Expiry Date" type="text" value={expiryDate} errorMessage={expiryDateErrorMessage} handleChange={handleExpiryDateChange} />
+                  <CustomTextField label="Status" type="text" value={status} errorMessage={statusErrorMessage} handleChange={handleStatusChange} />
                 </div>
 
                 {/* Products and Services */}
@@ -507,9 +481,11 @@ function Login() {
         )}
 
         {/* Submit */}
-        <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
-          {isLogin === "login" ? "Login" : "Submit"}
-        </button>
+        <Link href={isLogin === "login" ? "/partner" : "#"} >
+          <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
+            {isLogin === "login" ? "Login" : "Submit"}
+          </button>
+        </Link>
 
       </>
       
