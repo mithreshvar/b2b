@@ -34,6 +34,7 @@ import Tripartite from '../components/partner/Tripartite';
 import PartnerHome from '../components/partner/PartnerHome';
 import Brokerage from '../components/partner/Brokerage';
 import Portfolio from '../components/partner/Portfolio';
+import Password from '../components/partner/Password';
 export default function NavBar() {
 
     const [active, setActive] = useState('dashboard');
@@ -141,7 +142,7 @@ export default function NavBar() {
                         (active==='dbf' && <Dbf /> )||
                         (active==='home' && <PartnerHome /> )||
                         (active==='manual' && <Manual /> )||
-                        (active==='password' && <Dashboard /> )||
+                        (active==='password' && <Password /> )||
                         (active==='portfolio' && <Portfolio /> )||
                         (active==='registration' && <Registration /> )||
                         (active==='reports' && <Report /> )||
