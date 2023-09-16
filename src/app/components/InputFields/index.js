@@ -6,14 +6,15 @@ import { useState } from "react";
 
 const CustomSelectField = ({ width = "380px", height = "40px", ...props}) => {
     return (
-        <>
+        <div>
             <TextField
                 id={`${props.label}-select`}
                 select
                 {...props}
                 label={props.label}
                 value={props.value}
-                onChange={(event) => props.setValue(event.target.value)}
+                onChange={props.handleChange}
+                onBlur={props.handleChange}
                 InputProps={{sx: {fontSize: '14px', fontWeight: 'medium'}}}
                 SelectProps={{
                 IconComponent: () => (
@@ -49,16 +50,17 @@ const CustomSelectField = ({ width = "380px", height = "40px", ...props}) => {
                 ))}
             </TextField>
             {
-                props.isError ? 
-                <div className="mt-[5px] ml-[5px]">{props.errorMessage}</div> 
+                props.errorMessage  !== "" ? 
+                <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
                 : 
                 <></>
             }
-        </>
+        </div>
     );
 }
 
 const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
+
     return (
         <div>
             <TextField

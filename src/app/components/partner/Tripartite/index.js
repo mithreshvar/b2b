@@ -8,24 +8,45 @@ import Image from "next/image";
 function Tripartite() {
 
     const [investor, setInvestor] = useState('');
+
+    const [investorErrorMessage, setInvestorErrorMessage] = useState('');
+
     const [showTripartite, setShowTripartite] = useState(false);
     const [isIAgreed, setIsIAgreed] = useState(false);
 
     const handleShowTripartite = () => {
+        if (investor === "") {
+            setInvestorErrorMessage("Select an investor");
+            return;
+        }
+        else {
+            setInvestorErrorMessage("");
+        }
         setShowTripartite(true);
     }
     const handleIAgree = () => {
         setIsIAgreed(true);
     }
 
+    const handleInvestorChange = (event) => {
+        const value = event.target.value;
+        setInvestor(value);
+        if (value === "") {
+            setInvestorErrorMessage("Select an investor");
+        }
+        else {
+            setInvestorErrorMessage("");
+        }
+      };
+
     const investorOptions = ['eKYC - EPSPS6704G', 'eKYC - EPSPS6845T', 'eKYC - EPSPS6197P'];
 
     return (
-        <div className="text-[14px]">
+        <div className="text-[14px] p-[20px]">
             <div className="w-full bg-[#FFFFFF] mb-[20px] rounded-[15px] p-[20px] flex flex-col gap-[20px]">
                 <p className="text-[20px] font-semibold">Tripartite Agreement</p>
                 <div className="flex gap-[30px]">
-                    <CustomSelectField label="Investor" value={investor} setValue={setInvestor} valueOptions={investorOptions} />
+                    <CustomSelectField label="Investor" value={investor} valueOptions={investorOptions} errorMessage={investorErrorMessage} handleChange={handleInvestorChange} />
                     <button className="w-[166px] h-[40px] rounded-[25px] bg-primary text-white font-semibold" onClick={handleShowTripartite}>Show Tripartite</button>
                 </div>
             </div>
