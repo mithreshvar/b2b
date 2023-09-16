@@ -26,7 +26,7 @@ const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          height: '40px',
+          // height: '40px',
           display: 'flex',
           alignItems: 'center',
           padding: '0px'

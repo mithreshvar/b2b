@@ -1,7 +1,7 @@
 import { ExpandMore } from "@mui/icons-material";
 import { MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
-import CustomSelectField from "../../InputFields";
+import {CustomSelectField} from "../../InputFields";
 import Link from "next/link";
 import Image from "next/image";
 
