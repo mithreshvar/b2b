@@ -8,6 +8,7 @@ import { RadioButtonUnchecked } from '@mui/icons-material';
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { CustomSelectField, CustomTextField, CustomDatePicker, CustomPasswordField} from "../components/InputFields";
+import Link from "next/link";
 
 // Create a reusable AddressFields component
 function AddressFields({ cityOptions, stateOptions, setValueObject }) {
@@ -480,9 +481,11 @@ function Login() {
         )}
 
         {/* Submit */}
-        <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
-          {isLogin === "login" ? "Login" : "Submit"}
-        </button>
+        <Link href={isLogin === "login" ? "/partner" : "#"} >
+          <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
+            {isLogin === "login" ? "Login" : "Submit"}
+          </button>
+        </Link>
 
       </>
       

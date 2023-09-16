@@ -25,6 +25,7 @@ import ITripartite from '/public/partner/Tripartite';
 import back from '/public/partner/back.svg'
 import Dashboard from '../components/partner/Dashboard';
 import Tripartite from '../components/partner/Tripartite';
+import PartnerHome from '../components/partner/PartnerHome';
 
 
 export default function NavBar() {
@@ -34,7 +35,7 @@ export default function NavBar() {
 
     return (
         <ThemeProvider theme={theme} >
-            <Box sx={{ flexGrow: 1, zIndex: 2 }}>
+            <Box sx={{ flexGrow: 1, zIndex: 1 }}>
             <AppBar position="absolute" sx={{height: '60px', backgroundColor: "white", px: '70px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0}}>
                 <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                 <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>
@@ -46,9 +47,9 @@ export default function NavBar() {
             <div className='flex h-[calc(100vh-60px)] mt-[60px]'>
 
                 {/* navigation segment */}
-                <div className={` h-full py-[35px] px-[20px] flex flex-col gap-y-[30px] overflow-y-scroll overflow-x-visible text-[14px] font-medium text-[#6E6E72] z-20 relative ${(navOpen)? 'w-[250px] ': 'w-[61px]'} `}>
+                <div className={` h-full py-[35px] px-[20px] flex flex-col gap-y-[30px] overflow-y-scroll overflow-x-hide text-[14px] font-medium text-[#6E6E72] ${(navOpen)? 'w-[250px] ': 'w-[61px]'} `}>
 
-                    <Image src={back} className='absolute right-0 mr-[-9px] ' />
+                    {/* <Image src={back} className='absolute left-[240px] z-[2] cursor-pointer ' onClick={()=>{setNavOpen(!navOpen)}} /> */}
 
                     <div className='flex gap-x-[14px] items-center relative'>
                         {(active==='dashboard') && <div className='absolute w-[3px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
@@ -119,14 +120,14 @@ export default function NavBar() {
                 </div>
 
                 {/* page segment */}
-                <div className='bg-[#F5F7FE] h-full w-[calc(100vw-250px)] z-0 p-[20px] pr-0 '>
+                <div className='bg-[#F5F7FE] h-full w-[calc(100vw-250px)] z-0'>
 
                     {
                         (active==='about' && <Dashboard /> )||
                         (active==='brokerage' && <Dashboard /> )||
                         (active==='dashboard' && <Dashboard /> )||
                         (active==='dbf' && <Dashboard /> )||
-                        (active==='home' && <Dashboard /> )||
+                        (active==='home' && <PartnerHome /> )||
                         (active==='manual' && <Dashboard /> )||
                         (active==='password' && <Dashboard /> )||
                         (active==='portfolio' && <Dashboard /> )||
