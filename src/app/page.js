@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Demo from './components/Demo';
 import Callback from './components/Callback';
 import Contact from './components/Contact';
+import WhyFundsIndiaPartner from './components/WhyFundsIndiaPartner'
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
@@ -52,7 +53,7 @@ export default function HomePage() {
           </div>
           {
             (route==='Home' && <Home/>) || 
-            (route==='Why FundsIndiaPartner?' && <p>Why FundsIndiaPartner?</p>) || 
+            (route==='Why FundsIndiaPartner?' &&<WhyFundsIndiaPartner/>) || 
             (route==='Demo' && <Demo/>) ||
             (route==='Contact' && <Contact />) || 
             (route==='Callback' && <Callback />)
