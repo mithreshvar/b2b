@@ -2,7 +2,7 @@
 export default function dummmyData() {
     // Function to generate a random phone number
     function generatePhoneNumber() {
-        const phoneNumber = '9' + Math.floor(Math.random() * 9000000000 + 1000000000); // Generates a 10-digit number starting with '9'
+        const phoneNumber = '9' + Math.floor(Math.random() * 900000000 + 100000000); // Generates a 10-digit number starting with '9'
         return phoneNumber.toString();
     }
     
