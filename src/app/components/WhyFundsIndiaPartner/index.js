@@ -1,16 +1,16 @@
 import Image from 'next/image'
-import svg1 from '../../../../public/whyFundsIndia/Group544807.svg'
-import png1 from '../../../../public/whyFundsIndia/Group523584@2x.png'
-import png2 from '../../../../public/whyFundsIndia/Group520835@2x.png'
-import png3 from '../../../../public/whyFundsIndia/Group514401@2x.png'
-import png4 from '../../../../public/whyFundsIndia/Group544732@2x.png'
-import arrow from '../../../../public/whyFundsIndia/Group 508904@2x.png'
+import svg1 from '/public/whyFundsIndia/Group544807.svg'
+import png1 from '/public/whyFundsIndia/Group523584@2x.png'
+import png2 from '/public/whyFundsIndia/Group520835@2x.png'
+import png3 from '/public/whyFundsIndia/Group514401@2x.png'
+import png4 from '/public/whyFundsIndia/Group544732@2x.png'
+import arrow from '/public/whyFundsIndia/Group 508904@2x.png'
 import { VscCircleFilled } from "react-icons/vsc";
 
 export default function WhyFundsIndiaPartner() {
   return (
-    <div>
-            <div className="font-sans font-bold items-center justify-center">
+    <>
+            <div className=" font-bold items-center justify-center">
                 <div className='text-[40px]'>
                   <div className="text-[#000000] text-center">The Perfect Online Medium for</div>
                   <div className="text-[#0071E7] text-center"> Financial Partners</div>
@@ -60,13 +60,13 @@ export default function WhyFundsIndiaPartner() {
                         </div>
                         <br/>
                           <div className='w-[589px] h-[185px]'>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Alert-SIP</div></div>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Portfolio-SIP</div></div>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Flexi-SIP </div></div>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Step up-SIP Systematic Transfer Plan (STP)</div></div>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Value-averaging Investment Plan (VIP) & Value-averaging Transfer Plan (VTP) </div></div>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Triggers</div></div>
-                              <div className='flex'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>SIP on ETF</div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Alert-SIP</div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Portfolio-SIP</div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Flexi-SIP </div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Step up-SIP Systematic Transfer Plan (STP)</div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Value-averaging Investment Plan (VIP) & Value-averaging Transfer Plan (VTP) </div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>Triggers</div></div>
+                              <div className='flex gap-x-[7px]'><VscCircleFilled className=" text-[#0071E7] mt-[2px] relative flex-shrink-0" /><div>SIP on ETF</div></div>
                           </div>
                         
                     </div>
@@ -84,26 +84,26 @@ export default function WhyFundsIndiaPartner() {
                     <div className='w-[434px] h-[398px] flex items-center justify-center bg-[#EEF9F5] rounded-[34px] '><div className='mx-[-26px]'><Image src={png4} className='w-[538px] h-[326px] ml-[-50px]'/></div></div>
                   </div>
                 </div>
-           <div className='flex justify-center items-center  mt-[182px]'>
-            <div className='w-[1080px] h-[235px] rounded-[34px] bg-[#F3F8FC] flex items-center justify-center gap-x-[77px]'>
-              <div className='w-[183px] h-[150px]'>
+          <div className='flex justify-center items-center  mt-[182px]'>
+            <div className='w-[1080px] h-[235px] rounded-[34px] bg-[#F3F8FC] flex p-[40px] gap-x-[77px]'>
+              <div className='w-[183px] h-[150px] leading-[45px]'>
                           <span className='text-[40px] font-semibold'>Empanel <br/>with us<br/> <span className='text-[#0066CD]'>for FREE!</span></span>
               </div>
-              <div className='flex-col space-y-[21px]'>
+              <div className='flex flex-col justify-between gap-y-[21px]'>
                    <div className='w-[703px] h-[83px]'>
                    partner.fundsindia.com is a great way to drive your success rate even as you deliver personalized service! Come be a part of a successful, growing community.
                     For more information please feel free to write to us at contactpartner@fundsindia.com or call us at 044-61104100.
                    </div>
-                    <div className='bg-[#0071E7] w-[166px] h-[40px] text-[#FFFFFF] text-center items-center justify-center flex rounded-[25px]'>
+                    <button className='bg-[#0071E7] w-[166px] h-[40px] text-[#FFFFFF] text-center items-center justify-center flex rounded-[25px]'>
       
-                                      <div className='font-[14px]'>continue</div>
+                                      <div className='text-[14px]'>continue</div>
                                       <div className='ml-[21.9px]'><Image src={arrow} className='w-[13.31px] h-[9.82px]'/></div>
             
-                   </div>
+                   </button>
               </div>
             </div>
           </div>
             
-   </div>
+   </>
   )
 }
