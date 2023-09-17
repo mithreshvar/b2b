@@ -10,7 +10,7 @@ import { VscCircleFilled } from "react-icons/vsc";
 export default function WhyFundsIndiaPartner() {
   return (
     <>
-            <div className=" font-bold items-center justify-center">
+            <div className=" font-bold items-center justify-center mt-[90px]">
                 <div className='text-[40px]'>
                   <div className="text-[#000000] text-center">The Perfect Online Medium for</div>
                   <div className="text-[#0071E7] text-center"> Financial Partners</div>
