@@ -30,10 +30,38 @@ import { useSearchParams, useRouter } from 'next/navigation';
 export default function HomePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const search = searchParams.get('search')
+  const tab = searchParams.get('tab')
   const modal = searchParams.get('modal');
-  const [route, setRoute] = useState(search || 'Home');
+  const [route, setRoute] = useState(tab || 'Home');
   const [login, setLogin] = useState(false);
+
+  // handle route tab clicks
+  //#region 
+  function handleRouteHome() {
+    setRoute('Home');
+    router.push('/', undefined, { shallow: true });
+  }
+
+  function handleRouteWhyFIP() {
+    setRoute('whyFIP');
+    router.push('/?tab=whyFIP', undefined, { shallow: true });
+  }
+
+  function handleRouteDemo() {
+    setRoute('demo');
+    router.push('/?tab=demo', undefined, { shallow: true });
+  }
+
+  function handleRouteContact() {
+    setRoute('contact');
+    router.push('/?tab=contact', undefined, { shallow: true });
+  }
+
+  function handleRouteCallback() {
+    setRoute('callback');
+    router.push('/?tab=callback', undefined, { shallow: true });
+  }
+  //#endregion
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,21 +70,21 @@ export default function HomePage() {
           <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
             <Link href={'/'}><Image src={logo} className='w-[165px] h-[47px]' /></Link>
             <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
-              <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
-              <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
-              <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
+              <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={handleRouteHome}>Home</h6>
+              <h6 className={` cursor-pointer ${(route=='whyFIP')?'text-[#0066CD]':''}`} onClick={handleRouteWhyFIP}>Why FundsIndiaPartner?</h6>
+              <h6 className={` cursor-pointer ${(route=='demo')?'text-[#0066CD]':''}`} onClick={handleRouteDemo}>Demo</h6>
               <h6 className={'cursor-pointer '} ><Link href="/login?register=true">Register With Us</Link></h6>
-              <h6 className={` cursor-pointer ${(route=='Contact')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Contact')}}>Contact us</h6>
+              <h6 className={` cursor-pointer ${(route=='contact')?'text-[#0066CD]':''}`} onClick={handleRouteContact}>Contact us</h6>
               <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-primary text-white rounded-[25px]'>Login</button>
-              <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
+              <button onClick={handleRouteCallback} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
             </div>
           </div>
           {
             (route==='Home' && <Home/>) || 
-            (route==='Why FundsIndiaPartner?' &&<WhyFundsIndiaPartner/>) || 
-            (route==='Demo' && <Demo/>) ||
-            (route==='Contact' && <Contact />) || 
-            (route==='Callback' && <Callback />)
+            (route==='whyFIP' &&<WhyFundsIndiaPartner/>) || 
+            (route==='demo' && <Demo/>) ||
+            (route==='contact' && <Contact />) || 
+            (route==='callback' && <Callback />)
           }
           <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
 

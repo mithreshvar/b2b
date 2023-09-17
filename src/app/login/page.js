@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { CustomSelectField, CustomTextField, CustomDatePicker, CustomPasswordField} from "../components/InputFields";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Create a reusable AddressFields component
 function AddressFields({ cityOptions, stateOptions, setValueObject }) {
@@ -161,6 +162,7 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
 function Login() {
   const searchParams = useSearchParams()
   const register = searchParams.get('register')
+  const router = useRouter();
   
   const [isLogin, setIsLogin] = useState((register)?'register':'login');
 
@@ -198,6 +200,12 @@ function Login() {
   // Event handlers
   const handleIsLoginChange = (event) => {
     setIsLogin(event.target.value);
+    if (event.target.value === "register") {
+      router.push('/login?register=true', undefined, { shallow: true });
+    }
+    else {
+      router.push('/login', undefined, { shallow: true });
+    }
   };
 
   const handleIsIndividualChange = (event) => {
