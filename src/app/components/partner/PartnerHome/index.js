@@ -32,6 +32,7 @@ export default function PartnerHome () {
         setDividedData(data10);
         setDividedDataLength(data10.length);
         if (data10.length<=1) setBackActive(false);
+        else setBackActive(true);
     }
 
     const [dividedData, setDividedData] = useState([]);
@@ -90,6 +91,7 @@ export default function PartnerHome () {
     
         // Now, 'filteredData' contains the filtered data based on the provided criteria.
         splitData(filteredData);
+        setPageArray([2,3,4]);
     }
     
     // input variables
@@ -109,9 +111,7 @@ export default function PartnerHome () {
         setEmail(value);
         
         //validations
-        if (value === "") {
-            setEmailErrorMessage("Email cannot be empty");
-        } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value) && value !== '') {
             setEmailErrorMessage("Invalid email format");
         } else {
             setEmailErrorMessage("");
@@ -123,9 +123,7 @@ export default function PartnerHome () {
         setName(value);
         
         //validations
-        if (value === "") {
-            setNameErrorMessage("Name cannot be empty");
-        } else if (!/^[a-zA-Z0-9_-]+$/.test(value)) {
+        if (!/^[a-zA-Z0-9_-]+$/.test(value) && value !== '') {
             setNameErrorMessage("Username can not contain special characters");
         } else {
             setNameErrorMessage("");
@@ -134,15 +132,10 @@ export default function PartnerHome () {
 
     const handleNumberChange = (event) => {
         const value = event.target.value;
-        console.log(/^\+\s\d{12}$/.test(value))
-        if (! /^\+\s\d{12}$/.test(value) ) {
-            setNumber(value);
-        }
+        setNumber(value);
         
         //validations
-        if (value === "") {
-            setNumberErrorMessage("Phone Number cannot be empty");
-        } else if (!/^(\+91\s)?\d{10}$/.test(value)) {  //! accepts only indian standard number
+        if (!/^\d{10}$/.test(value) && value !== '') {  //! accepts only indian standard number
             setNumberErrorMessage("Invalid phone number");
         } else {
             setNumberErrorMessage("");
