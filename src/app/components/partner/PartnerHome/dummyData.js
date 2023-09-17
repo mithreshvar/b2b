@@ -30,7 +30,9 @@ export default function dummmyData() {
     
         data.push(entry);
     }
-    
+
+    localStorage.setItem('data', JSON.stringify({data: data}));
+
     // Print the generated data
-    return (data);
+    // return (data);
 }

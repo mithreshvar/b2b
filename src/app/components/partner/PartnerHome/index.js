@@ -1,15 +1,20 @@
-import { TextField, ThemeProvider } from "@mui/material";
+"use client"
+
+import { ThemeProvider } from "@mui/material";
 import theme from '../../../theme.js'
 
 import Arrow from "/public/partner/Arrow.js";
 import { useEffect, useState } from "react";
 import Table from "./Table.js";
 
-import dummmyData from "./dummyData.js";
+import { CustomTextField } from "../../InputFields/index.js";
+import { useDataContext } from "@/app/context/DataContext.js";
 
 export default function PartnerHome () {
 
-    const data = dummmyData();
+    const {data} = useDataContext();
+
+    if (!data) return(<></>);
 
     function splitData (data) {
         let data10 = [];
@@ -67,11 +72,7 @@ export default function PartnerHome () {
         else setFrontActive(true);
     }
 
-    // input variables
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [number, setNumber] = useState('');
+    // search function 
 
     function filterData() {
         const nameReg = new RegExp(name, 'i'); // Case-insensitive regex for name
@@ -91,6 +92,64 @@ export default function PartnerHome () {
         splitData(filteredData);
     }
     
+    // input variables
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [number, setNumber] = useState('');
+
+    const [nameErrorMessage, setNameErrorMessage] = useState('');
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [numberErrorMessage, setNumberErrorMessage] = useState('');
+
+    
+    // Handle error change
+    const handleEmailChange = (event) => {
+        const value = event.target.value;
+        setEmail(value);
+        
+        //validations
+        if (value === "") {
+            setEmailErrorMessage("Email cannot be empty");
+        } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+            setEmailErrorMessage("Invalid email format");
+        } else {
+            setEmailErrorMessage("");
+        }
+    };
+
+    const handleNameChange = (event) => {
+        const value = event.target.value;
+        setName(value);
+        
+        //validations
+        if (value === "") {
+            setNameErrorMessage("Name cannot be empty");
+        } else if (!/^[a-zA-Z0-9_-]+$/.test(value)) {
+            setNameErrorMessage("Username can not contain special characters");
+        } else {
+            setNameErrorMessage("");
+        }
+    };
+
+    const handleNumberChange = (event) => {
+        const value = event.target.value;
+        console.log(/^\+\s\d{12}$/.test(value))
+        if (! /^\+\s\d{12}$/.test(value) ) {
+            setNumber(value);
+        }
+        
+        //validations
+        if (value === "") {
+            setNumberErrorMessage("Phone Number cannot be empty");
+        } else if (!/^(\+91\s)?\d{10}$/.test(value)) {  //! accepts only indian standard number
+            setNumberErrorMessage("Invalid phone number");
+        } else {
+            setNumberErrorMessage("");
+        }
+    };
+    
+    
 
     return(
         <ThemeProvider theme={theme} >
@@ -105,10 +164,10 @@ export default function PartnerHome () {
                     <h4 className="text-[20px] font-semibold">Investor Search</h4>
                     <div className="flex gap-x-[50px]">
                         <div className="flex flex-col gap-y-[20px]">
-                            <TextField id="userName" label='User Name' sx={{width: '380px'}} value={name} onChange={e => setName(e.target.value)} />
-                            <TextField id="mobileNumber" label='Mobile Number' sx={{width: '380px'}} value={number} onChange={e => { const regex = /^[0-9\b]+$/; if (e.target.value === "" || regex.test(e.target.value)) setNumber(e.target.value) } } />
+                            <CustomTextField id="userName" label='User Name' sx={{width: '380px'}} type="text" errorMessage={nameErrorMessage} value={name} handleChange={handleNameChange} />
+                            <CustomTextField id="mobileNumber" label='Mobile Number' sx={{width: '380px'}} type="number" errorMessage={numberErrorMessage} value={number} handleChange={ handleNumberChange } />
                         </div>
-                        <TextField id="userEmail" label='User Email' sx={{width: '380px'}} value={email} onChange={e => setEmail(e.target.value)}/>
+                        <CustomTextField id="userEmail" label='User Email' sx={{width: '380px'}} type="text" errorMessage={emailErrorMessage} value={email} handleChange={handleEmailChange}/>
                     </div>
                     <div className="flex gap-x-[20px] text-[14px] font-bold">
                         <button onClick={()=>{filterData()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
