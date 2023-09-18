@@ -33,6 +33,8 @@ export default function PartnerHome () {
         setDividedDataLength(data10.length);
         if (data10.length<=1) setBackActive(false);
         else setBackActive(true);
+        setPageNo(0);
+        setFrontActive(false);
     }
 
     const [dividedData, setDividedData] = useState([]);
