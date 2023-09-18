@@ -1,9 +1,13 @@
 import { useState } from 'react'
-import Tick from '../../../../../public/callback/successmark.png';
+import Tick from 'public/callback/successmark.png';
 import Image from 'next/image';
+import { CustomDatePicker } from '../../InputFields';
 
 function dbf() {
   const[success, setSuccess] = useState(false);
+  const[fromdate,setFromdate] = useState();
+  const[todate,setTodate] = useState();
+
   return (
     <div className='p-[20px]'>
     
@@ -17,8 +21,9 @@ function dbf() {
         {
         (!success)?
         <>
-        <div>
-          {/* date feild */}
+        <div className='flex gap-[50px] pb-[20px]'>
+          <CustomDatePicker label="From Date" value={fromdate} setValue={setFromdate} disableFuture={true}  />
+          <CustomDatePicker label="To Date" value={todate} setValue={setTodate} disableFuture={true}/>
         </div>
 
         <button className='w-[108px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px]' onClick={()=>setSuccess(true)}>

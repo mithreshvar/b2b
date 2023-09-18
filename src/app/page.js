@@ -6,6 +6,8 @@ import Demo from './components/Demo';
 import Callback from './components/Callback';
 import Contact from './components/Contact';
 import WhyFundsIndiaPartner from './components/WhyFundsIndiaPartner'
+import Termsandconditions from './components/quicklinks/Termsandconditions';
+import PrivacyPolicy from './components/quicklinks/privacypolicy';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
@@ -13,7 +15,7 @@ import phoneIcon from '/public/home/Group 511824/Group 511824@2x.png'
 import partner from '/public/home/Mask Group 29511/Mask Group 29511@2x.png'
 import investor from '/public/home/Mask Group 29512/Mask Group 29512@2x.png'
 
-import email from '/public/Contact/Group 512412.svg'
+import emailIcon from '/public/Contact/Group 512412.svg'
 import phone from '/public/Contact/Group 512413.svg'
 import office from '/public/Contact/Group 512414.svg'
 import bulletin from '/public/bulletin sm.svg'
@@ -23,9 +25,10 @@ import x from '/public/home/Path 238654.svg'
 import logo from '/public/logo.svg'
 import Image from 'next/image';
 import Link from 'next/link';
-import { TextField, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import theme from './theme';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { CustomTextField } from './components/InputFields';
 
 export default function HomePage() {
   const searchParams = useSearchParams();
@@ -34,6 +37,30 @@ export default function HomePage() {
   const modal = searchParams.get('modal');
   const [route, setRoute] = useState(tab || 'Home');
   const [login, setLogin] = useState(false);
+
+  // Email input
+  const [email, setEmail] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  
+    //validations
+    
+    if (email !== "" && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+      setEmailErrorMessage("Invalid email format");
+    } else {
+      setEmailErrorMessage("");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (email === "") {
+      setEmailErrorMessage("Email cannot be empty");
+    }
+  }
+
 
   //handle route tab clicks
   function handleRoute(tab) {
@@ -63,7 +90,9 @@ export default function HomePage() {
             (route==='whyFIP' &&<WhyFundsIndiaPartner/>) || 
             (route==='demo' && <Demo/>) ||
             (route==='contact' && <Contact />) || 
-            (route==='callback' && <Callback />)
+            (route==='callback' && <Callback />) ||
+            (route==='terms' && <Termsandconditions />) ||
+            (route==='policy' && <PrivacyPolicy />)
           }
           <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
 
@@ -79,7 +108,7 @@ export default function HomePage() {
                     <p>044 - 61104100</p>
                   </div>
                   <div className='flex gap-x-[13px] items-center'>
-                    <Image src={email} className="w-[16px] h-[14px]" />
+                    <Image src={emailIcon} className="w-[16px] h-[14px]" />
                     <p>contactpartner@fundsindia.com</p>
                   </div>
                   <div className='flex gap-x-[13px]'>
@@ -91,11 +120,11 @@ export default function HomePage() {
                   <h6 className='font-bold text-[16px] mb-[10px]'>Quick Links</h6>
                   <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
                     <Image src={bulletin} className='h-[6px] w-[6px]'/>
-                    <p>Terms and Conditions</p>
+                    <p onClick={() => handleRoute('terms')}>Terms and Conditions</p>
                   </div>
                   <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
                     <Image src={bulletin} className='h-[6px] w-[6px]'/>
-                    <p>Privacy Policy</p>
+                    <p onClick={() => handleRoute('policy')}>Privacy Policy</p>
                   </div>
                 </div>
               </div>
@@ -103,8 +132,8 @@ export default function HomePage() {
               <div className='flex flex-col gap-y-[30px]'>
                 <h6 className='font-semibold text-[16px] '>Subscribe to our Newsletter</h6>
                 <div className='flex gap-x-[20px]'>
-                  <TextField id='email' label='Email' sx={{width:'304px'}} />
-                  <button className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
+                  <CustomTextField id='email' label='Email' type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} sx={{width:'304px'}} />
+                  <button onClick={handleSubmit} className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
                   <h6 className='text-[16px] font-semibold'>Follow us on</h6>
