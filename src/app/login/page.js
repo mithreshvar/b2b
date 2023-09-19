@@ -294,13 +294,13 @@ function Login() {
     }
   }
 
-  const handleIssueDateChange = (date) => {
-    setIssueDate(date);
+  const handleIssueDateChange = (event) => {
+    setIssueDate(event.target.value);
     // Add issue date validation logic here if needed
   };
 
-  const handleExpiryDateChange = (date) => {
-    setExpiryDate(date);
+  const handleExpiryDateChange = (event) => {
+    setExpiryDate(event.target.value);
     // Add expiry date validation logic here if needed
   };
 
