@@ -101,7 +101,7 @@ const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
             />
             {
                 props.errorMessage  !== "" ? 
-                <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
+                <div className="absolute mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
                 : 
                 <></>
             }
@@ -147,7 +147,7 @@ const CustomPasswordField = ({ width = "380px", height="40px", ...props}) => {
         />
         {
             props.errorMessage  !== "" ? 
-            <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
+            <div className="absolute mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
             : 
             <></>
         }

@@ -364,7 +364,7 @@ function Login() {
                 <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
                 <CustomPasswordField label="Password" type="password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
               </div>
-              <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[5px]">Forget password?</a>
+              <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forget password?</a>
             </div>
 
           </div>
