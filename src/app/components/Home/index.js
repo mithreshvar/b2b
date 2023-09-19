@@ -10,13 +10,82 @@ import { useState } from 'react'
 
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../../theme";
-import {
-    TextField,
-} from "@mui/material";
+import { CustomTextField } from '../InputFields'
 
 export default function Home() {
 
     const [empannelSuccess, setEmpannelSuccess] = useState(false);
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [captcha, setCaptcha] = useState('');
+
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [nameErrorMessage, setNameErrorMessage] = useState('');
+    const [phoneErrorMessage, setPhoneErrorMessage] = useState('');
+    const [mobileErrorMessage, setMobileErrorMessage] = useState('');
+    const [captchaErrorMessage, setCaptchaErrorMessage] = useState('');
+    
+    const handleEmailChange = (event) => {
+        const value = event.target.value;
+        setEmail(value);
+        //validations
+        if (value === "") {
+            setEmailErrorMessage("Email cannot be empty");
+        } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+            setEmailErrorMessage("Invalid email format");
+        } else {
+            setEmailErrorMessage("");
+        }
+    };
+    
+    const handleNameChange = (event) => {
+        const value = event.target.value;
+        setName(value);
+        //validations
+        if (value === "") {
+            setNameErrorMessage("Name cannot be empty");
+        } else if (!/^[A-Za-z./s]+$/.test(value)) {
+            setNameErrorMessage("Invalid Name");
+        } else {
+            setNameErrorMessage("");
+        }
+    };
+    
+    const handleMobileChange = (event) => {
+        const value = event.target.value;
+        setMobile(value);
+
+        if (value === "") {
+            setMobileErrorMessage("Mobile Number cannot be empty");
+        } else if (!/^\d{10}$/.test(value)) {
+            setMobileErrorMessage("Invalid mobile number format (10 digits required)");
+        } else {
+            setMobileErrorMessage("");
+        }
+    };
+    
+    const handlePhoneChange = (event) => {
+        const value = event.target.value;
+        setPhone(value);
+
+        if (value === "") {
+            setPhoneErrorMessage("Phone Number cannot be empty");
+        } else if (!/^\d{10}$/.test(value)) {
+            setPhoneErrorMessage("Invalid phone number format (10 digits required)");
+        } else {
+            setPhoneErrorMessage("");
+        }
+    };
+    
+    const handleCaptchaChange = (event) => {
+        const value = event.target.value;
+        setCaptcha(value);
+    };
+
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -61,32 +130,52 @@ export default function Home() {
                     <div className="flex gap-x-[50px]">
 
                     <div className="flex flex-col gap-y-[25px] text-[14px]">
-                        <TextField
+                        <CustomTextField
                             id='name' 
                             label="Name"
+                            value={name}
+                            handleChange={handleNameChange}
+                            type='text'
+                            errorMessage={nameErrorMessage}
                             sx={{width:'350px'}}
                         />
-                        <TextField 
+                        <CustomTextField 
                             id='email'
                             label="Email"
+                            value={email}
+                            handleChange={handleEmailChange}
+                            type='text'
+                            errorMessage={emailErrorMessage}
                             sx={{width:'350px'}}
                         />
-                        <TextField 
+                        <CustomTextField 
                             id='captcha'
                             label="Captcha"
-                            sx={{width:'185px'}}
+                            value={captcha}
+                            handleChange={handleCaptchaChange}
+                            type='text'
+                            errorMessage={captchaErrorMessage}
+                            width='185px'
                         />
 
                     </div>
                     <div className="flex flex-col gap-y-[25px] text-[14px]">
-                        <TextField 
+                        <CustomTextField 
                             id='mobile'
                             label="Mobile Number"
+                            value={mobile}
+                            handleChange={handleMobileChange}
+                            type='number'
+                            errorMessage={mobileErrorMessage}
                             sx={{width:'350px'}} 
                         />
-                        <TextField
+                        <CustomTextField
                             id='phone' 
                             label="Phone Number"
+                            value={phone}
+                            handleChange={handlePhoneChange}
+                            type='number'
+                            errorMessage={phoneErrorMessage}
                             sx={{width:'350px'}}
                         />
                         <button onClick={()=>{setEmpannelSuccess(true)}} className="bg-primary h-[40px] w-[165px] rounded-[25px] text-white font-bold self-end">Submit</button>

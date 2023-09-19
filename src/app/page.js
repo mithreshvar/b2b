@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Demo from './components/Demo';
 import Callback from './components/Callback';
 import Contact from './components/Contact';
+import WhyFundsIndiaPartner from './components/WhyFundsIndiaPartner'
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
@@ -12,7 +13,7 @@ import phoneIcon from '/public/home/Group 511824/Group 511824@2x.png'
 import partner from '/public/home/Mask Group 29511/Mask Group 29511@2x.png'
 import investor from '/public/home/Mask Group 29512/Mask Group 29512@2x.png'
 
-import email from '/public/Contact/Group 512412.svg'
+import emailIcon from '/public/Contact/Group 512412.svg'
 import phone from '/public/Contact/Group 512413.svg'
 import office from '/public/Contact/Group 512414.svg'
 import bulletin from '/public/bulletin sm.svg'
@@ -22,17 +23,49 @@ import x from '/public/home/Path 238654.svg'
 import logo from '/public/logo.svg'
 import Image from 'next/image';
 import Link from 'next/link';
-import { TextField, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import theme from './theme';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { CustomTextField } from './components/InputFields';
 
 export default function HomePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const search = searchParams.get('search')
+  const tab = searchParams.get('tab')
   const modal = searchParams.get('modal');
-  const [route, setRoute] = useState(search || 'Home');
+  const [route, setRoute] = useState(tab || 'Home');
   const [login, setLogin] = useState(false);
+
+  // Email input
+  const [email, setEmail] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  
+    //validations
+    
+    if (email !== "" && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+      setEmailErrorMessage("Invalid email format");
+    } else {
+      setEmailErrorMessage("");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (email === "") {
+      setEmailErrorMessage("Email cannot be empty");
+    }
+  }
+
+
+  //handle route tab clicks
+  function handleRoute(tab) {
+    setRoute(tab);
+    if (tab == 'Home') router.push('/', undefined, { shallow: true });
+    else router.push(`/?tab=${tab}`, undefined, { shallow: true });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -41,21 +74,21 @@ export default function HomePage() {
           <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
             <Link href={'/'}><Image src={logo} className='w-[165px] h-[47px]' /></Link>
             <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
-              <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Home')}}>Home</h6>
-              <h6 className={` cursor-pointer ${(route=='Why FundsIndiaPartner?')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Why FundsIndiaPartner?')}}>Why FundsIndiaPartner?</h6>
-              <h6 className={` cursor-pointer ${(route=='Demo')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Demo')}}>Demo</h6>
+              <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={() => handleRoute('Home')}>Home</h6>
+              <h6 className={` cursor-pointer ${(route=='whyFIP')?'text-[#0066CD]':''}`} onClick={() => handleRoute('whyFIP')}>Why FundsIndiaPartner?</h6>
+              <h6 className={` cursor-pointer ${(route=='demo')?'text-[#0066CD]':''}`} onClick={() => handleRoute('demo')}>Demo</h6>
               <h6 className={'cursor-pointer '} ><Link href="/login?register=true">Register With Us</Link></h6>
-              <h6 className={` cursor-pointer ${(route=='Contact')?'text-[#0066CD]':''}`} onClick={()=>{setRoute('Contact')}}>Contact us</h6>
+              <h6 className={` cursor-pointer ${(route=='contact')?'text-[#0066CD]':''}`} onClick={() => handleRoute('contact')}>Contact us</h6>
               <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-primary text-white rounded-[25px]'>Login</button>
-              <button onClick={()=>{setRoute('Callback')}} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
+              <button onClick={() => handleRoute('callback')} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
             </div>
           </div>
           {
             (route==='Home' && <Home/>) || 
-            (route==='Why FundsIndiaPartner?' && <p>Why FundsIndiaPartner?</p>) || 
-            (route==='Demo' && <Demo/>) ||
-            (route==='Contact' && <Contact />) || 
-            (route==='Callback' && <Callback />)
+            (route==='whyFIP' &&<WhyFundsIndiaPartner/>) || 
+            (route==='demo' && <Demo/>) ||
+            (route==='contact' && <Contact />) || 
+            (route==='callback' && <Callback />)
           }
           <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
 
@@ -71,7 +104,7 @@ export default function HomePage() {
                     <p>044 - 61104100</p>
                   </div>
                   <div className='flex gap-x-[13px] items-center'>
-                    <Image src={email} className="w-[16px] h-[14px]" />
+                    <Image src={emailIcon} className="w-[16px] h-[14px]" />
                     <p>contactpartner@fundsindia.com</p>
                   </div>
                   <div className='flex gap-x-[13px]'>
@@ -95,8 +128,8 @@ export default function HomePage() {
               <div className='flex flex-col gap-y-[30px]'>
                 <h6 className='font-semibold text-[16px] '>Subscribe to our Newsletter</h6>
                 <div className='flex gap-x-[20px]'>
-                  <TextField id='email' label='Email' sx={{width:'304px'}} />
-                  <button className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
+                  <CustomTextField id='email' label='Email' type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} sx={{width:'304px'}} />
+                  <button onClick={handleSubmit} className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
                   <h6 className='text-[16px] font-semibold'>Follow us on</h6>

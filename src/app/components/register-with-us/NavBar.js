@@ -11,7 +11,7 @@ export default function NavBar() {
       <AppBar position="static" sx={{height: '60px', backgroundColor: "white", px: '70px', boxShadow: '0px 3px 6px #0000001A'}}>
         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
           <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>
-          <Link href={'/?search=Contact'} className='font-poppins text-primary font-semibold'>Contact Us</Link>
+          <Link href={'/?tab=Contact'} className='font-poppins text-primary font-semibold'>Contact Us</Link>
         </Toolbar>
       </AppBar>
     </Box>
