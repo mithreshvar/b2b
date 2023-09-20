@@ -50,12 +50,18 @@ export default function NavBar() {
 
     const [active, setActive] = useState(tab || 'dashboard');
     const [navOpen, setNavOpen] = useState(true);
+    const [shortUrl,setShortUrl] = useState('https://www.partner.fund…');
+    const [linkCopied,setLinkCopied] = useState(false);
 
     function handleRoute(tab) {
         setActive(tab);
         if (tab == 'dashboard') router.push('/partner', undefined, { shallow: true });
         else router.push(`/partner?tab=${tab}`, undefined, { shallow: true });
     }
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(shortUrl);
+      };
 
     return (
         <ThemeProvider theme={theme} >
@@ -64,6 +70,17 @@ export default function NavBar() {
                 <AppBar position="absolute" sx={{height: '60px', backgroundColor: "white", px: '70px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0}}>
                     <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                     <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>
+                    <div className="flex w-[299px] h-[36px] border-[1px] border-[#E4E5E5] rounded-[6px]">
+                        <div className="w-[198px] text-[#6E6E72] text-[12px] self-center pl-[20px]">{shortUrl}</div>
+                        <div className='w-[1px] h-3/4 bg-[#E4E5E5] self-center'></div>
+                        <button
+                            type="button"
+                            className="w-[105px] text-[#0071E7] text-[12px] font-Semibold"
+                            onClick={handleCopy}
+                        >
+                            Copy Link
+                        </button>
+                    </div>
                     <div className='w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center'>T</div>
                     </Toolbar>
                 </AppBar>

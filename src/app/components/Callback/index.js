@@ -11,6 +11,7 @@ import page2Img4 from '/public/callback/2ndpageassets/4.png'
 import tick from '/public/callback/successmark.png';
 
 import { ThemeProvider } from '@mui/material/styles';
+import {CustomTextField} from "../../components/InputFields";
 import theme from "../../theme";
 import {
     TextField,
@@ -20,8 +21,14 @@ import { useState } from "react";
 function callback() {
 
     const[success, setSuccess] = useState(false);
+    const[name, setName] = useState('');
+    const[mobileNumber, setMobileNumber] = useState('');
+    const[phoneNumber,setPhoneNumber] = useState('');
+    const[email, setEmail] = useState('');
+    const[comments, setComments] = useState('');
+    const[verficationCode,setVerficationCode] = useState('');
 
-    return (
+    return ( 
         <ThemeProvider theme={theme}>
             <div className="flex h-screen flex-row items-center justify-center font-poppins mt-[-60px] ">
                 <div className="w-[50%] flex flex-col gap-y-[26px]">
@@ -36,27 +43,21 @@ function callback() {
                         {
                         (!success) ?
                         <>
-                            <div className="text-[26px] font-semibold mb-[29px] text-center leading-[20px]">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
+                            <div className="text-[26px] font-semibold mb-[20px] text-center leading-[20px]">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
                             <div className="flex flex-col gap-y-[20px]">
-                                <TextField id="name" label="Name" sx={{width: '433px'}}/>
-                                <TextField id="mobilenumber" label="Mobile Number" sx={{width: '433px'}}/>
-                                <TextField id="phonenumber" label="Phone Number" sx={{width: '433px'}}/>
-                                <TextField id="email" label="Email" sx={{width: '433px'}}/>
-                                <TextField id="comments" label="Comments" rows={3} multiline sx={
-                                    {
-                                        width: '433px',
-                                        '& .MuiInputBase-root': {
-                                            height: '80px',
-                                        }
-                                    }
-                                }/>
+                                <CustomTextField label="Name" width="433px" height='40px' value={name}   />
+                                <CustomTextField label="Mobile Number" width="433px" height='40px' value={mobileNumber}   />
+                                <CustomTextField label="Phone Number" width="433px" height='40px' value={phoneNumber}   />
+                                <CustomTextField label="Email" width="433px" height='40px' value={email}   />
+                                <CustomTextField label="Comments" width="433px" height="80px" value={comments}  />
+                                
                                 <div className="flex flex-row">
-                                    <TextField  id="verficationcode"  label="Verfication Code" sx={{width: '271px'}}/>
+                                    <CustomTextField label="Verification Code" width="271px" value={verficationCode}/>        
                                     <Image className="w-[144px] h-[36px] ml-[18px]" src={captcha}/>
                                 </div>
-                            </div>
-                            <div className="flex items-center justify-center mt-[30px]  text-[14px]">
-                                <button onClick={()=>{setSuccess(true)}} className="w-[166px] h-[40px] bg-primary text-white font-bold  rounded-[25px]  hover:bg-[#000000] duration-300">Submit</button>
+                                <div className="flex items-center justify-center text-[14px]">
+                                    <button onClick={()=>{setSuccess(true)}} className="w-[166px] h-[40px] bg-primary text-white font-bold  rounded-[25px]  hover:bg-[#000000] duration-300">Submit</button>
+                                </div>
                             </div>
                         </>
                         :

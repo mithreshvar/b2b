@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material'
+import {CustomTextField} from "../../../components/InputFields";
 import { useState } from 'react'
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
@@ -20,10 +21,10 @@ function Registration() {
           Account Creation
         </div>
         <div className='grid gap-[20px] grid-cols-2'>
-          <TextField className='w-[380px]' type='email' label='Email' id='email'/>
-          <TextField className='w-[380px]' type='text' label='Name' id='name'/>
+          <CustomTextField label="Email" width="380px" height='40px' value={email}   />
+          <CustomTextField label="Name" width="380px" height='40px' value={name}   />
           {/* <TextField  type='tel' label='Mobile Number' id='mobilenumber'/> */}
-          <PhoneInput style={{borderRadius: '10px'}} defaultCountry="in" value={mobilenumber} onChange={(mobilenumber) => setMobilenumber(mobilenumber)}/>
+          <PhoneInput style={{borderRadius: '10px', width: '380px'}} defaultCountry="in" value={mobilenumber} onChange={(mobilenumber) => setMobilenumber(mobilenumber)}/>
         </div>
           
         <div className='text-[14px] font-medium text-[#6E6E72] pt-[15px] pb-[20px]'>

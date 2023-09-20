@@ -6,6 +6,8 @@ import Demo from './components/Demo';
 import Callback from './components/Callback';
 import Contact from './components/Contact';
 import WhyFundsIndiaPartner from './components/WhyFundsIndiaPartner'
+import Termsandconditions from './components/quicklinks/Termsandconditions';
+import PrivacyPolicy from './components/quicklinks/privacypolicy';
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
@@ -88,7 +90,9 @@ export default function HomePage() {
             (route==='whyFIP' &&<WhyFundsIndiaPartner/>) || 
             (route==='demo' && <Demo/>) ||
             (route==='contact' && <Contact />) || 
-            (route==='callback' && <Callback />)
+            (route==='callback' && <Callback />) ||
+            (route==='terms' && <Termsandconditions />) ||
+            (route==='policy' && <PrivacyPolicy />)
           }
           <div className='flex flex-col gap-y-[60px] items-center pt-[80px]'>
 
@@ -116,11 +120,11 @@ export default function HomePage() {
                   <h6 className='font-bold text-[16px] mb-[10px]'>Quick Links</h6>
                   <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
                     <Image src={bulletin} className='h-[6px] w-[6px]'/>
-                    <p>Terms and Conditions</p>
+                    <p onClick={() => handleRoute('terms')}>Terms and Conditions</p>
                   </div>
                   <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
                     <Image src={bulletin} className='h-[6px] w-[6px]'/>
-                    <p>Privacy Policy</p>
+                    <p onClick={() => handleRoute('policy')}>Privacy Policy</p>
                   </div>
                 </div>
               </div>
