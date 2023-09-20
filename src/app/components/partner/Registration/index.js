@@ -1,11 +1,18 @@
 import { TextField } from '@mui/material'
+import { useRouter, useSearchParams } from 'next/navigation';
 import {CustomTextField} from "../../../components/InputFields";
 import { useState } from 'react'
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 
 function Registration() {
-  var[success, setSuccess] = useState(false);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const create = searchParams.get('create');
+
+  var[success, setSuccess] = useState(create || false);
 
   const[email,setEmail] = useState('');
   const[name,setName] = useState('');
@@ -30,7 +37,7 @@ function Registration() {
         <div className='text-[14px] font-medium text-[#6E6E72] pt-[15px] pb-[20px]'>
           For NRIs, Please enter the appropriate country code followed by their mobile number.
         </div>
-        <button className='w-[166px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px] ' onClick={()=>{setSuccess(true)}}>
+        <button className='w-[166px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px] ' onClick={()=>{setSuccess(true); router.push(`/partner?tab=registration&create=1`)}}>
         Create Account
         </button>
       </div>
