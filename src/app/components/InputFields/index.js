@@ -4,60 +4,80 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 
-const CustomSelectField = ({ width = "380px", height = "40px", ...props}) => {
-    return (
-        <div>
-            <TextField
-                id={`${props.label}-select`}
-                select
-                {...props}
-                label={props.label}
-                value={props.value}
-                onChange={props.handleChange}
-                onBlur={props.handleChange}
-                InputProps={{sx: {fontSize: '14px', fontWeight: 'medium'}}}
-                SelectProps={{
-                IconComponent: () => (
-                    <ExpandMore sx={{ color: 'primary.main', mr: '15px' }} />
-                ),
-                MenuProps: {
-                    sx: {
-                        // Add your custom styles for the menu here
-                    },
-                    PaperProps: {
-                        sx: {
-                            // Set the background color of the menu
-                            backgroundColor: '#F8F8F8', // Change this to your desired background color
-                            borderRadius: '15px',
-                            boxShadow: '0px 8px 15px #00000026',
-                        },
-                    },
-                    },
-                }}
-                sx={
-                    {
-                        width: width,
-                        '& .MuiInputBase-root': {
-                            height: height,
-                        }
-                    }
-                }
-            >
-                {props.valueOptions.map((investor) => (
-                <MenuItem key={investor} value={investor}>
-                    {investor}
-                </MenuItem>
-                ))}
-            </TextField>
-            {
-                props.errorMessage  !== "" ? 
-                <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
-                : 
-                <></>
-            }
+const CustomSelectField = ({ width = '380px', height = '40px',...props }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleIconClick = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <div>
+      <TextField
+        id={`${props.label}-select`}
+        select
+        {...props}
+        label={props.label}
+        value={props.value}
+        onChange={props.handleChange}
+        onBlur={props.handleChange}
+        InputProps={{
+          sx: { fontSize: '14px', fontWeight: 'medium' },
+        }}
+        SelectProps={{
+          IconComponent: () => (
+            <ExpandMore
+              sx={{
+                color: 'primary.main',
+                mr: '15px',
+                cursor: 'pointer', // Add cursor pointer style
+              }}
+              onClick={handleIconClick} // Add click handler to the icon
+            />
+          ),
+          open: open, // Set the open state of the menu
+          onOpen: () => setOpen(true), // Open the menu when clicking the icon
+          onClose: () => setOpen(false), // Close the menu when clicking outside
+          MenuProps: {
+            sx: {
+              // Add your custom styles for the menu here
+            },
+            PaperProps: {
+              sx: {
+                // Set the background color of the menu
+                backgroundColor: '#F8F8F8', // Change this to your desired background color
+                borderRadius: '15px',
+                boxShadow: '0px 8px 15px #00000026',
+              },
+            },
+          },
+        }}
+        sx={{
+          width: width,
+          '& .MuiInputBase-root': {
+            height: height,
+          },
+        }}
+      >
+        {props.valueOptions.map((investor) => (
+          <MenuItem key={investor} value={investor}>
+            {investor}
+          </MenuItem>
+        ))}
+      </TextField>
+      {props.errorMessage !== '' ? (
+        <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">
+          {props.errorMessage}
         </div>
-    );
-}
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
+
+export default CustomSelectField;
+
 
 const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
 
@@ -81,7 +101,7 @@ const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
             />
             {
                 props.errorMessage  !== "" ? 
-                <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
+                <div className="absolute mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
                 : 
                 <></>
             }
@@ -127,7 +147,7 @@ const CustomPasswordField = ({ width = "380px", height="40px", ...props}) => {
         />
         {
             props.errorMessage  !== "" ? 
-            <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
+            <div className="absolute mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
             : 
             <></>
         }
