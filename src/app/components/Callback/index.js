@@ -28,6 +28,24 @@ function callback() {
     const[comments, setComments] = useState('');
     const[verficationCode,setVerficationCode] = useState('');
 
+    const handleNameChange = (event)=>{
+        setName(event.target.value);
+    }
+    const handleMobileNumberChange = (event)=>{
+        setMobileNumber(event.target.value);
+    }
+    const handlePhoneNumberChange = (event)=>{
+        setPhoneNumber(event.target.value);
+    }
+    const handleEmailChange = (event)=>{
+        setEmail(event.target.value);
+    }
+    const handleCommentsChange = (event)=>{
+        setComments(event.target.value);
+    }
+    const handleVerificationChange = (event)=>{
+        setVerficationCode(event.target.value);
+    }
     return ( 
         <ThemeProvider theme={theme}>
             <div className="flex h-screen flex-row items-center justify-center font-poppins mt-[-60px] ">
@@ -45,14 +63,14 @@ function callback() {
                         <>
                             <div className="text-[26px] font-semibold mb-[20px] text-center leading-[20px]">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
                             <div className="flex flex-col gap-y-[20px]">
-                                <CustomTextField label="Name" width="433px" height='40px' value={name}   />
-                                <CustomTextField label="Mobile Number" width="433px" height='40px' value={mobileNumber}   />
-                                <CustomTextField label="Phone Number" width="433px" height='40px' value={phoneNumber}   />
-                                <CustomTextField label="Email" width="433px" height='40px' value={email}   />
-                                <CustomTextField label="Comments" width="433px" height="80px" value={comments}  />
+                                <CustomTextField type="text" label="Name" width="433px" height='40px' setValue={setName} value={name} handleChange={handleNameChange}/>
+                                <CustomTextField type="tel" label="Mobile Number" width="433px" height='40px' setValue={setMobileNumber} value={mobileNumber}  handleChange={handleMobileNumberChange}  />
+                                <CustomTextField type="tel" label="Phone Number" width="433px" height='40px' setValue={setPhoneNumber} value={phoneNumber} handleChange={handlePhoneNumberChange}  />
+                                <CustomTextField type="email" label="Email" width="433px" height='40px' setValue={setEmail} value={email} handleChange={handleEmailChange}  />
+                                <CustomTextField type="text" label="Comments" width="433px" height="80px" setValue={setComments} value={comments} handleChange={handleCommentsChange} />
                                 
                                 <div className="flex flex-row">
-                                    <CustomTextField label="Verification Code" width="271px" value={verficationCode}/>        
+                                    <CustomTextField type="text" label="Verification Code" width="271px" setValue={setVerficationCode} value={verficationCode} handleChange={handleVerificationChange}/>        
                                     <Image className="w-[144px] h-[36px] ml-[18px]" src={captcha}/>
                                 </div>
                                 <div className="flex items-center justify-center text-[14px]">
