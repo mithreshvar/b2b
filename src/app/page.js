@@ -157,26 +157,17 @@ export default function HomePage() {
           <div className='absolute w-screen h-screen bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
             <div className='relative w-[840px] h-[450px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
             <ClearRoundedIcon className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{ modal === "password-updated" && router.push('/'); setLogin(false)}} />
-              { modal === "password-updated" ?
-                <div className='flex justify-center items-center h-full flex-col'>
-                  <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} alt='Success' />
-                  <p className='text-[20px] text-[#00A345] font-semibold mt-[6px]'>Your Password Updated Successfully. Please <span className='text-primary'>Re-Login</span></p>
-                </div>
-                :
-                <>
-                  <h2 className='text-[24px] font-semibold'>A revolutionary platform for all your investment needs</h2>
-                  <div className='flex gap-x-[120px]'>
-                    <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
-                      <Image src={partner} className='w-[85px] h-[113px]' />
-                      <Link href={'/login'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px] flex items-center justify-center'>Partner</Link>
-                    </div>
-                    <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
-                      <Image src={investor} className='w-[97px] h-[115px]' />
-                      <button className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px]'>Investor</button>
-                    </div>
-                  </div>
-                </>
-              }
+            <h2 className='text-[24px] font-semibold'>A revolutionary platform for all your investment needs</h2>
+            <div className='flex gap-x-[120px]'>
+              <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
+                <Image src={partner} className='w-[85px] h-[113px]' />
+                <Link href={'/login'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px] flex items-center justify-center'>Partner</Link>
+              </div>
+              <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
+                <Image src={investor} className='w-[97px] h-[115px]' />
+                <button className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px]'>Investor</button>
+              </div>
+            </div>
             </div>
           </div>
         }

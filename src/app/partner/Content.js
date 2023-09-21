@@ -47,6 +47,7 @@ import { get5Data } from '../components/partner/PartnerHome/dummyData';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 export default function Content() {
 
@@ -57,6 +58,7 @@ export default function Content() {
 
     const [shortUrl,setShortUrl] = useState('https://www.partner.fundsindia.com'); //Add tinyurl logic and fetch
     const [linkCopied,setLinkCopied] = useState(false);
+    const [passwordChangedPopup, setPasswordChangedPopup] = useState(false);
 
     const [active, setActive] = useState(tab || 'dashboard');
     const [navOpen, setNavOpen] = useState(true);
@@ -91,7 +93,7 @@ export default function Content() {
                 <ToastContainer />
                 <div>
                     <Box sx={{ flexGrow: 1, zIndex: 1 }}>
-                    <AppBar position={(popup||deletePopup)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
+                    <AppBar position={(popup||deletePopup||passwordChangedPopup)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
                             <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
@@ -113,7 +115,7 @@ export default function Content() {
                     </AppBar>
                     </Box>
 
-                    <div className={`flex h-[calc(100vh-60px)] ${(!(popup||deletePopup)) && ' mt-[60px]'} `}> {/* */}
+                    <div className={`flex h-[calc(100vh-60px)] ${(!(popup||deletePopup||passwordChangedPopup)) && ' mt-[60px]'} `}> {/* */}
 
                         {/* navigation segment */}
                         <div className={` h-full py-[35px] px-[20px] flex flex-col gap-y-[30px] overflow-y-scroll overflow-x-hide text-[14px] font-medium text-[#6E6E72] ${(navOpen)? 'w-[250px] ': 'w-[61px]'} `}>
@@ -204,7 +206,7 @@ export default function Content() {
                                 (active==='dbf' && <Dbf /> )||
                                 (active==='home' && <PartnerHome setActive={setActive}/> )||
                                 (active==='manual' && <Manual /> )||
-                                (active==='password' && <Password /> )||
+                                (active==='password' && <Password setPasswordChangedPopup={setPasswordChangedPopup} /> )||
                                 (active==='portfolio' && <Portfolio /> )||
                                 (active==='registration' && <Registration /> )||
                                 (active==='reports' && <Report /> )||
@@ -217,6 +219,19 @@ export default function Content() {
                     </div>
                 </div>   
             </div> 
+            {(passwordChangedPopup) &&
+                <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
+                    <div className='relative w-[736px] h-[393px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
+                        <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPasswordChangedPopup(false)}} />
+                        <div className='flex justify-center items-center h-full flex-col'>
+                            <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} alt='Success' />
+                            <Link href={"/login"}>
+                                <p className='text-[20px] text-[#00A345] font-semibold mt-[6px]'>Your Password Updated Successfully. Please <span className='text-primary'>Re-Login</span></p>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            }
             {(popup) &&
                 <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center' >
                     <div className='relative w-full rounded-t-[25px] bg-white p-[40px] flex flex-col gap-y-[50px]  items-center '>
