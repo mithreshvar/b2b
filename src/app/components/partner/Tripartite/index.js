@@ -39,7 +39,7 @@ function Tripartite() {
         }
       };
 
-    const investorOptions = ['eKYC - EPSPS6704G', 'eKYC - EPSPS6845T', 'eKYC - EPSPS6197P'];
+    const investorOptions = ['Ramesh', 'Suresh', 'Babu'];
 
     return (
         <div className="text-[14px] p-[20px]">
@@ -61,7 +61,7 @@ function Tripartite() {
                                 <p>AND</p>
                                 <p><span className="font-bold">Iaspire Wealth Services</span> (hereinafter referred to as “the Partner”), and having his/its office/ registered office at <span className="font-bold">laspire Wealth, Asdfasdf, Asfasd, Asdf, Tamil Nadu, India,</span> which expression shall, unless repugnant to the context or meaning thereof, be deemed to mean and include his/her heirs, executors, administrators and legal representatives/the partners for the time being of the said entity, the survivor or survivors of them and their respective heirs, executors, administrators and legal representatives/its successors, as the case may be, of the Second Part;</p>
                                 <p>AND</p>
-                                <p><span className="font-bold">eKYC</span> (Name of the Investor of Partner) an individual. and having his/its residence/office/ at <span className="font-bold">New Str. Ssada, Agartala, Andaman & Nicobar, India</span> which expression shall, unless repugnant to the context or meaning thereof, be deemed to mean and include his/her heirs, executors, administrators and legal representatives/the partners for the time being of the said entity, the survivor or survivors of them and their respective heirs, executors, administrators and legal representatives/its successors, as the case may be, of the Third Part;</p>
+                                <p><span className="font-bold">{investor}</span> (Name of the Investor of Partner) an individual. and having his/its residence/office/ at <span className="font-bold">New Str. Ssada, Agartala, Andaman & Nicobar, India</span> which expression shall, unless repugnant to the context or meaning thereof, be deemed to mean and include his/her heirs, executors, administrators and legal representatives/the partners for the time being of the said entity, the survivor or survivors of them and their respective heirs, executors, administrators and legal representatives/its successors, as the case may be, of the Third Part;</p>
                             </div>
                             <Link href="#"><button className="w-[166px] h-[40px] rounded-[25px] bg-primary text-white font-semibold mt-[20px]" onClick={handleIAgree}>I Agree</button></Link>
                         </>

@@ -73,7 +73,7 @@ const Password = () => {
 
     return (
         <div className="text-[14px] p-[20px]">
-            <div className="bg-[white] w-full rounded-[25px] p-[20px] flex flex-col gap-[20px]">
+            <div className="bg-[white] w-full rounded-[25px] p-[20px] flex flex-col gap-[30px]">
                 <p className="text-[20px] font-semibold">Change Password</p>
                 <div className="text-[16px]">
                     <span className="font-medium">User Id:</span>
