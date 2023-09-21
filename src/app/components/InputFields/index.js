@@ -16,7 +16,6 @@ const CustomSelectField = ({ width = '380px', height = '40px',...props }) => {
       <TextField
         id={`${props.label}-select`}
         select
-        {...props}
         label={props.label}
         value={props.value}
         onChange={props.handleChange}
@@ -58,6 +57,7 @@ const CustomSelectField = ({ width = '380px', height = '40px',...props }) => {
             height: height,
           },
         }}
+        {...props}
       >
         {props.valueOptions.map((investor) => (
           <MenuItem key={investor} value={investor}>
@@ -86,8 +86,6 @@ const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
             <TextField
                 id={`${props.label}-input`}
                 label={props.label}
-                value={props.value}
-                {...props}
                 onChange={props.handleChange}
                 onBlur={props.handleChange}
                 sx={
@@ -98,6 +96,7 @@ const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
                         }
                     }
                 }
+                {...props}
             />
             {
                 props.errorMessage  !== "" ? 
@@ -132,7 +131,6 @@ const CustomPasswordField = ({ width = "380px", height="40px", ...props}) => {
               }}
             label={props.label}
             value={props.value}
-            {...props}
             type={!showPassword ? 'text' : 'password'}
             onChange={props.handleChange}
             onBlur={props.handleChange}
@@ -144,6 +142,7 @@ const CustomPasswordField = ({ width = "380px", height="40px", ...props}) => {
                     }
                 }
             }
+            {...props}
         />
         {
             props.errorMessage  !== "" ? 
@@ -163,7 +162,6 @@ const CustomDatePicker = ({ width = "380px", height = "40px", ...props}) => {
                 label={props.label}
                 format="DD MMM YYYY"
                 value={props.value}
-                {...props}
                 onChange={(newDate) => props.setValue(newDate)}
                 showDaysOutsideCurrentMonth={true}
                 dayOfWeekFormatter={(day) => {
@@ -200,6 +198,7 @@ const CustomDatePicker = ({ width = "380px", height = "40px", ...props}) => {
                 PopperProps={{
                     sx: {'&.MuiPickersPopper-root': {border: '4px solid red'},},
                 }}
+                {...props}
             />
         </LocalizationProvider>
     )
