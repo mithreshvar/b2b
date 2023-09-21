@@ -131,7 +131,7 @@ export default function PartnerHome ({setActive}) {
                             </div>
                         </div>
 
-                        <CustomTable headers={['User Name', 'Email', 'Phone Number', 'Action']} data={tableData} setActive={setActive} />
+                        <CustomTable headers={['User Name', 'Email', 'Phone Number', 'Systematic Plans', 'Action']} data={tableData} setActive={setActive} />
                     </>
                     :
                     <>
@@ -139,9 +139,9 @@ export default function PartnerHome ({setActive}) {
                             <h1 className="text-[20px] font-semibold">User Systematic Plan Details</h1>
                             <h4 className="text-[18px]  font-semibold">SIP Details</h4>
                             <h6 className="text-[14px]  font-semibold">SIP-Paused</h6>
-                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} headerStyle={' font-medium '} />
+                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} />
                             <h6 className="text-[14px]  font-semibold">ADVISORS SIP TRANSACTION</h6>
-                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} headerStyle={' font-medium '} />
+                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} />
 
                         </div>
                         <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
@@ -150,7 +150,7 @@ export default function PartnerHome ({setActive}) {
                             <CustomTable 
                                 headers={['VIP Reference ID', 'Folio', 'Scheme Name', 'Expected Return (%)', 'Paid/ Tot. Months', 'Next EGS/DD Date', 'Monthly Amount (Rs.)']}
                                 data={[['104476', '123/123451', 'Kotak Balance Advantage Fund-Reg(IDCW)', '12', '0/12', '-', '1,000.00']]}
-                                pagination={false} headerStyle={' font-medium '} />
+                                pagination={false} />
                         </div>
                     </>
                 }

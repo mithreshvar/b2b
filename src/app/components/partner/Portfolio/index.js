@@ -147,7 +147,7 @@ function Portfolio() {
                         </div>
                         
                         <div className=" bg-white rounded-[15px]">
-                            <CustomTable headers={['Portfolio Name', 'Investor Domicile Type', 'Portfolio Product Type']} data={data} pagination={false} headerStyle={' font-medium '} /> 
+                            <CustomTable headers={['Portfolio Name', 'Investor Domicile Type', 'Portfolio Product Type']} data={data} pagination={false} /> 
                         </div>
                     </>
                     : 

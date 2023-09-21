@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Arrow from "/public/partner/Arrow.js";
 
 
-export default function CustomTable({data, headers, setActive, pagination, headerStyle}) {
+export default function CustomTable({data, headers, setActive, pagination=true, headerStyle}) {
 
     function splitData (data) {
         let data10 = [];
