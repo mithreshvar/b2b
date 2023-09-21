@@ -39,11 +39,14 @@ import PartnerHome from '../components/partner/PartnerHome';
 import Brokerage from '../components/partner/Brokerage';
 import Portfolio from '../components/partner/Portfolio';
 import Password from '../components/partner/Password';
-import { ClearRounded } from '@mui/icons-material';
+import { ClearRounded, LinkRounded } from '@mui/icons-material';
 import { useDataContext } from '../context/DataContext';
 import CustomTable from '../components/partner/PartnerHome/CustomTable';
 import { get5Data } from '../components/partner/PartnerHome/dummyData';
 //endregion
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Content() {
 
@@ -52,7 +55,7 @@ export default function Content() {
 
     const tab = searchParams.get('tab');
 
-    const [shortUrl,setShortUrl] = useState('https://www.partner.fund…'); //Add tinyurl logic and fetch
+    const [shortUrl,setShortUrl] = useState('https://www.partner.fundsindia.com'); //Add tinyurl logic and fetch
     const [linkCopied,setLinkCopied] = useState(false);
 
     const [active, setActive] = useState(tab || 'dashboard');
@@ -68,11 +71,24 @@ export default function Content() {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortUrl);
+        notifyCopy()
     }
+
+    const notifyCopy = () => toast.success("Link Copied!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        limit:1,
+        progress: undefined,
+        theme: "light",
+        pauseOnHover:false,
+        });
 
     return (
         <ThemeProvider theme={theme} >
             <div className=' overflow-auto'>
+                <ToastContainer />
                 <div>
                     <Box sx={{ flexGrow: 1, zIndex: 1 }}>
                     <AppBar position={(popup||deletePopup)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
@@ -84,11 +100,11 @@ export default function Content() {
 
                         <div className='flex gap-x-[30px]'>
                             {/* Handle link copied */}
-                            <div> {/* Aline to right */}
-                                <div className="flex w-[299px] h-[36px] border-[1px] border-[#E4E5E5] rounded-[6px]">
-                                    <div className="w-[198px] text-[#6E6E72] text-[12px] self-center pl-[20px]">{shortUrl}</div>
-                                    <div className='w-[1px] h-3/4 bg-[#E4E5E5] self-center'></div>
-                                    <button type="button" className="w-[105px] text-[#0071E7] text-[12px] font-Semibold" onClick={handleCopy}>Copy Link</button>
+                            <div>
+                                <div className="flex w-[299px] h-[36px] border-[1px] border-[#E4E5E5] font-semibold rounded-[6px] items-center">
+                                    <div className="w-[198px] text-[#6E6E72] text-[12px] pl-[20px] pr-[10px] overflow-clip text-ellipsis">{shortUrl}</div>
+                                    <div className='w-[1px] h-3/4 bg-[#E4E5E5]'></div>
+                                    <button type="button" className="w-[105px] text-[#0071E7] text-[12px] font-Semibold" onClick={handleCopy}><LinkRounded className='-rotate-45 w-[18px] h-[15px] mb-[2px]' />Copy Link</button>
                                 </div>
                             </div>
                             <div className='w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center'>T</div>
