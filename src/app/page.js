@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Home from './components/Home'
 import Demo from './components/Demo';
 import Callback from './components/Callback';
@@ -69,10 +69,19 @@ export default function HomePage() {
     else router.push(`/?tab=${tab}`, undefined, { shallow: true });
   }
 
+  const top = useRef(null);
+
+  useEffect(() => {
+    if (top.current) {
+      top.current.scrollTop = 0;
+    }
+  }, [route]);
+
+
   return (
     <ThemeProvider theme={theme}>
-      <main className={`flex h-screen overflow-scroll flex-col items-center px-[80px] font-poppins bg-[url('../../public/app-background.png')] bg-cover bg-fixed ${(login)?' overflow-hidden':''}`}> 
-        <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`}>
+      <main className={`flex h-screen overflow-scroll flex-col items-center px-[80px] font-poppins bg-[url('../../public/app-background.png')] bg-cover bg-fixed ${(login)?' overflow-hidden':''}`} ref={top}> 
+        <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`} >
           <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
             <Link href={'/'}><Image src={logo} className='w-[165px] h-[47px]' /></Link>
             <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
@@ -87,7 +96,7 @@ export default function HomePage() {
           </div>
           {
             (route==='Home' && <Home/>) || 
-            (route==='whyFIP' &&<WhyFundsIndiaPartner/>) || 
+            (route==='whyFIP' &&<WhyFundsIndiaPartner setRoute={setRoute}/>) || 
             (route==='demo' && <Demo/>) ||
             (route==='contact' && <Contact />) || 
             (route==='callback' && <Callback />) ||
@@ -132,7 +141,7 @@ export default function HomePage() {
               <div className='flex flex-col gap-y-[30px]'>
                 <h6 className='font-semibold text-[16px] '>Subscribe to our Newsletter</h6>
                 <div className='flex gap-x-[20px]'>
-                  <CustomTextField id='email' label='Email' type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} sx={{width:'304px'}} />
+                  <CustomTextField id='email' label='Email' type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} width='304px' />
                   <button onClick={handleSubmit} className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
