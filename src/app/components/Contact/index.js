@@ -5,6 +5,7 @@ import Image from "next/image";
 import email from '/public/Contact/Group 512412.svg'
 import phone from '/public/Contact/Group 512413.svg'
 import office from '/public/Contact/Group 512414.svg'
+import map from '/public/map/map@2x.png'
 
 export default function Contact() {
     return(
@@ -40,7 +41,7 @@ export default function Contact() {
             </div>
             <div className="h-screen flex items-center justify-center">
                 <div className="flex gap-x-[10px]">
-                    <div className="border-[2px] w-[410px] h-[438px]"></div>
+                    <Image src={map} className=" w-[410px] h-[438px]" />
                     <div className="self-end flex flex-col gap-y-[15px]">
                         <div className="bg-[#F3F8FC] p-[30px] text-[16px] rounded-r-[34px] flex flex-col gap-y-[30px]">
                             <div>
