@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "@/app/components/register-with-us/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../theme";
-import { FormControlLabel, Radio, Typography, } from "@mui/material";
+import { FormControlLabel, Radio, TextareaAutosize, Typography, } from "@mui/material";
 import { RadioButtonUnchecked } from '@mui/icons-material';
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 // Create a reusable AddressFields component
-function AddressFields({ cityOptions, stateOptions, setValueObject }) {
+function AddressFields({ stateOptions, setValueObject, isCorrespondenceAddress }) {
   const [addressLine1, setAddressLine1] = useState('');
   const [addressLine2, setAddressLine2] = useState('');
   const [addressLine3, setAddressLine3] = useState('');
@@ -21,24 +21,24 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
   const [pincode, setPincode] = useState("");
   const [email, setEmail] = useState("");
   const [contactNoOffice, setContactNoOffice] = useState("");
-  const [residence, setResidence] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
 
   useEffect(() => {
     setValueObject({
-      addressLine1, addressLine2, addressLine3, city, state, pincode, email, contactNoOffice, residence, mobileNumber
+      addressLine1, addressLine2, addressLine3, city, state, pincode, email, contactNoOffice, mobileNumber
     })
-  }, [addressLine1, addressLine2, addressLine3, city, state, pincode, email, contactNoOffice, residence, mobileNumber]
+  }, [addressLine1, addressLine2, addressLine3, city, state, pincode, email, contactNoOffice, mobileNumber]
   );
 
   // Error message states
   const [addressLine1ErrorMessage, setAddressLine1ErrorMessage] = useState('');
   const [addressLine2ErrorMessage, setAddressLine2ErrorMessage] = useState('');
   const [addressLine3ErrorMessage, setAddressLine3ErrorMessage] = useState('');
+  const [cityErrorMessage, setCityErrorMessage] = useState('');
+  const [stateErrorMessage, setStateErrorMessage] = useState('');
   const [pincodeErrorMessage, setPincodeErrorMessage] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [contactNoOfficeErrorMessage, setContactNoOfficeErrorMessage] = useState('');
-  const [residenceErrorMessage, setResidenceErrorMessage] = useState('');
   const [mobileNumberErrorMessage, setMobileNumberErrorMessage] = useState('');
 
   // handleChange functions
@@ -74,6 +74,28 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
       setAddressLine3ErrorMessage("");
     }
   };
+
+  const handleCityChange = (event) => {
+    const value = event.target.value;
+    setCity(value);
+  
+    if (value === "") {
+      setCityErrorMessage("City cannot be empty");
+    } else {
+      setCityErrorMessage("");
+    }
+  };
+
+  const handleStateChange = (event) => {
+    const value = event.target.value;
+    setState(value);
+  
+    if (value === "") {
+      setStateErrorMessage("State cannot be empty");
+    } else {
+      setStateErrorMessage("");
+    }
+  }
   
   const handlePincodeChange = (event) => {
     const value = event.target.value;
@@ -114,17 +136,6 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
     }
   };
   
-  const handleResidenceChange = (event) => {
-    const value = event.target.value;
-    setResidence(value);
-  
-    if (value === "") {
-      setResidenceErrorMessage("Residence cannot be empty");
-    } else {
-      setResidenceErrorMessage("");
-    }
-  };
-  
   const handleMobileNumberChange = (event) => {
     const value = event.target.value;
     setMobileNumber(value);
@@ -137,24 +148,24 @@ function AddressFields({ cityOptions, stateOptions, setValueObject }) {
       setMobileNumberErrorMessage("");
     }
   };
-  
-  
-  // Similarly, you can add validation logic for other fields as needed
-  
-
 
   return (
-    <div className="flex flex-wrap gap-x-[50px] gap-y-[20px]">
+    <div className="flex flex-wrap gap-x-[50px] gap-y-[30px]">
       <CustomTextField label="Address Line 1" width="810px" value={addressLine1} errorMessage={addressLine1ErrorMessage} handleChange={handleAddressLine1Change} />
       <CustomTextField label="Address Line 2" width="810px" value={addressLine2} errorMessage={addressLine2ErrorMessage} handleChange={handleAddressLine2Change} />
       <CustomTextField label="Address Line 3" width="810px" value={addressLine3} errorMessage={addressLine3ErrorMessage} handleChange={handleAddressLine3Change} />
-      <CustomSelectField label="City" value={city} setValue={setCity} valueOptions={cityOptions} />
-      <CustomSelectField label="State" value={state} setValue={setState} valueOptions={stateOptions} />
+      <CustomTextField label="City" value={city} handleChange={handleCityChange} errorMessage={cityErrorMessage} />
+      <CustomSelectField label="State" value={state} setValue={setState} valueOptions={stateOptions} handleChange={handleStateChange} />
       <CustomTextField label="Pincode" value={pincode} errorMessage={pincodeErrorMessage} handleChange={handlePincodeChange} />
-      <CustomTextField label="Email" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
-      <CustomTextField label="Contact No. Office" value={contactNoOffice} errorMessage={contactNoOfficeErrorMessage} handleChange={handleContactNoOfficeChange} />
-      <CustomTextField label="Residence" value={residence} errorMessage={residenceErrorMessage} handleChange={handleResidenceChange} />
-      <CustomTextField label="Mobile Number" value={mobileNumber} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
+      
+      {isCorrespondenceAddress &&
+        <>
+          <CustomTextField label="Email" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
+          <CustomTextField label="Mobile Number" value={mobileNumber} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
+          <CustomTextField label="Contact No. Office" value={contactNoOffice} errorMessage={contactNoOfficeErrorMessage} handleChange={handleContactNoOfficeChange} />
+        </>
+      }
+
     </div>
   );
 }
@@ -173,14 +184,16 @@ function Login() {
   const [name, setName] = useState('');
   const [dob, setDob] = useState(null);
   const [panNumber, setPanNumber] = useState('');
+  const [contactNoOffice, setContactNoOffice] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
 
   const [isCorrespondence, setIsCorrespondence] = useState(false);
   const [permanentAddressObject, setPermanentAddressObject] = useState({});
   const [correspondenceAddressObject, setCorrespondenceAddressObject] = useState({});
 
   const [arnNumber, setArnNumber] = useState('');
-  const [issueDate, setIssueDate] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
+  const [issueDate, setIssueDate] = useState(null);
+  const [expiryDate, setExpiryDate] = useState(null);
   const [status, setStatus] = useState('');
 
   const [isSubmitted, setIsSubmitted] = useState(false);  
@@ -188,6 +201,8 @@ function Login() {
 
   //Field Specific Error Message
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [contactNoOfficeErrorMessage, setContactNoOfficeErrorMessage] = useState('');
+  const [mobileNumberErrorMessage, setMobileNumberErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [nameErrorMessage, setNameErrorMessage] = useState('');
   const [panNumberErrorMessage, setPanNumberErrorMessage] = useState('');
@@ -263,6 +278,32 @@ function Login() {
     }
   };
   
+  const handleContactNoOfficeChange = (event) => {
+    const value = event.target.value;
+    setContactNoOffice(value);
+  
+    if (value === "") {
+      setContactNoOfficeErrorMessage("Contact No. (Office) cannot be empty");
+    } else if (!/^\d{10}$/.test(value)) {
+      setContactNoOfficeErrorMessage("Invalid contact number format (10 digits required)");
+    } else {
+      setContactNoOfficeErrorMessage("");
+    }
+  };
+  
+  const handleMobileNumberChange = (event) => {
+    const value = event.target.value;
+    setMobileNumber(value);
+  
+    if (value === "") {
+      setMobileNumberErrorMessage("Mobile Number cannot be empty");
+    } else if (!/^\d{10}$/.test(value)) {
+      setMobileNumberErrorMessage("Invalid mobile number format (10 digits required)");
+    } else {
+      setMobileNumberErrorMessage("");
+    }
+  };
+  
   const handlePasswordChange = (event) => {
     const value = event.target.value;
     setPassword(value);
@@ -302,13 +343,13 @@ function Login() {
     }
   }
 
-  const handleIssueDateChange = (event) => {
-    setIssueDate(event.target.value);
+  const handleIssueDateChange = (date) => {
+    setIssueDate(date);
     // Add issue date validation logic here if needed
   };
 
-  const handleExpiryDateChange = (event) => {
-    setExpiryDate(event.target.value);
+  const handleExpiryDateChange = (date) => {
+    setExpiryDate(date);
     // Add expiry date validation logic here if needed
   };
 
@@ -319,7 +360,6 @@ function Login() {
   };
   
 
-  const cities = ['Chennai', 'Coimbatore'];
   const states = ['Kerala', 'Tamil Nadu'];
 
   return (
@@ -364,7 +404,7 @@ function Login() {
                 <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
                 <CustomPasswordField label="Password" type="password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
               </div>
-              <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forget password?</a>
+              <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forgot password?</a>
             </div>
 
           </div>
@@ -373,19 +413,22 @@ function Login() {
         (
           <div className="w-[859px]">
 
+            <p className='text-[18px] font-semibold my-[20px]'>Partner information</p>
+
             {/* Individuality provider */}
-                <div className="mt-[20px] text-textLight">Individuality</div>
+                <div className="text-textLight font-medium">Individuality</div>
                 <div className="mt-[10px] flex justify-start items-center gap-[20px] p-[1px]">
                     <button className={`w-[141px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'individual' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'individual'} onClick={handleIsIndividualChange}> Individuals </button>
                     <button className={`w-[178px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'non-individuals' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'non-individuals'} onClick={handleIsIndividualChange}> Non-Individuals </button>
                 </div>
 
-              <div className="py-[20px] flex flex-wrap gap-y-[20px] gap-x-[50px]">
+              <div className="pt-[20px] pb-[25px] flex flex-wrap gap-y-[30px] gap-x-[50px]">
                 <CustomTextField label="Name" type="text" value={name} errorMessage={nameErrorMessage} handleChange={handleNameChange} />
                 <CustomDatePicker label="Date Of Birth / incorporation" value={dob} setValue={setDob} disableFuture={true} />
-              <div>
-              <CustomTextField label="PAN Number" type="text" value={panNumber} errorMessage={panNumberErrorMessage} handleChange={handlePanNumberChange} />
-              </div>
+                <CustomTextField label="PAN Number" type="text" value={panNumber} errorMessage={panNumberErrorMessage} handleChange={handlePanNumberChange} />
+                <CustomTextField label="Email" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
+                <CustomTextField label="Mobile Number" value={mobileNumber} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
+                <CustomTextField label="Contact No. Office" value={contactNoOffice} errorMessage={contactNoOfficeErrorMessage} handleChange={handleContactNoOfficeChange} />
             </div>
 
             <div className="flex flex-col gap-y-[20px] gap-x-[50px]">
@@ -394,7 +437,6 @@ function Login() {
                 Permanent / Registered Office Address
               </div>
               <AddressFields
-                cityOptions={cities}
                 stateOptions={states}
                 setValueObject={setPermanentAddressObject}
               />
@@ -424,9 +466,9 @@ function Login() {
                     Correspondence Address (For all Communication)
                     </div>
                     <AddressFields
-                      cityOptions={cities}
                       stateOptions={states}
                       setValueObject={setCorrespondenceAddressObject}
+                      isCorrespondenceAddress
                     />
                 </>
               )}
@@ -436,10 +478,10 @@ function Login() {
                 <div className="-ml-[1px] font-semibold text-[18px]">
                     Registration Details
                 </div>
-                <div className="flex flex-wrap gap-x-[50px] gap-y-[20px]">
+                <div className="flex flex-wrap gap-x-[50px] gap-y-[30px]">
                   <CustomTextField label="ARN Number" type="text" value={arnNumber} errorMessage={arnNumberErrorMessage} handleChange={handleArnNumberChange} />
-                  <CustomTextField label="Issue Date" type="text" value={issueDate} errorMessage={issueDateErrorMessage} handleChange={handleIssueDateChange} />
-                  <CustomTextField label="Expiry Date" type="text" value={expiryDate} errorMessage={expiryDateErrorMessage} handleChange={handleExpiryDateChange} />
+                  <CustomDatePicker label="Issue Date" value={issueDate} setValue={setIssueDate} />
+                  <CustomDatePicker label="Expiry Date" value={expiryDate} setValue={setExpiryDate} />
                   <CustomTextField label="Status" type="text" value={status} errorMessage={statusErrorMessage} handleChange={handleStatusChange} />
                 </div>
 
@@ -489,7 +531,7 @@ function Login() {
         )}
 
         {/* Submit */}
-        <Link href={isLogin === "login" ? "/partner" : "#"} >
+        <Link href={isLogin === "login" ? "partner?tab=home" : "#"} >
           <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
             {isLogin === "login" ? "Login" : "Submit"}
           </button>

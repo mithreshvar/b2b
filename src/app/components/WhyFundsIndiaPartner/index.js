@@ -25,7 +25,7 @@ export default function WhyFundsIndiaPartner({setRoute}) {
             <div className=' grid gap-[110px] mt-[36.04px]'>
                   <div className='flex items-center justify-center'><Image src={svg1}/></div>
                   <div className='flex items-center justify-center gap-x-[60px]'>
-                    <div className='w-[434px] h-[438px] flex items-center justify-center bg-[#F4F8FB] rounded-[34px] '><div className='mx-[-26px]'><Image src={png1} className='w-[486px] h-[314px] '/></div></div>
+                    <div className='w-[434px] h-[438px] flex items-center justify-center bg-[#F4F8FB] rounded-[34px]'><div className='mx-[-26px]'><Image src={png1} className='w-[486px] h-[314px] '/></div></div>
                     <div className='w-[556px] h-[290px]'>
                       <div className='text-[#0071E7] font-bold text-[20px]'>Boundaryless Business</div>
                       <br/>
