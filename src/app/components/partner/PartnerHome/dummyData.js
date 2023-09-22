@@ -33,7 +33,7 @@ export default function dummmyData(n = 300) {
     // return (data);
 }
 
-export function get5Data(investor) {
+export function get5Data() {
 
     const names = ['Seymour', 'Mary', 'Fidel', 'Gonzalo', 'Annmarie', 'Abram', 'Stacy', 'Krista', 'Herb', 'Ada', 'Zachary', 'Marion', 'Chet', 'Ladonna' ]
 
@@ -88,7 +88,6 @@ export function get5Data(investor) {
         data.push(entry);
         }
 
-        data[0][1] = investor;
         return data;
     }
 

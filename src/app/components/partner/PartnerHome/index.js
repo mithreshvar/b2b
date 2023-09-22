@@ -120,10 +120,10 @@ export default function PartnerHome ({setActive}) {
                             <h4 className="text-[20px] font-semibold">Investor Search</h4>
                             <div className="flex gap-x-[50px]">
                                 <div className="flex flex-col gap-y-[20px]">
-                                    <CustomTextField id="userName" label='User Name' sx={{width: '380px'}} type="text" errorMessage={nameErrorMessage} value={name} handleChange={handleNameChange} />
-                                    <CustomTextField id="mobileNumber" label='Mobile Number' sx={{width: '380px'}} type="number" errorMessage={numberErrorMessage} value={number} handleChange={ handleNumberChange } />
+                                    <CustomTextField id="userName" label='User Name' type="text" errorMessage={nameErrorMessage} value={name} handleChange={handleNameChange} />
+                                    <CustomTextField id="mobileNumber" label='Mobile Number' type="number" errorMessage={numberErrorMessage} value={number} handleChange={ handleNumberChange } />
                                 </div>
-                                <CustomTextField id="userEmail" label='User Email' sx={{width: '380px'}} type="text" errorMessage={emailErrorMessage} value={email} handleChange={handleEmailChange}/>
+                                <CustomTextField id="userEmail" label='User Email' type="text" errorMessage={emailErrorMessage} value={email} handleChange={handleEmailChange}/>
                             </div>
                             <div className="flex gap-x-[20px] text-[14px] font-bold">
                                 <button onClick={()=>{filterData()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
@@ -138,7 +138,7 @@ export default function PartnerHome ({setActive}) {
                         <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
                             <h1 className="text-[20px] font-semibold">User Systematic Plan Details</h1>
                             <h4 className="text-[18px]  font-semibold">SIP Details</h4>
-                            <h6 className="text-[14px]  font-semibold">SIP-Paused</h6>
+                            <h6 className="text-[14px]  font-semibold">Regular SIP</h6>
                             <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} />
                             <h6 className="text-[14px]  font-semibold">ADVISORS SIP TRANSACTION</h6>
                             <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} />

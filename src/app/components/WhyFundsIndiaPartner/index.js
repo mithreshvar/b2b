@@ -7,10 +7,10 @@ import png4 from '/public/whyFundsIndia/Group544732@2x.png'
 import arrow from '/public/whyFundsIndia/Group 508904@2x.png'
 import { VscCircleFilled } from "react-icons/vsc";
 
-export default function WhyFundsIndiaPartner() {
+export default function WhyFundsIndiaPartner({setRoute}) {
   return (
     <>
-            <div className=" font-bold items-center justify-center mt-[90px]">
+            <div className=" font-bold items-center justify-center mt-[90px]" >
                 <div className='text-[40px]'>
                   <div className="text-[#000000] text-center">The Perfect Online Medium for</div>
                   <div className="text-[#0071E7] text-center"> Financial Partners</div>
@@ -94,9 +94,9 @@ export default function WhyFundsIndiaPartner() {
                    partner.fundsindia.com is a great way to drive your success rate even as you deliver personalized service! Come be a part of a successful, growing community.
                     For more information please feel free to write to us at contactpartner@fundsindia.com or call us at 044-61104100.
                    </div>
-                    <button className='bg-[#0071E7] w-[166px] h-[40px] text-[#FFFFFF] text-center items-center justify-center flex rounded-[25px]'>
+                    <button onClick={()=>{setRoute('callback')}} className='bg-[#0071E7] w-[166px] h-[40px] font-bold text-[#FFFFFF] text-center items-center justify-center flex rounded-[25px]'>
       
-                                      <div className='text-[14px]'>continue</div>
+                                      <div className='text-[14px] font-bold'>Continue</div>
                                       <div className='ml-[21.9px]'><Image src={arrow} className='w-[13.31px] h-[9.82px]'/></div>
             
                    </button>
