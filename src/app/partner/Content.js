@@ -80,19 +80,9 @@ export default function Content() {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortUrl);
-        notifyCopy()
+        setLinkCopied(true);
+        setTimeout(()=>setLinkCopied(false), 2000);
     }
-
-    const notifyCopy = () => toast.success("Link Copied!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        limit:1,
-        progress: undefined,
-        theme: "light",
-        pauseOnHover:false,
-        });
 
     const [deleteSuccess, setDeleteSuccess] = useState(false)
 
@@ -121,7 +111,6 @@ export default function Content() {
     return (
         <ThemeProvider theme={theme} >
             <div className=' overflow-auto relative'>
-                <ToastContainer />
                 <div>
                     <Box sx={{ flexGrow: 1, zIndex: 1 }}>
                     <AppBar position={(investorList||deletePopup||passwordChangedPopup||viewPortfolioScheme)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
@@ -131,7 +120,8 @@ export default function Content() {
                             <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' />
                         </div>
 
-                        <div className='flex gap-x-[30px]'>
+                        <div className='flex gap-x-[30px] items-center'>
+                            {linkCopied && <p className='h-[28px] w-[100px] text-white text-[12px] font-semibold bg-[#6A6C7C] rounded-[6px] flex items-center justify-center' >Link Copied</p>}
                             {/* Handle link copied */}
                             <div>
                                 <div className="flex w-[299px] h-[36px] border-[1px] border-[#E4E5E5] font-semibold rounded-[6px] items-center">
