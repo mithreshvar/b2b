@@ -260,7 +260,7 @@ export default function Content() {
             {(passwordChangedPopup) &&
                 <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
                     <div className='relative w-[736px] h-[393px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
-                        <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPasswordChangedPopup(false)}} />
+                        {/* <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPasswordChangedPopup(false)}} /> */}
                         <div className='flex justify-center items-center h-full flex-col'>
                             <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} alt='Success' />
                             <Link href={"/login"}>
