@@ -46,10 +46,6 @@ import CustomTable from '../components/partner/PartnerHome/CustomTable';
 import { get5Data } from '../components/partner/PartnerHome/dummyData';
 //endregion
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
-
 export default function Content() {
 
     const router = useRouter();
