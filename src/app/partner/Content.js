@@ -23,6 +23,7 @@ import IRegistration from '/public/partner/Registration';
 import IReports from '/public/partner/Reports';
 import ITripartite from '/public/partner/Tripartite';
 import rrkLogo from '/public/rrklogo/rrklogo@2x.png';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 // import back from '/public/partner/back.svg'
 
@@ -61,7 +62,13 @@ export default function Content() {
     const [active, setActive] = useState(tab || 'dashboard');
     const [navOpen, setNavOpen] = useState(true);
 
-    const {popup, setPopup, deletePopup, setDeletePopup, investor, setSip, setAddScheme} = useDataContext();
+    // const portfolioData = [
+    //     [ 'ICICI Prudential Nifty Next 50 Index Fund - Growth', 5, 3.58, 18.51, 18.51],
+    //     [ 'Axis Focused 25 Fund - Regular Plan - IDCW', 5, 0.53, 12.64, 7.22],
+    //     [ 'Edelweiss Emerging Markets opportunities Equity Offshore Fund - Regular Plan - Growth', 5, 6.17, -1.54, 2.51],
+    // ]
+
+    const {portfolioData, investorList, setInvestorList, deletePopup, setDeletePopup, viewPortfolioScheme, setViewPortfolioScheme, investor, setSip, setAddScheme, setAddSchemeList, savePortfolioData} = useDataContext();
 
     function handleRoute(tab) {
         setActive(tab);
@@ -85,13 +92,37 @@ export default function Content() {
         pauseOnHover:false,
         });
 
+    const [deleteSuccess, setDeleteSuccess] = useState(false)
+
+    function handleDelete(data) {
+        if (data.length >= 6) {
+            let index = portfolioData.findIndex(e=>e[0]==viewPortfolioScheme);
+            portfolioData[index][2] = (portfolioData[index][2]).filter(e => e[0] != data[0])
+            savePortfolioData(portfolioData);
+            setDeletePopup(false)
+            setDeleteSuccess('Scheme Deleted Successfully')
+            setTimeout(()=>{
+                setDeleteSuccess(false);
+            }, 2500)
+        } 
+        else if (data.length == 3) {
+            savePortfolioData(portfolioData.filter(e => e[0] != data[0]))
+            setDeletePopup(false)
+            setDeleteSuccess('Portfolio Deleted Successfully')
+            setTimeout(()=>{
+                setDeleteSuccess(false);
+            }, 2500)
+        }
+    }
+    if (!portfolioData) return (<></>)
+    
     return (
         <ThemeProvider theme={theme} >
-            <div className=' overflow-auto'>
+            <div className=' overflow-auto relative'>
                 <ToastContainer />
                 <div>
                     <Box sx={{ flexGrow: 1, zIndex: 1 }}>
-                    <AppBar position={(popup||deletePopup)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
+                    <AppBar position={(investorList||deletePopup||viewPortfolioScheme)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
                             <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
@@ -113,8 +144,15 @@ export default function Content() {
                     </AppBar>
                     </Box>
 
-                    <div className={`flex h-[calc(100vh-60px)] ${(!(popup||deletePopup)) && ' mt-[60px]'} `}> {/* */}
-
+                    <div className={`flex h-[calc(100vh-60px)] relative ${(!(investorList||deletePopup||viewPortfolioScheme)) && ' mt-[60px]'} `}> {/* */}
+                        
+                        {
+                            (deleteSuccess == 'Portfolio Deleted Successfully') &&
+                            <div className='absolute z-[1] top-[20px] right-[45px] bg-[#E2FFEE] rounded-[6px] border-[2px] border-[#04A345] p-[10px] flex gap-x-[10px] items-center'>
+                                <CheckCircleRoundedIcon className='text-[#04A345]' />
+                                <p className=' text-[#04A345] text-[14px] font-bold'>{deleteSuccess}  </p>
+                            </div>
+                        }
                         {/* navigation segment */}
                         <div className={` h-full py-[35px] px-[20px] flex flex-col gap-y-[30px] overflow-y-scroll overflow-x-hide text-[14px] font-medium text-[#6E6E72] ${(navOpen)? 'w-[250px] ': 'w-[61px]'} `}>
 
@@ -146,8 +184,8 @@ export default function Content() {
 
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'portfolio' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{ setAddScheme(false); handleRoute('portfolio')}}><IPortfolio active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='portfolio' && 'font-semibold text-primary'}`} onClick={()=>{ setAddScheme(false); handleRoute('portfolio')}} >Partner Portfolio</h6>
+                                <span className='cursor-pointer' onClick={()=>{ setAddSchemeList([]); setAddScheme(false); handleRoute('portfolio')}}><IPortfolio active={active} /></span>
+                                <h6 className={`cursor-pointer ${active==='portfolio' && 'font-semibold text-primary'}`} onClick={()=>{ setAddSchemeList([]); setAddScheme(false); handleRoute('portfolio')}} >Partner Portfolio</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative '>
@@ -217,21 +255,48 @@ export default function Content() {
                     </div>
                 </div>   
             </div> 
-            {(popup) &&
-                <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center' >
-                    <div className='relative w-full rounded-t-[25px] bg-white p-[40px] flex flex-col gap-y-[50px]  items-center '>
-                        <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPopup(false)}} />
-                        <div className='flex flex-col w-full'>
-                            <h2 className='text-[20px] font-semibold '>View Investors by Groups</h2>
-                            <CustomTable headers={['S.No','Investor Name','Date of Birth','PAN Number','Complete Application','Received Application','KYC','Status']} data={get5Data(investor)} />
+            {
+                (investorList || viewPortfolioScheme) &&
+                <div className='absolute w-screen h-screen top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center' >
+
+                    {
+                        (deleteSuccess == 'Scheme Deleted Successfully') &&
+                        <div className='absolute top-[80px] right-[45px] bg-[#E2FFEE] rounded-[6px] border-[2px] border-[#04A345] p-[10px] flex gap-x-[10px] items-center'>
+                            <CheckCircleRoundedIcon className='text-[#04A345]' />
+                            <p className=' text-[#04A345] text-[14px] font-bold'>{deleteSuccess}</p>
                         </div>
+                    }
+
+                    <div className='relative w-full rounded-t-[25px] bg-white p-[40px] flex flex-col gap-y-[50px]  items-center '>
+                        <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setInvestorList(false); setViewPortfolioScheme(false)}} />
+                        {
+                            (
+                                (investorList) &&
+                                <div className='flex flex-col w-full'>
+                                    <h2 className='text-[20px] font-semibold '>Investor's of {investorList}</h2>
+                                    <CustomTable headers={['S.No','Investor Name','Date of Birth','PAN Number','Complete Application','Received Application','KYC','Status']} data={get5Data()} />
+                                </div>
+                            )||
+                            (
+                                (viewPortfolioScheme) && 
+                                <div className='flex flex-col w-full'>
+                                    <h2 className='text-[20px] font-semibold '>Portfolio - {viewPortfolioScheme}</h2>
+                                    <CustomTable headers={['S.No','Scheme Name','FundsIndia Rating','1Yr Returns(Rs)','3Yr Returns(Rs)','5Yr Returns(Rs)']} data={portfolioData[portfolioData.findIndex(e=>e[0]==viewPortfolioScheme)][2]} pagination={false} />
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             }
             {(deletePopup) &&
                 <div className='absolute w-screen h-screen top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center' >
-                    <div className='relative w-full rounded-t-[25px] bg-white p-[40px] text-center flex flex-col gap-y-[50px]  items-center '>
-                        <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setDeletePopup(false)}} />
+                    <div className='relative w-full h-[230px] border-t-[1px] border-[#FF7922] bg-[#FDE4D5] p-[45px] text-center flex flex-col gap-y-[22px]  items-center '>
+                        <h4 className='font-bold text-[18px]'>Delete Confirmation</h4>
+                        <p className='text-[14px]'>Are you sure, you want to delete the {(deletePopup.length == 6) ? deletePopup[1] : deletePopup[0] + ' Portfolio'}?</p>
+                        <div className='flex gap-x-[40px] mt-[10px]'>
+                            <button onClick={()=>setDeletePopup(false)} className='bg-[#FF7922] h-[50px] w-[150px] text-white font-bold rounded-[25px]'>CANCEL</button>
+                            <button onClick={()=>handleDelete(deletePopup)} className='bg-[#FFECE0] h-[50px] w-[150px] text-[#FF7922] font-bold rounded-[25px] border-[#FF7922] border-[1px]'>DELETE</button>
+                        </div>
                     </div>
                 </div>
             }

@@ -1,36 +1,28 @@
-import { ThemeProvider } from "@mui/material";
+import { FormControlLabel, Radio, ThemeProvider, Typography } from "@mui/material";
 import theme from '../../../theme.js'
 import CustomSelectField, { CustomTextField } from "../../InputFields/index.js";
 import { useState } from "react";
 import CustomTable from "../PartnerHome/CustomTable.js";
 import { useDataContext } from "@/app/context/DataContext.js";
+import { RadioButtonUnchecked } from "@mui/icons-material";
 
 function Portfolio() {
 
-    const{addScheme} = useDataContext();
+    const{addScheme, setAddScheme, portfolioData, savePortfolioData, addSchemeList, setAddSchemeList} = useDataContext();
 
-    const [productType, setProductType] = useState('')
+    if (!portfolioData) return(<></>)
+
+    const [showRatedSchemes, setShowRatedSchemes] = useState(false)
+    const [showOnlyNFO, setShowOnlyNFO] = useState(false)
+
     const [investorDomicileType, setInvestorDomicileType] = useState('')
     const [portfolioName, setPortfolioName] = useState('')
 
-    const [productErrorMessage, setProductErrorMessage] = useState('')
     const [investorErrorMessage, setInvestorErrorMessage] = useState('')
     const [portfolioErrorMessage, setPortfolioErrorMessage] = useState('')
 
-    const productOptions = ['Mutual Fund']
     const investorOptions = ['Domestic Investor']
 
-    const handleProductChange = (event) => {
-        const value = event.target.value;
-        setProductType(value);
-        
-        //validations
-        if (value === "") {
-            setProductErrorMessage("Product Type cannot be empty");
-        }else {
-            setProductErrorMessage("");
-        }
-    };
 
     const handleInvestorChange = (event) => {
         const value = event.target.value;
@@ -103,29 +95,46 @@ function Portfolio() {
         }
     };
 
-    let [data, setData] =  useState([
-        ['Aggressive', 'Domestic Investor', 'Mutual Funds'],
-        ['Fd Test', 'Domestic Investor', 'Mutual Funds'],
-        ['Port', 'Domestic Investor', 'Mutual Funds'],
-        ['Port2', 'Domestic Investor', 'Mutual Funds'],
-        ['Port5', 'Domestic Investor', 'Mutual Funds'],
-        ['Single', 'Domestic Investor', 'Mutual Funds'],
-    ])
+    let schemeData = [
+        ['Aditya Birla Sun Life Corporate Bond Fund - Growth', '97.5097', '5', '11 Feb 1997', '100.00', '0.47'],
+        ['Aditya Birla Sun Life Corporate Bond Fund - Monthly IDCW', '12.3388', '5', '11 Feb 1997', '100.00', '0.47'],
+        ['Aditya Birla Sun Life Floating Rate Fund - Daily IDCW Reinvestment', '100.4179', '5', '03 Jun 2003', '1,000.00', '0.45'],
+        ['Aditya Birla Sun Life Floating Rate Fund - Growth', '302.9092', '5', '03 Jun 2003', '1,000.00', '0.45'],
+        ['Aditya Birla Sun Life Floating Rate Fund - Weekly IDCW', '100.4173', '5', '03 Jun 2003', '1,000.00', '0.45'],
+        ['Aditya Birla Sun Life Liquid Fund - Daily IDCW', '100.1950', '5', '09 Jun 1997', '1,000.00', '0.34'],
+    ]
 
     function handleSave() {
-        setData([ [portfolioName, investorDomicileType, productType], ...data])
-        console.log(data)
-        setPortfolioName('')
-        setInvestorDomicileType('')
-        setProductType('')
-        setPortfolioErrorMessage('')
-        setInvestorErrorMessage('')
-        setProductErrorMessage('')
+        if (portfolioErrorMessage == '' && investorErrorMessage == '' && (portfolioName.trim().length + investorDomicileType.trim().length != 0)){
+            let name = portfolioName.toLowerCase().trim();
+            portfolioData.forEach(ele=>{
+                if (ele[0].toLowerCase().trim() == name) {
+                    setPortfolioErrorMessage('Portfolio of this name is already present');
+                    name = '';
+                    return;
+                }
+            })
+            if (name == '') return;
+            savePortfolioData([ [portfolioName, investorDomicileType, []], ...portfolioData])
+            setPortfolioName('')
+            setInvestorDomicileType('')
+            setPortfolioErrorMessage('')
+            setInvestorErrorMessage('')
+        }
+    }
+
+    function handleAddSchemeList() {
+        let index = portfolioData.findIndex(e=>e[0]==addScheme);
+        // addSchemeList.forEach(e => e.pop())
+        portfolioData[index][2].push(...addSchemeList)
+        console.log(portfolioData)
+        savePortfolioData(portfolioData);
+        setAddScheme(false)
     }
 
     return (
         <ThemeProvider theme={theme} >
-            <div className='flex flex-col h-full gap-y-[20px] overflow-scroll p-[20px]'>
+            <div className='flex flex-col h-full gap-y-[20px] overflow-scroll p-[20px] pb-[100px]'>
 
                 {
                     (!addScheme) ?
@@ -135,10 +144,9 @@ function Portfolio() {
                             <h4 className="text-[20px] font-semibold">Create Partner Portfolio</h4>
                             <div className="flex flex-col gap-y-[20px]">
                                 <div className="flex gap-x-[50px]">
-                                    <CustomSelectField id="productType" label='Product Type' errorMessage={productErrorMessage} value={productType} handleChange={handleProductChange} valueOptions={productOptions} />
                                     <CustomSelectField id="investorDomicileType" label='Investor Domicile Type' errorMessage={investorErrorMessage} value={investorDomicileType} handleChange={ handleInvestorChange } valueOptions={investorOptions} />
+                                    <CustomTextField id="portfolioName" label='Portfolio Name' errorMessage={portfolioErrorMessage} value={portfolioName} handleChange={handlePortfolioChange}/>
                                 </div>
-                                <CustomTextField id="portfolioName" label='Portfolio Name' errorMessage={portfolioErrorMessage} value={portfolioName} handleChange={handlePortfolioChange}/>
                             </div>
                             <div className="flex gap-x-[20px] mt-[10px] text-[14px] font-bold">
                                 <button onClick={()=>{handleSave()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Save</button>
@@ -147,7 +155,7 @@ function Portfolio() {
                         </div>
                         
                         <div className=" bg-white rounded-[15px]">
-                            <CustomTable headers={['Portfolio Name', 'Investor Domicile Type', 'Portfolio Product Type']} data={data} pagination={false} /> 
+                            <CustomTable headers={['Portfolio Name', 'Investor Domicile Type', 'Action']} data={portfolioData} pagination={false} /> 
                         </div>
                     </>
                     : 
@@ -168,9 +176,53 @@ function Portfolio() {
                             </div>
                         </div>
 
+                        <div className="self-end flex gap-x-[20px] my-[-5px]">
+                            <div>
+                            <FormControlLabel
+                                sx={{height: '20px'}}
+                                control={
+                                    <Radio
+                                    checked={showRatedSchemes}
+                                    icon={<RadioButtonUnchecked sx={{ color: 'primary.main' }} />}
+                                    onClick={()=>{setShowRatedSchemes(!showRatedSchemes); setShowOnlyNFO(false)}}
+                                    value={true}
+                                    />
+                                }
+                                label={
+                                    <Typography variant="body1" sx={{ fontSize: '12px' }}>
+                                    Show only rated schemes
+                                    </Typography>
+                                }
+                            />
+                            <FormControlLabel
+                                sx={{height: '20px'}}
+                                control={
+                                    <Radio
+                                    checked={showOnlyNFO}
+                                    icon={<RadioButtonUnchecked sx={{ color: 'primary.main' }} />}
+                                    onClick={()=>{setShowOnlyNFO(!showOnlyNFO); setShowRatedSchemes(false)}}
+                                    value={true}
+                                    />
+                                }
+                                label={
+                                    <Typography variant="body1" sx={{ fontSize: '12px' }}>
+                                    Show only NFO/FMP Schemes
+                                    </Typography>
+                                }
+                            />
+                            </div>
+                        </div>
+
+                        <CustomTable headers={['Scheme Name', 'Current NAV (Rs.)', 'Rating', 'Launch Date', 'Minimum Invest (Rs.)', 'Expense Ratio(%)', 'Action']} data={schemeData} />
                     </>
                 }
             </div>
+            {
+                (addSchemeList  != 0) &&
+                <div className="absolute bottom-0 w-[calc(100vw-250px)] h-[130px] bg-gradient-to-t from-white to-transparent flex items-center justify-center pb-[20px] pointer-events-none ">
+                    <button onClick={handleAddSchemeList} className="bg-primary rounded-[25px] text-white h-[50px] w-[264px] text-[20px] font-semibold self-end pointer-events-auto">Add Scheme</button>
+                </div>
+            }
         </ThemeProvider>
     );
 }
