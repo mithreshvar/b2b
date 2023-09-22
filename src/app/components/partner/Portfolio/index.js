@@ -130,6 +130,7 @@ function Portfolio() {
         console.log(portfolioData)
         savePortfolioData(portfolioData);
         setAddScheme(false)
+        setAddSchemeList([])
     }
 
     return (
