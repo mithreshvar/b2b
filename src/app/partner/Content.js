@@ -22,6 +22,7 @@ import IPortfolio from '/public/partner/Portfolio';
 import IRegistration from '/public/partner/Registration';
 import IReports from '/public/partner/Reports';
 import ITripartite from '/public/partner/Tripartite';
+import IPhase3 from '/public/partner/Phase3';
 import rrkLogo from '/public/rrklogo/rrklogo@2x.png';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
@@ -33,8 +34,8 @@ import Registration from '../components/partner/Registration';
 import Report from '../components/partner/Report';
 import Dbf from '../components/partner/Dbf'
 import About from '../components/partner/About';
-import Manual from '../components/partner/Manual';
 import Phase3 from '../components/partner/Phase3';
+import Manual from '../components/partner/Manual';
 import Tripartite from '../components/partner/Tripartite';
 import PartnerHome from '../components/partner/PartnerHome';
 import Brokerage from '../components/partner/Brokerage';
@@ -214,7 +215,7 @@ export default function Content() {
 
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'phase3' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('phase3')}}><IPassword active={active} /></span>
+                                <span className='cursor-pointer' onClick={()=>{handleRoute('phase3')}}><IPhase3 active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='phase3' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('phase3')}} > Phase 3</h6>
                             </div>
 
