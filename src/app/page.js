@@ -46,14 +46,27 @@ export default function HomePage() {
     const value = event.target.value;
     setEmail(value);
   
-    //validations
-    
-    if (email !== "" && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+    if (value === "") {
+      setEmailErrorMessage("Email cannot be empty");
+    } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
       setEmailErrorMessage("Invalid email format");
+    } else if (value.indexOf('@') === -1 || value.indexOf('@') !== value.lastIndexOf('@')) {
+      setEmailErrorMessage("Email must contain exactly one '@'");
+    } else if (value.endsWith('.') || value.endsWith('@')) {
+      setEmailErrorMessage("Email cannot end with a dot or '@'");
+    } else if (value.includes('notprovided') || value.includes('Noemail') || value.includes('xyz')) {
+      setEmailErrorMessage("Email cannot contain 'notprovided', 'Noemail', or 'xyz'");
     } else {
-      setEmailErrorMessage("");
+      // Check for a dot before the top-level domain
+      const parts = value.split('.');
+      if (parts.length < 2 || parts[parts.length - 2].indexOf('@') === -1) {
+        setEmailErrorMessage("Email must have a '.' before the top-level domain");
+      } else {
+        setEmailErrorMessage("");
+      }
     }
   };
+  
 
   const handleSubmit = () => {
     if (email === "") {
