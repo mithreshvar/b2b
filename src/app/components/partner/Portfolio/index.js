@@ -5,12 +5,15 @@ import { useState } from "react";
 import CustomTable from "../PartnerHome/CustomTable.js";
 import { useDataContext } from "@/app/context/DataContext.js";
 import { RadioButtonUnchecked } from "@mui/icons-material";
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 function Portfolio() {
 
     const{addScheme, setAddScheme, portfolioData, savePortfolioData, addSchemeList, setAddSchemeList} = useDataContext();
 
     if (!portfolioData) return(<></>)
+    
+    const [searchOpen, setSearchOpen] = useState(true);
 
     const [showRatedSchemes, setShowRatedSchemes] = useState(false)
     const [showOnlyNFO, setShowOnlyNFO] = useState(false)
@@ -56,8 +59,8 @@ function Portfolio() {
     const [schemeClassificationErrorMessage, setSchemeClassificationErrorMessage] = useState('')
     const [schemeNameErrorMessage, setSchemeNameErrorMessage] = useState('')
 
-    const selectAMCOptions = ['Value 1', 'Value 2', 'Value 3']
-    const schemeClassificationOptions = ['Value 1', 'Value 2', 'Value 3']
+    const selectAMCOptions = ['HDFC Mutual Funds', 'Axis Bank Mutual Fund', 'SBI Mutual Fund','IDBI Bank','IDBI First Bank Limited','Canara Bank','Nippon Life India Assets']
+    const schemeClassificationOptions = ['All','Debit','Equity','Gold','Hybrid','Liquid','Others']
 
     const handleAMCChange = (event) => {
         const value = event.target.value;
@@ -141,18 +144,24 @@ function Portfolio() {
                     (!addScheme) ?
                     <>
                         {/* Search Box */}
-                        <div className=" flex flex-col gap-y-[20px] bg-white p-[20px] rounded-[15px]">
+                        <div className={` flex ${searchOpen ? ' flex-col ' : ' justify-between items-center'} gap-y-[20px] bg-white p-[20px] rounded-[15px]`}>
                             <h4 className="text-[20px] font-semibold">Create Partner Portfolio</h4>
-                            <div className="flex flex-col gap-y-[20px]">
-                                <div className="flex gap-x-[50px]">
-                                    <CustomSelectField id="investorDomicileType" label='Investor Domicile Type' errorMessage={investorErrorMessage} value={investorDomicileType} handleChange={ handleInvestorChange } valueOptions={investorOptions} />
-                                    <CustomTextField id="portfolioName" label='Portfolio Name' errorMessage={portfolioErrorMessage} value={portfolioName} handleChange={handlePortfolioChange}/>
+
+                            {(!searchOpen) ?
+                                <button onClick={()=>setSearchOpen(true)}><p className=" font-medium text-[14px] text-[#0066CD] flex items-center gap-x-[5px] "><AddCircleRoundedIcon className="text-[10px]" />Add Portfolio</p></button>
+                            :
+                            <>
+                                <div className="flex flex-col gap-y-[20px]">
+                                    <div className="flex gap-x-[50px]">
+                                        <CustomSelectField id="investorDomicileType" label='Investor Domicile Type' errorMessage={investorErrorMessage} value={investorDomicileType} handleChange={ handleInvestorChange } valueOptions={investorOptions} />
+                                        <CustomTextField id="portfolioName" label='Portfolio Name' errorMessage={portfolioErrorMessage} value={portfolioName} handleChange={handlePortfolioChange}/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex gap-x-[20px] mt-[10px] text-[14px] font-bold">
-                                <button onClick={()=>{handleSave()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Save</button>
-                                <button onClick={()=>{}} className='w-[128px] h-[40px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '>Cancel</button>
-                            </div>
+                                <div className="flex gap-x-[20px] mt-[10px] text-[14px] font-bold">
+                                    <button onClick={()=>{handleSave()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Save</button>
+                                    <button onClick={()=>{setSearchOpen(false)}} className='w-[128px] h-[40px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '>Cancel</button>
+                                </div>
+                            </>}
                         </div>
                         
                         <div className=" bg-white rounded-[15px]">
@@ -164,7 +173,7 @@ function Portfolio() {
 
                         {/* Search Box */}
                         <div className=" flex flex-col gap-y-[20px] bg-white p-[20px] rounded-[15px]">
-                            <h4 className="text-[20px] font-semibold">Domestic Investor : Nri - Small can Funds</h4>
+                            <h4 className="text-[20px] font-semibold">Domestic Investor : Nri - Small cap Funds</h4>
                             <div className="flex flex-col gap-y-[20px]">
                                 <div className="flex gap-x-[50px]">
                                     <CustomSelectField id="amc" label='Select AMC' errorMessage={selectAMCErrorMessage} value={selectAMC} handleChange={handleAMCChange} valueOptions={selectAMCOptions} />
@@ -173,7 +182,7 @@ function Portfolio() {
                                 <CustomTextField id="schemeName" label='Enter scheme Full/Partial Name' errorMessage={schemeNameErrorMessage} value={schemeName} handleChange={handleSchemeNameChange}/>
                             </div>
                             <div className="flex gap-x-[20px] mt-[10px] text-[14px] font-bold">
-                                <button onClick={()=>{ }} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Save</button>
+                                <button onClick={()=>{ }} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
                             </div>
                         </div>
 

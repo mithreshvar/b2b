@@ -82,7 +82,7 @@ export default CustomSelectField;
 const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
 
     return (
-        <div>
+        <div className="relative">
             <TextField
                 id={`${props.label}-input`}
                 label={props.label}

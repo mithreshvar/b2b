@@ -49,7 +49,7 @@ export default function Contact() {
                                     <Image src={office} className="w-[16px] h-[20px]" />
                                     <h5>Head Office</h5>
                                 </div>
-                                <p className="ml-[30px] mt-[10px]"><span className="font-semibold">wealth India Financial Services Pvt. Ltd.,</span> <br/> 3rd Floor, Uttam Building, No. 38 and 39, Whites Road, Royapettah.<br/> Chennai - 600014.</p>
+                                <p className="ml-[30px] mt-[10px]"><span className="font-semibold">Wealth India Financial Services Pvt. Ltd.,</span> <br/> 3rd Floor, Uttam Building, No. 38 and 39, Whites Road, Royapettah.<br/> Chennai - 600014.</p>
                             </div>
                             <div>
                                 <div className="flex items-center gap-x-[15px] text-primary font-bold ">
