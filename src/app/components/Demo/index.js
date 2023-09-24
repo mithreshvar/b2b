@@ -61,6 +61,14 @@ export default function Demo() {
         }
     };
 
+    function handleSchedule() {
+        if (name == '') setNameErrorMessage('Name cannot be empty')
+        if (email == '') setEmailErrorMessage('Email cannot be empty')
+        if (mobile == '') setMobileErrorMessage('Mobile Number cannot be empty')
+        if (emailErrorMessage === '' && nameErrorMessage === '' && mobileErrorMessage === '' && name != '' && email != '' && mobile != '' )
+        setScheduled(true);
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <div className="flex min-h-screen flex-col items-center justify-center px-[150px] mt-[-100px] ">
@@ -101,7 +109,7 @@ export default function Demo() {
                                     />
                                 </div>
                             </div>
-                            <button onClick={()=>{setScheduled(true)}} className="bg-primary h-[40px] w-[180px] rounded-[25px] text-white text-[14px] font-bold">SCHEDULE DEMO</button>
+                            <button onClick={handleSchedule} className="bg-primary h-[40px] w-[180px] rounded-[25px] text-white text-[14px] font-bold">SCHEDULE DEMO</button>
                         </div>
                         :
                         <div className=" w-[960px] h-[240px] flex flex-col mt-[20px] p-[30px] gap-y-[7px] items-center shadow-lg rounded-[15px]">

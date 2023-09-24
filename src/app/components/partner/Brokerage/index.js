@@ -51,6 +51,9 @@ function Brokerage() {
          }
       }
       const openTable=()=>{
+        if (amc == '') setAmcErrorMessage("Select an AMC")
+        if (schemeCategory == '') setSchemeCategoryErrorMessage("Select an Scheme Category")
+        if (amcErrorMessage=='' && schemeCategoryErrorMessage == '' && amc != '' && schemeCategory != '')
            setShowTable(true);
       }
 
@@ -69,7 +72,7 @@ function Brokerage() {
                         <button className="w-[144px] h-[40px] mt-[20px] rounded-[25px] bg-[#0071E7] text-[#FFFFFF] text-[14px] flex  items-center justify-center" onClick={openTable}><p>Show Brokerage</p></button>
                 </div>
             </div>{showTable&&
-            <div className="m-[20px]">
+            <div className="mt-[20px]">
                 <CustomTable headers={['Scheme Name', 'From', 'To', 'T1Y', 'T2Y', 'T3Y', 'T4Y', 'T5Y Onwards', 'TaddB30']} data={data} />
             </div>
              }
