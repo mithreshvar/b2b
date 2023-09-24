@@ -26,7 +26,8 @@ export default function TableRow ({data , setActive, type}) {
 
     function handleSelect() {
         if (selected == false) {
-            setAddSchemeList([...addSchemeList, data])
+            let newData = [data[0], 5, (Math.random()*10).toFixed(2), (Math.random()*100 % 20).toFixed(2), (Math.random()*100 % 20).toFixed(2)]
+            setAddSchemeList([...addSchemeList, newData])
             // console.log(addSchemeList.length)
             setSelected(true)
         }
