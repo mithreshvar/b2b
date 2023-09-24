@@ -37,6 +37,7 @@ export default function HomePage() {
   const modal = searchParams.get('modal');
   const [route, setRoute] = useState(tab || 'Home');
   const [login, setLogin] = useState(false);
+  const [subscribed, setSubscribed] = useState(false)
 
   // Email input
   const [email, setEmail] = useState('');
@@ -58,6 +59,9 @@ export default function HomePage() {
   const handleSubmit = () => {
     if (email === "") {
       setEmailErrorMessage("Email cannot be empty");
+    }
+    else if (emailErrorMessage === '') {
+      setSubscribed(true);
     }
   }
 
@@ -127,11 +131,11 @@ export default function HomePage() {
                 </div>
                 <div className='text-[14px] flex flex-col gap-y-[18px]'>
                   <h6 className='font-bold text-[16px] mb-[10px]'>Quick Links</h6>
-                  <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
+                  <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px] cursor-pointer'>
                     <Image src={bulletin} className='h-[6px] w-[6px]'/>
                     <p onClick={() => handleRoute('terms')}>Terms and Conditions</p>
                   </div>
-                  <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px]'>
+                  <div div className='flex gap-x-[10px] font-medium text-primary items-center pl-[5px] cursor-pointer'>
                     <Image src={bulletin} className='h-[6px] w-[6px]'/>
                     <p onClick={() => handleRoute('policy')}>Privacy Policy</p>
                   </div>
@@ -141,8 +145,17 @@ export default function HomePage() {
               <div className='flex flex-col gap-y-[30px]'>
                 <h6 className='font-semibold text-[16px] '>Subscribe to our Newsletter</h6>
                 <div className='flex gap-x-[20px]'>
-                  <CustomTextField id='email' label='Email' type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} width='304px' />
-                  <button onClick={handleSubmit} className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
+                  {
+                    (subscribed) ?
+                    <>
+                      <p className='font-medium text-[14px] text-[#42B092] w-[442px]'>Your mail has been subscribed !</p>
+                    </>
+                    :
+                    <>
+                      <CustomTextField id='email' label='Email' type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} width='304px' />
+                      <button onClick={handleSubmit} className='bg-primary w-[118px] h-[40px] rounded-[25px] text-white text-[14px] font-bold' >Subscribe</button>
+                    </>
+                  }
                 </div>
                 <div className='flex flex-col gap-y-[10px]'>
                   <h6 className='text-[16px] font-semibold'>Follow us on</h6>

@@ -210,6 +210,7 @@ function Login() {
   const [issueDateErrorMessage, setIssueDateErrorMessage] = useState('');
   const [expiryDateErrorMessage, setExpiryDateErrorMessage] = useState('');
   const [statusErrorMessage, setStatusErrorMessage] = useState('');
+  const [forgotPassword, setForgotPassword] = useState(false)
 
 
   // Event handlers
@@ -394,19 +395,38 @@ function Login() {
         
         (
           <div className="w-[481px] font-medium text-[14px] mt-[82px]">
-            <div>
-            This login is restricted to <span className="font-bold">Partners</span> only
-            If you are an investor and wish to access your account, please <a href="#" className="text-primary">click here</a>
-            </div>
+            {
+              (forgotPassword == 'submitted') ?
+                <p className="text-[18px] font-semibold mb-[310px]">Please Check your mail for reseting your password !</p>
+              :
+                <>
+                {
+                  (forgotPassword == 'forgot') ?
+                    <p>Enter your Email Address</p>
+                  :
+                    <div>
+                    This login is restricted to <span className="font-bold">Partners</span> only
+                    If you are an investor and wish to access your account, please <a href="#" className="text-primary">click here</a>
+                    </div>
+                }
 
-            <div className="py-[20px] flex flex-col gap-x-[20px]">
-              <div className="flex gap-[30px] flex-col">
-                <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
-                <CustomPasswordField label="Password" type="password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
-              </div>
-              <a href="#" className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forgot password?</a>
-            </div>
-
+                <div className="py-[20px] flex flex-col gap-x-[20px]">
+                  <div className="flex gap-[30px] flex-col">
+                    <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
+                    {
+                      (!forgotPassword) &&
+                      <CustomPasswordField label="Password" type="password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
+                    }
+                  </div>
+                  {
+                    (!forgotPassword) ?
+                      <a href="#" onClick={()=> setForgotPassword('forgot')} className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forgot password?</a>
+                    :
+                      <button onClick={()=>setForgotPassword(false)} className="font-medium text-right mr-[101px] text-primary mt-[25px]">Go Back</button>
+                  }
+                </div>
+                </>
+            }
           </div>
         ) :
         
@@ -531,11 +551,18 @@ function Login() {
         )}
 
         {/* Submit */}
-        <Link href={isLogin === "login" ? "partner?tab=home" : "#"} >
-          <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
-            {isLogin === "login" ? "Login" : "Submit"}
-          </button>
-        </Link>
+        {
+          (forgotPassword != 'submitted') && (
+          (forgotPassword == 'forgot') ?
+            <button className='bg-primary w-[230px] h-[50px] mt-[190px] mb-[15px] text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] ' onClick={()=>setForgotPassword('submitted')}>Submit</button>
+          :
+            <Link href={isLogin === "login" ? "partner?tab=home" : "#"} >
+              <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
+                {isLogin === "login" ? "Login" : "Submit"}
+              </button>
+            </Link>
+          )
+        }
 
       </>
       
