@@ -17,7 +17,7 @@ function Dashboard() {
                         <div className="bg-white w-[calc((100%-20px)/2)] h-[300px] rounded-[15px] p-[20px] flex flex-col gap-[10px] items-center font-bold">
                             <p>AUM Inflow</p>
                             <DoughnutChart 
-                                totalName="Total Value"
+                                totalName="Total AUM"
                                 data = {
                                     [
                                         { name: "name1", value: 20000 },
@@ -30,7 +30,7 @@ function Dashboard() {
                         <div className="bg-white w-[calc((100%-20px)/2)] h-[300px] rounded-[15px] p-[20px] flex flex-col gap-[10px] items-center font-bold">
                             <p>SIP Inflow</p>
                             <DoughnutChart 
-                                totalName="Total Value"
+                                totalName="Total SIP"
                                 data = {
                                     [
                                         { name: "name1", value: 20000 },
@@ -51,7 +51,7 @@ function Dashboard() {
                         <div className="bg-white w-[calc((100%-40px)/3)] h-[300px] rounded-[15px] p-[20px] flex flex-col gap-[10px] items-center font-bold">
                             <p>AUM Inflow</p>
                             <DoughnutChart 
-                                totalName="Total Value"
+                                totalName="Total Asset Inflow"
                                 data = {
                                     [
                                         { name: "name1", value: 20000 },
@@ -64,14 +64,13 @@ function Dashboard() {
                         <div className="bg-white w-[calc((100%-40px)/3)] h-[300px] rounded-[15px] p-[20px] flex flex-col gap-[10px] items-center font-bold">
                             <p>Redemption</p>
                             <DoughnutChart 
-                                totalName="Total Value"
                                 data = {[]}
                             />
                         </div>
                         <div className="bg-white w-[calc((100%-40px)/3)] h-[300px] rounded-[15px] p-[20px] flex flex-col gap-[10px] items-center font-bold">
                             <p>SIP Inflow</p>
                             <DoughnutChart 
-                                totalName="Total Value"
+                                totalName="Total SIP Inflow"
                                 data = {
                                     [
                                         { name: "name1", value: 80000 },

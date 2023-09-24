@@ -41,15 +41,23 @@ function DoughnutChart({ data, totalName }) {
 
   // Set the title conditionally
   const chartTitle =
-    sortedData.length === 0
-      ? `<div style="text-align: center; font-family: 'Poppins';">
+    sortedData.length === 0 ? 
+        `<div style="text-align: center; font-family: 'Poppins';">
             <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">No Records </div>
         </div>`
-      : `<div style="text-align: center; font-family: 'Poppins';">
+      :
+    totalName.length >= 10 ?
+        `<div style="text-align: center; font-family: 'Poppins'; width: 50px; ">
             <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">${totalName}</div>
-            <br>
+            <br/>
             <div style="font-size: 14px; font-weight: bold;">&#8377; ${totalValue.toLocaleString("en-In")}</div>
-        </div>`;
+        </div>`
+        :
+        `<div style="text-align: center; font-family: 'Poppins'; width: 50px; ">
+            <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">${totalName}</div>
+            <div style="font-size: 14px; font-weight: bold;">&#8377; ${totalValue.toLocaleString("en-In")}</div>
+        </div>`
+        ;
 
   const [options, setOptions] = useState({
     chart: {
@@ -59,6 +67,8 @@ function DoughnutChart({ data, totalName }) {
     },
     title: {
       text: chartTitle,
+      x: 75,
+      width: 150,
       verticalAlign: "middle",
       y: 15,
       floating: true,
