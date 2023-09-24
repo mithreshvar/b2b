@@ -99,7 +99,7 @@ function Dashboard() {
                         </div>
                         <div className="bg-white w-[calc((100%-10px)*1/3)] h-[101px] leading-none rounded-[15px] p-[25px] flex items-start font-medium">
                             <div className="flex flex-col w-[calc((100%-10px)/2)] gap-[10px] border-r-[1px] border-gray-200">
-                                <p>SIP's setup this month</p>
+                                <p className="w-[150px]">SIP's setup this month</p>
                                 <p className="text-[26px] font-bold">0</p>
                             </div>
                             <div className="flex flex-col w-[calc((100%-10px)/2)] gap-[10px] pl-[30px] ">
@@ -110,6 +110,7 @@ function Dashboard() {
                     </div>
                 </>
             }
+            <p className="mt-[120px] font-medium"><strong>Disclaimer:</strong> The AUM inflow data is as of the previous day. The redemption data does not account for STP or Switch transaction. <br/> Transfer-in Partner's data may vary.</p>
         </div>
     );
 }
