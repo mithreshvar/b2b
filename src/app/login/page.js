@@ -10,6 +10,7 @@ import { useSearchParams } from 'next/navigation'
 import { CustomSelectField, CustomTextField, CustomDatePicker, CustomPasswordField} from "../components/InputFields";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import dayjs from "dayjs";
 
 // Create a reusable AddressFields component
 function AddressFields({ stateOptions, setValueObject, isCorrespondenceAddress }) {
@@ -218,13 +219,16 @@ function Login() {
   const [mobileNumberErrorMessage, setMobileNumberErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [nameErrorMessage, setNameErrorMessage] = useState('');
+  const [dobErrorMessage, setDobErrorMessage] = useState('');
   const [panNumberErrorMessage, setPanNumberErrorMessage] = useState('');
   const [arnNumberErrorMessage, setArnNumberErrorMessage] = useState('');
   const [issueDateErrorMessage, setIssueDateErrorMessage] = useState('');
   const [expiryDateErrorMessage, setExpiryDateErrorMessage] = useState('');
   const [statusErrorMessage, setStatusErrorMessage] = useState('');
-  const [forgotPassword, setForgotPassword] = useState(false)
+  const [forgotPassword, setForgotPassword] = useState(false);
 
+  const minDob = dayjs().subtract(110, 'year');
+  const maxDob = dayjs().subtract(18, 'year');
 
   // Event handlers
   const handleIsLoginChange = (event) => {
@@ -239,6 +243,12 @@ function Login() {
 
   const handleIsIndividualChange = (event) => {
     setIsIndividual(event.target.value);
+    if (isIndividual !== "individual" && (dob && dayjs(dob).isBefore(minDob) || dayjs(dob).isAfter(maxDob))) {
+      setDobErrorMessage('DOB must be between 18 and 110 years ago.');
+    } 
+    else {
+      setDobErrorMessage('');
+    }
   };
 
   const handleIsCorrespondenceChange = () => {
@@ -304,9 +314,17 @@ function Login() {
     }
   };
   
-  const handleDobChange = (date) => {
-    setDob(date);
-  }
+  const handleDobChange = (newDate) => {
+
+    if (isIndividual === "individual" && (newDate && dayjs(newDate).isBefore(minDob) || dayjs(newDate).isAfter(maxDob))) {
+      setDobErrorMessage('DOB must be between 18 and 110 years ago.');
+    } 
+    else {
+      setDobErrorMessage('');
+    }
+
+    setDob(newDate);
+  };
   
   const handleContactNoOfficeChange = (event) => {
     const value = event.target.value;
@@ -473,7 +491,7 @@ function Login() {
 
               <div className="pt-[20px] pb-[25px] flex flex-wrap gap-y-[30px] gap-x-[50px]">
                 <CustomTextField label="Name" type="text" value={name} errorMessage={nameErrorMessage} handleChange={handleNameChange} />
-                <CustomDatePicker label="Date Of Birth / incorporation" value={dob} handleChange={handleDobChange} disableFuture={true} />
+                <CustomDatePicker label="Date Of Birth / incorporation" value={dob} handleChange={handleDobChange} disableFuture={true} errorMessage={dobErrorMessage} />
                 <CustomTextField label="PAN Number" type="text" value={panNumber} errorMessage={panNumberErrorMessage} handleChange={handlePanNumberChange} />
                 <CustomTextField label="Email" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
                 <CustomTextField label="Mobile Number" value={mobileNumber} type={"number"} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
