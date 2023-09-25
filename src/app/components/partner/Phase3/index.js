@@ -6,7 +6,7 @@ function phase3() {
     <div className="p-[20px]" >
       <div className="w-full h-[469px] bg-white p-[20px] rounded-[20px]  ">
         <div className="text-[20px] font-semibold leading-[20px]">Phase 3</div>
-        <div className="flex flex-col h-[259px] items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center h-full">
           <div className="w-[169px]">
             <Image src={IPhase3}/>
           </div>
