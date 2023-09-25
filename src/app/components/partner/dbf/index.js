@@ -2,11 +2,41 @@ import { useState } from 'react'
 import Tick from 'public/callback/successmark.png';
 import Image from 'next/image';
 import { CustomDatePicker } from '../../InputFields';
+import dayjs from 'dayjs';
 
 function dbf() {
   const[success, setSuccess] = useState(false);
-  const[fromdate,setFromdate] = useState();
-  const[todate,setTodate] = useState();
+  const[fromDate,setFromDate] = useState();
+  const[toDate,setToDate] = useState();
+
+  const [fromDateErrorMessage, setFromDateErrorMessage] = useState('');
+  const [toDateErrorMessage, setToDateErrorMessage] = useState('');
+
+  // Calculate the minimum allowed date as 60 days ago using dayjs
+  const today = dayjs();
+  const minDate = today.subtract(60, 'day').toDate();
+
+  const handleFromDateChange = (newDate) => {
+    // Check if the selected date is before the minimum allowed date
+    if (newDate && dayjs(newDate).isBefore(minDate, 'day')) {
+      setFromDateErrorMessage('Cannot select before 60 days from today.');
+    } else {
+      setFromDateErrorMessage('');
+    }
+
+    setFromDate(newDate);
+  };
+
+  const handleToDateChange = (newDate) => {
+    // Check if the selected date is before the minimum allowed date
+    if (newDate && fromDate && dayjs(newDate).isBefore(fromDate, 'day')) {
+      setToDateErrorMessage('To date should be after From Date');
+    } else {
+      setToDateErrorMessage('');
+    }
+
+    setToDate(newDate);
+  };
 
   return (
     <div className='p-[20px]'>
@@ -21,9 +51,9 @@ function dbf() {
         {
         (!success)?
         <>
-        <div className='flex gap-[50px] pb-[20px]'>
-          <CustomDatePicker label="From Date" value={fromdate} setValue={setFromdate} disableFuture={true}  />
-          <CustomDatePicker label="To Date" value={todate} setValue={setTodate} disableFuture={true}/>
+        <div className='flex gap-[50px] pb-[30px]'>
+          <CustomDatePicker label="From Date" value={fromDate} handleChange={handleFromDateChange} disableFuture={true} errorMessage={fromDateErrorMessage} />
+          <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />
         </div>
 
         <button className='w-[108px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px]' onClick={()=>setSuccess(true)}>

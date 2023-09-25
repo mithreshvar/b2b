@@ -20,9 +20,8 @@ function Dashboard() {
                                 totalName="Total AUM"
                                 data = {
                                     [
-                                        { name: "name1", value: 20000 },
-                                        { name: "name2", value: 80000 },
-                                        { name: "name3", value: 30000 },
+                                        { name: "Equity", value: 20000 },
+                                        { name: "Debt", value: 80000 },
                                     ]
                                 }
                             />
@@ -33,8 +32,8 @@ function Dashboard() {
                                 totalName="Total SIP"
                                 data = {
                                     [
-                                        { name: "name1", value: 20000 },
-                                        { name: "name3", value: 30000 },
+                                        { name: "Equity", value: 20000 },
+                                        { name: "Debt", value: 30000 },
                                       ]
                                 }
                             />
@@ -54,9 +53,9 @@ function Dashboard() {
                                 totalName="Total Asset Inflow"
                                 data = {
                                     [
-                                        { name: "name1", value: 20000 },
-                                        { name: "name2", value: 40000 },
-                                        { name: "name3", value: 30000 },
+                                        { name: "Debt", value: 20000 },
+                                        { name: "Equity", value: 40000 },
+                                        { name: "Hybrid", value: 30000 },
                                     ]
                                 }
                             />
@@ -73,9 +72,9 @@ function Dashboard() {
                                 totalName="Total SIP Inflow"
                                 data = {
                                     [
-                                        { name: "name1", value: 80000 },
-                                        { name: "name2", value: 60000 },
-                                        { name: "name3", value: 30000 },
+                                        { name: "Equity", value: 80000 },
+                                        { name: "Debt", value: 60000 },
+                                        { name: "Hybrid", value: 30000 },
                                     ]
                                 }
                             />

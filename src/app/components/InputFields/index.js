@@ -3,6 +3,7 @@ import { IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, TextFi
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
+import dayjs from 'dayjs';
 
 const CustomSelectField = ({ width = '380px', height = '40px',...props }) => {
   const [open, setOpen] = useState(false);
@@ -154,54 +155,61 @@ const CustomPasswordField = ({ width = "380px", height="40px", ...props}) => {
         )
 }
 
-const CustomDatePicker = ({ width = "380px", height = "40px", ...props}) => {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-                id={`${props.label}-input`}
-                label={props.label}
-                format="DD MMM YYYY"
-                value={props.value}
-                onChange={(newDate) => props.setValue(newDate)}
-                showDaysOutsideCurrentMonth={true}
-                dayOfWeekFormatter={(day) => {
-                    switch(day){
-                    case "Su":
-                        return "Sun";
-                    case "Mo":
-                        return "Mon";
-                    case "Tu":
-                        return "Tue";
-                    case "We":
-                        return "Wed";
-                    case "Th":
-                        return "Thu";
-                    case "Fr":
-                        return "Fri";
-                    case "Sa":
-                        return "Sat";
-                    }
-                }}
-                sx={
-                    {
-                        width: width,
-                        '& .MuiInputBase-root': {
-                            height: height,
-                        }
-                    }
-                }
-                slots={{
-                    openPickerIcon: () => (
-                    <CalendarMonth sx={{ width: '20px', height: '20px', color: 'primary.main' }} />
-                    ),
-                }}
-                PopperProps={{
-                    sx: {'&.MuiPickersPopper-root': {border: '4px solid red'},},
-                }}
-                {...props}
-            />
-        </LocalizationProvider>
-    )
-}
+const CustomDatePicker = ({ width = "380px", height = "40px", ...props }) => {
+  return (
+    <div>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          id={`${props.label}-input`}
+          label={props.label}
+          format="DD MMM YYYY"
+          value={props.value}
+          onChange={props.handleChange}
+          onBlur={props.handleChange}
+          showDaysOutsideCurrentMonth={true}
+          dayOfWeekFormatter={(day) => {
+            switch (day) {
+              case "Su":
+                return "Sun";
+              case "Mo":
+                return "Mon";
+              case "Tu":
+                return "Tue";
+              case "We":
+                return "Wed";
+              case "Th":
+                return "Thu";
+              case "Fr":
+                return "Fri";
+              case "Sa":
+                return "Sat";
+            }
+          }}
+          sx={{
+            width: width,
+            '& .MuiInputBase-root': {
+              height: height,
+            }
+          }}
+          slots={{
+            openPickerIcon: () => (
+              <CalendarMonth sx={{ width: '20px', height: '20px', color: 'primary.main' }} />
+            ),
+          }}
+          PopperProps={{
+            sx: { '&.MuiPickersPopper-root': { border: '4px solid red' } },
+          }}
+          {...props}
+        />
+      </LocalizationProvider>
+      {
+        props.errorMessage  !== "" ? 
+        <div className="absolute mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">{props.errorMessage}</div> 
+        : 
+        <></>
+      }
+    </div>
+  );
+};
 
 export {CustomSelectField, CustomTextField, CustomDatePicker, CustomPasswordField};

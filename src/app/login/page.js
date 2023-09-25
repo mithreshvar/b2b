@@ -91,7 +91,7 @@ function AddressFields({ stateOptions, setValueObject, isCorrespondenceAddress }
     setState(value);
   
     if (value === "") {
-      setStateErrorMessage("State cannot be empty");
+      setStateErrorMessage(""); //!Should be changed
     } else {
       setStateErrorMessage("");
     }
@@ -168,7 +168,7 @@ function AddressFields({ stateOptions, setValueObject, isCorrespondenceAddress }
       <CustomTextField label="Address Line 2" width="810px" value={addressLine2} errorMessage={addressLine2ErrorMessage} handleChange={handleAddressLine2Change} />
       <CustomTextField label="Address Line 3" width="810px" value={addressLine3} errorMessage={addressLine3ErrorMessage} handleChange={handleAddressLine3Change} />
       <CustomTextField label="City" value={city} handleChange={handleCityChange} errorMessage={cityErrorMessage} />
-      <CustomSelectField label="State" value={state} setValue={setState} valueOptions={stateOptions} handleChange={handleStateChange} />
+      <CustomSelectField label="State" value={state} valueOptions={stateOptions} handleChange={handleStateChange} errorMessage={stateErrorMessage} />
       <CustomTextField label="Pincode" value={pincode} errorMessage={pincodeErrorMessage} handleChange={handlePincodeChange} />
       
       {isCorrespondenceAddress &&
@@ -304,6 +304,9 @@ function Login() {
     }
   };
   
+  const handleDobChange = (date) => {
+    setDob(date);
+  }
   
   const handleContactNoOfficeChange = (event) => {
     const value = event.target.value;
@@ -387,7 +390,7 @@ function Login() {
   };
   
 
-  const states = ['Kerala', 'Tamil andu'];
+  const states = ['Kerala', 'Tamil Nadu'];
 
   return (
     <ThemeProvider theme={theme}>
@@ -422,12 +425,12 @@ function Login() {
         (
           <div className="w-[481px] font-medium text-[14px] mt-[82px]">
             {
-              (forgotPassword == 'submitted') ?
+              (forgotPassword === 'submitted') ?
                 <p className="text-[18px] font-semibold mb-[310px]">Please Check your mail for reseting your password !</p>
               :
                 <>
                 {
-                  (forgotPassword == 'forgot') ?
+                  (forgotPassword === 'forgot') ?
                     <p>Enter your Email Address</p>
                   :
                     <div>
@@ -470,11 +473,11 @@ function Login() {
 
               <div className="pt-[20px] pb-[25px] flex flex-wrap gap-y-[30px] gap-x-[50px]">
                 <CustomTextField label="Name" type="text" value={name} errorMessage={nameErrorMessage} handleChange={handleNameChange} />
-                <CustomDatePicker label="Date Of Birth / incorporation" value={dob} setValue={setDob} disableFuture={true} />
+                <CustomDatePicker label="Date Of Birth / incorporation" value={dob} handleChange={handleDobChange} disableFuture={true} />
                 <CustomTextField label="PAN Number" type="text" value={panNumber} errorMessage={panNumberErrorMessage} handleChange={handlePanNumberChange} />
                 <CustomTextField label="Email" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
-                <CustomTextField label="Mobile Number" value={mobileNumber} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
-                <CustomTextField label="Contact No. Office" value={contactNoOffice} errorMessage={contactNoOfficeErrorMessage} handleChange={handleContactNoOfficeChange} />
+                <CustomTextField label="Mobile Number" value={mobileNumber} type={"number"} errorMessage={mobileNumberErrorMessage} handleChange={handleMobileNumberChange} />
+                <CustomTextField label="Contact No. Office" value={contactNoOffice} type={"number"} errorMessage={contactNoOfficeErrorMessage} handleChange={handleContactNoOfficeChange} />
             </div>
 
             <div className="flex flex-col gap-y-[20px] gap-x-[50px]">
@@ -526,8 +529,8 @@ function Login() {
                 </div>
                 <div className="flex flex-wrap gap-x-[50px] gap-y-[30px]">
                   <CustomTextField label="ARN Number" type="text" value={arnNumber} errorMessage={arnNumberErrorMessage} handleChange={handleArnNumberChange} />
-                  <CustomDatePicker label="Issue Date" value={issueDate} setValue={setIssueDate} />
-                  <CustomDatePicker label="Expiry Date" value={expiryDate} setValue={setExpiryDate} />
+                  <CustomDatePicker label="Issue Date" value={issueDate} handleChange={handleIssueDateChange} />
+                  <CustomDatePicker label="Expiry Date" value={expiryDate} handleChange={handleExpiryDateChange} />
                   <CustomTextField label="Status" type="text" value={status} errorMessage={statusErrorMessage} handleChange={handleStatusChange} />
                 </div>
 
