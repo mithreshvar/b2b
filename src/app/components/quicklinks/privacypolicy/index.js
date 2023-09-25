@@ -34,57 +34,57 @@ function PrivacyPolicy() {
           <ul className='w-[100%] min-h-screen text-[18px] font-medium space-y-[50px]'>
             {
               (active==1)?
-              <li className='border-[#0071E7] border-b-[2px] pb-[15px]'>What We Collect</li>
+              <li className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>What We Collect</li>
               :
-              <li onClick={()=>{setActive(1);handleClickScroll(1)}}>What We Collect</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(1);handleClickScroll(1)}}>What We Collect</li>
             }
             {
               (active==2)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>Aadhar User Consent Policy</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>Aadhar User Consent Policy</li>
               :
-              <li onClick={()=>{setActive(2);handleClickScroll(2)}}>Aadhar User Consent Policy</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(2);handleClickScroll(2)}}>Aadhar User Consent Policy</li>
             }
             {
               (active==3)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>Security</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>Security</li>
               :
-              <li onClick={()=>{setActive(3);handleClickScroll(3)}}>Security</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(3);handleClickScroll(3)}}>Security</li>
             }
             {
               (active==4)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>How We Use Cookies</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>How We Use Cookies</li>
               :
-              <li onClick={()=>{setActive(4);handleClickScroll(4)}}>How We Use Cookies</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(4);handleClickScroll(4)}}>How We Use Cookies</li>
             }
             {
               (active==5)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>Links to Other Websites</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>Links to Other Websites</li>
               :
-              <li onClick={()=>{setActive(5);handleClickScroll(5)}}>Links to Other Websites</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(5);handleClickScroll(5)}}>Links to Other Websites</li>
             }
             {
               (active==6)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>Controlling Your Personal Information</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>Controlling Your Personal Information</li>
               :
-              <li onClick={()=>{setActive(6);handleClickScroll(6)}}>Controlling Your Personal Information</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(6);handleClickScroll(6)}}>Controlling Your Personal Information</li>
             }
             {
               (active==7)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>Security Certificates</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>Security Certificates</li>
               :
-              <li onClick={()=>{setActive(7);handleClickScroll(7)}}>Security Certificates</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(7);handleClickScroll(7)}}>Security Certificates</li>
             }
             {
               (active==8)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>When it Comes To Data Security, Our Goal is to Ensure that</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>When it Comes To Data Security, Our Goal is to Ensure that</li>
               :
-              <li onClick={()=>{setActive(8);handleClickScroll(8)}}>When it Comes To Data Security, Our Goal is to Ensure that</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(8);handleClickScroll(8)}}>When it Comes To Data Security, Our Goal is to Ensure that</li>
             }
             {
               (active==9)?
-              <li  className='border-[#0071E7] border-b-[2px] pb-[15px]'>Each of the Seals Below are Verified Daily, and they Hold a Specific Meaning</li>
+              <li  className='border-[#0071E7] border-b-[2px] pb-[15px] cursor-pointer'>Each of the Seals Below are Verified Daily, and they Hold a Specific Meaning</li>
               :
-              <li onClick={()=>{setActive(9);handleClickScroll(9)}}>Each of the Seals Below are Verified Daily, and they Hold a Specific Meaning</li>
+              <li className='cursor-pointer' onClick={()=>{setActive(9);handleClickScroll(9)}}>Each of the Seals Below are Verified Daily, and they Hold a Specific Meaning</li>
             }
           </ul>
       </div>

@@ -20,7 +20,7 @@ function about() {
         {
         (!success)?
         <div className='flex flex-col gap-[20px]'>
-          <CustomTextField type='text' width='100%' height='194px' multiline value={About} handleChange={handleAboutChange}/>
+          <textarea className='h-[200px] border-[1px] rounded-[25px] p-[10px] px-[20px]' value={About} handleChange={handleAboutChange} />
 
         <button className='w-[128px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px]' onClick={()=>setSuccess(true)}>
         Submit
