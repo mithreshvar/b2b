@@ -23,7 +23,7 @@ import IRegistration from '/public/partner/Registration';
 import IReports from '/public/partner/Reports';
 import ITripartite from '/public/partner/Tripartite';
 import IPhase3 from '/public/partner/Phase3';
-import rrkLogo from '/public/rrklogo/rrklogo@2x.png';
+// import rrkLogo from '/public/rrklogo/rrklogo@2x.png';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 // import back from '/public/partner/back.svg'
@@ -114,7 +114,7 @@ export default function Content() {
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
                             <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
-                            <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' />
+                            {/* <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' /> */}
                         </div>
 
                         <div className='flex gap-x-[30px] items-center'>

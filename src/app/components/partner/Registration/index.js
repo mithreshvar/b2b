@@ -1,9 +1,9 @@
-import { TextField } from '@mui/material'
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import {CustomTextField} from "../../../components/InputFields";
 import { useState } from 'react'
-import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
+import { MuiPhone } from './MuiPhone';
 
 function Registration() {
 
@@ -18,14 +18,46 @@ function Registration() {
   const[name,setName] = useState('');
   const[mobilenumber,setMobilenumber] = useState('');
 
-  const handleNameChange = (event) => {
-    const value = event.target.value;
-    setName(value);
-  }
+  const [nameErrorMessage, setNameErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
   const handleEmailChange = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-  }
+        const value = event.target.value;
+        setEmail(value);
+      
+        if (value === "") {
+          setEmailErrorMessage("Email cannot be empty");
+        } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+          setEmailErrorMessage("Invalid email format");
+        } else if (value.indexOf('@') === -1 || value.indexOf('@') !== value.lastIndexOf('@')) {
+          setEmailErrorMessage("Email must contain exactly one '@'");
+        } else if (value.endsWith('.') || value.endsWith('@')) {
+          setEmailErrorMessage("Email cannot end with a dot or '@'");
+        } else if (value.includes('notprovided') || value.includes('Noemail') || value.includes('xyz')) {
+          setEmailErrorMessage("Email cannot contain 'notprovided', 'Noemail', or 'xyz'");
+        } else {
+          // Check for a dot before the top-level domain
+          const parts = value.split('.');
+          if (parts.length < 2 || parts[parts.length - 2].indexOf('@') === -1) {
+            setEmailErrorMessage("Email must have a '.' before the top-level domain");
+          } else {
+            setEmailErrorMessage("");
+          }
+        }
+      };
+      
+
+      const handleNameChange = (event) => {
+        const value = event.target.value;
+        setName(value);
+        if (!(value.length >= 2 && value.length <= 50)) {
+          setNameErrorMessage("Name should be of min. 2 and max. 50 length");
+        } else if (!/^[A-Za-z]+$/.test(value)) {
+          setNameErrorMessage("Name can contain only alphabets");
+        } else {
+          setNameErrorMessage("");
+        }
+      };
 
   return (
     <div className='p-[20px]'>
@@ -35,11 +67,25 @@ function Registration() {
         <div className='text-[20px] font-semibold pb-[20px]'>
           Account Creation
         </div>
-        <div className='grid gap-[20px] grid-cols-2'>
-          <CustomTextField type='email' label="Email" width="380px" height='40px' value={email}  handleChange={handleEmailChange} />
-          <CustomTextField type='text' label="Name" width="380px" height='40px' value={name} setValue={setName} handleChange={handleNameChange} />
+        <div className='grid gap-[30px] grid-cols-2'>
+          <CustomTextField type='email' label="Email" width="380px" height='40px' value={email}  handleChange={handleEmailChange} errorMessage={emailErrorMessage} />
+          <CustomTextField type='text' label="Name" width="380px" height='40px' value={name} setValue={setName} handleChange={handleNameChange} errorMessage={nameErrorMessage} />
           {/* <TextField  type='tel' label='Mobile Number' id='mobilenumber'/> */}
-          <PhoneInput style={{borderRadius: '10px', width: '380px'}} defaultCountry="in" value={mobilenumber} onChange={(mobilenumber) => setMobilenumber(mobilenumber)}/>
+          <MuiPhone 
+            style={{
+              borderRadius: '10px',
+              width: '380px',
+            }} 
+            sx={
+              {
+                  '& .MuiInputBase-root': {
+                      height: '40px',
+                  }
+              }
+            }
+            value={mobilenumber} 
+            onChange={(mobilenumber) => setMobilenumber(mobilenumber)}
+          />
         </div>
           
         <div className='text-[14px] font-medium text-[#6E6E72] pt-[15px] pb-[20px]'>
