@@ -18,6 +18,14 @@ function Registration() {
   const[name,setName] = useState('');
   const[mobilenumber,setMobilenumber] = useState('');
 
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+  }
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  }
 
   return (
     <div className='p-[20px]'>
@@ -28,8 +36,8 @@ function Registration() {
           Account Creation
         </div>
         <div className='grid gap-[20px] grid-cols-2'>
-          <CustomTextField label="Email" width="380px" height='40px' value={email}   />
-          <CustomTextField label="Name" width="380px" height='40px' value={name}   />
+          <CustomTextField type='email' label="Email" width="380px" height='40px' value={email}  handleChange={handleEmailChange} />
+          <CustomTextField type='text' label="Name" width="380px" height='40px' value={name} setValue={setName} handleChange={handleNameChange} />
           {/* <TextField  type='tel' label='Mobile Number' id='mobilenumber'/> */}
           <PhoneInput style={{borderRadius: '10px', width: '380px'}} defaultCountry="in" value={mobilenumber} onChange={(mobilenumber) => setMobilenumber(mobilenumber)}/>
         </div>
@@ -43,13 +51,13 @@ function Registration() {
       </div>
       :
       <div>
-        <div className='w-[990px] h-[84px] bg-white p-[20px] rounded-[15px]'>
+        <div className='w-full h-[84px] bg-white p-[20px] rounded-[15px]'>
           <div className='text-[20px] font-semibold'>Account Type</div>
           <div className='text-[#6E6E72] text-[14px] font-medium'>To Create an Account please click on relevant Button below.</div>
         </div>
-        <div className='grid gap-[20px] grid-cols-2 pt-[20px] pr-[20px] '>
+        <div className='grid gap-[20px] grid-cols-2 pt-[20px]'>
 
-          <div className='w-[485px] h-[180px] bg-white rounded-[15px] p-[20px]'>
+          <div className=' bg-white rounded-[15px] p-[20px]'>
             <div className='text-[18px] font-semibold leading-[18px]'>
             Resident Individual
             </div>
@@ -62,7 +70,7 @@ function Registration() {
             </button>
           </div>
 
-          <div className='w-[485px] h-[180px] bg-white rounded-[15px] p-[20px]'>
+          <div className=' bg-white rounded-[15px] p-[20px]'>
             <div className='text-[18px] font-semibold leading-[18px] '>
             Non Resident Individual
             </div>
@@ -75,7 +83,7 @@ function Registration() {
             </button>
           </div>
 
-          <div className='w-[485px] h-[228px] bg-white rounded-[15px] p-[20px]'>
+          <div className=' bg-white rounded-[15px] p-[20px]'>
             <div className='text-[18px] font-semibold leading-[18px] '>
             Minor
             </div>
@@ -88,7 +96,7 @@ function Registration() {
             </button>
           </div>
 
-          <div className='w-[485px] h-[228px] bg-white rounded-[15px] p-[20px]'>
+          <div className=' bg-white rounded-[15px] p-[20px]'>
             <div className='text-[18px] font-semibold leading-[18px] '>
             Corporates / HUF
             </div>
