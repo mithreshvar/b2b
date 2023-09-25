@@ -38,6 +38,13 @@ function dbf() {
     setToDate(newDate);
   };
 
+  function handleDownload () {
+    if (fromDate == null) setFromDateErrorMessage('From date can not be empty');
+    if (toDate == null) setToDateErrorMessage('To date can not be empty');
+    else if (fromDateErrorMessage == '' && toDateErrorMessage == '' && fromDate != null && toDate != null )
+      setSuccess(true)
+  }
+
   return (
     <div className='p-[20px]'>
     
@@ -56,7 +63,7 @@ function dbf() {
           <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />
         </div>
 
-        <button className='w-[108px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px]' onClick={()=>setSuccess(true)}>
+        <button className='w-[108px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px]' onClick={handleDownload}>
         Download
         </button>
         </>
