@@ -133,13 +133,13 @@ export default function PartnerHome ({setActive}) {
                         <div className=" flex flex-col gap-y-[20px] bg-white p-[20px] rounded-[15px]">
                             <h4 className="text-[20px] font-semibold">Investor Search</h4>
                             <div className="flex gap-x-[50px]">
-                                <div className="flex flex-col gap-y-[20px]">
+                                <div className="flex flex-col gap-y-[30px]">
                                     <CustomTextField id="userName" label='User Name' type="text" errorMessage={nameErrorMessage} value={name} handleChange={handleNameChange} />
                                     <CustomTextField id="mobileNumber" label='Mobile Number' type="number" errorMessage={numberErrorMessage} value={number} handleChange={ handleNumberChange } />
                                 </div>
                                 <CustomTextField id="userEmail" label='User Email' type="text" errorMessage={emailErrorMessage} value={email} handleChange={handleEmailChange}/>
                             </div>
-                            <div className="flex gap-x-[20px] text-[14px] font-bold">
+                            <div className="flex gap-x-[20px] text-[14px] mt-[10px] font-bold">
                                 <button onClick={()=>{filterData()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
                                 <button onClick={()=>{}} className='w-[128px] h-[40px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '>Download</button>
                             </div>

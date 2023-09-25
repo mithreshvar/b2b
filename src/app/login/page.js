@@ -246,6 +246,7 @@ function Login() {
   };
 
   const handleSubmit = () => {
+    if (isLogin === 'login') {router.push('/partner?tab=home'); return;}
     setIsSubmitted( isLogin==='register'? true : null);
     console.log('Submit clicked');
   
@@ -585,11 +586,9 @@ function Login() {
           (forgotPassword == 'forgot') ?
             <button className='bg-primary w-[230px] h-[50px] mt-[190px] mb-[15px] text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] ' onClick={()=>setForgotPassword('submitted')}>Submit</button>
           :
-            <Link href={isLogin === "login" ? "partner?tab=home" : "#"} >
-              <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
-                {isLogin === "login" ? "Login" : "Submit"}
-              </button>
-            </Link>
+            <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
+              {isLogin === "login" ? "Login" : "Submit"}
+            </button>
           )
         }
 

@@ -21,7 +21,7 @@ function PrivacyPolicy() {
           </div>
           <br/><br/>
           <div className="text-[16px] font-medium leading-[20px]">
-          This privacy policy sets out how Funds ndiaPartner and Wealth India Financial Services Pvt. Ltd. (WIFS) uses and protects an information that vou share<br/><br/> when vou use tais doolcaron.<br/>virS Is committed to ensuring that your privacy is protected at all times. Should we ask you to provide certain information by which you can be identitied<br/><br/> when using this application, you can be assured that it will only be used in accordance with this privacy statement WIES mav change this policy from time to time ov updating this page. This policy is effective from March 1. 2022
+          This privacy policy sets out how Funds IndiaPartner and Wealth India Financial Services Pvt. Ltd. (WIFS) uses and protects an information that vou share<br/><br/> when vou use tais doolcaron.<br/>virS Is committed to ensuring that your privacy is protected at all times. Should we ask you to provide certain information by which you can be identitied<br/><br/> when using this application, you can be assured that it will only be used in accordance with this privacy statement WIES mav change this policy from time to time ov updating this page. This policy is effective from March 1. 2022
           </div>
       </div>
       <div className="w-[50%] p-[63px]">
