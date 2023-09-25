@@ -5,9 +5,11 @@ import theme from '../../../theme.js'
 import Table from "./Table.js";
 import { useEffect, useState } from "react";
 import Arrow from "/public/partner/Arrow.js";
+import Logo from '/public/Logo.json'
+import Lottie, { useLottie } from "lottie-react";
 
 
-export default function CustomTable({data, headers, setActive, pagination, headerStyle}) {
+export default function CustomTable({data, headers, setActive, pagination=true, headerStyle}) {
 
     function splitData (data) {
         let data10 = [];
@@ -36,6 +38,11 @@ export default function CustomTable({data, headers, setActive, pagination, heade
     useEffect(()=>{
         splitData(data)
     },[data])
+
+    useEffect(()=> {
+        setLoading(true);
+        setTimeout(()=>setLoading(false), 1500)
+    }, [])
 
     const [frontActive, setFrontActive] = useState(false);
     const [backActive, setBackActive] = useState(true);
@@ -67,62 +74,71 @@ export default function CustomTable({data, headers, setActive, pagination, heade
         if(n == 0) setFrontActive(false);
         else setFrontActive(true);
     }
+
+    const [loading, setLoading] = useState(true)
+
     
     return(
-        <ThemeProvider theme={theme} >
-            {/* Table content */}
-            <Table headers={headers} tenData={dividedData[pageNo]} setActive={setActive} headerStyle={headerStyle} />
 
-            {/* Page Number Navigator */}
-            {
-                (pagination) &&
-                <div className="flex items-center justify-center" >
+        (loading) ?
+            <div className={` bg-white p-[20px] rounded-[15px] ${(headers[0] == 'S.No')?' h-[300px] ':' h-[600px] '}`}>
+                <Lottie animationData={Logo} lopp={true} className="h-full" />
+            </div>
+            :
+            <ThemeProvider theme={theme} >
+                {/* Table content */}
+                <Table headers={headers} tenData={dividedData[pageNo]} setActive={setActive} headerStyle={headerStyle} />
 
-                    <div className="flex gap-x-[30px] leading-[20px] font-medium text-[14px] items-center">
+                {/* Page Number Navigator */}
+                {
+                    (pagination) &&
+                    <div className="flex items-center justify-center" >
 
-                        {/* Previous Button */}
-                        <button className={`flex items-center gap-x-[5px] ${frontActive ? 'cursor-pointer' : 'cursor-default'}`} 
-                            onClick={ () => {
-                                if(frontActive) { 
-                                    setPageNo(pageNo-1);
-                                    pageUpdate(pageNo-1);
-                                    if(pageNo-1 == 0) setFrontActive(false);
-                                    setBackActive(true) 
-                                }
-                            }}
-                        >
-                            <Arrow active={frontActive} left={true} />
-                            <p className={` ${frontActive?"text-[#0071e7]":"text-[#6e6e72]"} `} >Previous</p>
-                        </button>
+                        <div className="flex gap-x-[30px] leading-[20px] font-medium text-[14px] items-center">
 
-                        <div className="flex items-center font-medium">
-                            <button onClick={()=>pageNoClick(0)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == 0 && dividedDataLength>1) && 'text-white bg-primary'} `}>{1}</button>
-                            <button className={`h-[35px] w-[35px] flex items-center justify-center cursor-default ${ (pageNo<3 || dividedDataLength<=4) && 'hidden ' } `}>...</button>
-                            <button onClick={()=>pageNoClick(pageArray[0]-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == pageArray[0]-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=1) && 'hidden ' } `}>{pageArray[0]}</button>
-                            <button onClick={()=>pageNoClick(pageArray[1]-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == pageArray[1]-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=2) && 'hidden ' } `}>{pageArray[1]}</button>
-                            <button onClick={()=>pageNoClick(pageArray[2]-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == pageArray[2]-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=3) && 'hidden ' } `}>{pageArray[2]}</button>
-                            <button className={`h-[35px] w-[35px] flex items-center justify-center cursor-default ${ (pageNo>dividedDataLength-4 || dividedDataLength<=4) && 'hidden ' } `}>...</button>
-                            <button onClick={()=>pageNoClick(dividedDataLength-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == dividedDataLength-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=4) && 'hidden ' } `}>{dividedDataLength}</button>
+                            {/* Previous Button */}
+                            <button className={`flex items-center gap-x-[5px] ${frontActive ? 'cursor-pointer' : 'cursor-default'}`} 
+                                onClick={ () => {
+                                    if(frontActive) { 
+                                        setPageNo(pageNo-1);
+                                        pageUpdate(pageNo-1);
+                                        if(pageNo-1 == 0) setFrontActive(false);
+                                        setBackActive(true) 
+                                    }
+                                }}
+                            >
+                                <Arrow active={frontActive} left={true} />
+                                <p className={` ${frontActive?"text-[#0071e7]":"text-[#6e6e72]"} `} >Previous</p>
+                            </button>
+
+                            <div className="flex items-center font-medium">
+                                <button onClick={()=>pageNoClick(0)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == 0 && dividedDataLength>1) && 'text-white bg-primary'} `}>{1}</button>
+                                <button className={`h-[35px] w-[35px] flex items-center justify-center cursor-default ${ (pageNo<3 || dividedDataLength<=4) && 'hidden ' } `}>...</button>
+                                <button onClick={()=>pageNoClick(pageArray[0]-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == pageArray[0]-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=1) && 'hidden ' } `}>{pageArray[0]}</button>
+                                <button onClick={()=>pageNoClick(pageArray[1]-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == pageArray[1]-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=2) && 'hidden ' } `}>{pageArray[1]}</button>
+                                <button onClick={()=>pageNoClick(pageArray[2]-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == pageArray[2]-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=3) && 'hidden ' } `}>{pageArray[2]}</button>
+                                <button className={`h-[35px] w-[35px] flex items-center justify-center cursor-default ${ (pageNo>dividedDataLength-4 || dividedDataLength<=4) && 'hidden ' } `}>...</button>
+                                <button onClick={()=>pageNoClick(dividedDataLength-1)} className={`h-[35px] w-[35px] cursor-pointer flex items-center justify-center rounded-[7px] ${(pageNo == dividedDataLength-1) && 'text-white bg-primary'} ${ ( dividedDataLength<=4) && 'hidden ' } `}>{dividedDataLength}</button>
+                            </div>
+                            
+                            {/* Next Button */}
+                            <button className={`flex items-center gap-x-[5px] ${backActive ? 'cursor-pointer' : 'cursor-default' }`} 
+                                onClick={ () => {
+                                    if(backActive) {
+                                        setPageNo(pageNo+1);
+                                        pageUpdate(pageNo+1);
+                                        if(pageNo+1 == dividedDataLength-1) setBackActive(false);
+                                        setFrontActive(true) 
+                                    }
+                                }}
+                            >
+                                <p className={` ${backActive?"text-[#0071e7]":"text-[#6e6e72]"} `} >Next</p>
+                                <Arrow active={backActive} />
+                            </button>
+                            
                         </div>
-                        
-                        {/* Next Button */}
-                        <button className={`flex items-center gap-x-[5px] ${backActive ? 'cursor-pointer' : 'cursor-default' }`} 
-                            onClick={ () => {
-                                if(backActive) {
-                                    setPageNo(pageNo+1);
-                                    pageUpdate(pageNo+1);
-                                    if(pageNo+1 == dividedDataLength-1) setBackActive(false);
-                                    setFrontActive(true) 
-                                }
-                            }}
-                        >
-                            <p className={` ${backActive?"text-[#0071e7]":"text-[#6e6e72]"} `} >Next</p>
-                            <Arrow active={backActive} />
-                        </button>
-                        
                     </div>
-                </div>
-            }
-        </ThemeProvider>
+                }
+            </ThemeProvider>
     );
 }

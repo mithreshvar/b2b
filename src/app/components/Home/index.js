@@ -6,6 +6,7 @@ import img1 from '/public/home/Group 483641/Group 483641@2x.png'
 import img2 from '/public/home/Group 498762/Group 498762@2x.png'
 import img3 from '/public/home/Group 498555/Group 498555@2x.png'
 import success from '/public/home/Group 405761/Group 405761@2x.png'
+import captchaImg from 'public/callback/captcha.png'
 import { useState } from 'react'
 
 import { ThemeProvider } from '@mui/material/styles';
@@ -31,28 +32,40 @@ export default function Home() {
     const handleEmailChange = (event) => {
         const value = event.target.value;
         setEmail(value);
-        //validations
+      
         if (value === "") {
-            setEmailErrorMessage("Email cannot be empty");
+          setEmailErrorMessage("Email cannot be empty");
         } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
-            setEmailErrorMessage("Invalid email format");
+          setEmailErrorMessage("Invalid email format");
+        } else if (value.indexOf('@') === -1 || value.indexOf('@') !== value.lastIndexOf('@')) {
+          setEmailErrorMessage("Email must contain exactly one '@'");
+        } else if (value.endsWith('.') || value.endsWith('@')) {
+          setEmailErrorMessage("Email cannot end with a dot or '@'");
+        } else if (value.includes('notprovided') || value.includes('Noemail') || value.includes('xyz')) {
+          setEmailErrorMessage("Email cannot contain 'notprovided', 'Noemail', or 'xyz'");
         } else {
+          // Check for a dot before the top-level domain
+          const parts = value.split('.');
+          if (parts.length < 2 || parts[parts.length - 2].indexOf('@') === -1) {
+            setEmailErrorMessage("Email must have a '.' before the top-level domain");
+          } else {
             setEmailErrorMessage("");
+          }
         }
-    };
+      };
+      
     
-    const handleNameChange = (event) => {
+      const handleNameChange = (event) => {
         const value = event.target.value;
         setName(value);
-        //validations
-        if (value === "") {
-            setNameErrorMessage("Name cannot be empty");
-        } else if (!/^[A-Za-z./s]+$/.test(value)) {
-            setNameErrorMessage("Invalid Name");
+        if (!(value.length >= 2 && value.length <= 50)) {
+          setNameErrorMessage("Name should be of min. 2 and max. 50 length");
+        } else if (!/^[A-Za-z]+$/.test(value)) {
+          setNameErrorMessage("Name can contain only alphabets");
         } else {
-            setNameErrorMessage("");
+          setNameErrorMessage("");
         }
-    };
+      };;
     
     const handleMobileChange = (event) => {
         const value = event.target.value;
@@ -83,8 +96,20 @@ export default function Home() {
     const handleCaptchaChange = (event) => {
         const value = event.target.value;
         setCaptcha(value);
+
+        if (value != 'd4d58') setCaptchaErrorMessage('Captcha is wrong');
+        else setCaptchaErrorMessage('')
     };
 
+    function handleSubmit () {
+        if(name == '') setNameErrorMessage("Name cannot be empty")
+        if (email == '') setEmailErrorMessage ("Email cannot be empty")
+        if (phone == '') setPhoneErrorMessage("Phone number cannot be empty")
+        if (mobile == '') setMobileErrorMessage("Mobile number cannot be empty")
+        if (captcha == '') setCaptchaErrorMessage("Captcha cannot be empty")
+        if (emailErrorMessage == '' && nameErrorMessage == '' && phoneErrorMessage == '' && mobileErrorMessage == '' && captchaErrorMessage == '' && name!='' && email != '' && phone != '' && mobile != '' && captcha != '')
+        setEmpannelSuccess(true)
+    }
 
 
     return (
@@ -97,7 +122,7 @@ export default function Home() {
                 <Image src={slider1} className='w-[525px] h-[555px]' />
             </div>
 
-            <div className="h-screen flex flex-col items-center justify-center px-[70px]">
+            <div className="h-[800px] flex flex-col items-center justify-center px-[70px]">
 
                 <h2 className="text-primary text-[35px] mb-[60px] font-bold">Connect <span className="text-black">and</span> Grow!</h2>
                 <div className="flex gap-x-[30px]">
@@ -122,14 +147,14 @@ export default function Home() {
                 
             </div>
 
-            <div className="h-screen flex items-center justify-center  px-[40px]">
+            <div className="h-[800px] flex items-center justify-center  px-[40px]">
             {
                 (!empannelSuccess) ?
                 <div className="w-[870px] h-[351px] flex flex-col p-[60px] pt-[50px] gap-y-[30px] rounded-[15px] shadow-lg items-center">
                     <h3 className=" text-[26px] font-semibold text-center">Empanel with us for <span className="text-primary">FREE!</span></h3>
                     <div className="flex gap-x-[50px]">
 
-                    <div className="flex flex-col gap-y-[25px] text-[14px]">
+                    <div className="flex flex-col gap-y-[30px] text-[14px]">
                         <CustomTextField
                             id='name' 
                             label="Name"
@@ -137,7 +162,6 @@ export default function Home() {
                             handleChange={handleNameChange}
                             type='text'
                             errorMessage={nameErrorMessage}
-                            sx={{width:'350px'}}
                         />
                         <CustomTextField 
                             id='email'
@@ -146,28 +170,29 @@ export default function Home() {
                             handleChange={handleEmailChange}
                             type='text'
                             errorMessage={emailErrorMessage}
-                            sx={{width:'350px'}}
                         />
-                        <CustomTextField 
-                            id='captcha'
-                            label="Captcha"
-                            value={captcha}
-                            handleChange={handleCaptchaChange}
-                            type='text'
-                            errorMessage={captchaErrorMessage}
-                            width='185px'
-                        />
+                        <div className='flex gap-x-[20px]'>
+                            <CustomTextField 
+                                id='captcha'
+                                label="Captcha"
+                                value={captcha}
+                                handleChange={handleCaptchaChange}
+                                type='text'
+                                errorMessage={captchaErrorMessage}
+                                width='185px'
+                            />
+                            <Image src={captchaImg} className='w-[144px] h-[36px]' />
+                        </div>
 
                     </div>
-                    <div className="flex flex-col gap-y-[25px] text-[14px]">
+                    <div className="flex flex-col gap-y-[30px] text-[14px]">
                         <CustomTextField 
                             id='mobile'
                             label="Mobile Number"
                             value={mobile}
                             handleChange={handleMobileChange}
                             type='number'
-                            errorMessage={mobileErrorMessage}
-                            sx={{width:'350px'}} 
+                            errorMessage={mobileErrorMessage} 
                         />
                         <CustomTextField
                             id='phone' 
@@ -176,9 +201,8 @@ export default function Home() {
                             handleChange={handlePhoneChange}
                             type='number'
                             errorMessage={phoneErrorMessage}
-                            sx={{width:'350px'}}
                         />
-                        <button onClick={()=>{setEmpannelSuccess(true)}} className="bg-primary h-[40px] w-[165px] rounded-[25px] text-white font-bold self-end">Submit</button>
+                        <button onClick={handleSubmit} className="bg-primary h-[40px] w-[165px] rounded-[25px] text-white font-bold self-end">Submit</button>
 
                     </div>
 

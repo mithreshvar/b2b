@@ -13,9 +13,6 @@ import tick from '/public/callback/successmark.png';
 import { ThemeProvider } from '@mui/material/styles';
 import {CustomTextField} from "../../components/InputFields";
 import theme from "../../theme";
-import {
-    TextField,
-} from "@mui/material";
 import { useState } from "react";
 
 function callback() {
@@ -95,7 +92,7 @@ function callback() {
             </div>
 
             {/* Second page will be here */}
-            <div className="flex min-h-screen flex-col items-center justify-center font-poppins">
+            <div className="flex mt-[200px] flex-col items-center justify-center font-poppins">
                 <div className="items-center text-[35px] font-bold">
                     How it <span className="text-[#0071E7]">Works?</span>
                 </div>
@@ -149,7 +146,7 @@ function callback() {
 
             {/* 3rd page */}
 
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins">
+            <div className="flex mt-[118px] flex-row items-center justify-center font-poppins">
                 <div className="w-[50%]">
                     <div className="text-[20px] font-bold text-[#0071E7]">
                         With Fundsindiapartner<br/> Get Low Cost High Value Solutions
@@ -194,7 +191,7 @@ function callback() {
             </div>
 
             {/* 4th page */}
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
+            <div className="flex mt-[170px] flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%] p-[63px]">
                     <Image src={page4Img}/>
                 </div>
@@ -230,7 +227,7 @@ function callback() {
 
             {/* 5th page */}
 
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
+            <div className="flex mt-[122px] flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%]">
                     <div className="text-[20px] font-bold text-[#0071E7]">
                         With Fundsindiapartner<br/> Get Low Cost High Value Solutions
@@ -247,7 +244,7 @@ function callback() {
 
             {/* 6th page */}
 
-            <div className="flex min-h-screen flex-row items-center justify-center font-poppins ">
+            <div className="flex mt-[128px] flex-row items-center justify-center font-poppins ">
                 <div className="w-[50%] p-[63px]">
                     <Image src={page6Img}/>
                 </div>

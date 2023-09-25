@@ -5,6 +5,7 @@ import Image from "next/image";
 import email from '/public/Contact/Group 512412.svg'
 import phone from '/public/Contact/Group 512413.svg'
 import office from '/public/Contact/Group 512414.svg'
+import map from '/public/map/map@2x.png'
 
 export default function Contact() {
     return(
@@ -40,7 +41,7 @@ export default function Contact() {
             </div>
             <div className="h-screen flex items-center justify-center">
                 <div className="flex gap-x-[10px]">
-                    <div className="border-[2px] w-[410px] h-[438px]"></div>
+                    <Image src={map} className=" w-[410px] h-[438px]" />
                     <div className="self-end flex flex-col gap-y-[15px]">
                         <div className="bg-[#F3F8FC] p-[30px] text-[16px] rounded-r-[34px] flex flex-col gap-y-[30px]">
                             <div>
@@ -48,7 +49,7 @@ export default function Contact() {
                                     <Image src={office} className="w-[16px] h-[20px]" />
                                     <h5>Head Office</h5>
                                 </div>
-                                <p className="ml-[30px] mt-[10px]"><span className="font-semibold">wealth India Financial Services Pvt. Ltd.,</span> <br/> 3rd Floor, Uttam Building, No. 38 and 39, Whites Road, Royapettah.<br/> Chennai - 600014.</p>
+                                <p className="ml-[30px] mt-[10px]"><span className="font-semibold">Wealth India Financial Services Pvt. Ltd.,</span> <br/> 3rd Floor, Uttam Building, No. 38 and 39, Whites Road, Royapettah.<br/> Chennai - 600014.</p>
                             </div>
                             <div>
                                 <div className="flex items-center gap-x-[15px] text-primary font-bold ">

@@ -54,26 +54,40 @@ export default function PartnerHome ({setActive}) {
     const handleEmailChange = (event) => {
         const value = event.target.value;
         setEmail(value);
-        
-        //validations
-        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value) && value !== '') {
-            setEmailErrorMessage("Invalid email format");
+      
+        if (value === "") {
+          setEmailErrorMessage("Email cannot be empty");
+        } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(value)) {
+          setEmailErrorMessage("Invalid email format");
+        } else if (value.indexOf('@') === -1 || value.indexOf('@') !== value.lastIndexOf('@')) {
+          setEmailErrorMessage("Email must contain exactly one '@'");
+        } else if (value.endsWith('.') || value.endsWith('@')) {
+          setEmailErrorMessage("Email cannot end with a dot or '@'");
+        } else if (value.includes('notprovided') || value.includes('Noemail') || value.includes('xyz')) {
+          setEmailErrorMessage("Email cannot contain 'notprovided', 'Noemail', or 'xyz'");
         } else {
+          // Check for a dot before the top-level domain
+          const parts = value.split('.');
+          if (parts.length < 2 || parts[parts.length - 2].indexOf('@') === -1) {
+            setEmailErrorMessage("Email must have a '.' before the top-level domain");
+          } else {
             setEmailErrorMessage("");
+          }
         }
-    };
+      };
+      
 
-    const handleNameChange = (event) => {
+      const handleNameChange = (event) => {
         const value = event.target.value;
         setName(value);
-        
-        //validations
-        if (!/^[a-zA-Z0-9_-]+$/.test(value) && value !== '') {
-            setNameErrorMessage("Username can not contain special characters");
+        if (!(value.length >= 2 && value.length <= 50)) {
+          setNameErrorMessage("Name should be of min. 2 and max. 50 length");
+        } else if (!/^[A-Za-z]+$/.test(value)) {
+          setNameErrorMessage("Name can contain only alphabets");
         } else {
-            setNameErrorMessage("");
+          setNameErrorMessage("");
         }
-    };
+      };
 
     const handleNumberChange = (event) => {
         const value = event.target.value;
@@ -120,10 +134,10 @@ export default function PartnerHome ({setActive}) {
                             <h4 className="text-[20px] font-semibold">Investor Search</h4>
                             <div className="flex gap-x-[50px]">
                                 <div className="flex flex-col gap-y-[20px]">
-                                    <CustomTextField id="userName" label='User Name' sx={{width: '380px'}} type="text" errorMessage={nameErrorMessage} value={name} handleChange={handleNameChange} />
-                                    <CustomTextField id="mobileNumber" label='Mobile Number' sx={{width: '380px'}} type="number" errorMessage={numberErrorMessage} value={number} handleChange={ handleNumberChange } />
+                                    <CustomTextField id="userName" label='User Name' type="text" errorMessage={nameErrorMessage} value={name} handleChange={handleNameChange} />
+                                    <CustomTextField id="mobileNumber" label='Mobile Number' type="number" errorMessage={numberErrorMessage} value={number} handleChange={ handleNumberChange } />
                                 </div>
-                                <CustomTextField id="userEmail" label='User Email' sx={{width: '380px'}} type="text" errorMessage={emailErrorMessage} value={email} handleChange={handleEmailChange}/>
+                                <CustomTextField id="userEmail" label='User Email' type="text" errorMessage={emailErrorMessage} value={email} handleChange={handleEmailChange}/>
                             </div>
                             <div className="flex gap-x-[20px] text-[14px] font-bold">
                                 <button onClick={()=>{filterData()}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
@@ -131,17 +145,17 @@ export default function PartnerHome ({setActive}) {
                             </div>
                         </div>
 
-                        <CustomTable headers={['User Name', 'Email', 'Phone Number', 'Action']} data={tableData} setActive={setActive} />
+                        <CustomTable headers={['User Name', 'Email', 'Phone Number', 'Systematic Plans', 'Action']} data={tableData} setActive={setActive} />
                     </>
                     :
                     <>
                         <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
                             <h1 className="text-[20px] font-semibold">User Systematic Plan Details</h1>
                             <h4 className="text-[18px]  font-semibold">SIP Details</h4>
-                            <h6 className="text-[14px]  font-semibold">SIP-Paused</h6>
-                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} headerStyle={' font-medium '} />
+                            <h6 className="text-[14px]  font-semibold">Regular SIP</h6>
+                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} />
                             <h6 className="text-[14px]  font-semibold">ADVISORS SIP TRANSACTION</h6>
-                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} headerStyle={' font-medium '} />
+                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} />
 
                         </div>
                         <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
@@ -150,7 +164,7 @@ export default function PartnerHome ({setActive}) {
                             <CustomTable 
                                 headers={['VIP Reference ID', 'Folio', 'Scheme Name', 'Expected Return (%)', 'Paid/ Tot. Months', 'Next EGS/DD Date', 'Monthly Amount (Rs.)']}
                                 data={[['104476', '123/123451', 'Kotak Balance Advantage Fund-Reg(IDCW)', '12', '0/12', '-', '1,000.00']]}
-                                pagination={false} headerStyle={' font-medium '} />
+                                pagination={false} />
                         </div>
                     </>
                 }

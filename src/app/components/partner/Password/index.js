@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { CustomPasswordField, CustomTextField } from "../../InputFields";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-const Password = () => {
-
-    const router = useRouter();
+const Password = ({ setPasswordChangedPopup }) => {
 
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -40,6 +36,9 @@ const Password = () => {
         const value = event.target.value;
         setNewPassword(value);
         handlePasswordErrorCheck(value, setNewPasswordErrorMessage);
+        if (value === currentPassword ){
+            setNewPasswordErrorMessage("Current & New Password cannot be same!");
+        }
     }
 
     const handleConfirmPasswordChange = (event) => {
@@ -62,18 +61,14 @@ const Password = () => {
                 setConfirmPasswordErrorMessage("New password & Confirm password doesn't match");
             }
             else{
-                router.push("/?modal=password-updated");
+                setPasswordChangedPopup(true);
             }
         }
     }
 
-    const handleBack = () => {
-
-    }
-
     return (
         <div className="text-[14px] p-[20px]">
-            <div className="bg-[white] w-full rounded-[25px] p-[20px] flex flex-col gap-[20px]">
+            <div className="bg-[white] w-full rounded-[25px] p-[20px] flex flex-col gap-[30px]">
                 <p className="text-[20px] font-semibold">Change Password</p>
                 <div className="text-[16px]">
                     <span className="font-medium">User Id:</span>
@@ -84,10 +79,8 @@ const Password = () => {
                 <CustomPasswordField label="New Password (Minimum 8 Characters)" value={newPassword} handleChange={handleNewPasswordChange} errorMessage={newPasswordErrorMessage} />
                 <CustomPasswordField label="Confirm Password" value={confirmPassword} handleChange={handleConfirmPasswordChange} errorMessage={confirmPasswordErrorMessage} />
 
-                <div className="flex gap-[20px]">
-                    <button className="w-[108px] h-[40px] bg-[#0071E7] rounded-[25px] text-white font-semibold flex justify-center items-center" onClick={handleSubmit}>Submit</button>
-                    <button className="w-[108px] h-[40px] bg-white border-[1px] border-[#0071E7] rounded-[25px] text-[#0071E7] font-semibold flex justify-center items-center" onClick={handleBack}>Back</button>
-                </div>
+                <button className="w-[108px] h-[40px] bg-[#0071E7] rounded-[25px] text-white font-semibold flex justify-center items-center" onClick={handleSubmit}>Save</button>
+
             </div>
         </div>
     )
