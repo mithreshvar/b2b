@@ -256,7 +256,13 @@ function Login() {
   };
 
   const handleSubmit = () => {
-    if (isLogin === 'login') {router.push('/partner?tab=home'); return;}
+    if((email === "b2btest1@gmail.com" || email === "b2btest2@gmail.com" || email === "b2btest3@gmail.com") && password === "12345678"){
+      setPasswordErrorMessage("");
+      if (isLogin === 'login') {router.push('/partner?tab=dashboard'); return;}
+    }
+    else
+      setPasswordErrorMessage("Email ID or Password doesn't match!");
+
     setIsSubmitted( isLogin==='register'? true : null);
     console.log('Submit clicked');
   
@@ -463,7 +469,7 @@ function Login() {
                     <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
                     {
                       (!forgotPassword) &&
-                      <CustomPasswordField label="Password" type="password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
+                      <CustomPasswordField label="Password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
                     }
                   </div>
                   {

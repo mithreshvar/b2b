@@ -110,7 +110,7 @@ const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
 }
 
 const CustomPasswordField = ({ width = "380px", height="40px", ...props}) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 

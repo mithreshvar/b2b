@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Home from './components/Home'
-import Demo from './components/Demo';
 import Callback from './components/Callback';
 import Contact from './components/Contact';
 import WhyFundsIndiaPartner from './components/WhyFundsIndiaPartner'
@@ -104,7 +103,6 @@ export default function HomePage() {
             <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
               <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={() => handleRoute('Home')}>Home</h6>
               <h6 className={` cursor-pointer ${(route=='whyFIP')?'text-[#0066CD]':''}`} onClick={() => handleRoute('whyFIP')}>Why FundsIndiaPartner?</h6>
-              <h6 className={` cursor-pointer ${(route=='demo')?'text-[#0066CD]':''}`} onClick={() => handleRoute('demo')}>Demo</h6>
               <h6 className={'cursor-pointer '} ><Link href="/login?register=true">Register With Us</Link></h6>
               <h6 className={` cursor-pointer ${(route=='contact')?'text-[#0066CD]':''}`} onClick={() => handleRoute('contact')}>Contact us</h6>
               <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-primary text-white rounded-[25px]'>Login</button>
@@ -114,7 +112,6 @@ export default function HomePage() {
           {
             (route==='Home' && <Home/>) || 
             (route==='whyFIP' &&<WhyFundsIndiaPartner setRoute={setRoute}/>) || 
-            (route==='demo' && <Demo/>) ||
             (route==='contact' && <Contact />) || 
             (route==='callback' && <Callback />) ||
             (route==='terms' && <Termsandconditions />) ||
