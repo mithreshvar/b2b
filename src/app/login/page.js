@@ -258,7 +258,7 @@ function Login() {
   const handleSubmit = () => {
     if((email === "b2btest1@fundsindia.com" || email === "b2btest2@fundsindia.com" || email === "b2btest3@fundsindia.com") && password === "12345678"){
       setPasswordErrorMessage("");
-      if (isLogin === 'login') {router.push('/partner?tab=dashboard'); return;}
+      if (isLogin === 'login') {router.push('/partner'); return;}
     }
     else
       setPasswordErrorMessage("Email ID or Password doesn't match!");

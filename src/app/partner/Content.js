@@ -214,7 +214,7 @@ export default function Content() {
                         </div>
 
                         {/* page segment */}
-                        <div className='bg-[#F5F7FE] h-full w-[calc(100vw-250px)] z-0'>
+                        <div className='bg-[#F5F7FE] h-full w-[calc(100vw-250px)] overflow-auto z-0'>
 
                             {
                                 (active==='about' && <About /> )||

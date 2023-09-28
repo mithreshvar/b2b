@@ -60,11 +60,25 @@ function callback() {
                         <>
                             <div className="text-[26px] font-semibold mb-[20px] text-center leading-[20px]">Please tell us how to <span className="text-[#0071E7]">REACH YOU</span></div>
                             <div className="flex flex-col gap-y-[20px]">
-                                <CustomTextField type="text" label="Name" width="433px" height='40px' setValue={setName} value={name} handleChange={handleNameChange}/>
-                                <CustomTextField type="tel" label="Mobile Number" width="433px" height='40px' setValue={setMobileNumber} value={mobileNumber}  handleChange={handleMobileNumberChange}  />
-                                <CustomTextField type="tel" label="Phone Number" width="433px" height='40px' setValue={setPhoneNumber} value={phoneNumber} handleChange={handlePhoneNumberChange}  />
-                                <CustomTextField type="email" label="Email" width="433px" height='40px' setValue={setEmail} value={email} handleChange={handleEmailChange}  />
-                                <CustomTextField type="text" label="Comments" width="433px" height="80px" setValue={setComments} value={comments} handleChange={handleCommentsChange} />
+                                <CustomTextField type="text" label="Name" width="433px" height='40px' value={name} handleChange={handleNameChange}/>
+                                <CustomTextField type="tel" label="Mobile Number" width="433px" height='40px' value={mobileNumber}  handleChange={handleMobileNumberChange}  />
+                                <CustomTextField type="tel" label="Phone Number" width="433px" height='40px' value={phoneNumber} handleChange={handlePhoneNumberChange}  />
+                                <CustomTextField type="email" label="Email" width="433px" height='40px' value={email} handleChange={handleEmailChange}  />
+                                <CustomTextField type="text" label="Comments" width="433px" height="80px" value={comments} handleChange={handleCommentsChange} multiline 
+                                    sx={{
+                                        '& .MuiInputBase-root': {
+                                            width:"433px",
+                                            height:"80px",
+                                        },
+                                        '& .MuiInputBase-input': {
+                                            overflow: 'scroll !important',
+                                            width:"433px",
+                                            marginTop: '6px',
+                                            marginBottom: '4px',
+                                            height:"70px !important",
+                                        },
+                                    }} 
+                                />
                                 
                                 <div className="flex flex-row">
                                     <CustomTextField type="text" label="Verification Code" width="271px" setValue={setVerficationCode} value={verficationCode} handleChange={handleVerificationChange}/>        
@@ -98,7 +112,7 @@ function callback() {
                 </div>
                 <div className="flex gap-x-[44px] mt-[53px]">
 
-                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px]">
+                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px] bg-white">
                         <div className="h-[50%] flex items-center">
                             <Image className="w-[74px] h-[63px]" src={page2Img1} />
                         </div>
@@ -107,7 +121,7 @@ function callback() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px]">
+                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px] bg-white">
                         <div className="h-[50%] flex items-center">
                             <Image className="w-[64px] h-[66px]" src={page2Img2}/>
                         </div>
@@ -116,7 +130,7 @@ function callback() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px]">
+                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px] bg-white">
                         <div className="h-[50%] flex items-center">
                             <Image className="w-[73px] h-[51px]" src={page2Img3}/>
                         </div>
@@ -124,7 +138,7 @@ function callback() {
                         FundsindiaPartner generates user ids, documents for client signature
                         </div>
                     </div>
-                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px]">
+                    <div className="flex flex-col w-[237px] h-[239px] shadow-lg  rounded-[15px] items-center justify-center p-[20px] bg-white">
                         <div className="h-[50%] flex items-center">
                             <Image className="w-[57px] h-[73px]" src={page2Img4}/>
                         </div>
@@ -134,11 +148,11 @@ function callback() {
                     </div>
                 </div>
 
-                <div className="h-[187px] w-[1080px] shadow-lg mt-[60px] rounded-[15px]">
+                <div className="p-[30px] w-[1080px] shadow-lg mt-[60px] rounded-[15px] bg-white flex flex-col gap-y-[25px]">
                     <div className="text-center font-bold text-[30px] text-[#0071E7]">
                     Connect <span className="text-[#000000]">and</span> Grow!
                     </div>
-                    <div className="mt-[31px] mb-[30px] ml-[38px] mr-[37px] text-[16px] text-center">
+                    <div className="text-[16px] text-center">
                     FundsindiaPartner lets you connect with your clients across geographical regions, offering them products across the investment spectrum, giving them the best of both worlds - your planning & advice along with access to cutting-edge technology and services.Direct your browser to www.partner.fundsindia.com and get the online advantage to grow your business exponentially
                     </div>
                 </div>

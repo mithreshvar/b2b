@@ -16,22 +16,22 @@ export default function Contact() {
                 <div>
                     <h3 className="text-[24px] font-extrabold mt-[70px] ">Escalation <span className="text-primary">Matrix</span></h3>
                     <div className="flex gap-x-[24px] mt-[30px] items-center justify-center " >
-                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px]">
+                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px] bg-white">
                             <h6 className="font-semibold text-[16px]">Level</h6>
                             <h2 className="font-extrabold text-[35px] text-primary ">01</h2>
                             <p className="text-[14px] font-semibold">Any queries related to FIP should be raised as a ticket to <span className="text-primary">contactpartner@fundsindia.com</span> Based on the queries solution & responses will be given within 24hrs.</p>
                         </div>
-                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px]">
+                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px] bg-white">
                             <h6 className="font-semibold text-[16px]">Level</h6>
                             <h2 className="font-extrabold text-[35px] text-primary ">02</h2>
                             <p className="text-[14px] font-semibold">Give us a call on <span className="text-primary">044 - 61104100</span> with your issue. We will get back to you within 24 business hours.</p>
                         </div>
-                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px]">
+                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px] bg-white">
                             <h6 className="font-semibold text-[16px]">Level</h6>
                             <h2 className="font-extrabold text-[35px] text-primary ">03</h2>
                             <p className="text-[14px] font-semibold">If you are not getting any response as per the TAT you can reach out to <span className="text-primary">partnerescalation@fundsindia.com</span></p>
                         </div>
-                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px]">
+                        <div className="w-[275px] h-[235px] shadow-lg py-[15px] px-[10px] rounded-[15px] bg-white">
                             <h6 className="font-semibold text-[16px]">Level</h6>
                             <h2 className="font-extrabold text-[35px] text-primary ">04</h2>
                             <p className="text-[14px] font-semibold">Escalation to top management, if all these steps have failed to address your problem.You can lodge a complaint with top management at <span className="text-primary">partnergrievance@fundsindia.com</span></p>

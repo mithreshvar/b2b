@@ -10,21 +10,21 @@ function Brokerage() {
     const [schemeCategoryErrorMessage,setSchemeCategoryErrorMessage]=useState("");
     const [showTable,setShowTable]=useState(false);
     let data = [
-        ['HDFC Arbitrage-WP(G)', '01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Develoned World Indexes FoF-ReaG','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Arbitrage-WP(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Develoned World Indexes FoF-ReaG','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Arbitrage-WP(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Develoned World Indexes FoF-ReaG','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Arbitrage-WP(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29' ],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29'],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29'],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29'],
-        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29', '0.29', '0.29','0.29','0.29','0.29']
+        ['HDFC Arbitrage-WP(G)', '01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Develoned World Indexes FoF-ReaG','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Arbitrage-WP(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Develoned World Indexes FoF-ReaG','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Arbitrage-WP(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Develoned World Indexes FoF-ReaG','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Arbitrage-WP(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29' ],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29'],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29'],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29'],
+        ['HDFC Credit Risk Debt Fund-(G)','01/07/2023', '30/09/2023', '0.29']
 
     ]
 
@@ -73,7 +73,7 @@ function Brokerage() {
                 </div>
             </div>{showTable&&
             <div className="mt-[20px]">
-                <CustomTable headers={['Scheme Name', 'From', 'To', 'T1Y', 'T2Y', 'T3Y', 'T4Y', 'T5Y Onwards', 'TaddB30']} data={data} />
+                <CustomTable headers={['Scheme Name', 'From', 'To', 'Trail']} data={data} />
             </div>
              }
         </div>

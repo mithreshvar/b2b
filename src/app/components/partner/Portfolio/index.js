@@ -138,7 +138,7 @@ function Portfolio() {
 
     return (
         <ThemeProvider theme={theme} >
-            <div className='flex flex-col h-full gap-y-[20px] overflow-scroll p-[20px] pb-[100px]'>
+            <div className='flex flex-col h-full gap-y-[20px] p-[20px] pb-[100px]'>
 
                 {
                     (!addScheme) ?
