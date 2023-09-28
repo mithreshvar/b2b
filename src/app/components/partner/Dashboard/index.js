@@ -16,7 +16,7 @@ function Dashboard() {
     return (
         <div className="p-[20px] text-[14px]">
             <div className="flex gap-[20px] mb-[20px] text-[16px]">
-                <div className="bg-white w-[calc((100%-40px)*2/3)] h-[300px] rounded-[15px] p-[20px] flex font-bold">
+                <div className="bg-white w-[calc((100%-20px)*2/3)] h-[300px] rounded-[15px] p-[20px] flex font-bold">
                     <div className="flex flex-col w-[50%] gap-[10px] items-center border-r-[1px] border-r-[rgba(112, 112, 112, 0.1)]">
                         <p>Gross - Inflow</p>
                         <DoughnutChart 
