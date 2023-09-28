@@ -150,7 +150,7 @@ export default function Home() {
             <div className="h-[800px] flex items-center justify-center  px-[40px]">
             {
                 (!empannelSuccess) ?
-                <div className="w-[870px] h-[351px] flex flex-col p-[60px] pt-[50px] gap-y-[30px] rounded-[15px] shadow-lg items-center">
+                <div className=" flex flex-col p-[60px] pt-[50px] gap-y-[30px] rounded-[15px] shadow-lg items-center bg-white">
                     <h3 className=" text-[26px] font-semibold text-center">Empanel with us for <span className="text-primary">FREE!</span></h3>
                     <div className="flex gap-x-[50px]">
 
