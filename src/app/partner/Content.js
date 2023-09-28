@@ -14,7 +14,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import IDashboard from '/public/partner/Dashboard.js'
 import IAbout from '/public/partner/About.js'
 import IBrokerage from '/public/partner/Brokerage.js'
-import IDbf from '/public/partner/Dbf.js'
 import IHome from '/public/partner/Home.js'
 import IManual from '/public/partner/Manual.js'
 import IPassword from '/public/partner/Password.js'
@@ -32,7 +31,6 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import Dashboard from '../components/partner/Dashboard';
 import Registration from '../components/partner/Registration';
 import Report from '../components/partner/Report';
-import Dbf from '../components/partner/Dbf'
 import About from '../components/partner/About';
 import Phase3 from '../components/partner/Phase3';
 import Manual from '../components/partner/Manual';
@@ -162,7 +160,7 @@ export default function Content() {
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'registration' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('registration')}}><IRegistration active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='registration' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('registration')}} >New User Registration</h6>
+                                <h6 className={`cursor-pointer ${active==='registration' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('registration')}} >New Client Registration</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative '>
@@ -187,12 +185,6 @@ export default function Content() {
                                 {active === 'brokerage' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('brokerage')}}><IBrokerage active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='brokerage' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('brokerage')}} >Brokerage Details</h6>
-                            </div>
-
-                            <div className='flex gap-x-[14px] items-center relative '>
-                                {active === 'dbf' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('dbf')}}><IDbf active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='dbf' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('dbf')}} >DBF File Download</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative '>
@@ -228,7 +220,6 @@ export default function Content() {
                                 (active==='about' && <About /> )||
                                 (active==='brokerage' && <Brokerage /> )||
                                 (active==='dashboard' && <Dashboard /> )||
-                                (active==='dbf' && <Dbf /> )||
                                 (active==='home' && <PartnerHome setActive={setActive}/> )||
                                 (active==='manual' && <Manual /> )||
                                 (active==='password' && <Password setPasswordChangedPopup={setPasswordChangedPopup} /> )||
