@@ -26,6 +26,7 @@ function Dashboard() {
                                     { name: "Debt", value: 20000 },
                                     { name: "Equity", value: 40000 },
                                     { name: "Hybrid", value: 30000 },
+                                    { name: "Commodity", value: 5000 },
                                 ]
                             }
                         />
@@ -147,7 +148,7 @@ function Dashboard() {
                     <>
                         <div className="flex flex-col w-[calc((100%-10px)/2)] gap-[10px] border-r-[1px] border-gray-200">
                             <p className="w-[150px]">SIP's setup this month</p>
-                            <p className="text-[26px] font-bold">0</p>
+                            <p className="text-[26px] font-bold">1</p>
                         </div>
                         <div className="flex flex-col w-[calc((100%-10px)/2)] gap-[10px] pl-[30px] ">
                             <p>SIP expiring in Next 30 days</p>
@@ -169,11 +170,11 @@ function Dashboard() {
                     <>
                         <div className="flex flex-col w-[calc((100%-10px)/2)] gap-[10px] border-r-[1px] border-gray-200">
                             <p className="w-[150px]">SWP's setup this month</p>
-                            <p className="text-[26px] font-bold">0</p>
+                            <p className="text-[26px] font-bold">2</p>
                         </div>
                         <div className="flex flex-col w-[calc((100%-10px)/2)] gap-[10px] pl-[30px] ">
                             <p>SWP expiring in Next 30 days</p>
-                            <p className="text-[26px] font-bold">0</p>
+                            <p className="text-[26px] font-bold">1</p>
                         </div>
                     </>
                     }
