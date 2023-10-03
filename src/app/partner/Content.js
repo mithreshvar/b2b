@@ -45,6 +45,8 @@ import CustomTable from '../components/partner/PartnerHome/CustomTable';
 import { get5Data } from '../components/partner/PartnerHome/dummyData';
 //endregion
 
+import avathar from 'public/partner/avathar/Ellipse 2700.png'
+
 export default function Content() {
 
     const router = useRouter();
@@ -58,6 +60,7 @@ export default function Content() {
 
     const [active, setActive] = useState(tab || 'dashboard');
     const [navOpen, setNavOpen] = useState(true);
+    const [viewProfile, setViewProfile] = useState(false)
 
     // const portfolioData = [
     //     [ 'ICICI Prudential Nifty Next 50 Index Fund - Growth', 5, 3.58, 18.51, 18.51],
@@ -115,7 +118,7 @@ export default function Content() {
                             {/* <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' /> */}
                         </div>
 
-                        <div className='flex gap-x-[30px] items-center'>
+                        <div className='flex gap-x-[30px] items-center relative'>
                             {linkCopied && <p className='h-[28px] w-[100px] text-white text-[12px] font-semibold bg-[#6A6C7C] rounded-[6px] flex items-center justify-center' >Link Copied</p>}
                             {/* Handle link copied */}
                             <div>
@@ -125,7 +128,42 @@ export default function Content() {
                                     <button type="button" className="w-[105px] text-[#0071E7] text-[12px] font-Semibold" onClick={handleCopy}><LinkRounded className='-rotate-45 w-[18px] h-[15px] mb-[2px]' />Copy Link</button>
                                 </div>
                             </div>
-                            <div className='w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center'>T</div>
+                            <button className='relative w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center' onClick={()=>setViewProfile(true)} >{/*onBlur={()=>setViewProfile(false)}*/}
+                                T
+                                {
+                                    viewProfile && 
+                                    <div className='pointer-events-auto cursor-default' >
+                                        <div className='absolute right-[10px] bottom-[-14px] shadow-[0px_0px_10px_#00000026] bg-gradient-radial from-[#00000026] to-white rounded-t-[10px]'>
+                                            <div className=' border-[#ffffff] opacity-100 border-x-[10px] border-b-[12px] border-x-transparent h-0 w-0' />
+                                        </div>
+                                        <div className='absolute bottom-[-384px] right-[-10px] bg-white w-[267px] h-[375px] rounded-[20px] shadow-[0px_3px_8px_#00000026] p-[20px] text-black text-[15px] flex flex-col gap-y-[15px] items-center '>
+                                            <div className='flex gap-x-[10px] px-[10px] items-center '>
+                                                <Image src={avathar} className='w-[30px] h-[30px]' />
+                                                <div className='overflow-clip text-ellipsis font-semibold w-[168px] h-[20px] text-left whitespace-nowrap'>Kishore Kumar Palaniswamy</div>
+                                            </div>
+
+                                            <div className='border-2 h-[150px] w-[150px]' />
+
+                                            <div className='border-b-[1px] h-0 w-full' />
+
+                                            <div className='flex flex-col gap-y-[18px] w-full'>
+                                                <div className='flex gap-x-[20px] items-center relative '>
+                                                    <span className='cursor-pointer' onMouseDown={()=>{setViewProfile(false); handleRoute('about'); }}><IAbout active={'about'} /></span>
+                                                    <h6 className={`cursor-pointer `} onMouseDown={()=>{setViewProfile(false); handleRoute('about'); }} >About Partner</h6>
+                                                </div>
+                                                <div className='flex gap-x-[24px] items-center relative '>
+                                                    <span className='cursor-pointer' onMouseDown={()=>{ setViewProfile(false); handleRoute('password');}}><IPassword active={'password'} /></span>
+                                                    <h6 className={`cursor-pointer`} onMouseDown={()=>{ setViewProfile(false); handleRoute('password');}} >Change Password</h6>
+                                                </div>
+                                                <div className='flex gap-x-[24px] items-center relative '>
+                                                    <span className='cursor-pointer' onMouseDown={()=>{ setViewProfile(false); router.push('/')}}><IPassword active={'password'} /></span>
+                                                    <h6 className={`cursor-pointer`} onMouseDown={()=>{ setViewProfile(false); router.push('/')}} >Logout</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </button>
                         </div>
                         </Toolbar>
                     </AppBar>
@@ -188,21 +226,9 @@ export default function Content() {
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative '>
-                                {active === 'about' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('about')}}><IAbout active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='about' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('about')}} >About Partner</h6>
-                            </div>
-
-                            <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'manual' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('manual')}}><IManual active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='manual' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('manual')}} >Partner Manual</h6>
-                            </div>
-
-                            <div className='flex gap-x-[14px] items-center relative '>
-                                {active === 'password' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('password')}}><IPassword active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='password' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('password')}} >Change Password</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative '>
