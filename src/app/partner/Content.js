@@ -46,6 +46,8 @@ import { get5Data } from '../components/partner/PartnerHome/dummyData';
 //endregion
 
 import avathar from 'public/partner/avathar/Ellipse 2700.png'
+import logout from 'public/partner/logout.svg'
+import qrcode from 'public/partner/qrcode/qrcode@2x.png'
 
 export default function Content() {
 
@@ -128,7 +130,7 @@ export default function Content() {
                                     <button type="button" className="w-[105px] text-[#0071E7] text-[12px] font-Semibold" onClick={handleCopy}><LinkRounded className='-rotate-45 w-[18px] h-[15px] mb-[2px]' />Copy Link</button>
                                 </div>
                             </div>
-                            <button className='relative w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center' onClick={()=>setViewProfile(true)} >{/*onBlur={()=>setViewProfile(false)}*/}
+                            <button className='relative w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center' onClick={()=>setViewProfile(true)} onBlur={()=>setViewProfile(false)} >
                                 T
                                 {
                                     viewProfile && 
@@ -142,7 +144,7 @@ export default function Content() {
                                                 <div className='overflow-clip text-ellipsis font-semibold w-[168px] h-[20px] text-left whitespace-nowrap'>Kishore Kumar Palaniswamy</div>
                                             </div>
 
-                                            <div className='border-2 h-[150px] w-[150px]' />
+                                            <Image src={qrcode} className='h-[150px] w-[150px]' />
 
                                             <div className='border-b-[1px] h-0 w-full' />
 
@@ -156,7 +158,7 @@ export default function Content() {
                                                     <h6 className={`cursor-pointer`} onMouseDown={()=>{ setViewProfile(false); handleRoute('password');}} >Change Password</h6>
                                                 </div>
                                                 <div className='flex gap-x-[24px] items-center relative '>
-                                                    <span className='cursor-pointer' onMouseDown={()=>{ setViewProfile(false); router.push('/')}}><IPassword active={'password'} /></span>
+                                                    <span className='cursor-pointer' onMouseDown={()=>{ setViewProfile(false); router.push('/')}}><Image src={logout} /></span>
                                                     <h6 className={`cursor-pointer`} onMouseDown={()=>{ setViewProfile(false); router.push('/')}} >Logout</h6>
                                                 </div>
                                             </div>
@@ -198,7 +200,7 @@ export default function Content() {
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'registration' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('registration')}}><IRegistration active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='registration' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('registration')}} >New Client Registration</h6>
+                                <h6 className={`cursor-pointer ${active==='registration' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('registration')}} >New Client</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative '>
