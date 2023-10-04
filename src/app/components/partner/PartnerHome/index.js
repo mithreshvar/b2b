@@ -117,6 +117,12 @@ export default function PartnerHome ({setActive}) {
         ["", '-', 'ICIC Pru Nifty 50 Index Fund(G)', '204', 'POWERSIP PASSIVE', '2,500.00'],
     ]
     
+    const stpData = [
+      ["3887829389/ Ramesh Nri","ICIC Pru Nifty 50 Index Fund(G)","ICIC Pru Nifty Next 50 Index Fund(G)","Daily","-","0/9","-","1 / 1,000.00"],
+      ["8981829389/ Lokesh","ICIC Pru Nifty Next 50 Index Fund(G)","Kotak Balance Advantage Fund-Reg(IDCW)","Daily","-","0/12","-","2 / 2,500.00"],
+      ["3887829389/ Ramesh Nri","ICIC Pru Nifty 50 Index Fund(G)","ICIC Pru Nifty Next 50 Index Fund(G)","Daily","-","0/12","-","1 / 500.00"],
+    ]
+
 
     return(
         <ThemeProvider theme={theme} >
@@ -166,7 +172,15 @@ export default function PartnerHome ({setActive}) {
                                 data={[['104476', '123/123451', 'Kotak Balance Advantage Fund-Reg(IDCW)', '12', '0/12', '-', '1,000.00']]}
                                 pagination={false} />
                         </div>
+                        <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
+                            <h1 className="text-[18px] font-semibold">STP Details</h1>
+                            <CustomTable 
+                                headers={['Folio/Holding Profile','From Scheme','To Scheme','Frequency','STP Date','Paid/No. Of Months','Initial Investment Units/Amount','Installment Units/ Amount']}
+                                data={stpData}
+                                pagination={false} />
+                        </div>
                     </>
+
                 }
             </div>
         </ThemeProvider>
