@@ -12,6 +12,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import resetPassword from 'public/resetPassword/resetPassword@2x.png'
+
 // Create a reusable AddressFields component
 function AddressFields({ stateOptions, setValueObject, isCorrespondenceAddress }) {
   const [addressLine1, setAddressLine1] = useState('');
@@ -226,6 +229,7 @@ function Login() {
   const [expiryDateErrorMessage, setExpiryDateErrorMessage] = useState('');
   const [statusErrorMessage, setStatusErrorMessage] = useState('');
   const [forgotPassword, setForgotPassword] = useState(false);
+  const [submitResetPassword, setSubmitResetPassword] = useState(false)
 
   const minDob = dayjs().subtract(110, 'year');
   const maxDob = dayjs().subtract(18, 'year');
@@ -419,6 +423,7 @@ function Login() {
 
   return (
     <ThemeProvider theme={theme}>
+      <div className={`relative ${submitResetPassword ? 'overflow-hidden' :'overflow-auto'} h-screen`} >
       <NavBar />
       <div className="pt-[30px] px-[80px] font-poppins text-[14px]">
 
@@ -426,61 +431,57 @@ function Login() {
           !isSubmitted?
         <>
         {/* Login selector */}
-        <div className="bg-[#F8F9FA] border-[#E4E5E5] border-[1px] rounded-[25px] w-[222px] h-[45px] p-[5px] flex">
-          <button
-            className={`w-[96px] h-[35px] ${isLogin === 'login' ? 'bg-primary text-white font-semibold' : 'font-medium'
-              } rounded-[25px]  flex justify-center items-center`}
-            value="login"
-            onClick={handleIsLoginChange}
-          >
-            Login
-          </button>
-          <button
-            className={`w-[116px] h-[35px] ${isLogin === 'register' ? 'bg-primary text-white font-semibold' : 'font-medium'
-              } rounded-[25px]  flex justify-center items-center`}
-            value="register"
-            onClick={handleIsLoginChange}
-          >
-            Register
-          </button>
-        </div>
+        { forgotPassword != 'forgot' &&
+            <div className="bg-[#F8F9FA] border-[#E4E5E5] border-[1px] rounded-[25px] w-[222px] h-[45px] p-[5px] flex">
+              <button
+                className={`w-[96px] h-[35px] ${isLogin === 'login' ? 'bg-primary text-white font-semibold' : 'font-medium'
+                  } rounded-[25px]  flex justify-center items-center`}
+                value="login"
+                onClick={handleIsLoginChange}
+              >
+                Login
+              </button>
+              <button
+                className={`w-[116px] h-[35px] ${isLogin === 'register' ? 'bg-primary text-white font-semibold' : 'font-medium'
+                  } rounded-[25px]  flex justify-center items-center`}
+                value="register"
+                onClick={handleIsLoginChange}
+              >
+                Register
+              </button>
+            </div>
+        }
 
         {isLogin === 'login' ?
         
         (
           <div className="w-[481px] font-medium text-[14px] mt-[82px]">
             {
-              (forgotPassword === 'submitted') ?
-                <p className="text-[18px] font-semibold mb-[310px]">Please Check your mail for reseting your password !</p>
-              :
+              (forgotPassword === 'forgot') ?
                 <>
-                {
-                  (forgotPassword === 'forgot') ?
-                    <p>Enter your Email Address</p>
-                  :
-                    <div>
-                    This login is restricted to <span className="font-bold">Partners</span> only
-                    If you are an investor and wish to access your account, please <a href="#" className="text-primary">click here</a>
-                    </div>
-                }
-
-                <div className="py-[20px] flex flex-col gap-x-[20px]">
-                  <div className="flex gap-[30px] flex-col">
-                    <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
-                    {
-                      (!forgotPassword) &&
-                      <CustomPasswordField label="Password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
-                    }
-                  </div>
-                  {
-                    (!forgotPassword) ?
-                      <a href="#" onClick={()=> setForgotPassword('forgot')} className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forgot password?</a>
-                    :
-                      <button onClick={()=>setForgotPassword(false)} className="font-medium text-right mr-[101px] text-primary mt-[25px]">Go Back</button>
-                  }
-                </div>
+                  <h1 className="mb-[30px] font-semibold text-[24px]">Forgot Password</h1>
+                  <p className="mb-[27px]">Enter the email address you used when you joined and we’ll send you instructions to reset your password.</p>
                 </>
+              :
+                <div>
+                This login is restricted to <span className="font-bold">Partners</span> only
+                If you are an investor and wish to access your account, please <a href="#" className="text-primary">click here</a>
+                </div>
             }
+
+            <div className="py-[20px] flex flex-col gap-x-[20px]">
+              <div className="flex gap-[30px] flex-col">
+                <CustomTextField label="Email" type="text" value={email} errorMessage={emailErrorMessage} handleChange={handleEmailChange} />
+                {
+                  (!forgotPassword) &&
+                  <CustomPasswordField label="Password" value={password} errorMessage={passwordErrorMessage} handleChange={handlePasswordChange} />
+                }
+              </div>
+              {
+                (!forgotPassword) &&
+                  <a href="#" onClick={()=> setForgotPassword('forgot')} className="font-medium text-right mr-[101px] text-primary mt-[25px]">Forgot password?</a>
+              }
+            </div>
           </div>
         ) :
         
@@ -605,16 +606,29 @@ function Login() {
         )}
 
         {/* Submit */}
-        {
-          (forgotPassword != 'submitted') && (
-          (forgotPassword == 'forgot') ?
-            <button className='bg-primary w-[230px] h-[50px] mt-[190px] mb-[15px] text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] ' onClick={()=>setForgotPassword('submitted')}>Submit</button>
-          :
-            <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
-              {isLogin === "login" ? "Login" : "Submit"}
-            </button>
-          )
-        }
+        <div className=" flex gap-x-[20px]">
+          {
+            (forgotPassword == 'forgot') &&
+            <button onClick={()=>setForgotPassword(false)} className="mt-[190px] w-[130px] h-[50px] border-[1px] border-[#0071E7] rounded-[25px] font-bold flex items-center justify-center text-primary">Go Back</button>
+          }
+          {
+            (forgotPassword == 'forgot') ?
+              <button className='bg-primary w-[230px] h-[50px] mt-[190px] mb-[15px] text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] ' 
+                onClick={()=>{ 
+                  if (email.trim()!='' && emailErrorMessage=='') {
+                    setSubmitResetPassword(true); setForgotPassword('')
+                  }
+                  if (email==''){
+                    setEmailErrorMessage('Email cannot be empty')
+                  }
+                }
+              }>Submit</button>
+            :
+              <button className= {`bg-primary w-[230px] h-[50px] ${isLogin === "login" ? "mt-[190px] mb-[15px]" : "my-[47px]"} text-white font-semibold flex justify-center items-center rounded-[25px] text-[18px] `} onClick={handleSubmit} >
+                {isLogin === "login" ? "Login" : "Submit"}
+              </button>
+          }
+        </div>
 
       </>
       
@@ -657,6 +671,21 @@ function Login() {
           <>Internal Server Error : Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</>
         </div>
       }
+      {
+        submitResetPassword &&
+        <div className='absolute w-screen h-screen bg-[rgba(10,22,8,0.3)] top-0 flex items-center justify-center z-[3] pointer-events-auto' >
+          <div className='relative w-[840px] h-[450px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
+            <ClearRoundedIcon className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setEmail(''); setPassword(''); setSubmitResetPassword(false)}} />
+            <Image src={resetPassword} className="w-[154px] h-[154px]" />
+            <div className='flex flex-col gap-y-[10px] text-[18px] text-center'>
+              <p>An Email has been sent to the Address</p>
+              <p className="font-bold">{email}</p>
+              <p>Password Assist will be provided in the mail.</p>
+            </div>
+          </div>
+        </div>
+      }
+      </div>
     </ThemeProvider>
   );
 }

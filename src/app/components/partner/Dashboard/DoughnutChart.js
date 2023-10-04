@@ -46,7 +46,7 @@ function DoughnutChart({ data, totalName }) {
             <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">No Records </div>
         </div>`
       :
-    totalName.length >= 10 ?
+    totalName.length >= 15 ?
         `<div style="text-align: center; font-family: 'Poppins'; width: 50px; ">
             <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">${totalName}</div>
             <br/>
