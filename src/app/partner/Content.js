@@ -121,14 +121,23 @@ export default function Content() {
                         </div>
 
                         <div className='flex gap-x-[30px] items-center relative'>
-                            {linkCopied && <p className='h-[28px] w-[100px] text-white text-[12px] font-semibold bg-[#6A6C7C] rounded-[6px] flex items-center justify-center' >Link Copied</p>}
+                            
                             {/* Handle link copied */}
                             <div>
                                 <div className="flex w-[299px] h-[36px] border-[1px] border-[#E4E5E5] font-semibold rounded-[6px] items-center">
                                     <div className="w-[198px] text-[#6E6E72] text-[12px] pl-[20px] pr-[10px] overflow-clip text-ellipsis">{shortUrl}</div>
                                     <div className='w-[1px] h-3/4 bg-[#E4E5E5]'></div>
-                                    <button type="button" className="w-[105px] text-[#0071E7] text-[12px] font-Semibold" onClick={handleCopy}><LinkRounded className='-rotate-45 w-[18px] h-[15px] mb-[2px]' />Copy Link</button>
+                                    <button type="button" className="relative w-[105px] text-[#0071E7] text-[12px] font-Semibold" onClick={handleCopy}><LinkRounded className='-rotate-45 w-[18px] h-[15px] mb-[2px]' />Copy Link
+                                    {linkCopied && 
+                                    <div className='absolute flex flex-col items-center'>
+                                        <div className='w-0 h-0 ml-[30px] top-[4px] right-[20px] border-l-transparent border-b-[9px] border-[#2D7251] border-x-[6px] border-r-transparent'/>
+                                        <p className='h-[28px] w-[105px] text-white text-[12px] font-semibold bg-[#2D7251] rounded-[6px] flex items-center justify-center' >Link Copied</p>
+                                    </div>
+                                    }
+                                    </button>
+
                                 </div>
+                                
                             </div>
                             <button className='relative w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center' onClick={()=>setViewProfile(true)} onBlur={()=>setViewProfile(false)} >
                                 T
