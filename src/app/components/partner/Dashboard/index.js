@@ -18,9 +18,9 @@ function Dashboard() {
             <div className="flex gap-[20px] mb-[20px] text-[16px]">
                 <div className="bg-white w-[calc((100%-20px)*2/3)] h-[300px] rounded-[15px] p-[20px] flex font-bold">
                     <div className="flex flex-col w-[50%] gap-[10px] items-center border-r-[1px] border-r-[rgba(112, 112, 112, 0.1)]">
-                        <p>Gross - Inflow</p>
+                        <p>AUM</p>
                         <DoughnutChart 
-                            totalName="Total Asset Inflow"
+                            totalName="Total AUM"
                             data = {
                                 [
                                     { name: "Debt", value: 20000 },
@@ -32,11 +32,14 @@ function Dashboard() {
                         />
                     </div>
                     <div className="flex flex-col w-[50%] gap-[10px] items-center">
-                        <p>Net - Inflow</p>
+                        <p>Inflow</p>
                         <DoughnutChart 
-                            totalName="Total Asset Inflow"
+                            totalName="Total Inflow"
                             data = {
-                                []
+                                [
+                                    { name: "Debt", value: 20000 },
+                                    { name: "Equity", value: 40000 },
+                                ]
                             }
                         />
                     </div>
@@ -95,11 +98,7 @@ function Dashboard() {
                                     <DoughnutChart 
                                         totalName="Total SWP Inflow"
                                         data = {
-                                            [
-                                                { name: "Equity", value: 90000 },
-                                                { name: "Debt", value: 10000 },
-                                                { name: "Hybrid", value: 50000 },
-                                            ]
+                                            []
                                         }
                                     />
                                 </div>
