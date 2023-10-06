@@ -194,7 +194,7 @@ function Brokerage() {
                         </div>
                         <div className="flex justify-between items-center mt-[20px]">
                             <button className="w-[144px] h-[40px] rounded-[25px] bg-[#0071E7] text-[#FFFFFF] text-[14px] flex  items-center justify-center font-bold" onClick={openTable}><p>Show Brokerage</p></button>
-                            <button className="h-[40px] text-[#0066CD] text-[16px] font-bold flex gap-x-[5px]" onClick={()=>{setShowInvoice(true)}}><DownloadRoundedIcon />Download Invoice</button>
+                            <button className="h-[40px] text-[#0066CD] text-[16px] font-bold flex gap-x-[5px] items-center " onClick={()=>{setShowInvoice(true)}}><DownloadRoundedIcon />Download Invoice</button>
                         </div>
                 </div>
             </div>
