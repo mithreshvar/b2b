@@ -2,6 +2,7 @@ import CustomSelectField from "../../InputFields";
 import { useState } from "react";
 import CustomTable from "../PartnerHome/CustomTable";
 import Arrow from "/public/partner/Arrow.js";
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 function Brokerage() {
 
  
@@ -171,15 +172,15 @@ function Brokerage() {
                 <div className="p-[20px] pb-0">
                     <div className="flex justify-between">
                         <div className="text-[20px] font-semibold pb-[20px]">Download Invoice</div>
-                        <div className="flex items-center" onClick={()=>{setShowInvoice(false)}}>
+                        <button className="flex items-center" onClick={()=>{setShowInvoice(false)}}>
                             <Arrow left={true} active={true}/>
                             <div className="text-[#0066CD] text-[16px] font-semibold ml-[6px]">Back</div>
-                        </div>
+                        </button>
                     </div>
                     <div className="flex gap-[10px]">
-                        <h2 className={`flex h-[34px] w-[130px] ${selectedOption==='mf'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(mutualfundsData);setSelectedOption('mf')}}>Mutual Funds</h2>
-                        <h2 className={`flex h-[34px] w-[195px] ${selectedOption==='fd'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(fixeddepositsbondsData);setSelectedOption('fd')}}>Fixed Deposits & Bonds</h2>
-                        <h2 className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</h2>
+                        <button className={`flex h-[34px] w-[130px] ${selectedOption==='mf'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(mutualfundsData);setSelectedOption('mf')}}>Mutual Funds</button>
+                        <button className={`flex h-[34px] w-[195px] ${selectedOption==='fd'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(fixeddepositsbondsData);setSelectedOption('fd')}}>Fixed Deposits & Bonds</button>
+                        <button className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</button>
                     </div>
                 </div>
                 <CustomTable className={'p-0'} headers={['Invoice Month-Year', 'File', 'Action']} data={InvoiceData} />
@@ -194,8 +195,8 @@ function Brokerage() {
                             <CustomSelectField label="Scheme Category" value={schemeCategory} valueOptions={schemeCategoryOptions} errorMessage={schemeCategoryErrorMessage} handleChange={handleSChemeCategoryChange} />
                         </div>
                         <div className="flex justify-between items-center mt-[20px]">
-                            <button className="w-[144px] h-[40px] rounded-[25px] bg-[#0071E7] text-[#FFFFFF] text-[14px] flex  items-center justify-center" onClick={openTable}><p>Show Brokerage</p></button>
-                            <div className="h-[40px] text-[#0066CD] text-[16px] font-bold" onClick={()=>{setShowInvoice(true)}}>Download Invoice</div>
+                            <button className="w-[144px] h-[40px] rounded-[25px] bg-[#0071E7] text-[#FFFFFF] text-[14px] flex  items-center justify-center font-bold" onClick={openTable}><p>Show Brokerage</p></button>
+                            <button className="h-[40px] text-[#0066CD] text-[16px] font-bold flex gap-x-[5px]" onClick={()=>{setShowInvoice(true)}}><DownloadRoundedIcon />Download Invoice</button>
                         </div>
                 </div>
             </div>
