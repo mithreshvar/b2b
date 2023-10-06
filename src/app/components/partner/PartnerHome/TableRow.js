@@ -9,6 +9,7 @@ import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import star from '/public/star.svg';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
 export default function TableRow ({data , setActive, type}) {
 
@@ -86,6 +87,12 @@ export default function TableRow ({data , setActive, type}) {
                 (type == 'rating') && 
                 <td className={` pl-[25px] h-full ${(!selected)?'text-primary':'text-[#42B092]'} font-extrabold text-[22px] `} >
                     <button onClick={handleSelect}>{(!selected)?<AddCircleRoundedIcon />:<CheckCircleRoundedIcon />}</button>
+                </td>
+            }
+            {
+                type == 'downloadInvoice' &&
+                <td>
+                    <button ><DownloadRoundedIcon className='text-[#0071E7] text-[16px]'/></button>
                 </td>
             }
         </tr>

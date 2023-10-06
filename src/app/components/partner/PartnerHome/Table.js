@@ -3,6 +3,7 @@ import TableRow from "./TableRow";
 export default function Table({headers, tenData=[], setActive}) {
 
     let type, schemeData;
+    if (headers[0] == "Invoice Month-Year") type = 'downloadInvoice';
     if(headers[3]=='Systematic Plans') type = 'sip';
     if(headers[0]=='Portfolio Name'){
         type = 'portfolio';
