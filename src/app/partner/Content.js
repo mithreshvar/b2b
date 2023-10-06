@@ -139,11 +139,11 @@ export default function Content() {
                                 </div>
                                 
                             </div>
-                            <button className='relative w-[38px] h-[38px] text-white rounded-full bg-[#6A6C7C] font-medium text-[18px] flex items-center justify-center' onClick={()=>setViewProfile(true)} onBlur={()=>setViewProfile(false)} >
+                            <button className='relative w-[38px] h-[38px] text-[#0084FF] rounded-full bg-[#D8ECFF] font-bold text-[18px] flex items-center justify-center' onClick={()=>setViewProfile(true)} onBlur={()=>setViewProfile(false)} >
                                 T
                                 {
                                     viewProfile && 
-                                    <div className='pointer-events-auto cursor-default' >
+                                    <div className='pointer-events-auto cursor-default font-medium' >
                                         <div className='absolute right-[10px] bottom-[-14px] shadow-[0px_0px_10px_#00000026] bg-gradient-radial from-[#00000026] to-white rounded-t-[10px]'>
                                             <div className=' border-[#ffffff] opacity-100 border-x-[10px] border-b-[12px] border-x-transparent h-0 w-0' />
                                         </div>
