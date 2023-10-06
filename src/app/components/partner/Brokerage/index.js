@@ -168,20 +168,18 @@ function Brokerage() {
     return (
         <div className="m-[20px] overflow-scroll">
         {(showInvoice)?
-            <div className=" w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF]">
-                <div className="p-[20px] pb-0">
-                    <div className="flex justify-between">
-                        <div className="text-[20px] font-semibold pb-[20px]">Download Invoice</div>
-                        <button className="flex items-center" onClick={()=>{setShowInvoice(false)}}>
-                            <Arrow left={true} active={true}/>
-                            <div className="text-[#0066CD] text-[16px] font-semibold ml-[6px]">Back</div>
-                        </button>
-                    </div>
-                    <div className="flex gap-[10px]">
-                        <button className={`flex h-[34px] w-[130px] ${selectedOption==='mf'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(mutualfundsData);setSelectedOption('mf')}}>Mutual Funds</button>
-                        <button className={`flex h-[34px] w-[195px] ${selectedOption==='fd'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(fixeddepositsbondsData);setSelectedOption('fd')}}>Fixed Deposits & Bonds</button>
-                        <button className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</button>
-                    </div>
+            <div className="p-[20px] w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF] ">
+                <div className="flex justify-between">
+                    <div className="text-[20px] font-semibold pb-[20px]">Download Invoice</div>
+                    <button className="flex items-center" onClick={()=>{setShowInvoice(false)}}>
+                        <Arrow left={true} active={true}/>
+                        <div className="text-[#0066CD] text-[16px] font-semibold ml-[6px]">Back</div>
+                    </button>
+                </div>
+                <div className="flex gap-[10px]">
+                    <button className={`flex h-[34px] w-[130px] ${selectedOption==='mf'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(mutualfundsData);setSelectedOption('mf')}}>Mutual Funds</button>
+                    <button className={`flex h-[34px] w-[195px] ${selectedOption==='fd'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(fixeddepositsbondsData);setSelectedOption('fd')}}>Fixed Deposits & Bonds</button>
+                    <button className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</button>
                 </div>
                 <CustomTable className={'p-0'} headers={['Invoice Month-Year', 'File', 'Action']} data={InvoiceData} />
             </div>
