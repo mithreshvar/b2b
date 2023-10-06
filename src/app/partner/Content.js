@@ -70,7 +70,7 @@ export default function Content() {
     //     [ 'Edelweiss Emerging Markets opportunities Equity Offshore Fund - Regular Plan - Growth', 5, 6.17, -1.54, 2.51],
     // ]
 
-    const {portfolioData, investorList, setInvestorList, deletePopup, setDeletePopup, viewPortfolioScheme, setViewPortfolioScheme, investor, setSip, setAddScheme, setAddSchemeList, savePortfolioData} = useDataContext();
+    const {portfolioData, investorList, setInvestorList, deletePopup, setDeletePopup, viewPortfolioScheme, setViewPortfolioScheme, investor, setSip, setAddScheme, setAddSchemeList, savePortfolioData, notificationMessage, setNotificationMessage} = useDataContext();
 
     function handleRoute(tab) {
         setActive(tab);
@@ -84,25 +84,23 @@ export default function Content() {
         setTimeout(()=>setLinkCopied(false), 2000);
     }
 
-    const [deleteSuccess, setDeleteSuccess] = useState(false)
-
     function handleDelete(data) {
         if (data.length >= 6) {
             let index = portfolioData.findIndex(e=>e[0]==viewPortfolioScheme);
             portfolioData[index][2] = (portfolioData[index][2]).filter(e => e[0] != data[0])
             savePortfolioData(portfolioData);
             setDeletePopup(false)
-            setDeleteSuccess('Scheme Deleted Successfully')
+            setNotificationMessage('Scheme Deleted Successfully')
             setTimeout(()=>{
-                setDeleteSuccess(false);
+                setNotificationMessage(false);
             }, 2500)
         } 
         else if (data.length == 3) {
             savePortfolioData(portfolioData.filter(e => e[0] != data[0]))
             setDeletePopup(false)
-            setDeleteSuccess('Portfolio Deleted Successfully')
+            setNotificationMessage('Portfolio Deleted Successfully')
             setTimeout(()=>{
-                setDeleteSuccess(false);
+                setNotificationMessage(false);
             }, 2500)
         }
     }
@@ -183,10 +181,10 @@ export default function Content() {
                     <div className={`flex h-[calc(100vh-60px)] relative ${(!(investorList||deletePopup||viewPortfolioScheme||passwordChangedPopup)) && ' mt-[60px]'} `}> {/* */}
                         
                         {
-                            (deleteSuccess == 'Portfolio Deleted Successfully') &&
+                            (notificationMessage == 'Portfolio Deleted Successfully' || notificationMessage == 'Successfully Downloaded' ) &&
                             <div className='absolute z-[1] top-[20px] right-[45px] bg-[#E2FFEE] rounded-[6px] border-[2px] border-[#04A345] p-[10px] flex gap-x-[10px] items-center'>
                                 <CheckCircleRoundedIcon className='text-[#04A345]' />
-                                <p className=' text-[#04A345] text-[14px] font-bold'>{deleteSuccess}  </p>
+                                <p className=' text-[#04A345] text-[14px] font-bold'>{notificationMessage}  </p>
                             </div>
                         }
                         {/* navigation segment */}
@@ -292,10 +290,10 @@ export default function Content() {
                 <div className='absolute w-screen h-screen top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center' >
 
                     {
-                        (deleteSuccess == 'Scheme Deleted Successfully') &&
+                        (notificationMessage == 'Scheme Deleted Successfully') &&
                         <div className='absolute top-[80px] right-[45px] bg-[#E2FFEE] rounded-[6px] border-[2px] border-[#04A345] p-[10px] flex gap-x-[10px] items-center'>
                             <CheckCircleRoundedIcon className='text-[#04A345]' />
-                            <p className=' text-[#04A345] text-[14px] font-bold'>{deleteSuccess}</p>
+                            <p className=' text-[#04A345] text-[14px] font-bold'>{notificationMessage}</p>
                         </div>
                     }
 
