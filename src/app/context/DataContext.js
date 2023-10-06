@@ -13,6 +13,7 @@ export function DataContextProvider(props) {
     const [addScheme, setAddScheme] = useState(false)
     const [viewPortfolioScheme, setViewPortfolioScheme] = useState(false)
     const [addSchemeList, setAddSchemeList] = useState([])
+    const [notificationMessage, setNotificationMessage] = useState(false)
 
     useEffect(() => {
         let str = localStorage.getItem('data');
@@ -57,7 +58,7 @@ export function DataContextProvider(props) {
 
 
     return(
-        <DataContext.Provider value={{data, saveData, investorList, setInvestorList, deletePopup, setDeletePopup, investor, setInvestor, sip, setSip, addScheme, setAddScheme, viewPortfolioScheme, setViewPortfolioScheme, portfolioData, savePortfolioData, addSchemeList, setAddSchemeList }}>
+        <DataContext.Provider value={{data, saveData, investorList, setInvestorList, deletePopup, setDeletePopup, investor, setInvestor, sip, setSip, addScheme, setAddScheme, viewPortfolioScheme, setViewPortfolioScheme, portfolioData, savePortfolioData, addSchemeList, setAddSchemeList, notificationMessage, setNotificationMessage }}>
             {props.children}
         </DataContext.Provider>
     );

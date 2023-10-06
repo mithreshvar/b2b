@@ -20,7 +20,7 @@ export default function TableRow ({data , setActive, type}) {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     };
 
-    let {setInvestorList, setInvestor, setSip, setAddScheme, setViewPortfolioScheme, addSchemeList, setAddSchemeList, setDeletePopup} = useDataContext();
+    let {setInvestorList, setInvestor, setSip, setAddScheme, setViewPortfolioScheme, addSchemeList, setAddSchemeList, setDeletePopup, setNotificationMessage} = useDataContext();
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popper' : undefined;
@@ -36,6 +36,13 @@ export default function TableRow ({data , setActive, type}) {
             setAddSchemeList(addSchemeList.filter(item => item[0] != data[0]))
             setSelected(false)
         }
+    }
+
+    function handleDownload() {
+        setNotificationMessage('Successfully Downloaded')
+        setTimeout(()=>{
+            setNotificationMessage(false);
+        }, 2500)
     }
 
     return(
@@ -92,7 +99,7 @@ export default function TableRow ({data , setActive, type}) {
             {
                 type == 'downloadInvoice' &&
                 <td>
-                    <button ><DownloadRoundedIcon className='text-[#0071E7] text-[16px]'/></button>
+                    <button onClick={handleDownload} ><DownloadRoundedIcon className='text-[#0071E7] text-[16px]'/></button>
                 </td>
             }
         </tr>
