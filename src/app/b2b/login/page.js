@@ -491,8 +491,8 @@ function Login() {
             <p className='text-[18px] font-semibold my-[20px]'>Partner information</p>
 
             {/* Individuality provider */}
-                <div className="text-textLight font-medium">Individuality</div>
                 <div className="mt-[10px] flex justify-start items-center gap-[20px] p-[1px]">
+                  <div className="text-textLight font-medium">PAN Status</div>
                     <button className={`w-[141px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'individual' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'individual'} onClick={handleIsIndividualChange}> Individuals </button>
                     <button className={`w-[178px] h-[40px] bg-[#F8F9FA] ${isIndividual === 'non-individuals' ? 'border-primary text-primary font-semibold' : 'border-[#E4E5E5] font-medium'} border-[1px] flex justify-center items-center rounded-[25px]`} value={'non-individuals'} onClick={handleIsIndividualChange}> Non-Individuals </button>
                 </div>
@@ -568,37 +568,25 @@ function Login() {
                 <div className="-mt-[7px] flex">
 
                     <div>
-                        <a href="#" className="flex gap-[15px]">
-                            <Image
-                                src='/login/mutualFunds.png'
-                                width={23}
-                                height={23}
-                                alt="mutual-funds"
-                            />
+                        <div className="flex gap-[10px] items-center">
+                            <div className="w-[8px] h-[8px] rounded-full bg-[#0071E7]"
+                            ></div>
                             <span className="font-medium">Mutual Funds</span>
-                        </a>
+                        </div>
                     </div>
                     <div className="mx-[30px] px-[30px] border-x-[1px] border-x-[#E4E5E5]">
-                        <a href="#" className="flex gap-[15px]">
-                            <Image
-                                src='/login/fixedDeposit@2x.png'
-                                width={23}
-                                height={23}
-                                alt="fd-deposits"
-                            />
+                    <div className="flex gap-[10px] items-center">
+                            <div className="w-[8px] h-[8px] rounded-full bg-[#0071E7]"
+                            ></div>
                             <span className="font-medium">Fixed Deposits & Bonds</span>
-                        </a>
+                        </div>
                     </div>
                     <div>
-                        <a href="#" className="flex gap-[15px]">
-                            <Image
-                                src='/login/NPS@2x.png'
-                                width={23}
-                                height={23}
-                                alt="NPS-funds"
-                            />
+                    <div className="flex gap-[10px] items-center">
+                            <div className="w-[8px] h-[8px] rounded-full bg-[#0071E7]"
+                            ></div>
                             <span className="font-medium">NPS</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
               </div>
