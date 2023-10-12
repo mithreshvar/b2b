@@ -1,5 +1,5 @@
 import { FormControlLabel, Radio, ThemeProvider, Typography } from "@mui/material";
-import theme from '../../../../theme.js'
+import theme from '../../../theme.js'
 import CustomSelectField, { CustomTextField } from "../../InputFields/index.js";
 import { useState } from "react";
 import CustomTable from "../PartnerHome/CustomTable.js";

@@ -12,7 +12,7 @@ import tick from '/public/callback/successmark.png';
 
 import { ThemeProvider } from '@mui/material/styles';
 import {CustomTextField} from "../InputFields";
-import theme from "../../../theme";
+import theme from "../../theme";
 import { useState } from "react";
 
 function callback() {

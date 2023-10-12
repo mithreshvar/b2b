@@ -10,7 +10,7 @@ import captchaImg from 'public/callback/captcha.png'
 import { useState } from 'react'
 
 import { ThemeProvider } from '@mui/material/styles';
-import theme from "../../../theme";
+import theme from "../../theme";
 import { CustomTextField } from '../InputFields'
 
 export default function Home() {

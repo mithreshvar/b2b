@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/register-with-us/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
-import theme from "../../theme";
+import theme from "../theme";
 import { FormControlLabel, Radio, TextareaAutosize, Typography, } from "@mui/material";
 import { RadioButtonUnchecked } from '@mui/icons-material';
 import Image from 'next/image'

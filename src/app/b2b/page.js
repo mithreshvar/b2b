@@ -25,9 +25,12 @@ import logo from '/public/logo.svg'
 import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeProvider } from '@mui/material';
-import theme from '../theme';
+import theme from './theme';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { CustomTextField } from './components/InputFields';
+
+
+import bgimg from '/public/app-background.png'
 
 export default function HomePage() {
   const searchParams = useSearchParams();
@@ -96,7 +99,7 @@ export default function HomePage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <main className={`flex h-screen overflow-scroll flex-col items-center px-[80px] font-poppins bg-[url('../../public/app-background.png')] bg-cover bg-fixed ${(login)?' overflow-hidden':''}`} ref={top}> 
+      <main className={`flex h-screen overflow-scroll flex-col items-center px-[80px] font-poppins bg-funds-india bg-cover bg-fixed ${(login)?' overflow-hidden':''}`} ref={top}> 
         <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`} >
           <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
             <button onClick={()=>{router.push("/b2b/"); setRoute('Home')}}><Image src={logo} className='w-[165px] h-[47px]' /></button>

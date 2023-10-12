@@ -6,7 +6,7 @@ import success from '/public/home/Group 405761/Group 405761@2x.png'
 import { useRef, useState } from "react";
 
 import { ThemeProvider } from '@mui/material/styles';
-import theme from "../../../theme";
+import theme from "../../theme";
 import { CustomTextField } from '../InputFields';
 
 export default function Demo() {

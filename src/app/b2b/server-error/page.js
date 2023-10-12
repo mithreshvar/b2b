@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from "@emotion/react";
 import NavBar from "../components/register-with-us/NavBar";
-import theme from "../../theme";
+import theme from "../theme";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { ThemeProvider } from "@mui/material";
-import theme from '../../../../theme.js'
+import theme from '../../../theme.js'
 
 import { useState } from "react";
 

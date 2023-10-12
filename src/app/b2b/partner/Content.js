@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeProvider } from '@mui/material';
-import theme from '../../theme';
+import theme from '../theme';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import IDashboard from '/public/partner/Dashboard.js'
