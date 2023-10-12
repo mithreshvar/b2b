@@ -11,8 +11,8 @@ import page2Img4 from '/public/callback/2ndpageassets/4.png'
 import tick from '/public/callback/successmark.png';
 
 import { ThemeProvider } from '@mui/material/styles';
-import {CustomTextField} from "../../components/InputFields";
-import theme from "../../theme";
+import {CustomTextField} from "../InputFields";
+import theme from "../../../theme";
 import { useState } from "react";
 
 function callback() {

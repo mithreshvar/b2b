@@ -3,8 +3,8 @@ import threeDots from '/public/partner/threeDots.svg'
 import Image from "next/image.js";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDataContext } from '@/app/context/DataContext';
-import Arrow from '../../../../../public/partner/Arrow';
+import { useDataContext } from '../../../context/DataContext';
+import Arrow from '/public/partner/Arrow';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import star from '/public/star.svg';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -70,7 +70,7 @@ export default function TableRow ({data , setActive, type}) {
                 </button>
                 <Popper id={id} open={open} anchorEl={anchorEl} >
                     <div className='w-[160px] text-[14px] flex flex-col bg-white rounded-[10px] shadow-lg justify-around items-center mt-[5px] mr-[100px] p-[5px] '>
-                        <p onMouseDown={()=>{router.push('/partner?tab=registration&create=1');setTimeout(()=>setActive('registration'),500);}} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[150px] flex items-center justify-center ' >Add Investor</p>
+                        <p onMouseDown={()=>{router.push('/b2b/partner?tab=registration&create=1');setTimeout(()=>setActive('registration'),500);}} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[150px] flex items-center justify-center ' >Add Investor</p>
                         <p onMouseDown={()=>{ setInvestor(data[0]); setInvestorList(data[0]);}} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[150px] flex items-center justify-center '>Investor List</p>
                     </div>
                 </Popper>

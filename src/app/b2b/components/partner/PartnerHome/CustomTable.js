@@ -1,12 +1,12 @@
 "use client"
 
 import { ThemeProvider } from "@mui/material";
-import theme from '../../../theme.js'
+import theme from '../../../../theme.js'
 import Table from "./Table.js";
 import { useEffect, useState } from "react";
 import Arrow from "/public/partner/Arrow.js";
 import Logo from '/public/Logo.json'
-import Lottie, { useLottie } from "lottie-react";
+import Lottie from "lottie-react";
 
 
 export default function CustomTable({data, headers, setActive, pagination=true, headerStyle}) {

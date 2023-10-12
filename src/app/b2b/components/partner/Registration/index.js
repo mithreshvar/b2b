@@ -91,7 +91,7 @@ function Registration() {
         <div className='text-[14px] font-medium text-[#6E6E72] pt-[15px] pb-[20px]'>
           For NRIs, Please enter the appropriate country code followed by their mobile number.
         </div>
-        <button className='w-[166px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px] ' onClick={()=>{setSuccess(true); router.push(`/partner?tab=registration&create=1`)}}>
+        <button className='w-[166px] h-[40px] text-[14px] text-white font-bold bg-[#0071E7] rounded-[25px] ' onClick={()=>{setSuccess(true); router.push(`/b2b/partner?tab=registration&create=1`)}}>
         Create Account
         </button>
       </div>

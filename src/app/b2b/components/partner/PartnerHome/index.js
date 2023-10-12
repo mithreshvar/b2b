@@ -1,13 +1,13 @@
 "use client"
 
 import { ThemeProvider } from "@mui/material";
-import theme from '../../../theme.js'
+import theme from '../../../../theme.js'
 
 import { useState } from "react";
 
 
 import { CustomTextField } from "../../InputFields/index.js";
-import { useDataContext } from "@/app/context/DataContext.js";
+import { useDataContext } from "../../../context/DataContext.js";
 import CustomTable from "./CustomTable.js";
 
 export default function PartnerHome ({setActive}) {

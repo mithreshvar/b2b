@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Tick from '../../../../../public/callback/successmark.png';
+import Tick from '/public/callback/successmark.png';
 import Image from 'next/image';
 
 function manual() {

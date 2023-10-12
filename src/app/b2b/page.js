@@ -25,7 +25,7 @@ import logo from '/public/logo.svg'
 import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeProvider } from '@mui/material';
-import theme from './theme';
+import theme from '../theme';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { CustomTextField } from './components/InputFields';
 
@@ -82,7 +82,7 @@ export default function HomePage() {
   function handleRoute(tab) {
     setRoute(tab);
     if (tab == 'Home') router.push('/', undefined, { shallow: true });
-    else router.push(`/?tab=${tab}`, undefined, { shallow: true });
+    else router.push(`?tab=${tab}`, undefined, { shallow: true });
   }
 
   const top = useRef(null);
@@ -99,11 +99,11 @@ export default function HomePage() {
       <main className={`flex h-screen overflow-scroll flex-col items-center px-[80px] font-poppins bg-[url('../../public/app-background.png')] bg-cover bg-fixed ${(login)?' overflow-hidden':''}`} ref={top}> 
         <div className={` w-full ${(login)?' opacity-20 pointer-events-none select-none ':''}`} >
           <div className='w-full flex justify-between items-center h-[100px] px-[20px] pt-[6px] z-[1]'>
-            <Link href={'/'}><Image src={logo} className='w-[165px] h-[47px]' /></Link>
+            <button onClick={()=>{router.push("/b2b/"); setRoute('Home')}}><Image src={logo} className='w-[165px] h-[47px]' /></button>
             <div className='flex gap-x-[30px] font-semibold text-[14px] text-[#6E6E72] items-center'>
               <h6 className={` cursor-pointer ${(route=='Home')?'text-[#0066CD]':''}`} onClick={() => handleRoute('Home')}>Home</h6>
               <h6 className={` cursor-pointer ${(route=='whyFIP')?'text-[#0066CD]':''}`} onClick={() => handleRoute('whyFIP')}>Why FundsIndiaPartner?</h6>
-              <h6 className={'cursor-pointer '} ><Link href="/login?register=true">Register With Us</Link></h6>
+              <h6 className={'cursor-pointer '} ><Link href="/b2b/login?register=true">Register With Us</Link></h6>
               <h6 className={` cursor-pointer ${(route=='contact')?'text-[#0066CD]':''}`} onClick={() => handleRoute('contact')}>Contact us</h6>
               <button onClick={()=>{setLogin(true)}} className='w-[96px] h-[35px] bg-primary text-white rounded-[25px]'>Login</button>
               <button onClick={() => handleRoute('callback')} className='w-[119px] h-[35px] border-[1px] border-primary text-[#0066CD] rounded-[25px] flex items-center justify-center gap-x-[5px] '><Image src={phoneIcon} className='w-[12px] h-[12px]'/>Callback</button>
@@ -193,7 +193,7 @@ export default function HomePage() {
             <div className='flex gap-x-[120px]'>
               <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
                 <Image src={partner} className='w-[85px] h-[113px]' />
-                <Link href={'/login'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px] flex items-center justify-center'>Partner</Link>
+                <Link href={'/b2b/login'}  className='w-[116px] h-[35px] text-white text-[14px] font-semibold bg-primary rounded-[25px] flex items-center justify-center'>Partner</Link>
               </div>
               <div className='w-[260px] h-[210px] flex flex-col items-center justify-center p-[10px] gap-y-[30px] shadow-lg rounded-[20px]'>
                 <Image src={investor} className='w-[97px] h-[115px]' />

@@ -1,9 +1,9 @@
 import { FormControlLabel, Radio, ThemeProvider, Typography } from "@mui/material";
-import theme from '../../../theme.js'
+import theme from '../../../../theme.js'
 import CustomSelectField, { CustomTextField } from "../../InputFields/index.js";
 import { useState } from "react";
 import CustomTable from "../PartnerHome/CustomTable.js";
-import { useDataContext } from "@/app/context/DataContext.js";
+import { useDataContext } from "../../../context/DataContext.js";
 import { RadioButtonUnchecked } from "@mui/icons-material";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 

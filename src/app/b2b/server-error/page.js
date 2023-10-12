@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from "@emotion/react";
 import NavBar from "../components/register-with-us/NavBar";
-import theme from "../theme";
+import theme from "../../theme";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ const ServerError = () => {
                 <div className="flex flex-col justify-center items-center mt-[44px] gap-[20px]">
                     <div className="text-[20px] leading-[14px] font-semibold">Internal Server Error</div>
                     <div className="text-[14px] font-medium">Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.</div>
-                    <Link href='/login' className="w-[120px] h-[42px] bg-primary text-white font-semibold rounded-[25px] flex justify-center items-center">Go Back</Link>
+                    <Link href='/b2b/login' className="w-[120px] h-[42px] bg-primary text-white font-semibold rounded-[25px] flex justify-center items-center">Go Back</Link>
                 </div>                
             </div>
         </ThemeProvider>

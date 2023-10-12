@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-import theme from '../../theme'
+import theme from '../../../theme'
 import Image from "next/image";
 
 import email from '/public/Contact/Group 512412.svg'

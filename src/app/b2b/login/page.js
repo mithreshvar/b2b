@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import NavBar from "@/app/components/register-with-us/NavBar";
+import NavBar from "../components/register-with-us/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
-import theme from "../theme";
+import theme from "../../theme";
 import { FormControlLabel, Radio, TextareaAutosize, Typography, } from "@mui/material";
 import { RadioButtonUnchecked } from '@mui/icons-material';
 import Image from 'next/image'
@@ -238,10 +238,10 @@ function Login() {
   const handleIsLoginChange = (event) => {
     setIsLogin(event.target.value);
     if (event.target.value === "register") {
-      router.push('/login?register=true', undefined, { shallow: true });
+      router.push('/b2b/login?register=true', undefined, { shallow: true });
     }
     else {
-      router.push('/login', undefined, { shallow: true });
+      router.push('/b2b/login', undefined, { shallow: true });
     }
   };
 
@@ -262,7 +262,7 @@ function Login() {
   const handleSubmit = () => {
     if((email === "b2btest1@fundsindia.com" || email === "b2btest2@fundsindia.com" || email === "b2btest3@fundsindia.com") && password === "12345678"){
       setPasswordErrorMessage("");
-      if (isLogin === 'login') {router.push('/partner'); return;}
+      if (isLogin === 'login') {router.push('/b2b/partner'); return;}
     }
     else
       setPasswordErrorMessage("Email ID or Password doesn't match!");
