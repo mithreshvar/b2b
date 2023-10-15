@@ -231,15 +231,15 @@ export default function Content() {
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
                             </div> */}
                             <Collapsible trigger={"Reports"}>
-                                <div className='pl-[16px]'>
+                                <div className='pl-[16px] text-[12px]'>
                                  <Collapsible trigger={"Business reports"} style={{fontSize:"8px"}}>
-                                    <div className='pl-[10px]'>
+                                    <div className='pl-[10px] text-[10px]'>
                                         <div>AUM Client Report</div>
                                         <div>Partner Invoice Report (Brokerage)</div>
                                     </div>
                                  </Collapsible>
                                  <Collapsible trigger={"Transaction reports"}>
-                                    <div className='pl-[10px]'>
+                                    <div className='pl-[10px] text-[10px]'>
                                             <div>Transaction Report</div>
                                             <div>Investor Scheme Details</div>
                                             <div>SIP Report</div>
@@ -249,7 +249,7 @@ export default function Content() {
                                      </div>
                                  </Collapsible>
                                  <Collapsible trigger={"User management reports"}>
-                                    <div className='pl-[10px]'>
+                                    <div className='pl-[10px] text-[10px]'>
                                         <div>Investor Details</div>
                                         <div>Valuation Report</div>
                                         <div>Client RTA Email and Mobile</div>
