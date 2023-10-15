@@ -10,7 +10,7 @@ import down from 'public/Dashboard/Group 508930.svg'
 import up from 'public/Dashboard/Group 508929.svg'
 import calender from 'public/Dashboard/Group 508995.svg'
 import dot from 'public/Dashboard/Group 508926.svg'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 export default function Dashboard({setActive}) {
@@ -22,9 +22,10 @@ export default function Dashboard({setActive}) {
             <div className="h-[82px] flex justify-between items-center">
                 <div className="flex">
                     <div className="w-[70px] h-[70px]">
-                        <CircularProgressbar value={(+data.tasks.today)/(+data.tasks.total)*100} strokeWidth={"5"} styles={buildStyles({ pathColor: "#0171e7", })} />
+                        <CircularProgressbarWithChildren value={(+data.tasks.today)/(+data.tasks.total)*100} strokeWidth={"5"} styles={buildStyles({ pathColor: "#0171e7", })} >
+                            <Image className="w-[55px] h-[55px]" src={Avathar}/>
+                        </CircularProgressbarWithChildren>
                     </div>
-                    <Image className="w-[55px] h-[55px] -ml-[63px] mt-[8px]" src={Avathar}/>
                     <div className="ml-[20px] flex flex-col gap-[10px]">
                         <p className="font-bold mt-[10px] text-[18px] leading-[15px]">Good Evening Bruce!👋</p>
                         <p className="font-medium text-[#6E6E72]">Have an in-depth look at all the metrics within your dashboard</p>
