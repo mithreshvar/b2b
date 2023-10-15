@@ -87,7 +87,9 @@ export default function Portfolio() {
 
 
     const [selectedOption,setSelectedOption]=useState("basicDetails");
-    const [loadingScroll, setLoadingScroll] = useState(false);
+    const [loadingScroll, setLoadingScroll] = useState(true);
+
+    setTimeout(() => setLoadingScroll(false), 1000); // loading is set false only after initial render
 
     const handleTableBodyScroll = event => {
         if (loadingScroll) return;
@@ -118,6 +120,7 @@ export default function Portfolio() {
     };
 
     function scrollRefIntoView(i) {
+        if (i<0 || i>=tableNames.length) return;
 
         let paddingLeftForLastNav = tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - ( navSIPBookRef.current.offsetLeft + navSIPBookRef.current.offsetWidth + 10 );
 
