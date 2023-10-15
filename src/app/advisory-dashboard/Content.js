@@ -14,6 +14,11 @@ import IDashboard from '/public/Dashboard.js';
 import IEarlyRisk from '/public/EarlyRisk.js';
 import IRedemption from '/public/Redemption.js';
 import IMonitoringTarget from '/public/MonitoringTarget.js';
+import ISipBook from '/public/SipBook.js';
+import IPortfolioReview from '/public/PortfolioReview.js';
+import IPortfolioClient from '/public/PortfolioClient.js';
+import IClientRisk from '/public/ClientRisk.js';
+import IPassword from '/public/Password.js';
 import back from 'public/back.svg'
 
 
@@ -26,12 +31,13 @@ import EarlyRisk from './components/EarlyRisk';
 import ClientRisk from './components/ClientRisk';
 import ChangePassword from './components/ChangePassword';
 import Review from './components/Review';
+import { useDataContext } from './context/DataContext';
 
 export default function Content() {
 
+    const {navOpen, setNavOpen} = useDataContext();
 
     const [active, setActive] = useState('dashboard');
-    const [navOpen, setNavOpen] = useState(true);
 
     const [viewProfile, setViewProfile] = useState(false)
     
@@ -96,55 +102,55 @@ export default function Content() {
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {(active==='dashboard') && <div className='absolute w-[3px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('dashboard')}}><IDashboard active={active} /></span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('dashboard')}}><IDashboard active={active} /></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='dashboard' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('dashboard')}} >Dashboard</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'monitoring-target' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('monitoring-target');}}><IMonitoringTarget active={active} /></span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('monitoring-target');}}><IMonitoringTarget active={active} /></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='monitoring-target' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('monitoring-target')}} >Monitoring Target</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'sipbook' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('sipbook')}}></span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('sipbook')}}><ISipBook active={active} /></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='sipbook' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('sipbook')}} >SIP Book</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'redemption' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('redemption')}}>< IRedemption active={active} /></span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('redemption')}}>< IRedemption active={active} /></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='redemption' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('redemption')}} >Redemption Dashboard</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'portfolio-review' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{ handleRoute('portfolio-review')}}> </span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{ handleRoute('portfolio-review')}}><IPortfolioReview active={active}/></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='portfolio-review' && 'font-semibold text-primary'}`} onClick={()=>{ handleRoute('portfolio-review')}} >Portfolio Review</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'portfolio-monitor' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{ handleRoute('portfolio-monitor')}}> </span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{ handleRoute('portfolio-monitor')}}><IPortfolioClient active={active}/></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='portfolio-monitor' && 'font-semibold text-primary'}`} onClick={()=>{ handleRoute('portfolio-monitor')}} >Client Portfolio Monitor</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'early-risk' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('early-risk')}}><IEarlyRisk active={active} /></span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('early-risk')}}><IEarlyRisk active={active} /></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='early-risk' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('early-risk')}} >Early Risk Warning System</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'client-risk' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('client-risk')}}> </span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('client-risk')}}><IClientRisk active={active}/></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='client-risk' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('client-risk')}} >Client level Risks</h6>
                             </div>
 
                             <div className='flex gap-x-[14px] items-center relative'>
                                 {active === 'password' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('password')}}> </span>
+                                <span className='cursor-pointer h-full flex items-center ' onClick={()=>{handleRoute('password')}}><IPassword active={active}/></span>
                                 <h6 className={`cursor-pointer ${navOpen ? 'opacity-100' : 'opacity-0'} transition-[opacity] duration-[1s] w-[175px] shrink-0 ${active==='password' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('password')}} >Change Password</h6>
                             </div>
 
