@@ -10,8 +10,12 @@ import rightArrow from "/public/Group 547353.svg";
 import leftArrow from "/public/Group 547354.svg";
 import whatsappIcon from "/public/Group 549708.svg";
 import telegramIcon from "/public/Path 238665.svg";
+import { useDraggable } from "react-use-draggable-scroll";
+import { useDataContext } from "../../context/DataContext";
 
 export default function Portfolio() {
+
+    const {navOpen} = useDataContext()
 
     // for(let i in data) {
     //     console.log(i)
@@ -20,21 +24,89 @@ export default function Portfolio() {
     //     }
     // }
 
-    const tableNameRef = useRef();
+    //Navigation REFS FOR NAVIGARION BAR
+    const tablesNavbarRef = useRef();
+    const navBasicDetailsRef = useRef();
+    const navAssetAllocationRef = useRef();
+    const navCashAllocationRef = useRef();
+    const navPortfolioQualityRef = useRef();
+    const navDiversificationRiskRef = useRef();
+    const navLiquidityRef = useRef();
+    const navCostRef = useRef();
+    const navEquityMonitorRef = useRef();
+    const navDebtMonitorRef = useRef();
+    const navSIPBookRef = useRef();
+
+    //TABLE REFS FOR NAVIGARION BAR
+    const tablesContainerRef = useRef();
     const tableBasicDetailsRef = useRef();
     const tableAssetAllocationRef = useRef();
     const tableCashAllocationRef = useRef();
     const tablePortfolioQualityRef = useRef();
+    const tableDiversificationRiskRef = useRef();
+    const tableLiquidityRef = useRef();
+    const tableCostRef = useRef();
+    const tableEquityMonitorRef = useRef();
+    const tableDebtMonitorRef = useRef();
+    const tableSIPBookRef = useRef();
+
+
+    const { events } = useDraggable(tablesNavbarRef);
+    console.log(events)
+
+
+    // TABLE BODY REFS FOR SCROLL
+    const tableNameRef = useRef();
+    const tableBasicDetailsBodyRef = useRef();
+    const tableAssetAllocationBodyRef = useRef();
+    const tableCashAllocationBodyRef = useRef();
+    const tablePortfolioQualityBodyRef = useRef();
+    const tableDiversificationRiskBodyRef = useRef();
+    const tableLiquidityBodyRef = useRef();
+    const tableCostBodyRef = useRef();
+    const tableEquityMonitorBodyRef = useRef();
+    const tableDebtMonitorBodyRef = useRef();
+    const tableSIPBookBodyRef = useRef();
 
     function handleScroll(pos) {
         tableNameRef.current.scroll({top: pos});
-        tableBasicDetailsRef.current.scroll({top: pos});
-        tableAssetAllocationRef.current.scroll({top: pos});
-        tableCashAllocationRef.current.scroll({top: pos});
-        tablePortfolioQualityRef.current.scroll({top: pos});
+        tableBasicDetailsBodyRef.current.scroll({top: pos});
+        tableAssetAllocationBodyRef.current.scroll({top: pos});
+        tableCashAllocationBodyRef.current.scroll({top: pos});
+        tablePortfolioQualityBodyRef.current.scroll({top: pos});
+        tableDiversificationRiskBodyRef.current.scroll({top: pos});
+        tableLiquidityBodyRef.current.scroll({top: pos});
+        tableCostBodyRef.current.scroll({top: pos});
+        tableEquityMonitorBodyRef.current.scroll({top: pos});
+        tableDebtMonitorBodyRef.current.scroll({top: pos});
+        tableSIPBookBodyRef.current.scroll({top: pos});
     }
 
     const [selectedOption,setSelectedOption]=useState("basicDetails");
+
+    function scrollRefIntoView(i) {
+        let refTable = [tableBasicDetailsRef, tableAssetAllocationRef, tableCashAllocationRef, tablePortfolioQualityRef, tableDiversificationRiskRef, tableLiquidityRef, tableCostRef, tableEquityMonitorRef, tableDebtMonitorRef, tableSIPBookRef]
+        let refNav = [navBasicDetailsRef, navAssetAllocationRef, navCashAllocationRef, navPortfolioQualityRef, navDiversificationRiskRef, navLiquidityRef, navCostRef, navEquityMonitorRef, navDebtMonitorRef, navSIPBookRef]
+
+        tablesContainerRef.current.scroll({left: refTable[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft, behavior: "smooth"})
+        tablesNavbarRef.current.scroll({left: refNav[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft, behavior: "smooth"})
+    }
+
+    function handleSelectOption(option, i) {
+        setSelectedOption(option);
+        scrollRefIntoView(i);
+    }
+
+    function handleArrows(direction) {
+        let arr = ['basicDetails','assetAllocationRisk','cashAllocation','portfolioQualityRisk','diversityRisk','liquidity','cost','equityMonitor','debtMonitor','sipBook'];
+        
+        let i = arr.findIndex((e) => e === selectedOption) + direction;
+        if (i < arr.length && i >= 0) {
+            scrollRefIntoView(i);
+            setSelectedOption(arr[i])
+        }
+    }
+    
 
     const [checked, setChecked] = useState([false,false,false,false,false]);
     const [selectAll, setSelectAll] = useState(false);
@@ -45,7 +117,7 @@ export default function Portfolio() {
         }))
     }
     const handleCheckAll = (val) => {
-        setChecked(Array(checked.length).fill(val))
+        setChecked(Array(checked.length).fill(val));
     }
 
     const [showClientInfo, setShowClientInfo] = useState(-1);
@@ -59,7 +131,7 @@ export default function Portfolio() {
                     <button className="flex items-center justify-center border-[1px] border-[#E4E5E5] hover:border-[#6f7070] rounded-[7px] gap-x-[10px] h-[40px] w-[100px]"><div className="text-[14px] text-[#6E6E72] font-medium leading-[18px]">Filter</div></button>
                 </div>
             </div>
-           
+            
             <div className="flex">
                 <div className="w-[210px] ml-[-15px]">
                     <div className="flex gap-x-[15.68px] h-[34px] items-center pl-[10px]">
@@ -96,7 +168,7 @@ export default function Portfolio() {
                                     <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} /> 
                                     <p>{client["Client Name"]}</p>
                                     <div onMouseOver={()=>setShowClientInfo(i)} onMouseLeave={()=>setShowClientInfo(-1)} className="relative">
-                                        <InfoOutlinedIcon className="ml-[5px] mb-[-2px] text-[13px] scale-[60%] text-primary " />
+                                        <InfoOutlinedIcon className="ml-[5px] mb-[-2px] text-[13px] text-primary " />
                                             <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto": 'opacity-0 hidden'} absolute flex flex-col h-auto w-[250px] top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
                                                 <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[20px] py-[10px] ">{client["Client Name"]}</h6>
                                                 <div className="py-[10px] px-[20px] flex-col flex gap-y-[10px]">
@@ -116,22 +188,22 @@ export default function Portfolio() {
                 
                 </div>
                 <div className="flex flex-col">
-                    <div className="h-[34px] flex gap-x-[10px] overflow-x-scroll no-scrollbar text-[14px] text-[#BEBEBE] font-bold"> 
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='basicDetails'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('basicDetails')}}>Basic Details</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='assetAllocationRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('assetAllocationRisk')}}>Asset Allocation Risk</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cashAllocation'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('cashAllocation')} }>Cash Allocation</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='portfolioQualityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('portfolioQualityRisk')} }>Portfolio Quality Risk</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='diversityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('diversityRisk')} }>Diversification Risk</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='liquidity'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('liquidity')} }>Liquidity</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cost'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('cost')} }>Cost</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='equityMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('equityMonitor')} }>Equity Monitor</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='debtMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('debtMonitor')} }>Debt Monitor</button>
-                        <button className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='sipBook'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{setSelectedOption('sipBook')} }>SIP Book</button>
+                    <div ref={tablesNavbarRef} {...events} className="h-[34px] flex gap-x-[10px] overflow-x-scroll no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] "> 
+                        <button onMouseDown={null} ref={navBasicDetailsRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='basicDetails'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('basicDetails', 0)}}>Basic Details</button>
+                        <button ref={navAssetAllocationRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='assetAllocationRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('assetAllocationRisk', 1)}}>Asset Allocation Risk</button>
+                        <button ref={navCashAllocationRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cashAllocation'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('cashAllocation', 2)} }>Cash Allocation</button>
+                        <button ref={navPortfolioQualityRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='portfolioQualityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('portfolioQualityRisk', 3)} }>Portfolio Quality Risk</button>
+                        <button ref={navDiversificationRiskRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='diversityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('diversityRisk', 4)} }>Diversification Risk</button>
+                        <button ref={navLiquidityRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='liquidity'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('liquidity', 5)} }>Liquidity</button>
+                        <button ref={navCostRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cost'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('cost', 6)} }>Cost</button>
+                        <button ref={navEquityMonitorRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='equityMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('equityMonitor', 7)} }>Equity Monitor</button>
+                        <button ref={navDebtMonitorRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='debtMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('debtMonitor', 8)} }>Debt Monitor</button>
+                        <button ref={navSIPBookRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='sipBook'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('sipBook', 9)} }>SIP Book</button>
                     </div>
 
-                    <div className="flex overflow-x-scroll w-[calc(100vw-507px)] p-[10px] gap-x-[10px] no-scrollbar ">
+                    <div ref={tablesContainerRef} className={`flex overflow-x-scroll ${ navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] gap-x-[10px] no-scrollbar `}>
 
-                        <div className=" border-[2px] border-[#7EB7F270] rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]">
+                        <div ref={tableBasicDetailsRef} className={` ${ (selectedOption === 'basicDetails') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
                             <table>
                                 <tr className="flex">
                                     <th className="h-[44px] w-[130px] justify-end flex items-center text-[12px] text-[#6E6E72] font-normal pr-[10px]">AUM</th>
@@ -140,7 +212,7 @@ export default function Portfolio() {
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">Since Inception Returns</p></th>
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>RiskScore</p></th>
                                 </tr>
-                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableBasicDetailsRef} onScroll={()=>{handleScroll(tableBasicDetailsRef.current.scrollTop) }}>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableBasicDetailsBodyRef} onScroll={()=>{handleScroll(tableBasicDetailsBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
                                                 <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
@@ -156,7 +228,7 @@ export default function Portfolio() {
                             </table>
                         </div>
                         
-                        <div className=" border-[2px] border-[#7EB7F270] rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]">
+                        <div ref={tableAssetAllocationRef} className={` ${ (selectedOption === 'assetAllocationRisk') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
                             <table>
                                 <tr className="flex">
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">ABC Number</th>
@@ -166,7 +238,7 @@ export default function Portfolio() {
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Debt Exposure</p></th>
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Gold & Others Exposure</p></th>
                                 </tr>
-                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableAssetAllocationRef} onScroll={()=>{handleScroll(tableAssetAllocationRef.current.scrollTop) }}>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableAssetAllocationBodyRef} onScroll={()=>{handleScroll(tableAssetAllocationBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
                                                 <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
@@ -183,12 +255,12 @@ export default function Portfolio() {
                             </table>
                         </div>
 
-                        <div className=" border-[2px] border-[#7EB7F270] rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]">
+                        <div ref={tableCashAllocationRef} className={` ${ (selectedOption === 'cashAllocation') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
                             <table>
                                 <tr className="flex">
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">Overnight/Liquid Exposure</th>
                                 </tr>
-                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableCashAllocationRef} onScroll={()=>{handleScroll(tableCashAllocationRef.current.scrollTop) }}>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableCashAllocationBodyRef} onScroll={()=>{handleScroll(tableCashAllocationBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
                                                 <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
@@ -200,7 +272,7 @@ export default function Portfolio() {
                             </table>
                         </div>
 
-                        <div className=" border-[2px] border-[#7EB7F270] rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]">
+                        <div ref={tablePortfolioQualityRef} className={` ${ (selectedOption === 'portfolioQualityRisk') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
                             <table>
                                 <tr className="flex">
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">5 star rated funds</th>
@@ -209,7 +281,7 @@ export default function Portfolio() {
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Not Rated Fund Exposure</p></th>
                                     <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>FundsIndia Select Fund Exposure</p></th>
                                 </tr>
-                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tablePortfolioQualityRef} onScroll={()=>{handleScroll(tablePortfolioQualityRef.current.scrollTop) }}>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tablePortfolioQualityBodyRef} onScroll={()=>{handleScroll(tablePortfolioQualityBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
                                                 <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
@@ -225,11 +297,207 @@ export default function Portfolio() {
                             </table>
                         </div>
 
+                        <div ref={tableDiversificationRiskRef} className={` ${ (selectedOption === 'diversityRisk') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                            <table>
+                                <tr className="flex">
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">Highest AMC Exposure</th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Highest Fund Exposure</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>2nd Highest Fund Exposure</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Total Number of Non Debt Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Total Number of Funds</p></th>
+                                </tr>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableDiversificationRiskBodyRef} onScroll={()=>{handleScroll(tableDiversificationRiskBodyRef.current.scrollTop) }}>
+                                        {
+                                            data.clients.map( (client, i) =>
+                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["Highest AMC Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["Highest Fund Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["2nd Highest Fund Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["Total Number of Non Debt Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["Total Number of Funds"]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                </div>
+                            </table>
+                        </div>
+
+                        <div ref={tableLiquidityRef} className={` ${ (selectedOption === 'liquidity') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                            <table>
+                                <tr className="flex">
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">% of Portfolio under lock-in</th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>ELSS Exposure</p></th>
+                                </tr>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableLiquidityBodyRef} onScroll={()=>{handleScroll(tableLiquidityBodyRef.current.scrollTop) }}>
+                                        {
+                                            data.clients.map( (client, i) =>
+                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Liquidity"]["% of Portfolio under lock-in"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Liquidity"]["ELSS Exposure"]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                </div>
+                            </table>
+                        </div>
+
+                        <div ref={tableCostRef} className={`${ (selectedOption === 'cost') && "border-[#7EB7F270]  border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                            <table>
+                                <tr className="flex">
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">Portfolio Expense Ratio</th>
+                                </tr>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableCostBodyRef} onScroll={()=>{handleScroll(tableCostBodyRef.current.scrollTop) }}>
+                                        {
+                                            data.clients.map( (client, i) =>
+                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Cost"]["Portfolio Expense Ratio"]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                </div>
+                            </table>
+                        </div>
+
+                        <div ref={tableEquityMonitorRef} className={` ${ (selectedOption === 'equityMonitor') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                            <table>
+                                <tr className="flex">
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">Equity Exposure</th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Active Large Cap Fund Exposure</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Sector/Thematic Exposure</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Small Cap Exposure</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>5 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>4 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>{"<3 Star Funds"}</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>1 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>2 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>3 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Not Rated</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Blend</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Quality</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Value</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Mid & Small</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Global</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Others</p></th>
+                                </tr>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableEquityMonitorBodyRef} onScroll={()=>{handleScroll(tableEquityMonitorBodyRef.current.scrollTop) }}>
+                                        {
+                                            data.clients.map( (client, i) =>
+                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Equity Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Active Large Cap Fund Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Sector/Thematic Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Small Cap Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["5 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["4 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["<3 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["1 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["2 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["3 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Not Rated"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Blend"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Quality"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Value"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Mid & Small"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Global"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Others"]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                </div>
+                            </table>
+                        </div>
+
+                        <div ref={tableDebtMonitorRef} className={` ${ (selectedOption === 'debtMonitor') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                            <table>
+                                <tr className="flex">
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">Debt Exposure</th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Net YTM</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>% of AAA Equivalent</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>5 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>4 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>{"<3 Star Funds"}</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>1 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>2 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>3 Star Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Not Rated</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Liquid & Overnight</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>UST</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Low Duration</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Short Duration</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Medium Duration</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Logn Duration</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Credit Risk</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Dynamic Funds</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Conservative Hybrid</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Others</p></th>
+                                </tr>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableDebtMonitorBodyRef} onScroll={()=>{handleScroll(tableDebtMonitorBodyRef.current.scrollTop) }}>
+                                        {
+                                            data.clients.map( (client, i) =>
+                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Debt Exposure"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Net YTM"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["% of AAA Equivalent"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["5 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["4 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["<3 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["1 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["2 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["3 Star Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Not Rated"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Liquid & Overnight"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["UST"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Low Duration"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Short Duration"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Medium Duration"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Logn Duration"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Credit Risk"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Dynamic Funds"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Conservative Hybrid"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Others"]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                </div>
+                            </table>
+                        </div>
+
+                        <div ref={tableSIPBookRef} className={` ${ (selectedOption === 'sipBook') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                            <table>
+                                <tr className="flex">
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">Total SIP Value</th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Equity</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Debt</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Others</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>5 Star</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>4 Star</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>{"<3 Star"}</p></th>
+                                    <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal"><p>Not Rated</p></th>
+                                </tr>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableSIPBookBodyRef} onScroll={()=>{handleScroll(tableSIPBookBodyRef.current.scrollTop) }}>
+                                        {
+                                            data.clients.map( (client, i) =>
+                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Total SIP Value"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Equity"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Debt"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Others"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["5 Star"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["4 Star"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["<3 Star"]}</td>
+                                                    <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Not Rated"]}</td>
+                                                </tr>
+                                            )
+                                        }
+                                </div>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
-                <div className="w-[41px] h-[30px] flex gap-x-[20px]">
-                    <Image src={leftArrow}/>
-                    <Image src={rightArrow}/>
+                <div className="mr-[-15px] w-[60px] h-[30px] flex px-[10px] justify-between ">
+                    <Image className="cursor-pointer " onClick={() => handleArrows(-1)} src={leftArrow}/>
+                    <Image className="cursor-pointer " onClick={() => handleArrows(1)} src={rightArrow}/>
                     
                 </div>
             </div>
