@@ -25,34 +25,33 @@ export default function Portfolio() {
     // }
 
     //Navigation REFS FOR NAVIGARION BAR
-    const tablesNavbarRef = useRef();
-    const navBasicDetailsRef = useRef();
-    const navAssetAllocationRef = useRef();
-    const navCashAllocationRef = useRef();
-    const navPortfolioQualityRef = useRef();
-    const navDiversificationRiskRef = useRef();
-    const navLiquidityRef = useRef();
-    const navCostRef = useRef();
-    const navEquityMonitorRef = useRef();
-    const navDebtMonitorRef = useRef();
-    const navSIPBookRef = useRef();
+    const tablesNavbarRef = useRef(null);
+    const navBasicDetailsRef = useRef(null);
+    const navAssetAllocationRef = useRef(null);
+    const navCashAllocationRef = useRef(null);
+    const navPortfolioQualityRef = useRef(null);
+    const navDiversificationRiskRef = useRef(null);
+    const navLiquidityRef = useRef(null);
+    const navCostRef = useRef(null);
+    const navEquityMonitorRef = useRef(null);
+    const navDebtMonitorRef = useRef(null);
+    const navSIPBookRef = useRef(null);
 
     //TABLE REFS FOR NAVIGARION BAR
-    const tablesContainerRef = useRef();
-    const tableBasicDetailsRef = useRef();
-    const tableAssetAllocationRef = useRef();
-    const tableCashAllocationRef = useRef();
-    const tablePortfolioQualityRef = useRef();
-    const tableDiversificationRiskRef = useRef();
-    const tableLiquidityRef = useRef();
-    const tableCostRef = useRef();
-    const tableEquityMonitorRef = useRef();
-    const tableDebtMonitorRef = useRef();
-    const tableSIPBookRef = useRef();
+    const tablesContainerRef = useRef(null);
+    const tableBasicDetailsRef = useRef(null);
+    const tableAssetAllocationRef = useRef(null);
+    const tableCashAllocationRef = useRef(null);
+    const tablePortfolioQualityRef = useRef(null);
+    const tableDiversificationRiskRef = useRef(null);
+    const tableLiquidityRef = useRef(null);
+    const tableCostRef = useRef(null);
+    const tableEquityMonitorRef = useRef(null);
+    const tableDebtMonitorRef = useRef(null);
+    const tableSIPBookRef = useRef(null);
 
 
     const { events } = useDraggable(tablesNavbarRef);
-    console.log(events)
 
 
     // TABLE BODY REFS FOR SCROLL
@@ -82,29 +81,83 @@ export default function Portfolio() {
         tableSIPBookBodyRef.current.scroll({top: pos});
     }
 
+    let tableNames = ['basicDetails','assetAllocationRisk','cashAllocation','portfolioQualityRisk','diversityRisk','liquidity','cost','equityMonitor','debtMonitor','sipBook'];
+    let refTable = [tableBasicDetailsRef, tableAssetAllocationRef, tableCashAllocationRef, tablePortfolioQualityRef, tableDiversificationRiskRef, tableLiquidityRef, tableCostRef, tableEquityMonitorRef, tableDebtMonitorRef, tableSIPBookRef]
+    let refNav = [navBasicDetailsRef, navAssetAllocationRef, navCashAllocationRef, navPortfolioQualityRef, navDiversificationRiskRef, navLiquidityRef, navCostRef, navEquityMonitorRef, navDebtMonitorRef, navSIPBookRef]
+
+
     const [selectedOption,setSelectedOption]=useState("basicDetails");
+    const [loadingScroll, setLoadingScroll] = useState(false);
+
+    const handleTableBodyScroll = event => {
+        if (loadingScroll) return;
+
+        let i = tableNames.findIndex((e) => e === selectedOption)
+        let start = refTable[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft;
+        let end = refTable[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft + refTable[i].current.offsetWidth;
+        let current;
+
+        let paddingLeftForLastNav = tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - ( navSIPBookRef.current.offsetLeft + navSIPBookRef.current.offsetWidth + 10 );
+
+        if (tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - navSIPBookRef.current.offsetLeft > 0 ){
+            current = event.currentTarget.scrollLeft + paddingLeftForLastNav + (refNav[i].current.offsetWidth /2) + 10;
+        }
+        else {
+            current = event.currentTarget.scrollLeft + (refNav[i].current.offsetWidth/2);
+        }
+        // console.log( current, paddingLeftForLastNav + (refNav[i].current.offsetWidth /2) + 10, tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - navSIPBookRef.current.offsetLeft > 0 , "start : " + start, " end : " + end )
+
+        if (true) {
+            if ( current > end) {
+                handleSelectOption(tableNames[i+1], i+1);
+            }
+            else if ( current < start) {
+                handleSelectOption(tableNames[i-1], i-1);
+            }
+        }
+    };
 
     function scrollRefIntoView(i) {
-        let refTable = [tableBasicDetailsRef, tableAssetAllocationRef, tableCashAllocationRef, tablePortfolioQualityRef, tableDiversificationRiskRef, tableLiquidityRef, tableCostRef, tableEquityMonitorRef, tableDebtMonitorRef, tableSIPBookRef]
-        let refNav = [navBasicDetailsRef, navAssetAllocationRef, navCashAllocationRef, navPortfolioQualityRef, navDiversificationRiskRef, navLiquidityRef, navCostRef, navEquityMonitorRef, navDebtMonitorRef, navSIPBookRef]
 
-        tablesContainerRef.current.scroll({left: refTable[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft, behavior: "smooth"})
-        tablesNavbarRef.current.scroll({left: refNav[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft, behavior: "smooth"})
+        let paddingLeftForLastNav = tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - ( navSIPBookRef.current.offsetLeft + navSIPBookRef.current.offsetWidth + 10 );
+
+        if (tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - navSIPBookRef.current.offsetLeft > 0 && refTable[i].current.offsetWidth<paddingLeftForLastNav) {
+            tablesContainerRef.current.scroll({left: (refTable[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft) - paddingLeftForLastNav, behavior: "smooth"})
+        }
+        else {
+            tablesContainerRef.current.scroll({left: refTable[i].current.offsetLeft - tableBasicDetailsRef.current.offsetLeft, behavior: "smooth"})
+        }
+        tablesNavbarRef.current.scroll({left: refNav[i].current.offsetLeft - navBasicDetailsRef.current.offsetLeft, behavior: "smooth"})
+
+        // if (tablesNavbarRef.current.offsetWidth + refNav[i].current.offsetLeft - navSIPBookRef.current.offsetLeft > 0 ){
+        //     console.log(paddingLeftForLastNav + (refNav[i].current.offsetWidth /2) + tablesNavbarRef.current.offsetLeft + 10) 
+        // }
+        // else{
+        //     console.log(refNav[i].current.offsetLeft + (refNav[i].current.offsetWidth /2) + (tablesNavbarRef.current.offsetLeft-refNav[i].current.offsetLeft) , tablesNavbarRef.current.offsetLeft-refNav[i].current.offsetLeft)
+        // }
     }
 
     function handleSelectOption(option, i) {
+        if (loadingScroll) return;
+
+        setLoadingScroll(true);
         setSelectedOption(option);
-        scrollRefIntoView(i);
+        scrollRefIntoView(i)
+        setTimeout( () => setLoadingScroll(false), 1000);
     }
 
     function handleArrows(direction) {
-        let arr = ['basicDetails','assetAllocationRisk','cashAllocation','portfolioQualityRisk','diversityRisk','liquidity','cost','equityMonitor','debtMonitor','sipBook'];
         
-        let i = arr.findIndex((e) => e === selectedOption) + direction;
-        if (i < arr.length && i >= 0) {
+        if (loadingScroll) return;
+        
+        let i = tableNames.findIndex((e) => e === selectedOption) + direction;
+        setLoadingScroll(true);
+        if (i < tableNames.length && i >= 0) {
             scrollRefIntoView(i);
-            setSelectedOption(arr[i])
+            setSelectedOption(tableNames[i])
         }
+        setTimeout( () => setLoadingScroll(false), 500);
+
     }
     
 
@@ -188,22 +241,62 @@ export default function Portfolio() {
                 
                 </div>
                 <div className="flex flex-col">
-                    <div ref={tablesNavbarRef} {...events} className="h-[34px] flex gap-x-[10px] overflow-x-scroll no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] "> 
-                        <button onMouseDown={null} ref={navBasicDetailsRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='basicDetails'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('basicDetails', 0)}}>Basic Details</button>
-                        <button ref={navAssetAllocationRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='assetAllocationRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('assetAllocationRisk', 1)}}>Asset Allocation Risk</button>
-                        <button ref={navCashAllocationRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cashAllocation'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('cashAllocation', 2)} }>Cash Allocation</button>
-                        <button ref={navPortfolioQualityRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='portfolioQualityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('portfolioQualityRisk', 3)} }>Portfolio Quality Risk</button>
-                        <button ref={navDiversificationRiskRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='diversityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('diversityRisk', 4)} }>Diversification Risk</button>
-                        <button ref={navLiquidityRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='liquidity'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('liquidity', 5)} }>Liquidity</button>
-                        <button ref={navCostRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cost'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('cost', 6)} }>Cost</button>
-                        <button ref={navEquityMonitorRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='equityMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('equityMonitor', 7)} }>Equity Monitor</button>
-                        <button ref={navDebtMonitorRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='debtMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('debtMonitor', 8)} }>Debt Monitor</button>
-                        <button ref={navSIPBookRef} className={`rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='sipBook'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('sipBook', 9)} }>SIP Book</button>
+                    <div ref={tablesNavbarRef} {...events} className={`h-[44px] flex gap-x-[10px] overflow-x-scroll ${ navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] `}> 
+                        <button onMouseDown={null} ref={navBasicDetailsRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='basicDetails'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('basicDetails', 0)}}>
+                            <p>Basic Details</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'basicDetails' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navAssetAllocationRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='assetAllocationRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('assetAllocationRisk', 1)}}>
+                            <p>Asset Allocation Risk</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'assetAllocationRisk' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navCashAllocationRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cashAllocation'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('cashAllocation', 2)} }>
+                            <p>Cash Allocation</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'cashAllocation' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navPortfolioQualityRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='portfolioQualityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('portfolioQualityRisk', 3)} }>
+                            <p>Portfolio Quality Risk</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'portfolioQualityRisk' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navDiversificationRiskRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='diversityRisk'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('diversityRisk', 4)} }>
+                            <p>Diversification Risk</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'diversityRisk' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navLiquidityRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='liquidity'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('liquidity', 5)} }>
+                            <p>Liquidity</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'liquidity' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navCostRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='cost'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('cost', 6)} }>
+                            <p>Cost</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'cost' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navEquityMonitorRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='equityMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('equityMonitor', 7)} }>
+                            <p>Equity Monitor</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'equityMonitor' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navDebtMonitorRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='debtMonitor'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('debtMonitor', 8)} }>
+                            <p>Debt Monitor</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'debtMonitor' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
+                        <button ref={navSIPBookRef} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption==='sipBook'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={()=>{handleSelectOption('sipBook', 9)} }>
+                            <p>SIP Book</p>
+                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${ selectedOption == 'sipBook' ? ' opacity-100 ': ' opacity-0 '} `}/>
+                        </button>
+
                     </div>
 
-                    <div ref={tablesContainerRef} className={`flex overflow-x-scroll ${ navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] gap-x-[10px] no-scrollbar `}>
+                    <div ref={tablesContainerRef} onScroll={handleTableBodyScroll} className={`flex overflow-x-scroll ${ navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] pt-0 gap-x-[10px] no-scrollbar `}>
 
-                        <div ref={tableBasicDetailsRef} className={` ${ (selectedOption === 'basicDetails') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                        <div ref={tableBasicDetailsRef}  className={` ${ (selectedOption === 'basicDetails') && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
                             <table>
                                 <tr className="flex">
                                     <th className="h-[44px] w-[130px] justify-end flex items-center text-[12px] text-[#6E6E72] font-normal pr-[10px]">AUM</th>
