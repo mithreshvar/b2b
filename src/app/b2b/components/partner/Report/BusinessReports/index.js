@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-function Report() {
+function BusinessReports() {
   return (
     <div className="p-[20px]" >
       <div className="w-full bg-white p-[20px] rounded-[20px]">
@@ -20,4 +20,4 @@ function Report() {
   )
 }
 
-export default Report
+export default BusinessReports

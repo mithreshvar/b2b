@@ -30,15 +30,33 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 //region - Component imports
 import Dashboard from '../components/partner/Dashboard';
 import Registration from '../components/partner/Registration';
-import Report from '../components/partner/Report';
+import Report from '../components/partner/Report/BusinessReports/AUMClientReport';
 import About from '../components/partner/About';
-import Phase3 from '../components/partner/Phase3';
 import Manual from '../components/partner/Manual';
 import Tripartite from '../components/partner/Tripartite';
 import PartnerHome from '../components/partner/PartnerHome';
 import Brokerage from '../components/partner/Brokerage';
 import Portfolio from '../components/partner/Portfolio';
 import Password from '../components/partner/Password';
+// Components for phase 3 Reports
+import BusinessReports from '../components/partner/Report/BusinessReports';
+import AUMClientReport from '../components/partner/Report/BusinessReports/AUMClientReport';
+import PartnerInvoiceReportBrokerage from '../components/partner/Report/BusinessReports/PartnerInvoiceReportBrokerage';
+import TransactioReports from '../components/partner/Report/TransactionReports';
+import AuthorizationPendingReport from '../components/partner/Report/TransactionReports/AuthorizationPendingReport';
+import InvestorSchemeDetails from '../components/partner/Report/TransactionReports/InvestorSchemeDetails';
+import SIPReport from '../components/partner/Report/TransactionReports/SIPReport';
+import STPReport from '../components/partner/Report/TransactionReports/STPReport';
+import SWPReport from '../components/partner/Report/TransactionReports/SWPReport';
+import TransactionReport from '../components/partner/Report/TransactionReports/TransactionReport';
+import UserManagementReports from '../components/partner/Report/UserManagementReports';
+import BirthdayDetails from '../components/partner/Report/UserManagementReports/BirthdayDetails';
+import ClientRTAEmailAndMobile from '../components/partner/Report/UserManagementReports/ClientRTAEmailAndMobile';
+import InvestorDetails from '../components/partner/Report/UserManagementReports/InvestorDetails';
+import LastLoginReport from '../components/partner/Report/UserManagementReports/LastLoginReport';
+import MandatesReport from '../components/partner/Report/UserManagementReports/MandatesReport';
+import ValuationReport from '../components/partner/Report/UserManagementReports/ValuationReport';
+
 import { ClearRounded, LinkRounded } from '@mui/icons-material';
 import { useDataContext } from '../context/DataContext';
 import CustomTable from '../components/partner/PartnerHome/CustomTable';
@@ -240,12 +258,6 @@ export default function Content() {
                                 <h6 className={`cursor-pointer ${active==='manual' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('manual')}} >Partner Manual</h6>
                             </div>
 
-                            <div className='flex gap-x-[14px] items-center relative '>
-                                {active === 'phase3' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('phase3')}}><IPhase3 active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='phase3' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('phase3')}} > Phase 3</h6>
-                            </div>
-
                         </div>
 
                         {/* page segment */}
@@ -261,8 +273,7 @@ export default function Content() {
                                 (active==='portfolio' && <Portfolio /> )||
                                 (active==='registration' && <Registration /> )||
                                 (active==='reports' && <Report /> )||
-                                (active==='tripartite' && <Tripartite /> )||
-                                (active==='phase3' && <Phase3 /> )
+                                (active==='tripartite' && <Tripartite /> )
                             }
 
                         </div>
