@@ -40,5 +40,4 @@ function UserManagementReports() {
     </div>
   );
 }
-
 export default UserManagementReports;

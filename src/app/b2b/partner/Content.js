@@ -82,7 +82,12 @@ export default function Content() {
 
     const [active, setActive] = useState(tab || 'dashboard');
     const [navOpen, setNavOpen] = useState(true);
-    const [viewProfile, setViewProfile] = useState(false)
+    const [viewProfile, setViewProfile] = useState(false);
+
+    const [isReportOpen, setIsReportOpen] = useState(false);
+    const [isBReportOpen, setIsBReportOpen] = useState(false);
+    const [istReportOpen, setIstReportOpen] = useState(false);
+    const [isUReportOpen, setIsUReportOpen] = useState(false);
 
     // const portfolioData = [
     //     [ 'ICICI Prudential Nifty Next 50 Index Fund - Growth', 5, 3.58, 18.51, 18.51],
@@ -125,7 +130,8 @@ export default function Content() {
         }
     }
     if (!portfolioData) return (<></>)
-    
+
+    console.log(active);
     return (
         <ThemeProvider theme={theme} >
             <div className=' overflow-auto relative'>
@@ -249,41 +255,57 @@ export default function Content() {
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('reports')}}><IReports active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
                             </div> */}
-                             <Collapsible trigger={[<IReports active={active} />, "Reports", <HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
-                             triggerWhenOpen={[<IReports active={active} />, "Reports", <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />] }
-                            triggerStyle={{cursor: 'pointer',display: 'flex', gap:'14px', margin: '0', }}>
+                             <Collapsible trigger={[<IReports isOpened={isReportOpen} />, <span className='font-medium'>Reports</span>, <HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
+                                triggerWhenOpen={[<IReports isOpened={isReportOpen} />, <span className='font-semibold text-primary'>Reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />] }
+                                triggerStyle={{cursor: 'pointer',display: 'flex', gap:'14px', margin: '0' }}
+                                open={isReportOpen}
+                                onOpening={() => setIsReportOpen(true)}
+                                onClosing={() => setIsReportOpen(false)}
+                                >
                                 <div className='pl-[16px] pt-[24px] text-[12px]'> 
-                                        <Collapsible trigger={[<IPortfolio active={active} className='h-[3px]'/>,"Business reports",<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
-                                         triggerWhenOpen={[<IPortfolio active={active} />, "Business reports", <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
-                                        triggerStyle={{cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} >
-                                            <div className='pl-[10px] pt-[16px] flex flex-col gap-y-[15px]  text-[10px]'>
-                                        <div onClick={()=>{setActive('AUMClientReports')}}>AUM Client Report</div>
-                                        <div onClick={()=>{setActive('PartnerInvoice')}}>Partner Invoice Report (Brokerage)</div>
-                                    </div>
+                                    <Collapsible trigger={[<IPortfolio isOpened={isBReportOpen} className='h-[3px]'/>,<span className='font-medium'>Business reports</span>,<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
+                                        triggerWhenOpen={[<IPortfolio isOpened={isBReportOpen} />, <span className='font-semibold text-primary'>Business reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
+                                    triggerStyle={{cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
+                                    open={isBReportOpen}
+                                    onOpening={() => setIsBReportOpen(true)}
+                                    onClosing={() => setIsBReportOpen(false)}
+                                    >
+                                        <div className='pl-[10px] pt-[16px] flex flex-col gap-y-[15px]  text-[10px]'>
+                                        <div onClick={()=>{setActive('AUMClientReports')}} className={`cursor-pointer ${active==='AUMClientReports'? 'text-primary': ''}`}>AUM Client Report</div>
+                                        <div onClick={()=>{setActive('PartnerInvoice')}} className={`cursor-pointer ${active==='PartnerInvoice'? 'text-primary': ''}`}>Partner Invoice Report (Brokerage)</div>
+                                </div>
                                  </Collapsible>
-                                 <Collapsible trigger={[<IPortfolio active={active} />,"Transaction reports",<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]} 
-                                  triggerWhenOpen={[<IPortfolio active={active} />, "Transaction reports", <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
-                                 triggerStyle={{ paddingTop: '26.7px',cursor: 'pointer', display: 'flex',gap:'7.8px', margin: '0',}} >
-                                            <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
-                                        <div onClick={()=>{setActive('TransactionReport')}}>TransactionReport</div>
-                                            <div onClick={()=>{setActive('InvestorSchemeDetails')}}>Investor Scheme Details</div>
-                                            <div onClick={()=>{setActive('SIPReport')}}>SIP Report</div>
-                                            <div onClick={()=>{setActive('STPReport')}}>STP Report</div>
-                                            <div onClick={()=>{setActive('SWPReport')}}>SWP Report</div>
-                                            <div onClick={()=>{setActive('AuthorizationPendingReport')}}>Authorization Pending Report</div>
+                                 <Collapsible trigger={[<IPortfolio isOpened={istReportOpen} className='h-[3px]'/>,<span className='font-medium'>Transaction reports</span>,<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
+                                        triggerWhenOpen={[<IPortfolio isOpened={istReportOpen} />, <span className='font-semibold text-primary'>Transaction reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
+                                    triggerStyle={{paddingTop: '26.7px', cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
+                                    open={istReportOpen}
+                                    onOpening={() => setIstReportOpen(true)}
+                                    onClosing={() => setIstReportOpen(false)}
+                                    >
+                                        <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
+                                        <div onClick={()=>{setActive('TransactionReport')}} className={`cursor-pointer ${active==='TransactionReport'? 'text-primary': ''}`}>TransactionReport</div>
+                                        <div onClick={()=>{setActive('InvestorSchemeDetails')}} className={`cursor-pointer ${active==='InvestorSchemeDetails'? 'text-primary': ''}`} >Investor Scheme Details</div>
+                                        <div onClick={()=>{setActive('SIPReport')}} className={`cursor-pointer ${active==='SIPReport'? 'text-primary': ''}`} >SIP Report</div>
+                                        <div onClick={()=>{setActive('STPReport')}} className={`cursor-pointer ${active==='STPReport'? 'text-primary': ''}`} >STP Report</div>
+                                        <div onClick={()=>{setActive('SWPReport')}} className={`cursor-pointer ${active==='SWPReport'? 'text-primary': ''}`} >SWP Report</div>
+                                        <div onClick={()=>{setActive('AuthorizationPendingReport')}} className={`cursor-pointer ${active==='AuthorizationPendingReport'? 'text-primary': ''}`} >Authorization Pending Report</div>
                                      </div>
                                  </Collapsible>
-                                 <Collapsible trigger={[<IPortfolio active={active}/>,"User management reports",<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]} 
-                                  triggerWhenOpen={[<IPortfolio active={active} />, "User management reports", <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
-
-                                 triggerStyle={{paddingTop: '28.73px',cursor: 'pointer',display: 'flex',gap:'7.8px',margin: '0',}} >
-                                            <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
-                                        <div onClick={()=>{setActive('InvestorDetails')}}>Investor Details</div>
-                                        <div onClick={()=>{setActive('ValuationReport')}}>Valuation Report</div>
-                                        <div onClick={()=>{setActive('ClientRTAEmailAndMobile')}}>Client RTA Email and Mobile</div>
-                                        <div onClick={()=>{setActive('MandatesReport')}}>Mandates Report</div>
-                                        <div onClick={()=>{setActive('LastLoginReport')}}>Last Login Report</div>
-                                        <div onClick={()=>{setActive('BirthdayDetails')}}>Birthday details</div>
+                                 <Collapsible 
+                                    trigger={[<IPortfolio isOpened={isUReportOpen} className='h-[3px]'/>,<span className='font-medium'>User management reports</span>,<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
+                                    triggerWhenOpen={[<IPortfolio isOpened={isUReportOpen} />, <span className='font-semibold text-primary'>User management reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
+                                    triggerStyle={{paddingTop: '28.7px', cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
+                                    open={isUReportOpen}
+                                    onOpening={() => setIsUReportOpen(true)}
+                                    onClosing={() => setIsUReportOpen(false)}
+                                    >
+                                        <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
+                                        <div onClick={()=>{setActive('InvestorDetails')}} className={`cursor-pointer ${active==='InvestorDetails'? 'text-primary': ''}`} >Investor Details</div>
+                                        <div onClick={()=>{setActive('ValuationReport')}} className={`cursor-pointer ${active==='ValuationReport'? 'text-primary': ''}`} >Valuation Report</div>
+                                        <div onClick={()=>{setActive('ClientRTAEmailAndMobile')}} className={`cursor-pointer ${active==='ClientRTAEmailAndMobile'? 'text-primary': ''}`} >Client RTA Email and Mobile</div>
+                                        <div onClick={()=>{setActive('MandatesReport')}} className={`cursor-pointer ${active==='MandatesReport'? 'text-primary': ''}`} >Mandates Report</div>
+                                        <div onClick={()=>{setActive('LastLoginReport')}} className={`cursor-pointer ${active==='LastLoginReport'? 'text-primary': ''}`} >Last Login Report</div>
+                                        <div onClick={()=>{setActive('BirthdayDetails')}} className={`cursor-pointer ${active==='BirthdayDetails'? 'text-primary': ''}`} >Birthday details</div>
                                      </div>
                                  </Collapsible>
                                  </div>
