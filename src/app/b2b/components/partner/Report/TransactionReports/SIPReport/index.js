@@ -6,7 +6,7 @@ import CustomTable from "../../../PartnerHome/CustomTable";
 function SIPReport() {
   const SipReportData = [
     ["100000000202000","Anand Ekambaram","18557516","Franklin India Bluechip Fund- Growth","PUR","APPROVED","10,000","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023","10,000"],
-    ["100000001283080","Arruthra Venugopaal/ Hemachandran Babu","16936931/38","ICICI Prudential Nifty Next 50 Index Fund - Growth","PUR","APPROVED","20,000","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023","10,000"]
+    ["100000001283080","Arruthra Venugopaal/ Hemachandran Babu","16936931/38","ICICI Prudential Nifty Next 50 Index Fund - Growth","PUR","APPROVED","20,000","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023","10,000"],
     ["100000001283080","Arruthra Venugopaal/ Hemachandran Babu","16936931/38","ICICI Prudential Technology Fund - Growth","PUR","APPROVED","10,000","03 Oct 2023","4","4","03 Oct 2023","09 Oct 2023","10,000"],
     ["100000001703260","Deepti Bhaskaran","14076836/91","HDFC Hybrid Equity Fund-Growth","PUR","APPROVED","10,000","03 Oct 2023","1","1","03 Oct 2023","09 Oct 2023","10,000"],
     ["100000001049074","Harsh Dittakavi","13921347/85","ICICI Prudential Banking & Financial Services Fund - Growth","PUR","APPROVED","15,000","03 Oct 2023","5","5","03 Oct 2023","09 Oct 2023","10,000"],
@@ -18,17 +18,17 @@ function SIPReport() {
   ]
   const [value, setvalue] = useState('')
   const [tableData, setTableData] = useState(SipReportData);
-  // function filterData() {
-  //   const valueReg = new RegExp(value.trim(), 'i'); // Case-insensitive regex for name
-  //   const filteredData = InvestorScheme.filter((item) => {
-  //     // Check if the name, email, and number match the provided regex patterns
-  //       return (
-  //           (value === '' || valueReg.test(item[0])) 
-  //       );
-  //   });
-  //   // Now, 'filteredData' contains the filtered data based on the provided criteria.
-  //   setTableData(filteredData);
-  // }
+  function filterData() {
+    const valueReg = new RegExp(value.trim(), 'i'); // Case-insensitive regex for name
+    const filteredData = SipReportData.filter((item) => {
+      // Check if the name, email, and number match the provided regex patterns
+        return (
+            (value === '' || valueReg.test(item[1])) 
+        );
+    });
+    // Now, 'filteredData' contains the filtered data based on the provided criteria.
+    setTableData(filteredData);
+  }
 
   const [Status, setStatus] = useState('Active');
   const [StatusErrorMessage, setStatusErrorMessage] = useState('');
@@ -66,7 +66,7 @@ function SIPReport() {
           <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />
         </div>
         <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]">Search</button>
+          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]" onClick={filterData}>Search</button>
           <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
         </div>
       </div>
