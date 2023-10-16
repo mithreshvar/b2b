@@ -12,7 +12,7 @@ export default function Table({headers, tenData=[], setActive}) {
     if(headers[1]=='Scheme Name' && headers[2]=='Current NAV (Rs.)') type = 'schemes';    
 
     return(
-        <div className=" flex flex-col bg-white p-[20px] rounded-[15px] text-left ">
+        <div className=" flex flex-col bg-white p-[20px] rounded-[15px] text-left overflow-auto">
             {
                 (tenData.length === 0) ?
                 <h1 className="text-[24px] font-bold text-center">

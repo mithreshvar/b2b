@@ -1,5 +1,6 @@
 import Image from "next/image"
-
+import Img1 from 'public/partner/Group 570420@2x.png'
+import Img2 from 'public/partner/Group 570421@2x.png'
 function BusinessReports() {
   return (
     <div className="p-[20px]" >
@@ -7,11 +8,11 @@ function BusinessReports() {
         <h1 className="text-[20px] font-semibold leading-[20px] mb-[30px]">Business reports</h1>
         <div className="flex gap-x-[40px]">
           <button className="flex items-center justify-center gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]">
-            <Image height={50} width={52} alt="icon" />
+            <Image height={50} width={50} src={Img1} alt="icon" />
             <h2 className="text-[14px] font-semibold">AUM Client Report</h2>
           </button>
           <button className="flex items-center justify-center gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]">
-            <Image height={50} width={52} alt="icon"/>
+            <Image height={50} width={50} src={Img2} alt="icon"/>
             <h2 className="text-[14px] font-semibold">Partner Invoice Report<br/>(Brokerage)</h2>
           </button>
         </div>
