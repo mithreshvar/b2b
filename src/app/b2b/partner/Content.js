@@ -255,7 +255,7 @@ export default function Content() {
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('reports')}}><IReports active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
                             </div> */}
-                             <Collapsible trigger={[<IReports isOpened={isReportOpen} />, <span className='font-medium'>Reports</span>, <HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
+                             <Collapsible trigger={[<IReports isOpened={isReportOpen} />, <span className='font-medium'>Reports</span>, <HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
                                 triggerWhenOpen={[<IReports isOpened={isReportOpen} />, <span className='font-semibold text-primary'>Reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />] }
                                 triggerStyle={{cursor: 'pointer',display: 'flex', gap:'14px', margin: '0' }}
                                 open={isReportOpen}
