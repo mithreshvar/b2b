@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="112" height="110" viewBox="0 0 112 110">
+  <defs>
+    <filter id="Rectangle_185247" x="0" y="0" width="112" height="110" filterUnits="userSpaceOnUse">
+      <feOffset dy="10" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-opacity="0.078"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_185246" data-name="Rectangle 185246" width="26.74" height="30.659" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_570443" data-name="Group 570443" transform="translate(-612 -142)">
+    <g transform="matrix(1, 0, 0, 1, 612, 142)" filter="url(#Rectangle_185247)">
+      <rect id="Rectangle_185247-2" data-name="Rectangle 185247" width="52" height="50" rx="17" transform="translate(30 20)" fill="#0171e7"/>
+    </g>
+    <g id="Group_570288" data-name="Group 570288" transform="translate(654.63 171.67)">
+      <g id="Group_570280" data-name="Group 570280" clip-path="url(#clip-path)">
+        <path id="Path_251182" data-name="Path 251182" d="M180.307,236.491c-.453-.106-.917-.18-1.358-.325a6.379,6.379,0,1,1,3.136.216c-.174.032-.347.072-.52.109Zm-2.413-5.848,2.287,2.307,3.8-3.8-1.205-1.206-2.576,2.587-1.075-1.126-1.233,1.238" transform="translate(-160.59 -205.832)" fill="#fff"/>
+        <path id="Path_251183" data-name="Path 251183" d="M2.469,204.869a2.292,2.292,0,0,0,.024-.236q0-3.652,0-7.3c0-.069-.008-.138-.014-.247H0l5.912-7.727,5.431,7.712h-2.5v.381q0,3.532,0,7.064c0,.119-.015.238-.022.356Z" transform="translate(0 -174.21)" fill="#fff"/>
+        <path id="Path_251184" data-name="Path 251184" d="M131.951,313.845c.008-.119.022-.237.022-.356q0-2.661,0-5.323v-.361h1.58c.173.774.285,1.536.516,2.26a7.766,7.766,0,0,0,2.434,3.589,2.112,2.112,0,0,1,.177.191Z" transform="translate(-121.397 -283.186)" fill="#fff"/>
+        <path id="Path_251185" data-name="Path 251185" d="M40.337,12.2H35.965v.337c0,1.307,0,2.615,0,3.922a.325.325,0,0,1-.213.366,8.053,8.053,0,0,0-4.436,4.653c-.024.062-.056.121-.1.207-.082-.11-.148-.195-.21-.283q-3.168-4.467-6.331-8.937a.544.544,0,0,0-.512-.258c-1.3.01-2.592.005-3.968.005L30.75,0l9.587,12.2" transform="translate(-18.585)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

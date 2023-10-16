@@ -56,6 +56,18 @@ function TransactionReport() {
   ]
   // 
   // 
+  const [TableData, setTableData] = useState(TransactionReport)
+  function filterData() {
+    const valueReg = new RegExp(Amount.trim(), 'i'); // Case-insensitive regex for name
+    const filteredData = TransactionReport.filter((item) => {
+      // Check if the name, email, and number match the provided regex patterns
+        return (
+            (Amount === '' || valueReg.test(item[5])) 
+        );
+    });
+    // Now, 'filteredData' contains the filtered data based on the provided criteria.
+    setTableData(filteredData);
+  }
   return (
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
@@ -80,13 +92,11 @@ function TransactionReport() {
         </div>
         
         <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]">Search</button>
+          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]" onClick={filterData}>Search</button>
           <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
         </div>
       </div>
-      <div className="w-full overflow-scroll">
-        <CustomTable className={'p-0 justify-start'} overflowX={true} headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tax Date','Tax Type','Paid Through','User Ref ID']} data={TransactionReport} />
-      </div>
+      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tax Date','Tax Type','Paid Through','User Ref ID']} data={TableData} />
     </div>
   );
 }
