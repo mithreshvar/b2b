@@ -9,7 +9,7 @@ export default function Table({headers, tenData=[], setActive}) {
         type = 'portfolio';
     }
     if(headers[2]=='Rating') type = 'rating';
-    if(headers[1]=='Scheme Name') type = 'schemes';    
+    if(headers[1]=='Scheme Name' && headers[2]=='Current NAV (Rs.)') type = 'schemes';    
 
     return(
         <div className=" flex flex-col bg-white p-[20px] rounded-[15px] text-left ">
