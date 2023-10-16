@@ -88,6 +88,7 @@ export default function Portfolio() {
 
 
     const [selectedOption,setSelectedOption]=useState("basicDetails");
+    const [hoverIndex, setHoverIndex] = useState(-1)
     const [loadingScroll, setLoadingScroll] = useState(true);
 
     setTimeout(() => setLoadingScroll(false), 1000); // loading is set false only after initial render
@@ -198,7 +199,7 @@ export default function Portfolio() {
                     </div>
                     <table>
                     <thead>
-                    <th className="h-[54px] max-w-[192px] pt-[10px] flex items-center text-[12px] text-[#6E6E72] font-normal">
+                    <th className="h-[54px] w-[165px] pt-[10px] flex items-center text-[12px] text-[#6E6E72] font-normal">
                         <Checkbox 
                             checked={selectAll} 
                             onChange={(e)=> {
@@ -221,7 +222,7 @@ export default function Portfolio() {
                     <tbody >
                         {
                             data.clients.map( (client, i) => 
-                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}> 
                                     <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} /> 
                                     <p>{client["Client Name"]}</p>
                                     <div onMouseOver={()=>setShowClientInfo(i)} onMouseLeave={()=>setShowClientInfo(-1)} className="relative">
@@ -312,7 +313,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableBasicDetailsBodyRef} onScroll={()=>{handleScroll(tableBasicDetailsBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[130px] justify-end flex items-center pr-[10px]">{client["Basic Details"]["AUM"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Basic Details"]["Net Inflow YTD (without MTM)"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Basic Details"]["Net Inflow Growth (without MTM)"]}</td>
@@ -338,7 +339,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableAssetAllocationBodyRef} onScroll={()=>{handleScroll(tableAssetAllocationBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Asset Allocation Risk"]["ABC Number"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Asset Allocation Risk"]["Equity Exposure"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Asset Allocation Risk"]["Target Exposure"]}</td>
@@ -360,7 +361,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableCashAllocationBodyRef} onScroll={()=>{handleScroll(tableCashAllocationBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Cash Allocation"]["Overnight/Liquid Exposure"]}</td>
                                                 </tr>
                                             )
@@ -381,7 +382,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tablePortfolioQualityBodyRef} onScroll={()=>{handleScroll(tablePortfolioQualityBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Portfolio Quality Risk"]["5 star rated funds"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Portfolio Quality Risk"]["4 star rated funds"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Portfolio Quality Risk"]["Low Rated Fund"]}</td>
@@ -406,7 +407,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableDiversificationRiskBodyRef} onScroll={()=>{handleScroll(tableDiversificationRiskBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["Highest AMC Exposure"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["Highest Fund Exposure"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Diversification Risk"]["2nd Highest Fund Exposure"]}</td>
@@ -428,7 +429,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableLiquidityBodyRef} onScroll={()=>{handleScroll(tableLiquidityBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Liquidity"]["% of Portfolio under lock-in"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Liquidity"]["ELSS Exposure"]}</td>
                                                 </tr>
@@ -446,7 +447,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableCostBodyRef} onScroll={()=>{handleScroll(tableCostBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Cost"]["Portfolio Expense Ratio"]}</td>
                                                 </tr>
                                             )
@@ -479,7 +480,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableEquityMonitorBodyRef} onScroll={()=>{handleScroll(tableEquityMonitorBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Equity Exposure"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Active Large Cap Fund Exposure"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Equity Monitor"]["Sector/Thematic Exposure"]}</td>
@@ -531,7 +532,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableDebtMonitorBodyRef} onScroll={()=>{handleScroll(tableDebtMonitorBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Debt Exposure"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["Net YTM"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["Debt Monitor"]["% of AAA Equivalent"]}</td>
@@ -574,7 +575,7 @@ export default function Portfolio() {
                                 <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={tableSIPBookBodyRef} onScroll={()=>{handleScroll(tableSIPBookBodyRef.current.scrollTop) }}>
                                         {
                                             data.clients.map( (client, i) =>
-                                                <tr className="h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] "> 
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)}  className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${ (hoverIndex == i) &&" border-[#5DA9F8] border-y-[1px] border-r-[1px] "}  `}> 
                                                     <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Total SIP Value"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Equity"]}</td>
                                                     <td className="w-[150px] justify-center flex items-center">{client["SIP Book"]["Debt"]}</td>

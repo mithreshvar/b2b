@@ -31,16 +31,34 @@ import Collapsible from 'react-collapsible';
 //region - Component imports
 import Dashboard from '../components/partner/Dashboard';
 import Registration from '../components/partner/Registration';
-import Report from '../components/partner/Report';
+import Report from '../components/partner/Report/BusinessReports/AUMClientReport';
 import About from '../components/partner/About';
-import Phase3 from '../components/partner/Phase3';
 import Manual from '../components/partner/Manual';
 import Tripartite from '../components/partner/Tripartite';
 import PartnerHome from '../components/partner/PartnerHome';
 import Brokerage from '../components/partner/Brokerage';
 import Portfolio from '../components/partner/Portfolio';
 import Password from '../components/partner/Password';
-import { ClearRounded, LinkRounded } from '@mui/icons-material';
+// Components for phase 3 Reports
+import BusinessReports from '../components/partner/Report/BusinessReports';
+import AUMClientReport from '../components/partner/Report/BusinessReports/AUMClientReport';
+import PartnerInvoiceReportBrokerage from '../components/partner/Report/BusinessReports/PartnerInvoiceReportBrokerage';
+import TransactioReports from '../components/partner/Report/TransactionReports';
+import AuthorizationPendingReport from '../components/partner/Report/TransactionReports/AuthorizationPendingReport';
+import InvestorSchemeDetails from '../components/partner/Report/TransactionReports/InvestorSchemeDetails';
+import SIPReport from '../components/partner/Report/TransactionReports/SIPReport';
+import STPReport from '../components/partner/Report/TransactionReports/STPReport';
+import SWPReport from '../components/partner/Report/TransactionReports/SWPReport';
+import TransactionReport from '../components/partner/Report/TransactionReports/TransactionReport';
+import UserManagementReports from '../components/partner/Report/UserManagementReports';
+import BirthdayDetails from '../components/partner/Report/UserManagementReports/BirthdayDetails';
+import ClientRTAEmailAndMobile from '../components/partner/Report/UserManagementReports/ClientRTAEmailAndMobile';
+import InvestorDetails from '../components/partner/Report/UserManagementReports/InvestorDetails';
+import LastLoginReport from '../components/partner/Report/UserManagementReports/LastLoginReport';
+import MandatesReport from '../components/partner/Report/UserManagementReports/MandatesReport';
+import ValuationReport from '../components/partner/Report/UserManagementReports/ValuationReport';
+
+import { ArchiveTwoTone, ClearRounded, LinkRounded } from '@mui/icons-material';
 import { useDataContext } from '../context/DataContext';
 import CustomTable from '../components/partner/PartnerHome/CustomTable';
 import { get5Data } from '../components/partner/PartnerHome/dummyData';
@@ -75,8 +93,8 @@ export default function Content() {
 
     function handleRoute(tab) {
         setActive(tab);
-        if (tab == 'dashboard') router.push('/partner', undefined, { shallow: true });
-        else router.push(`/partner?tab=${tab}`, undefined, { shallow: true });
+        if (tab == 'dashboard') router.push('/b2b/partner', undefined, { shallow: true });
+        else router.push(`/b2b/partner?tab=${tab}`, undefined, { shallow: true });
     }
 
     const handleCopy = () => {
@@ -115,7 +133,7 @@ export default function Content() {
                     <AppBar position={(investorList||deletePopup||passwordChangedPopup||viewPortfolioScheme)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
-                            <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
+                            <Link href={'/b2b/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
                             {/* <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' /> */}
                         </div>
 
@@ -230,32 +248,32 @@ export default function Content() {
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('reports')}}><IReports active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
                             </div> */}
-                            <Collapsible trigger={"Reports"}>
+                            <Collapsible className='' trigger={"Reports"}>
                                 <div className='pl-[16px] text-[12px]'>
-                                 <Collapsible trigger={"Business reports"} style={{fontSize:"8px"}}>
+                                 <Collapsible trigger={"Business reports"} style={{fontSize:"8px"}} onOpening={()=>{setActive('BussinessReports')}}>
                                     <div className='pl-[10px] text-[10px]'>
-                                        <div>AUM Client Report</div>
-                                        <div>Partner Invoice Report (Brokerage)</div>
+                                        <div onClick={()=>{setActive('AUMClientReports')}}>AUM Client Report</div>
+                                        <div onClick={()=>{setActive('PartnerInvoice')}}>Partner Invoice Report (Brokerage)</div>
                                     </div>
                                  </Collapsible>
-                                 <Collapsible trigger={"Transaction reports"}>
+                                 <Collapsible trigger={"Transaction reports"} onOpening={()=>{setActive('TransactionReports')}}>
                                     <div className='pl-[10px] text-[10px]'>
-                                            <div>Transaction Report</div>
-                                            <div>Investor Scheme Details</div>
-                                            <div>SIP Report</div>
-                                            <div>STP Report</div>
-                                            <div>STP Report</div>
-                                            <div>STP Report</div>
+                                        <div onClick={()=>{setActive('TransactionReport')}}>TransactionReport</div>
+                                            <div onClick={()=>{setActive('InvestorSchemeDetails')}}>Investor Scheme Details</div>
+                                            <div onClick={()=>{setActive('SIPReport')}}>SIP Report</div>
+                                            <div onClick={()=>{setActive('STPReport')}}>STP Report</div>
+                                            <div onClick={()=>{setActive('SWPReport')}}>SWP Report</div>
+                                            <div onClick={()=>{setActive('AuthorizationPendingReport')}}>Authorization Pending Report</div>
                                      </div>
                                  </Collapsible>
-                                 <Collapsible trigger={"User management reports"}>
+                                 <Collapsible trigger={"User management reports"} onOpening={()=>{setActive('UserManagementReports')}}>
                                     <div className='pl-[10px] text-[10px]'>
-                                        <div>Investor Details</div>
-                                        <div>Valuation Report</div>
-                                        <div>Client RTA Email and Mobile</div>
-                                        <div>Mandates Report</div>
-                                        <div>Last Login Report</div>
-                                        <div>Birthday details</div>
+                                        <div onClick={()=>{setActive('InvestorDetails')}}>Investor Details</div>
+                                        <div onClick={()=>{setActive('ValuationReport')}}>Valuation Report</div>
+                                        <div onClick={()=>{setActive('ClientRTAEmailAndMobile')}}>Client RTA Email and Mobile</div>
+                                        <div onClick={()=>{setActive('MandatesReport')}}>Mandates Report</div>
+                                        <div onClick={()=>{setActive('LastLoginReport')}}>Last Login Report</div>
+                                        <div onClick={()=>{setActive('BirthdayDetails')}}>Birthday details</div>
                                      </div>
                                  </Collapsible>
                                  </div>
@@ -274,12 +292,6 @@ export default function Content() {
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('manual')}}><IManual active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='manual' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('manual')}} >Partner Manual</h6>
                             </div>
-                           {/* 
-                            <div className='flex gap-x-[14px] items-center relative '>
-                                {active === 'phase3' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
-                                <span className='cursor-pointer' onClick={()=>{handleRoute('phase3')}}><IPhase3 active={active} /></span>
-                                <h6 className={`cursor-pointer ${active==='phase3' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('phase3')}} > Phase 3</h6>
-                            </div> */}
 
                         </div>
 
@@ -297,7 +309,23 @@ export default function Content() {
                                 (active==='registration' && <Registration /> )||
                                 (active==='reports' && <Report /> )||
                                 (active==='tripartite' && <Tripartite /> )||
-                                (active==='phase3' && <Phase3 /> )
+                                (active==='BussinessReports' && <BusinessReports/>)||
+                                (active==='AUMClientReports' &&<AUMClientReport/>)||
+                                (active==='PartnerInvoice' && <PartnerInvoiceReportBrokerage/>)||
+                                (active==='TransactionReports' && <TransactioReports/>)||
+                                (active==='TransactionReport' && <TransactionReport/>) ||
+                                (active==='InvestorSchemeDetails' && <InvestorSchemeDetails/>)||
+                                (active==='SIPReport' && <SIPReport/>)||
+                                (active==='STPReport' && <STPReport/>)||
+                                (active==='SWPReport' && <SWPReport/>)||
+                                (active==='AuthorizationPendingReport' &&<AuthorizationPendingReport/>)||
+                                (active==='UserManagementReports' &&<UserManagementReports/>)||
+                                (active==='InvestorDetails' && <InvestorDetails/>)||
+                                (active==='ValuationReport' && <ValuationReport/>)||
+                                (active==='ClientRTAEmailAndMobile' && <ClientRTAEmailAndMobile/>)||
+                                (active==='MandatesReport' && <MandatesReport/>)||
+                                (active==='LastLoginReport' && <LastLoginReport/>)||
+                                (active==='BirthdayDetails' && <BirthdayDetails/>)
                             }
 
                         </div>
@@ -308,12 +336,12 @@ export default function Content() {
             {(passwordChangedPopup) &&
                 <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
                     <div className='relative w-[736px] h-[393px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
-                        <Link href={"/login"}>
+                        <Link href={"/b2b/login"}>
                             <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPasswordChangedPopup(false)}} />
                         </Link>
                         <div className='flex justify-center items-center h-full flex-col'>
                             <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} alt='Success' />
-                            <Link href={"/login"}>
+                            <Link href={"/b2b/login"}>
                                 <p className='text-[20px] text-[#00A345] font-semibold mt-[6px]'>Your Password Updated Successfully. Please <span className='text-primary'>Re-Login</span></p>
                             </Link>
                         </div>
