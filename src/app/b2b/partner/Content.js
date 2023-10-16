@@ -24,6 +24,7 @@ import ITripartite from '/public/partner/Tripartite';
 import IPhase3 from '/public/partner/Phase3';
 // import rrkLogo from '/public/rrklogo/rrklogo@2x.png';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import Collapsible from 'react-collapsible';
 
 // import back from '/public/partner/back.svg'
 
@@ -92,8 +93,8 @@ export default function Content() {
 
     function handleRoute(tab) {
         setActive(tab);
-        if (tab == 'dashboard') router.push('/b2b/partner', undefined, { shallow: true });
-        else router.push(`/b2b/partner?tab=${tab}`, undefined, { shallow: true });
+        if (tab == 'dashboard') router.push('/partner', undefined, { shallow: true });
+        else router.push(`/partner?tab=${tab}`, undefined, { shallow: true });
     }
 
     const handleCopy = () => {
@@ -132,7 +133,7 @@ export default function Content() {
                     <AppBar position={(investorList||deletePopup||passwordChangedPopup||viewPortfolioScheme)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
-                            <Link href={'/b2b/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
+                            <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
                             {/* <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' /> */}
                         </div>
 
@@ -240,11 +241,45 @@ export default function Content() {
                                 <h6 className={`cursor-pointer ${active==='portfolio' && 'font-semibold text-primary'}`} onClick={()=>{ setAddSchemeList([]); setAddScheme(false); handleRoute('portfolio')}} >Partner Portfolio</h6>
                             </div>
 
-                            <div className='flex gap-x-[14px] items-center relative '>
+
+                            {/* report */}
+                            {/* <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'reports' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('reports')}}><IReports active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
-                            </div>
+                            </div> */}
+                            <Collapsible trigger={"Reports"}>
+                                <div className='pl-[16px] text-[12px]'>
+                                 <Collapsible trigger={"Business reports"} style={{fontSize:"8px"}}>
+                                    <div className='pl-[10px] text-[10px]'>
+                                        <div>AUM Client Report</div>
+                                        <div>Partner Invoice Report (Brokerage)</div>
+                                    </div>
+                                 </Collapsible>
+                                 <Collapsible trigger={"Transaction reports"}>
+                                    <div className='pl-[10px] text-[10px]'>
+                                            <div>Transaction Report</div>
+                                            <div>Investor Scheme Details</div>
+                                            <div>SIP Report</div>
+                                            <div>STP Report</div>
+                                            <div>STP Report</div>
+                                            <div>STP Report</div>
+                                     </div>
+                                 </Collapsible>
+                                 <Collapsible trigger={"User management reports"}>
+                                    <div className='pl-[10px] text-[10px]'>
+                                        <div>Investor Details</div>
+                                        <div>Valuation Report</div>
+                                        <div>Client RTA Email and Mobile</div>
+                                        <div>Mandates Report</div>
+                                        <div>Last Login Report</div>
+                                        <div>Birthday details</div>
+                                     </div>
+                                 </Collapsible>
+                                 </div>
+                            </Collapsible>
+
+
 
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'brokerage' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
@@ -284,12 +319,12 @@ export default function Content() {
             {(passwordChangedPopup) &&
                 <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
                     <div className='relative w-[736px] h-[393px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
-                        <Link href={"/b2b/login"}>
+                        <Link href={"/login"}>
                             <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPasswordChangedPopup(false)}} />
                         </Link>
                         <div className='flex justify-center items-center h-full flex-col'>
                             <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} alt='Success' />
-                            <Link href={"/b2b/login"}>
+                            <Link href={"/login"}>
                                 <p className='text-[20px] text-[#00A345] font-semibold mt-[6px]'>Your Password Updated Successfully. Please <span className='text-primary'>Re-Login</span></p>
                             </Link>
                         </div>
