@@ -1,11 +1,22 @@
 import Arrow from "/public/partner/Arrow.js";
-import {CustomSelectField, CustomTextField} from "../../../../InputFields";
+import {CustomSelectField, CustomTextField, CustomDatePicker} from "../../../../InputFields";
 import { useState } from "react";
 import CustomTable from "../../../PartnerHome/CustomTable";
-import Reset from "/public/partner/reset.svg"
-import Image from "next/image";
 
 function AuthorizationPendingReport() {
+  const Authorizationpendingreports =[
+    ["S Nagarajan/ GPadmini","Nagaraj@gmail.com","984637678","Axis Flexi Cap Fund- Reg(G)","Purchase","40000","0","09 Oct 2023"]
+    ["Dattatraya Kulkarni","Nagaraj@gmail.com","984637678","Aditva Birla SL Frontline EquityFund(G)","Purchase","35000","0","09 Oct 2023"],
+    ["Santosh Venkatachalam","Nagaraj@gmail.com","984637678","Parag Parikh Liquid Fund-Reg(G)","Purchase","150000","0","08 Oct 2023"],
+    ["Santosh Venkatachalam","Nagaraj@gmail.com","984637678","Parag Parikh Liquid Fund-Reg(G)","Purchase","150000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","HDFC Mid-Cap Opportunities Fund(G)","Purchase","10000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","Axis Midcan Fund- Reg(G)","Purchase","10000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","Kotak Bluechip Fund(G)","Purchase","10000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","SBI BlueChip Fund- Reg(G)","Purchase","10000","0","07 Oct 2023"],
+    ["Dattatraya Kulkarni","Nagaraj@gmail.com","984637678","Parag Parikh Flexi Cap Fund-Reg(G)","Purchase","30000","0","07 Oct 2023"],
+    ["Venkatachalam Sankarasubramanian","Nagaraj@gmail.com","984637678","Nippon India Growth Fund(G)","Purchase","15000","0","06 Oct 2023"]
+]
+
   const [TransactionType, setTransactionType] = useState('Purchase');
   const [TransactionTypeErrorMessage, setTransactionTypeErrorMessage] = useState('');
   const handleTransactionTypeChange = (event) => {
@@ -14,78 +25,53 @@ function AuthorizationPendingReport() {
   };
   const TransactionTypeOptions = ['Purchase','Additional purchase','Redemption','Switch'];
 
-  const [Success, setSuccess] = useState('Success');
-  const [SuccessErrorMessage, setSuccessErrorMessage] = useState('');
-  const handleSuccessChange = (event) => {
-    const value = event.target.value;
-    setSuccess(value);
+  const[fromDate,setFromDate] = useState();
+  const[toDate,setToDate] = useState();
+  const [fromDateErrorMessage, setFromDateErrorMessage] = useState('');
+  const [toDateErrorMessage, setToDateErrorMessage] = useState('');
+  const handleFromDateChange = (newDate) => {
+    setFromDate(newDate);
   };
-  const SuccessOptions = ['Success','Under Process','Failed'];
-
-  const [FilterAmount, setFilterAmount] = useState('Greater Than');
-  const [FilterAmountErrorMessage, setFilterAmountErrorMessage] = useState('');
-  const handleFilterAmountChange = (event) => {
-    const value = event.target.value;
-    setFilterAmount(value);
-  };
-  const FilterAmountOptions = ['Greater Than'];
-
-  const [Amount, setAmount] = useState();
-  const handleAmountChange = (event) => {
-    const value = event.target.value;
-    setAmount(value);
-  };
+  const handleToDateChange = (newDate) => {
+    setToDate(newDate);
+  }
 
 
+  const [value, setvalue] = useState('')
+  const [tableData, setTableData] = useState(Authorizationpendingreports);
+  function filterData() {
+    const valueReg = new RegExp(value.trim(), 'i'); // Case-insensitive regex for name
+    const filteredData = Authorizationpendingreports.filter((item) => {
+      // Check if the name, email, and number match the provided regex patterns
+        return (
+            (value === '' || valueReg.test(item[1]) || valueReg.test(item[2]) || valueReg.test(item[3])) 
+        );
+    });
+    // Now, 'filteredData' contains the filtered data based on the provided criteria.
+    setTableData(filteredData);
+  }
 
-  // 
-  // 
-  // Data
-  const TransactionReport = [
-    ["S Nagarajan/ GPadmini","Axis Flexi Cap Fund- Reg(G)","91086859796","Processing","0","40000","09 Oct 2023","PUR","ENACH","41469960"],
-    ["Dattatraya Kulkarni","Aditva Birla SL Frontline EquityFund(G)","1037144947","Processing","0","35000","09 Oct 2023","PUR","NACH","41467512"],
-    ["Santosh Venkatachalam","Parag Parikh Liquid Fund-Reg(G)","12420705","Processing","0","150000","08 Oct 2023","PUR","rz_netbanking","41499105"],
-    ["Santosh Venkatachalam","Parag Parikh Liquid Fund-Reg(G)","12420705","Processing","0","150000","07 Oct 2023","PUR","rz_netbanking","41499102"],
-    ["Shantha Narayanan","HDFC Mid-Cap Opportunities Fund(G)","17995610/72","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450595"],
-    ["Shantha Narayanan","Axis Midcan Fund- Reg(G)","910122163446","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450594"],
-    ["Shantha Narayanan","Kotak Bluechip Fund(G)","8844995/44","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450596"],
-    ["Shantha Narayanan","SBI BlueChip Fund- Reg(G)","26655956","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450597"],
-    ["Dattatraya Kulkarni","Parag Parikh Flexi Cap Fund-Reg(G)","12373805","Processing","0","30000","07 Oct 2023","PUR","NACH","41448502"],
-    ["Venkatachalam Sankarasubramanian","Nippon India Growth Fund(G)","499266662595","Processing","0","15000","06 Oct 2023","PUR","rz_netbanking","41457490"]
-  ]
-  // 
-  // 
   return (
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
           <Arrow left={true} active={true}/>
-          <h1 className="text-[20px] font-semibold leading-[20px]">Transaction Report</h1>
+          <h1 className="text-[20px] font-semibold leading-[20px]">Authorization Pending Report</h1>
         </div>
         <div className='flex gap-x-[50px]'>
+          <CustomTextField label='Email/Mobile/Scheme Name' value={value} handleChange={(event)=>{setvalue(event.target.value)}}/>
           <CustomSelectField label="Transaction Type" value={TransactionType} valueOptions={TransactionTypeOptions} errorMessage={TransactionTypeErrorMessage} handleChange={handleTransactionTypeChange} />
-          <CustomSelectField label="Success" value={Success} valueOptions={SuccessOptions} errorMessage={SuccessErrorMessage} handleChange={handleSuccessChange} />
         </div>
-        <div className="flex">
-          <div className='flex gap-x-[50px]'>
-            <CustomSelectField label="Filter Amount" value={FilterAmount} valueOptions={FilterAmountOptions} errorMessage={FilterAmountErrorMessage} handleChange={handleFilterAmountChange} />
-            <CustomTextField label='Amount' value={Amount} handleChange={handleAmountChange}/>
-          </div>
-          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]">
-            <Image src={Reset}/>
-            <p className="text-[14px] font-medium text-[#0066CD]">Clear</p>
-          </button>
-          
+        <div className='flex gap-x-[50px]'>
+          <CustomDatePicker label="From Date" value={fromDate} handleChange={handleFromDateChange} disableFuture={true} errorMessage={fromDateErrorMessage} />
+          <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />
         </div>
-        
         <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]">Search</button>
+          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]" onClick={filterData}>Search</button>
           <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
         </div>
       </div>
-      <div className="w-full overflow-scroll">
-        <CustomTable className={'p-0 justify-start'} overflowX={true} headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tax Date','Tax Type','Paid Through','User Ref ID']} data={TransactionReport} />
-      </div>
+      <CustomTable className={'justify-start'}headers={['Investor Names','Email','Mobile','Scheme Name','Transaction','Amount(Rs.)','Units',' Created Date']} data={tableData} />
     </div>
   );
 }

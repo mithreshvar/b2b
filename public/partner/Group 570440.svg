@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="112" height="110" viewBox="0 0 112 110">
+  <defs>
+    <filter id="Rectangle_185134" x="0" y="0" width="112" height="110" filterUnits="userSpaceOnUse">
+      <feOffset dy="10" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-opacity="0.078"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_185164" data-name="Rectangle 185164" width="30.176" height="30.184" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_570440" data-name="Group 570440" transform="translate(-270 -142)">
+    <g transform="matrix(1, 0, 0, 1, 270, 142)" filter="url(#Rectangle_185134)">
+      <rect id="Rectangle_185134-2" data-name="Rectangle 185134" width="52" height="50" rx="17" transform="translate(30 20)" fill="#0171e7"/>
+    </g>
+    <g id="Group_570134" data-name="Group 570134" transform="translate(310.912 171.908)">
+      <g id="Group_570134-2" data-name="Group 570134" clip-path="url(#clip-path)">
+        <path id="Path_251161" data-name="Path 251161" d="M83.633,0A7.717,7.717,0,1,1,75.9,7.673,7.723,7.723,0,0,1,83.633,0" transform="translate(-69.23 0.001)" fill="#fff"/>
+        <path id="Path_251162" data-name="Path 251162" d="M16.455,189.576a8.892,8.892,0,0,0-.12,12.033c-.126.007-.229.017-.333.017q-6.726,0-13.452,0a2.372,2.372,0,0,1-2.54-2.552,19.908,19.908,0,0,1,.059-2.529,5.655,5.655,0,0,1,2.316-3.657,14,14,0,0,1,4.95-2.434,25.885,25.885,0,0,1,8.619-.928c.152.007.3.03.5.05" transform="translate(0 -172.835)" fill="#fff"/>
+        <path id="Path_251163" data-name="Path 251163" d="M183.04,190.461a7.37,7.37,0,1,1,7.371-7.349,7.374,7.374,0,0,1-7.371,7.349m1.055-5.619c0-.558,0-1.116,0-1.674a1.053,1.053,0,1,0-2.1,0q-.013,1.691,0,3.382a1.074,1.074,0,0,0,1.056,1.112,1.058,1.058,0,0,0,1.045-1.113c.007-.569,0-1.138,0-1.707m-1.058-6.308a1.405,1.405,0,0,0,.022,2.811,1.405,1.405,0,1,0-.022-2.811" transform="translate(-160.234 -160.277)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

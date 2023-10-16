@@ -47,7 +47,7 @@ export default function TableRow ({data , setActive, type}) {
 
     return(
         <tr class="even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium">
-            {data.map((ele, index)=>{
+            {data?.map((ele, index)=>{
                 if (type == 'rating' && index == 2) 
                     return <td ><p className='text-[#42B093] flex gap-x-[3px] items-center'>{ele}<Image src={star} className='w-[13px] h-[13px] pb-[2px]' /></p></td>
                 if (type == 'schemes' && index==5)
