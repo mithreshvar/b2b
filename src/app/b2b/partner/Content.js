@@ -133,7 +133,7 @@ export default function Content() {
                     <AppBar position={(investorList||deletePopup||passwordChangedPopup||viewPortfolioScheme)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
-                            <Link href={'/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
+                            <Link href={'/b2b/'}><Image src='/logo.svg' width={125} height={36} /></Link>   
                             {/* <Image src={rrkLogo} className='w-[152px] h-[40px] border-l-[1px] border-[#70707030]' alt='rrk logo' /> */}
                         </div>
 
@@ -336,12 +336,12 @@ export default function Content() {
             {(passwordChangedPopup) &&
                 <div className='absolute w-screen h-screen z-20 top-0 bg-[rgba(10,22,8,0.3)] flex items-center justify-center' >
                     <div className='relative w-[736px] h-[393px] rounded-[20px] bg-white py-[70px] px-[80px] text-center flex flex-col gap-y-[50px]  items-center '>
-                        <Link href={"/login"}>
+                        <Link href={"/b2b/login"}>
                             <ClearRounded className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setPasswordChangedPopup(false)}} />
                         </Link>
                         <div className='flex justify-center items-center h-full flex-col'>
                             <Image src="/home/Group 405761/Group 405761@2x.png" width={113} height={133} alt='Success' />
-                            <Link href={"/login"}>
+                            <Link href={"/b2b/login"}>
                                 <p className='text-[20px] text-[#00A345] font-semibold mt-[6px]'>Your Password Updated Successfully. Please <span className='text-primary'>Re-Login</span></p>
                             </Link>
                         </div>
