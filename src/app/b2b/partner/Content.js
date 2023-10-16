@@ -58,7 +58,7 @@ import LastLoginReport from '../components/partner/Report/UserManagementReports/
 import MandatesReport from '../components/partner/Report/UserManagementReports/MandatesReport';
 import ValuationReport from '../components/partner/Report/UserManagementReports/ValuationReport';
 
-import { ClearRounded, LinkRounded } from '@mui/icons-material';
+import { ArchiveTwoTone, ClearRounded, LinkRounded } from '@mui/icons-material';
 import { useDataContext } from '../context/DataContext';
 import CustomTable from '../components/partner/PartnerHome/CustomTable';
 import { get5Data } from '../components/partner/PartnerHome/dummyData';
@@ -93,8 +93,8 @@ export default function Content() {
 
     function handleRoute(tab) {
         setActive(tab);
-        if (tab == 'dashboard') router.push('/partner', undefined, { shallow: true });
-        else router.push(`/partner?tab=${tab}`, undefined, { shallow: true });
+        if (tab == 'dashboard') router.push('/b2b/partner', undefined, { shallow: true });
+        else router.push(`/b2b/partner?tab=${tab}`, undefined, { shallow: true });
     }
 
     const handleCopy = () => {
@@ -248,32 +248,32 @@ export default function Content() {
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('reports')}}><IReports active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
                             </div> */}
-                            <Collapsible trigger={"Reports"}>
+                            <Collapsible className='' trigger={"Reports"}>
                                 <div className='pl-[16px] text-[12px]'>
-                                 <Collapsible trigger={"Business reports"} style={{fontSize:"8px"}}>
+                                 <Collapsible trigger={"Business reports"} style={{fontSize:"8px"}} onOpening={()=>{setActive('BussinessReports')}}>
                                     <div className='pl-[10px] text-[10px]'>
-                                        <div>AUM Client Report</div>
-                                        <div>Partner Invoice Report (Brokerage)</div>
+                                        <div onClick={()=>{setActive('AUMClientReports')}}>AUM Client Report</div>
+                                        <div onClick={()=>{setActive('PartnerInvoice')}}>Partner Invoice Report (Brokerage)</div>
                                     </div>
                                  </Collapsible>
-                                 <Collapsible trigger={"Transaction reports"}>
+                                 <Collapsible trigger={"Transaction reports"} onOpening={()=>{setActive('TransactionReports')}}>
                                     <div className='pl-[10px] text-[10px]'>
-                                            <div>Transaction Report</div>
-                                            <div>Investor Scheme Details</div>
-                                            <div>SIP Report</div>
-                                            <div>STP Report</div>
-                                            <div>STP Report</div>
-                                            <div>STP Report</div>
+                                        <div onClick={()=>{setActive('TransactionReport')}}>TransactionReport</div>
+                                            <div onClick={()=>{setActive('InvestorSchemeDetails')}}>Investor Scheme Details</div>
+                                            <div onClick={()=>{setActive('SIPReport')}}>SIP Report</div>
+                                            <div onClick={()=>{setActive('STPReport')}}>STP Report</div>
+                                            <div onClick={()=>{setActive('SWPReport')}}>SWP Report</div>
+                                            <div onClick={()=>{setActive('AuthorizationPendingReport')}}>Authorization Pending Report</div>
                                      </div>
                                  </Collapsible>
-                                 <Collapsible trigger={"User management reports"}>
+                                 <Collapsible trigger={"User management reports"} onOpening={()=>{setActive('UserManagementReports')}}>
                                     <div className='pl-[10px] text-[10px]'>
-                                        <div>Investor Details</div>
-                                        <div>Valuation Report</div>
-                                        <div>Client RTA Email and Mobile</div>
-                                        <div>Mandates Report</div>
-                                        <div>Last Login Report</div>
-                                        <div>Birthday details</div>
+                                        <div onClick={()=>{setActive('InvestorDetails')}}>Investor Details</div>
+                                        <div onClick={()=>{setActive('ValuationReport')}}>Valuation Report</div>
+                                        <div onClick={()=>{setActive('ClientRTAEmailAndMobile')}}>Client RTA Email and Mobile</div>
+                                        <div onClick={()=>{setActive('MandatesReport')}}>Mandates Report</div>
+                                        <div onClick={()=>{setActive('LastLoginReport')}}>Last Login Report</div>
+                                        <div onClick={()=>{setActive('BirthdayDetails')}}>Birthday details</div>
                                      </div>
                                  </Collapsible>
                                  </div>
@@ -308,7 +308,24 @@ export default function Content() {
                                 (active==='portfolio' && <Portfolio /> )||
                                 (active==='registration' && <Registration /> )||
                                 (active==='reports' && <Report /> )||
-                                (active==='tripartite' && <Tripartite /> )
+                                (active==='tripartite' && <Tripartite /> )||
+                                (active==='BussinessReports' && <BusinessReports/>)||
+                                (active==='AUMClientReports' &&<AUMClientReport/>)||
+                                (active==='PartnerInvoice' && <PartnerInvoiceReportBrokerage/>)||
+                                (active==='TransactionReports' && <TransactioReports/>)||
+                                (active==='TransactionReport' && <TransactionReport/>) ||
+                                (active==='InvestorSchemeDetails' && <InvestorSchemeDetails/>)||
+                                (active==='SIPReport' && <SIPReport/>)||
+                                (active==='STPReport' && <STPReport/>)||
+                                (active==='SWPReport' && <SWPReport/>)||
+                                (active==='AuthorizationPendingReport' &&<AuthorizationPendingReport/>)||
+                                (active==='UserManagementReports' &&<UserManagementReports/>)||
+                                (active==='InvestorDetails' && <InvestorDetails/>)||
+                                (active==='ValuationReport' && <ValuationReport/>)||
+                                (active==='ClientRTAEmailAndMobile' && <ClientRTAEmailAndMobile/>)||
+                                (active==='MandatesReport' && <MandatesReport/>)||
+                                (active==='LastLoginReport' && <LastLoginReport/>)||
+                                (active==='BirthdayDetails' && <BirthdayDetails/>)
                             }
 
                         </div>
