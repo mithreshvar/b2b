@@ -77,14 +77,14 @@ function TransactionReport() {
         </div>
         <div className='flex gap-x-[50px]'>
           <CustomSelectField label="Transaction Type" value={TransactionType} valueOptions={TransactionTypeOptions} errorMessage={TransactionTypeErrorMessage} handleChange={handleTransactionTypeChange} />
-          <CustomSelectField label="Success" value={Success} valueOptions={SuccessOptions} errorMessage={SuccessErrorMessage} handleChange={handleSuccessChange} />
+          <CustomSelectField label="Status" value={Success} valueOptions={SuccessOptions} errorMessage={SuccessErrorMessage} handleChange={handleSuccessChange} />
         </div>
         <div className="flex">
           <div className='flex gap-x-[50px]'>
             <CustomSelectField label="Filter Amount" value={FilterAmount} valueOptions={FilterAmountOptions} errorMessage={FilterAmountErrorMessage} handleChange={handleFilterAmountChange} />
             <CustomTextField label='Amount' value={Amount} handleChange={handleAmountChange}/>
           </div>
-          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]">
+          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]" onClick={()=>{setAmount('')}}>
             <Image src={Reset}/>
             <p className="text-[14px] font-medium text-[#0066CD]">Clear</p>
           </button>
