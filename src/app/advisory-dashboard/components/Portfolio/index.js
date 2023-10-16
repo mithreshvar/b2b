@@ -12,6 +12,7 @@ import whatsappIcon from "/public/Group 549708.svg";
 import telegramIcon from "/public/Path 238665.svg";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useDataContext } from "../../context/DataContext";
+import Arrow from "../../../../../public/partner/Arrow";
 
 export default function Portfolio() {
 
@@ -591,10 +592,9 @@ export default function Portfolio() {
 
                     </div>
                 </div>
-                <div className="mr-[-15px] w-[60px] h-[30px] flex px-[10px] justify-between ">
-                    <Image className="cursor-pointer " onClick={() => handleArrows(-1)} src={leftArrow}/>
-                    <Image className="cursor-pointer " onClick={() => handleArrows(1)} src={rightArrow}/>
-                    
+                <div className="mr-[-15px] w-[60px] h-[30px] flex pl-[10px] pr-[5px] justify-between items-center ">
+                    <button onClick={() => handleArrows(-1) }><Arrow active={!(selectedOption=='basicDetails')} left={true} h={12} w={8} notActiveClr={'#0071e750'} /></button>
+                    <button onClick={() => handleArrows(1) }><Arrow active={!(selectedOption=='sipBook')} h={12} w={8} notActiveClr={'#0071e750'} /></button>
                 </div>
             </div>
         </div>
