@@ -1,5 +1,5 @@
-import Arrow from "/public/partner/Arrow.js";
 import {CustomSelectField, CustomTextField} from "../../../../InputFields";
+import Arrow from "/public/partner/Arrow.js";
 import { useState } from "react";
 import CustomTable from "../../../PartnerHome/CustomTable";
 import Reset from "/public/partner/reset.svg"
