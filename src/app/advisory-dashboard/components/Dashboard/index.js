@@ -13,17 +13,17 @@ import dot from 'public/Dashboard/Group 508926.svg'
 import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-export default function Dashboard({setActive}) {
+export default function Dashboard({ setActive }) {
     const [isCritical, setisCritical] = useState(true);
-        return (
+    return (
         <div className="p-[30px] scroll-auto text-[14px] flex flex-col gap-y-[20px]">
 
             {/* Name Container */}
             <div className="h-[82px] flex justify-between items-center">
                 <div className="flex">
                     <div className="w-[70px] h-[70px]">
-                        <CircularProgressbarWithChildren value={(+data.tasks.today)/(+data.tasks.total)*100} strokeWidth={"5"} styles={buildStyles({ pathColor: "#0171e7", })} >
-                            <Image className="w-[55px] h-[55px]" src={Avathar}/>
+                        <CircularProgressbarWithChildren value={(+data.tasks.today) / (+data.tasks.total) * 100} strokeWidth={"5"} styles={buildStyles({ pathColor: "#0171e7", })} >
+                            <Image className="w-[55px] h-[55px]" src={Avathar} />
                         </CircularProgressbarWithChildren>
                     </div>
                     <div className="ml-[20px] flex flex-col gap-[10px]">
@@ -41,94 +41,94 @@ export default function Dashboard({setActive}) {
             <div className="bg-white w-full p-[20px] rounded-[10px] ">
                 <div className="flex justify-between">
                     <div className="flex w-[272px] gap-[38px] justify-center pb-[8px]">
-                        <button className={`text-[16px] px-[30px] ${isCritical && 'font-bold'}`} onClick={()=>{setisCritical(true)}}>Critical</button>
-                        <button className={`text-[16px] px-[30px] ${!isCritical && 'font-bold'}`}onClick={()=>{setisCritical(false)}}>Others</button>
+                        <button className={`text-[16px] px-[30px] ${isCritical && 'font-bold'}`} onClick={() => { setisCritical(true) }}>Critical</button>
+                        <button className={`text-[16px] px-[30px] ${!isCritical && 'font-bold'}`} onClick={() => { setisCritical(false) }}>Others</button>
                     </div>
                     <div className="flex gap-[4px] pr-[20px]">
-                        <Image src={sort}/>
+                        <Image src={sort} />
                         <button className="text-[#6E8CA0] text-[14px] font-medium">Sort</button>
                     </div>
                 </div>
-                
+
                 <div className="w-[272px] relative flex h-[2px] bg-[#EDEDED] rounded-[5px] mb-[18px]">
-                    <div className={`absolute left-0 ${!isCritical && ' translate-x-[150px] '} w-[122px] h-[4px] rounded-[5px] bg-primary transition-[all_0.4s] `}/>
+                    <div className={`absolute left-0 ${!isCritical && ' translate-x-[150px] '} w-[122px] h-[4px] rounded-[5px] bg-primary transition-[all_0.4s] `} />
                 </div>
                 {
-                    
-                    (isCritical)?
-                    <div className="max-h-[200px] overflow-auto">
-                        <table class="w-full table-fixed text-left text-[14px]">
-                        <thead className="text-[#6E6E72] text-[12px] sticky top-0">
-                        <tr className="align-top border-b-[1px] bg-white border-b-[#F2F2F2] [&>*:nth-child(1)]:w-[200px] [&>*:nth-child(2)]:w-[180px] [&>*:nth-child(3)]:w-[260px] [&>*:nth-child(4)]:w-[150px] [&>*:nth-child(4)]:pl-[70px] [&>*:nth-child(5)]:pl-[100px]">
-                            <th className="font-medium pb-[5px]">Client Name</th>
-                            <th className="font-medium pb-[5px]">Date</th>
-                            <th className="font-medium pb-[5px]">Task</th>
-                            <th className="font-medium pb-[5px]">Status</th>
-                            <th className="font-medium pb-[5px]">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
 
-                            {
-                                data["Critical/Others"].Critical.map(person => 
-                                    <>
-                                        <tr className="align-top [&>*:nth-child(1)]:w-[200px] [&>*:nth-child(2)]:w-[150px] [&>*:nth-child(3)]:w-[260px] [&>*:nth-child(4)]:w-[150px] [&>*:nth-child(4)]:pl-[70px] [&>*:nth-child(5)]:pl-[100px]">
-                                            <td className="pt-[15px]" rowSpan={3}>{person.name}</td>
-                                            <td className="pt-[15px]">{person.data[0].date}</td>
-                                            <td className="pt-[15px]">{person.data[0].task}</td>
-                                            <td className="pt-[15px] text-[#EA9954] font-semibold">{person.data[0].status}</td>
-                                            <td className="pt-[15px] text-[#0066CD] font-semibold">{person.data[0].action}</td>
-                                        </tr>
-                                        <tr className="align-top [&>*:nth-child(1)]:w-[150px] [&>*:nth-child(2)]:w-[260px] [&>*:nth-child(3)]:w-[150px] [&>*:nth-child(3)]:pl-[70px] [&>*:nth-child(4)]:pl-[100px]">
-                                            <td className="pt-[15px]">{person.data[1].date}</td>
-                                            <td className="pt-[15px]">{person.data[1].task}</td>
-                                            <td className="pt-[15px] text-[#EA9954] font-semibold">{person.data[1].status}</td>
-                                            <td className="pt-[15px] text-[#0066CD] font-semibold">{person.data[1].action}</td>
-                                        </tr>
-                                        <tr className="align-top border-b-[1px] border-b-[#F2F2F2] [&>*:nth-child(1)]:w-[150px] [&>*:nth-child(2)]:w-[260px] [&>*:nth-child(3)]:w-[150px] [&>*:nth-child(3)]:pl-[70px] [&>*:nth-child(4)]:pl-[100px]">
-                                            <td className="pt-[15px] pb-[10px]">{person.data[2].date}</td>
-                                            <td className="pt-[15px] pb-[10px]">{person.data[2].task}</td>
-                                            <td className="pt-[15px] pb-[10px] text-[#EA9954] font-semibold">{person.data[2].status}</td>
-                                            <td className="pt-[15px] pb-[10px] text-[#0066CD] font-semibold">{person.data[2].action}</td>
-                                        </tr>
-                                    </>
-                                )
-                            }
+                    (isCritical) ?
+                        <div className="max-h-[200px] overflow-auto">
+                            <table class="w-full table-fixed text-left text-[14px]">
+                                <thead className="text-[#6E6E72] text-[12px] sticky top-0">
+                                    <tr className="align-top border-b-[1px] bg-white border-b-[#F2F2F2] [&>*:nth-child(1)]:w-[200px] [&>*:nth-child(2)]:w-[180px] [&>*:nth-child(3)]:w-[260px] [&>*:nth-child(4)]:w-[150px] [&>*:nth-child(4)]:pl-[70px] [&>*:nth-child(5)]:pl-[100px]">
+                                        <th className="font-medium pb-[5px]">Client Name</th>
+                                        <th className="font-medium pb-[5px]">Date</th>
+                                        <th className="font-medium pb-[5px]">Task</th>
+                                        <th className="font-medium pb-[5px]">Status</th>
+                                        <th className="font-medium pb-[5px]">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        </tbody>
-                        </table>
-                    </div>
-                    :
-                    <div className="max-h-[200px] overflow-auto">
-                        <table class="w-full table-fixed text-left text-[14px]">
-                        <thead className="text-[#6E6E72] text-[12px] sticky top-0">
-                        <tr className="align-top border-b-[1px] bg-white border-b-[#F2F2F2] ">
-                            <th className="font-medium pb-[5px]">Client Name</th>
-                            <th className="font-medium pb-[5px]">Date</th>
-                            <th className="font-medium pb-[5px]">Task</th>
-                            <th className="font-medium pb-[5px]">Status</th>
-                            <th className="font-medium pb-[5px]">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                                    {
+                                        data["Critical/Others"].Critical.map(person =>
+                                            <>
+                                                <tr className="align-top [&>*:nth-child(1)]:w-[200px] [&>*:nth-child(2)]:w-[150px] [&>*:nth-child(3)]:w-[260px] [&>*:nth-child(4)]:w-[150px] [&>*:nth-child(4)]:pl-[70px] [&>*:nth-child(5)]:pl-[100px]">
+                                                    <td className="pt-[15px]" rowSpan={3}>{person.name}</td>
+                                                    <td className="pt-[15px]">{person.data[0].date}</td>
+                                                    <td className="pt-[15px]">{person.data[0].task}</td>
+                                                    <td className="pt-[15px] text-[#EA9954] font-semibold">{person.data[0].status}</td>
+                                                    <td className="pt-[15px] text-[#0066CD] font-semibold">{person.data[0].action}</td>
+                                                </tr>
+                                                <tr className="align-top [&>*:nth-child(1)]:w-[150px] [&>*:nth-child(2)]:w-[260px] [&>*:nth-child(3)]:w-[150px] [&>*:nth-child(3)]:pl-[70px] [&>*:nth-child(4)]:pl-[100px]">
+                                                    <td className="pt-[15px]">{person.data[1].date}</td>
+                                                    <td className="pt-[15px]">{person.data[1].task}</td>
+                                                    <td className="pt-[15px] text-[#EA9954] font-semibold">{person.data[1].status}</td>
+                                                    <td className="pt-[15px] text-[#0066CD] font-semibold">{person.data[1].action}</td>
+                                                </tr>
+                                                <tr className="align-top border-b-[1px] border-b-[#F2F2F2] [&>*:nth-child(1)]:w-[150px] [&>*:nth-child(2)]:w-[260px] [&>*:nth-child(3)]:w-[150px] [&>*:nth-child(3)]:pl-[70px] [&>*:nth-child(4)]:pl-[100px]">
+                                                    <td className="pt-[15px] pb-[10px]">{person.data[2].date}</td>
+                                                    <td className="pt-[15px] pb-[10px]">{person.data[2].task}</td>
+                                                    <td className="pt-[15px] pb-[10px] text-[#EA9954] font-semibold">{person.data[2].status}</td>
+                                                    <td className="pt-[15px] pb-[10px] text-[#0066CD] font-semibold">{person.data[2].action}</td>
+                                                </tr>
+                                            </>
+                                        )
+                                    }
 
-                            {
-                                data["Critical/Others"].Others.map(person => 
-                                    <>
-                                        <tr className="align-top border-b-[1px] border-b-[#F2F2F2] [&>*:nth-child(1)]:w-[250px] [&>*:nth-child(2)]:w-[150px] [&>*:nth-child(3)]:w-[150px] [&>*:nth-child(4)]:w-[150px]">
-                                            <td className="pt-[15px] pb-[15px]">{person.name}</td>
-                                            <td className="pt-[15px] pb-[15px]">{person.date}</td>
-                                            <td className="pt-[15px] pb-[15px]">{person.task}</td>
-                                            <td className={`pt-[15px] pb-[15px] ${person.status === "Completed"? 'text-[#6FC88D]' : "text-[#EA9954]"} font-semibold`}>{person.status}</td>
-                                            <td className={`pt-[15px] pb-[15px] ${person.status === "Completed"? 'text-[#6FC88D]' : "text-[#0066CD]"} font-semibold`}>{person.action}</td>
-                                        </tr>
-                                    </>
-                                )
-                            }
+                                </tbody>
+                            </table>
+                        </div>
+                        :
+                        <div className="max-h-[200px] overflow-auto">
+                            <table class="w-full table-fixed text-left text-[14px]">
+                                <thead className="text-[#6E6E72] text-[12px] sticky top-0">
+                                    <tr className="align-top border-b-[1px] bg-white border-b-[#F2F2F2] ">
+                                        <th className="font-medium pb-[5px]">Client Name</th>
+                                        <th className="font-medium pb-[5px]">Date</th>
+                                        <th className="font-medium pb-[5px]">Task</th>
+                                        <th className="font-medium pb-[5px]">Status</th>
+                                        <th className="font-medium pb-[5px]">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        </tbody>
-                        </table>
-                    </div>
+                                    {
+                                        data["Critical/Others"].Others.map(person =>
+                                            <>
+                                                <tr className="align-top border-b-[1px] border-b-[#F2F2F2] [&>*:nth-child(1)]:w-[250px] [&>*:nth-child(2)]:w-[150px] [&>*:nth-child(3)]:w-[150px] [&>*:nth-child(4)]:w-[150px]">
+                                                    <td className="pt-[15px] pb-[15px]">{person.name}</td>
+                                                    <td className="pt-[15px] pb-[15px]">{person.date}</td>
+                                                    <td className="pt-[15px] pb-[15px]">{person.task}</td>
+                                                    <td className={`pt-[15px] pb-[15px] ${person.status === "Completed" ? 'text-[#6FC88D]' : "text-[#EA9954]"} font-semibold`}>{person.status}</td>
+                                                    <td className={`pt-[15px] pb-[15px] ${person.status === "Completed" ? 'text-[#6FC88D]' : "text-[#0066CD]"} font-semibold`}>{person.action}</td>
+                                                </tr>
+                                            </>
+                                        )
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
                 }
             </div>
 
@@ -138,52 +138,52 @@ export default function Dashboard({setActive}) {
                     <div className="flex items-center justify-between mb-[20px]">
                         <h2 className="text-[16px] font-bold">Monitoring Target & Client AUM</h2>
                         <button className="text-[14px] font-semibold text-[#0066CD]">View All</button>
-                    </div>   
+                    </div>
                     <div className="flex flex-col gap-y-[20px] items-start justify-between w-full">
                         <div className="flex w-full h-fit justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
                             <div className="flex items-center w-2/5 gap-x-[20px]">
-                                <Image className="w-[40px] h-[40px]" src={target}/>
+                                <Image className="w-[40px] h-[40px]" src={target} />
                                 <div className="flex flex-col">
                                     <h3 className="text-[#6E6E72] text-[14px] font-medium">Target AUM</h3>
                                     <div className="text-[20px] font-semibold">10%</div>
                                 </div>
                             </div>
-                            <div className="h-[65px] border-[1px] border-[#F2F2F2] mx-[20px]"/>
+                            <div className="h-[65px] border-[1px] border-[#F2F2F2] mx-[20px]" />
                             <div className="flex items-center w-3/5 gap-[20px]">
-                                <Image className="w-[40px] h-[40px]" src={people}/>
+                                <Image className="w-[40px] h-[40px]" src={people} />
                                 <div className="flex flex-col">
                                     <h3 className="text-[#6E6E72] text-[14px] font-medium">Current AUM</h3>
                                     <div className="flex gap-[81px]">
                                         <div className="text-[20px] font-semibold">8%</div>
                                         <div className="flex w-[67px] h-[25px] items-center justify-center rounded-[13px] bg-[#EA995420]">
-                                            <Image className="w-[14px] h-[10px]" src={down}/>
+                                            <Image className="w-[14px] h-[10px]" src={down} />
                                             <div className="text-[#EA9954] text-[16px] font-semibold">-2%</div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="flex w-full h-fit justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
                             <div className="flex items-center w-2/5 gap-x-[20px]">
-                                <Image className="w-[40px] h-[40px]" src={target}/>
+                                <Image className="w-[40px] h-[40px]" src={target} />
                                 <div className="flex flex-col">
                                     <h3 className="text-[#6E6E72] text-[14px] font-medium">Target SIP</h3>
                                     <div className="text-[20px] font-semibold">10%</div>
                                 </div>
                             </div>
-                            <div className="h-[65px] border-[1px] border-[#F2F2F2] mx-[20px]"/>
+                            <div className="h-[65px] border-[1px] border-[#F2F2F2] mx-[20px]" />
                             <div className="flex items-center w-3/5 gap-[20px]">
-                                <Image className="w-[40px] h-[40px]" src={people}/>
+                                <Image className="w-[40px] h-[40px]" src={people} />
                                 <div className="flex flex-col">
                                     <h3 className="text-[#6E6E72] text-[14px] font-medium">Current SIP</h3>
                                     <div className="flex gap-[73px]">
                                         <div className="text-[20px] font-semibold">18%</div>
                                         <div className="flex w-[67px] h-[25px] items-center justify-center rounded-[13px] bg-[#6FC88D20]">
-                                            <Image className="w-[14px] h-[10px]" src={up}/>
+                                            <Image className="w-[14px] h-[10px]" src={up} />
                                             <div className="text-[#6FC88D] text-[16px] font-semibold">+3%</div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -192,40 +192,40 @@ export default function Dashboard({setActive}) {
                 <div className="flex flex-col w-2/5">
                     <div className="flex items-center justify-between mb-[20px]">
                         <h2 className="text-[16px] font-bold">Client Portfolio Monitor</h2>
-                        <button onClick={()=>setActive('portfolio-monitor')} className="text-[14px] font-semibold text-[#0066CD]">View All</button>
+                        <button onClick={() => setActive('portfolio-monitor')} className="text-[14px] font-semibold text-[#0066CD]">View All</button>
                     </div>
                     <div className="flex flex-col w-full h-full justify-center gap-y-[20px] rounded-[9px] bg-[#FBFBFF] p-[20px]">
                         <div className="flex items-center w-3/5 gap-[20px]">
-                            <Image className="w-[40px] h-[40px]" src={people}/>
-                                <div className="flex flex-col">
-                                    <h3 className="text-[#6E6E72] text-[14px] font-medium">Total users</h3>
-                                    <div className="text-[20px] font-semibold">300</div>
-                                </div> 
+                            <Image className="w-[40px] h-[40px]" src={people} />
+                            <div className="flex flex-col">
+                                <h3 className="text-[#6E6E72] text-[14px] font-medium">Total users</h3>
+                                <div className="text-[20px] font-semibold">300</div>
+                            </div>
                         </div>
                         <div className="flex items-center w-3/5 gap-[20px]">
-                            <Image className="w-[40px] h-[40px]" src={target}/>
+                            <Image className="w-[40px] h-[40px]" src={target} />
                             <div className="flex flex-col">
                                 <h3 className="text-[#6E6E72] text-[14px] font-medium">Total AUM</h3>
                                 <div className="flex gap-[27px]">
                                     <div className="text-[20px] font-semibold">50,00,00,00</div>
                                     <div className="flex w-[67px] h-[25px] items-center justify-center rounded-[13px] bg-[#6FC88D20]">
-                                        <Image className="w-[14px] h-[10px]" src={up}/>
+                                        <Image className="w-[14px] h-[10px]" src={up} />
                                         <div className="text-[#6FC88D] text-[16px] font-semibold">+3%</div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                         <div className="flex items-center w-3/5 gap-[20px]">
-                            <Image className="w-[40px] h-[40px]" src={people}/>
+                            <Image className="w-[40px] h-[40px]" src={people} />
                             <div className="flex flex-col">
                                 <h3 className="text-[#6E6E72] text-[14px] font-medium">Total SIP</h3>
                                 <div className="flex gap-[26px]">
                                     <div className="text-[20px] font-semibold">3,00,00,000</div>
                                     <div className="flex w-[67px] h-[25px] items-center justify-center rounded-[13px] bg-[#6FC88D20]">
-                                        <Image className="w-[14px] h-[10px]" src={up}/>
+                                        <Image className="w-[14px] h-[10px]" src={up} />
                                         <div className="text-[#6FC88D] text-[16px] font-semibold">+50%</div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -253,8 +253,8 @@ export default function Dashboard({setActive}) {
                 <div className="h-[126px] w-3/5 bg-white rounded-[10px] p-[20px]">
                     <h2 className="text-[16px] font-bold mb-[20px]">Remainder</h2>
                     <div className="flex flex-col gap-y-[15px]">
-                        <div className="w-full border-[7px] border-[#F2F2F2] rounded-[13px] animate-pulse"/>
-                        <div className="w-4/5 border-[7px] border-[#F2F2F2] rounded-[13px] animate-pulse"/>
+                        <div className="w-full border-[7px] border-[#F2F2F2] rounded-[13px] animate-pulse" />
+                        <div className="w-4/5 border-[7px] border-[#F2F2F2] rounded-[13px] animate-pulse" />
                     </div>
                 </div>
             </div>
@@ -266,12 +266,12 @@ export default function Dashboard({setActive}) {
                         <div className="flex items-center justify-between mb-[20px]">
                             <h2 className="text-[16px] font-bold leading-[12px]">Redemption Dashboard</h2>
                             <button className="text-[14px] font-medium text-[#0066CD]">View All</button>
-                        </div>   
+                        </div>
                         <div className="flex flex-col gap-y-[20px] items-start justify-between w-full text-[14px]">
                             <div className="flex w-full justify-around">
                                 <div className=" w-[48%] h-[84px] justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
                                     <div className="flex gap-x-[20px]">
-                                        <Image className="w-[32px] h-[32px]" src={people}/>
+                                        <Image className="w-[32px] h-[32px]" src={people} />
                                         <div className="flex flex-col">
                                             <h3 className="text-[#6E6E72] width-[50px] text-[14px] font-medium">Total user on redemption page</h3>
                                             <div className="text-[20px] font-semibold">3000</div>
@@ -279,39 +279,39 @@ export default function Dashboard({setActive}) {
                                     </div>
                                 </div>
                                 <div className="w-[48%] h-[84px] justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
-                                <div className="flex gap-[20px]">
-                                    <Image className="w-[32px] h-[32px]" src={calender}/>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-[#6E6E72] text-[14px] font-medium">Total redemption today</h3>
-                                        <div className="flex gap-[81px]">
-                                            <div className="text-[20px] font-semibold">₹ 3,000</div>
-                                        </div> 
+                                    <div className="flex gap-[20px]">
+                                        <Image className="w-[32px] h-[32px]" src={calender} />
+                                        <div className="flex flex-col">
+                                            <h3 className="text-[#6E6E72] text-[14px] font-medium">Total redemption today</h3>
+                                            <div className="flex gap-[81px]">
+                                                <div className="text-[20px] font-semibold">₹ 3,000</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
 
                             <div className="flex w-full justify-around">
-                            <div className=" w-[48%] h-[84px] justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
-                                <div className="flex gap-x-[20px]">
-                                    <Image className="w-[32px] h-[32px]" src={calender}/>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-[#6E6E72] width-[50px] text-[14px] font-medium">Total redemption MTD</h3>
-                                        <div className="text-[20px] font-semibold">₹ 3,00,000</div>
+                                <div className=" w-[48%] h-[84px] justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
+                                    <div className="flex gap-x-[20px]">
+                                        <Image className="w-[32px] h-[32px]" src={calender} />
+                                        <div className="flex flex-col">
+                                            <h3 className="text-[#6E6E72] width-[50px] text-[14px] font-medium">Total redemption MTD</h3>
+                                            <div className="text-[20px] font-semibold">₹ 3,00,000</div>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                                 <div className=" w-[48%] h-[84px] justify-center rounded-[9px] bg-[#FBFBFF] p-[20px]">
-                                <div className="flex   gap-[20px]">
-                                    <Image className="w-[32px] h-[32px]" src={calender}/>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-[#6E6E72] text-[14px] font-medium">Total redemption YTD</h3>
-                                        <div className="flex gap-[81px]">
-                                            <div className="text-[20px] font-semibold">₹ 4,00,000</div>
-                                        </div> 
+                                    <div className="flex   gap-[20px]">
+                                        <Image className="w-[32px] h-[32px]" src={calender} />
+                                        <div className="flex flex-col">
+                                            <h3 className="text-[#6E6E72] text-[14px] font-medium">Total redemption YTD</h3>
+                                            <div className="flex gap-[81px]">
+                                                <div className="text-[20px] font-semibold">₹ 4,00,000</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -320,7 +320,7 @@ export default function Dashboard({setActive}) {
                 <div className="w-2/5 h-[261px] flex flex-col rounded-[10px] bg-[#FFFFFF] p-[20px] gap-[15px]">
                     <div className="flex items-center justify-between mb-[5px]">
                         <h2 className="text-[16px] font-bold">Portfolio Review</h2>
-                        <div className="text-[12px] flex gap-[5px] items-center"> <Image className="w-[14px]  h-[14px]" src={dot}/> <span>Include team's clients</span></div>
+                        <div className="text-[12px] flex gap-[5px] items-center"> <Image className="w-[14px]  h-[14px]" src={dot} /> <span>Include team's clients</span></div>
                     </div>
 
                     <div className="bg-[#FBFBFF] h-[46px] rounded-[9px] w-full p-[4px] flex gap-[25px] items-center">
@@ -356,7 +356,7 @@ export default function Dashboard({setActive}) {
                 <p className="text-[16px] font-bold">Early Risk Warning System </p>
                 <div className=" flex justify-between mt-[19px] h-[14px]">
                     <p className=" font-medium text-[#6E6E72]">Client  level Risks </p>
-                    <p className="text-[#0066CD] font-medium">View client list</p>
+                    <p className="text-[#0066CD] font-medium cursor-pointer">View client list</p>
                 </div>
                 <div className="mt-[20px] flex justify-between gap-[60px] items-start">
                     <div className="w-[225px] h-[46px] bg-[#F8F9FF] flex justify-start items-center rounded-[9px]">
@@ -393,16 +393,16 @@ export default function Dashboard({setActive}) {
                                 <tr>
                                     <td className="p-4 text-left text-[14px] w-[300px] pl-[50px]">Franklin Templeton Debt</td>
                                     <td className="p-4 text-left text-[14px] w-[350px] h-[32px]">consectetur adipiscing elit.    Donec ullamcorper aliquam interdum.</td>
-                                    <td className="p-4 text-left pl-[50px] w-[250px] items-center flex flex-nowrap"> <div className=" w-[33px] h-[34px] mr-[6px]"><CircularProgressbar value={80/120*100} strokeWidth={"11"} /></div>
+                                    <td className="p-4 text-left pl-[50px] w-[250px] items-center flex flex-nowrap"> <div className=" w-[33px] h-[34px] mr-[6px]"><CircularProgressbar value={80 / 120 * 100} strokeWidth={"11"} /></div>
                                         <div><span className="text-[18px] font-bold">80</span> <span className="text-[14px] font-bold">/120</span></div>
                                     </td>
-                                    <td className="p-4 text-left  text-[#0066CD] ">View Client</td>
+                                    <td className="p-4 text-left  text-[#0066CD] cursor-pointer ">View Client</td>
                                 </tr>
                                 <tr className=" ">
                                     <td className="p-4 text-left mb-[20px] pl-[50px]">Axis Bank</td>
                                     <td className="p-4 text-left mb-[20px]">Vivamus varius iaculis eleifend. Nam id tristique nulla, nec convallis nulla.</td>
-                                    <td className="p-4 text-left mb-[20px] pl-[50px] flex items-center flex-nowrap"> <div className=" w-[33px] h-[34px] mr-[6px]"><CircularProgressbar  value={90/300*100} strokeWidth={"11"}  styles={buildStyles({ pathColor: "orange", })}/></div> <div><span className="text-[18px] font-bold">90</span> <span className="text-[14px] font-bold">/300</span></div></td>
-                                    <td className="p-4 text-left text-[#0066CD] mb-[20px]">View client</td>
+                                    <td className="p-4 text-left mb-[20px] pl-[50px] flex items-center flex-nowrap"> <div className=" w-[33px] h-[34px] mr-[6px]"><CircularProgressbar value={90 / 300 * 100} strokeWidth={"11"} styles={buildStyles({ pathColor: "orange", })} /></div> <div><span className="text-[18px] font-bold">90</span> <span className="text-[14px] font-bold">/300</span></div></td>
+                                    <td className="p-4 text-left text-[#0066CD] mb-[20px] cursor-pointer">View client</td>
                                 </tr>
                             </tbody>
                         </table>
