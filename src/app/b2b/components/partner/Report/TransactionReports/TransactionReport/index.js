@@ -77,7 +77,7 @@ function TransactionReport() {
         </div>
         <div className='flex gap-x-[50px]'>
           <CustomSelectField label="Transaction Type" value={TransactionType} valueOptions={TransactionTypeOptions} errorMessage={TransactionTypeErrorMessage} handleChange={handleTransactionTypeChange} />
-          <CustomSelectField label="Success" value={Success} valueOptions={SuccessOptions} errorMessage={SuccessErrorMessage} handleChange={handleSuccessChange} />
+          <CustomSelectField label="Status" value={Success} valueOptions={SuccessOptions} errorMessage={SuccessErrorMessage} handleChange={handleSuccessChange} />
         </div>
         <div className="flex">
           <div className='flex gap-x-[50px]'>
