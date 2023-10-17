@@ -35,7 +35,7 @@ function AddNote() {
         else {
             setDescription([{ "Date": moment().format("DD-MM-YYYY"), "Notes": text }, ...Description])
         }
-        settext("note")
+        settext("Note")
         setEdit(false)
         setIsfocus(false)
     }
@@ -49,7 +49,7 @@ const DeleteNote = ()=>{
 
     return (
         <div>
-        <div className={` w-[100%] h-[479px] pr-[15px] pl-[30px] ${Delete ? "opacity-30 ":"opacity-100 bg-white "}`}>
+        <div className={` w-[100%] h-[479px] pr-[15px] pl-[30px] ${Delete ? "opacity-20 ":"opacity-100 bg-white "}`}>
 
             <div className='w-full flex justify-end'>
                 <Image src={close} className='mt-[15px]' />
@@ -60,7 +60,7 @@ const DeleteNote = ()=>{
 
 
             {focus ? (<legend className={`absolute mt-[13.3px] backdrop-blur-3xl bg-white ml-[20px] text-[12px] w-[42px] pl-[5px] text-[#6E6E72]`}>Note</legend>) : ""}
-            <textarea className={`w-full mr-[15px] mt-[20px] border-[#E4E5E5] text- ${edit || text !== "Notes" ? "[#6E6E72]" : "black   "} border-[2px] pt-[5px] pl-[15px] rounded-[8px]`} value={text} onChange={textchange} onClick={() => { setIsfocus(true), settext("") }} onBlur={() => { setIsfocus(false); edit ||  text !== "Note"? "" : settext("Note"); }}></textarea>
+            <textarea className={`w-full mr-[15px] mt-[20px] border-[#E4E5E5] text- ${edit || text !== "Notes" ? "[#6E6E72]" : "black   "} border-[2px] pt-[5px] pl-[15px] rounded-[8px]`} value={text} onChange={textchange} onClick={() => { setIsfocus(true), edit ? "" : settext("");}} onBlur={() => { setIsfocus(false); edit ? "" : settext("Note"); }}></textarea>
 
 
 
@@ -72,7 +72,7 @@ const DeleteNote = ()=>{
             <div className='w-full flex justify-end gap-[20px]'>
 
                 <button className={`w-[114px] h-[40px] ${edit ? "opacity-100" : "opacity-0"}  rounded-[25px] text-[#0071E7] font-medium text-[14px]`} onClick={() => {
-                    settext("note"); setEdit(false); setIsfocus(false)
+                    settext("Note"); setEdit(false); setIsfocus(false)
                 }}>Cancel</button>
                 <button className={`w-[114px] h-[40px] ${text !== "" ? "bg-[#0071E7] opacity-1" : "bg-[#0071E7] opacity-[0.5]"}  rounded-[25px] text-white font-semibold text-[14px]`} onClick={handleSave}>Save</button>
             </div>
@@ -114,8 +114,8 @@ const DeleteNote = ()=>{
             <br />
             <p className='text-[#000000]  text-[14px]'>Are you sure, you want to delete the note created on {moment(Description[Index].Date, "DD-MM-YYYY").format("D MMM YYYY")}?</p>
             <div className=' flex justify-center gap-[40px] mt-[41px]' >
-            <button className='bg-[#FF7922] rounded-[25px] text-bold text-white w-[150px] h-[50px] text-[20px]' onClick={()=>{setDelete(false)}}>CANCEL</button>
-            <button className='text-[#FF7922] rounded-[25px] bg-[#FFECE0] w-[150px] h-[50px] text-[20px] text-bold border-[#FF7922] border-[1px]' onClick={DeleteNote} >DELETE</button>
+            <button className='bg-[#FF7922] rounded-[25px] text-bold text-white w-[150px] h-[50px] text-[20px] shadow-[0px_15px_20px_#0000002F]' onClick={()=>{setDelete(false)}}>CANCEL</button>
+            <button className='text-[#FF7922] rounded-[25px] bg-[#FFECE0] w-[150px] h-[50px] text-[20px] text-bold border-[#FF7922] border-[1px] ' onClick={DeleteNote} >DELETE</button>
           
             </div>
             </div>
