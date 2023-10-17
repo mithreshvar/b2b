@@ -131,7 +131,7 @@ export default function PartnerHome ({setActive}) {
                     (!sip)?
                     <>
                         <div className="text-[14px] font-medium flex justify-between bg-white px-[30px] py-[15px] rounded-[10px]">
-                            <p><span className="font-bold">ARN Number:</span> Am-3333 & <span className="font-bold">Expiry Date:</span> 30/oct/2020</p>
+                            <p><span className="font-bold">ARN Number:</span> Am-3333 & <span className="font-bold">Expiry Date:</span> 30/Oct/2020</p>
                             <p><span className="font-bold">Euin Number:</span> N/A & <span className="font-bold">Expiry Date:</span> N/A</p>
                         </div>
 
