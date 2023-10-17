@@ -40,13 +40,13 @@ function ClientRTAEmailAndMobile( {setActive} ) {
               </div>
               <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">
                 <CustomSelectField label="Investor Type" value={ClientRtaEmailandMobile} valueOptions={ClientRtaOptions} handleChange={handleRtaChange}/>
-                <CustomTextField label="Pan" value={Pan} handleChange={handlePanChange}/>
+                <CustomTextField label="PAN" value={Pan} handleChange={handlePanChange}/>
               </div>
               <div className="pl-[20px] pb-[20px]">
                 <button className="rounded-[25px] bg-[#0071E7] px-[30px] py-[10px] text-[#FFFFFF]">Submit</button>
               </div>
             </div>
-            <div className="pt-[41px] pb-[15px] flex">
+            <div className="pt-[41px] flex">
               <div>As on 13 Oct 2023</div>
             </div>
         </div>

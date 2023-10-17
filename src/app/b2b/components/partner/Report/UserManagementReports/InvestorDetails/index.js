@@ -4,7 +4,7 @@ import CustomTable from "../../../PartnerHome/CustomTable";
 import Arrow from "/public/partner/Arrow.js";
 
 function InvestorDetails( {setActive} ) {
-  const [Investor, setInvestor] = useState('Kishior@gmail.com');
+  const [Investor, setInvestor] = useState('');
   const handleChange = (event) => {
     const value = event.target.value;
     setInvestor(value);

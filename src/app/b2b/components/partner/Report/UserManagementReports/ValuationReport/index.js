@@ -37,8 +37,8 @@ function ValuationReport( {setActive} ) {
               <h1 className="font-semibold  text-[20px]">ValuationReports</h1>
             </div>
             <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">
-              <CustomTextField label="User Email/Mobile" value={Valuation} handleChange={handleChange}/>
-              <CustomTextField label="Pan" value={Pan} handleChange={handlePanChange}/>
+              <CustomTextField label="Email/Mobile" value={Valuation} handleChange={handleChange}/>
+              <CustomTextField label="PAN" value={Pan} handleChange={handlePanChange}/>
             </div>
             <div className="pl-[20px] pb-[20px]">
               <button className="rounded-[25px] bg-[#0071E7] px-[30px] py-[10px] text-[#FFFFFF]">Submit</button>
