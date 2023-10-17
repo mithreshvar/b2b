@@ -10,6 +10,7 @@ export default function Table({headers, tenData=[], setActive}) {
     }
     if(headers[2]=='Rating') type = 'rating';
     if(headers[1]=='Scheme Name' && headers[2]=='Current NAV (Rs.)') type = 'schemes';    
+    if(headers[0]=='Scheme Name' && headers[1]=='Amount (Rs.)') type = 'AUM'
 
     return(
         <div className=" flex flex-col bg-white p-[20px] rounded-[15px] text-left overflow-auto">
@@ -21,7 +22,12 @@ export default function Table({headers, tenData=[], setActive}) {
                 :
                 <table cellPadding={'15px'} >
                     <tr className="border-b-[2px] border-[#E2E2E2] ">
-                        {headers.map( ele =><th className={`pb-[20px] pt-[5px] font-medium `}>{ele}</th>)}
+                        {headers.map( (ele, i) =>{
+
+                            if (type == 'AUM' && i == 1) 
+                                return <th className={`pb-[20px] pt-[5px] font-medium text-right`}>{ele}</th>
+                            return <th className={`pb-[20px] pt-[5px] font-medium `}>{ele}</th>
+                        })}
                     </tr>
                     {
                         tenData.map( (ele, index) =>{
