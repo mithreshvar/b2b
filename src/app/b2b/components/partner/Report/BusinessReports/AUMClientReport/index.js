@@ -102,16 +102,16 @@ function AUMClientReport() {
           )
         } else if (Aum=='Investor') {
           return (
-            <CustomTable className={'p-0'} headers={['Investor Name','PAN','Amount (Rs.)']} data={Investor} />
+            <CustomTable className={'p-0 justify-between'} headers={['Investor Name','PAN','Amount (Rs.)']} data={Investor} />
           )
         } else if (Aum=='AMC') {
           return (
-            <CustomTable className={'p-0'} headers={['AMC','Amount (Rs.)']} data={AMC} />
+            <CustomTable className={'p-0 justify-between'} headers={['AMC','Amount (Rs.)']} data={AMC} />
           )
         }
         else if (Aum=='Asset category') {
           return (
-            <CustomTable className={'p-0'} headers={['Asset category','Amount (Rs.)']} data={AssetCategory} />
+            <CustomTable className={'p-0 justify-between'} headers={['Asset category','Amount (Rs.)']} data={AssetCategory} />
           )
         }
       })()}
