@@ -1,6 +1,6 @@
 import Image from "next/image"
-import Img1 from 'public/partner/Group 570420@2x.png'
-import Img2 from 'public/partner/Group 570421@2x.png'
+import Img1 from 'public/partner/Group 570420.svg'
+import Img2 from 'public/partner/Group 570421.svg'
 function BusinessReports() {
   return (
     <div className="p-[20px]" >
