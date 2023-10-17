@@ -43,15 +43,15 @@ function TransactionReport( {setActive} ) {
   // 
   // Data
   const TransactionReport = [
-    ["S Nagarajan/ GPadmini","Axis Flexi Cap Fund- Reg(G)","91086859796","Processing","0","40000","09 Oct 2023","PUR","ENACH","41469960"],
-    ["Dattatraya Kulkarni","Aditva Birla SL Frontline EquityFund(G)","1037144947","Processing","0","35000","09 Oct 2023","PUR","NACH","41467512"],
-    ["Santosh Venkatachalam","Parag Parikh Liquid Fund-Reg(G)","12420705","Processing","0","150000","08 Oct 2023","PUR","rz_netbanking","41499105"],
+    ["S Nagarajan/ GPadmini","Axis Flexi Cap Fund- Reg(G)","91086859796","Success","0","40000","09 Oct 2023","PUR","ENACH","41469960"],
+    ["Dattatraya Kulkarni","Aditva Birla SL Frontline EquityFund(G)","1037144947","Success","0","35000","09 Oct 2023","PUR","NACH","41467512"],
+    ["Santosh Venkatachalam","Parag Parikh Liquid Fund-Reg(G)","12420705","Success","0","150000","08 Oct 2023","PUR","rz_netbanking","41499105"],
     ["Santosh Venkatachalam","Parag Parikh Liquid Fund-Reg(G)","12420705","Processing","0","150000","07 Oct 2023","PUR","rz_netbanking","41499102"],
     ["Shantha Narayanan","HDFC Mid-Cap Opportunities Fund(G)","17995610/72","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450595"],
     ["Shantha Narayanan","Axis Midcan Fund- Reg(G)","910122163446","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450594"],
-    ["Shantha Narayanan","Kotak Bluechip Fund(G)","8844995/44","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450596"],
-    ["Shantha Narayanan","SBI BlueChip Fund- Reg(G)","26655956","Processing","0","10000","07 Oct 2023","PUR","ENACH","41450597"],
-    ["Dattatraya Kulkarni","Parag Parikh Flexi Cap Fund-Reg(G)","12373805","Processing","0","30000","07 Oct 2023","PUR","NACH","41448502"],
+    ["Shantha Narayanan","Kotak Bluechip Fund(G)","8844995/44","Failed","0","10000","07 Oct 2023","PUR","ENACH","41450596"],
+    ["Shantha Narayanan","SBI BlueChip Fund- Reg(G)","26655956","Failed","0","10000","07 Oct 2023","PUR","ENACH","41450597"],
+    ["Dattatraya Kulkarni","Parag Parikh Flexi Cap Fund-Reg(G)","12373805","Failed","0","30000","07 Oct 2023","PUR","NACH","41448502"],
     ["Venkatachalam Sankarasubramanian","Nippon India Growth Fund(G)","499266662595","Processing","0","15000","06 Oct 2023","PUR","rz_netbanking","41457490"]
   ]
   // 
@@ -59,6 +59,7 @@ function TransactionReport( {setActive} ) {
   const [TableData, setTableData] = useState(TransactionReport)
   function filterData() {
     const valueReg = new RegExp(Amount.trim(), 'i'); // Case-insensitive regex for name
+
     const filteredData = TransactionReport.filter((item) => {
       // Check if the name, email, and number match the provided regex patterns
         return (
@@ -96,7 +97,7 @@ function TransactionReport( {setActive} ) {
           <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
         </div>
       </div>
-      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tax Date','Tax Type','Paid Through','User Ref ID']} data={TableData} />
+      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','TX.Date','TX.Type','Paid Through','User Ref ID']} data={TableData} />
     </div>
   );
 }
