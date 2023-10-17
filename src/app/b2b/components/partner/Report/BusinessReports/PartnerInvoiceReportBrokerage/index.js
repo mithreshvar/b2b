@@ -3,7 +3,7 @@ import Arrow from "/public/partner/Arrow.js";
 import { useState } from "react";
 
 
-function PartnerInvoiceReportBrokerage() {
+function PartnerInvoiceReportBrokerage( {setActive} ) {
   const mutualfundsData = [
     ["Sep - 2020", "MF_ARN-152318_Sep_2020.pdf"],
     ["Oct - 2020", "MF_ARN-152318_Oct_2020.pdf"],
@@ -109,13 +109,13 @@ function PartnerInvoiceReportBrokerage() {
     <div className="p-[20px]">
       <div className="w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF] ">
         <div className="flex gap-x-[10px] items-center justify-start p-[20px]">
-            <Arrow left={true} active={true}/>
-            <div className="text-[20px] font-semibold">Partner Invoice Report (Brokerage)</div>
+          <button onClick={()=>setActive('BussinessReports')}><Arrow left={true} active={true}/></button>
+          <div className="text-[20px] font-semibold">Partner Invoice Report (Brokerage)</div>
         </div>
         <div className="flex gap-[10px] pl-[20px]">
-            <button className={`flex h-[34px] w-[130px] ${selectedOption==='mf'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(mutualfundsData);setSelectedOption('mf')}}>Mutual Funds</button>
-            <button className={`flex h-[34px] w-[195px] ${selectedOption==='fd'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(fixeddepositsbondsData);setSelectedOption('fd')}}>Fixed Deposits & Bonds</button>
-            <button className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</button>
+          <button className={`flex h-[34px] w-[130px] ${selectedOption==='mf'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(mutualfundsData);setSelectedOption('mf')}}>Mutual Funds</button>
+          <button className={`flex h-[34px] w-[195px] ${selectedOption==='fd'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(fixeddepositsbondsData);setSelectedOption('fd')}}>Fixed Deposits & Bonds</button>
+          <button className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</button>
         </div>
         <CustomTable className={'p-0'} headers={['Invoice Month-Year', 'File', 'Action']} data={InvoiceData} />
       </div> 

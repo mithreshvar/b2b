@@ -3,7 +3,7 @@ import Arrow from "/public/partner/Arrow";
 import {CustomSelectField} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function BirthdayDetails() {
+function BirthdayDetails( {setActive} ) {
   const birthdayDetails =[
     ["Nuthalapati Babu Sivaprasad","nuthalapatip@vahoo.com","955065643","09 Aug 2023"],
     ["Vijava Bhaskar G","gvbhas@gmail.com","955065643","10 Aug 2023"],
@@ -47,7 +47,7 @@ function BirthdayDetails() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">Birthday Details</h1>
         </div>
         <div className="flex text-[14px] font-bold gap-x-[20px]">

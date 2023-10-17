@@ -3,7 +3,7 @@ import {CustomSelectField, CustomTextField, CustomDatePicker} from "../../../../
 import { useState } from "react";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function AuthorizationPendingReport() {
+function AuthorizationPendingReport( {setActive} ) {
   const Authorizationpendingreports =[
     ["S Nagarajan/ GPadmini","Nagaraj@gmail.com","984637678","Axis Flexi Cap Fund- Reg(G)","Purchase","40000","0","09 Oct 2023"],
     ["Dattatraya Kulkarni","Nagaraj@gmail.com","984637678","Aditva Birla SL Frontline EquityFund(G)","Purchase","35000","0","09 Oct 2023"],
@@ -55,7 +55,7 @@ function AuthorizationPendingReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">Authorization Pending Report</h1>
         </div>
         <div className='flex gap-x-[50px]'>

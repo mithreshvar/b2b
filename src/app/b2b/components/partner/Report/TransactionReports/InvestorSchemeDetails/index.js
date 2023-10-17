@@ -2,7 +2,7 @@ import {CustomTextField} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 import Arrow from "/public/partner/Arrow";
 import { useState } from "react";
-function InvestorSchemeDetails() {
+function InvestorSchemeDetails( {setActive}) {
   const InvestorScheme = [
     ["talk2sams@qmail.com","Krishna Kumar Srinivasan","DSP Liquidity Fund - RegularPlan - Growth (Merged)","0","03 Oct 2023"],
     ["talk2sams@gmail.com","Swaminathan Sankaranarayanan","DSP Strategic Bond Fund - Regular Plan -Growth (Merged)","0","03 Oct 2023"],
@@ -37,7 +37,7 @@ function InvestorSchemeDetails() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">Investor Scheme Details</h1>
         </div>
         <div className="flex gap-x-[30px]">

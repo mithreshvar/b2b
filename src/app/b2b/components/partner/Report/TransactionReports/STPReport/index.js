@@ -3,7 +3,7 @@ import Arrow from "/public/partner/Arrow";
 import {CustomSelectField, CustomTextField, CustomDatePicker} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function STPReport() {
+function STPReport( {setActive} ) {
   const StpReport =[
     ["100000000202000","Shantha Narayanan","17995610/72","HDFC Corporate Bond Fund- Growth","HDFC Mid-Cap Opportunities Fund- Growth","Activated","25,000","0","5","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023"],
     ["100000001283080","Muralidharan Rangarajan","17995610/72","UTI Liquid Cash Plan - Regular Plan - Growth","UTI Flexi Cap Fund -Regular Plan -Growth","Activated","50,000","0","5","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023"],
@@ -54,7 +54,7 @@ function STPReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">STP Reports</h1>
         </div>
         <div className="flex gap-x-[50px]">

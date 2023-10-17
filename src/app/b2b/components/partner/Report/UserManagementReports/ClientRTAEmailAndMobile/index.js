@@ -4,7 +4,7 @@ import CustomTable from "../../../PartnerHome/CustomTable";
 import {CustomTextField} from "../../../../InputFields";
 import Arrow from "/public/partner/Arrow.js";
 
-function ClientRTAEmailAndMobile() {
+function ClientRTAEmailAndMobile( {setActive} ) {
   const [ClientRtaEmailandMobile, setClientRtaEmailandMobile] = useState('Pan'); 
   const handleRtaChange = (event) => {
     const value = event.target.value;
@@ -35,7 +35,7 @@ function ClientRTAEmailAndMobile() {
         <div className="pb-[20px]">
             <div className="rounded-[20px] bg-[#ffffff]">
               <div className="flex items-center gap-x-[10px] p-[20px]">
-                <Arrow left={true} active={true}/>
+                <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
                 <h1 className="text-[20px] font-semibold">Client RTA Email and Mobile</h1>
               </div>
               <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">

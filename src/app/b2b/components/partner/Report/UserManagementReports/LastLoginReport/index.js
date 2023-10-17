@@ -3,7 +3,7 @@ import Arrow from "/public/partner/Arrow";
 import {CustomTextField} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function LastLoginReport() {
+function LastLoginReport( {setActive} ) {
   const LastloginReport =[
     ["Abhijit Sinha Roy","nuthalapatip@vahoo.com","04 Oct 2023 20:17:29","Web"],
     ["Adarsh Dattani","gvbhas@gmail.com","06 Oct 2023 20:17:29","MWeb"],
@@ -33,7 +33,7 @@ function LastLoginReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">Last Login Report</h1>
         </div>
         <div className="flex text-[14px] font-bold gap-x-[20px]">

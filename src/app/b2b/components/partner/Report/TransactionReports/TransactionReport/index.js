@@ -6,7 +6,7 @@ import Reset from "/public/partner/reset.svg"
 import Image from "next/image";
 import TransactioReports from "..";
 
-function TransactionReport() {
+function TransactionReport( {setActive} ) {
   const [TransactionType, setTransactionType] = useState('Purchase');
   const [TransactionTypeErrorMessage, setTransactionTypeErrorMessage] = useState('');
   const handleTransactionTypeChange = (event) => {
@@ -72,7 +72,7 @@ function TransactionReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">Transaction Report</h1>
         </div>
         <div className='flex gap-x-[50px]'>

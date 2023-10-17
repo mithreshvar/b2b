@@ -3,7 +3,7 @@ import Arrow from "/public/partner/Arrow";
 import {CustomSelectField, CustomTextField, CustomDatePicker} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function SIPReport() {
+function SIPReport( {setActive} ) {
   const SipReportData = [
     ["100000000202000","Anand Ekambaram","18557516","Franklin India Bluechip Fund- Growth","PUR","APPROVED","10,000","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023","10,000"],
     ["100000001283080","Arruthra Venugopaal/ Hemachandran Babu","16936931/38","ICICI Prudential Nifty Next 50 Index Fund - Growth","PUR","APPROVED","20,000","03 Oct 2023","3","3","03 Oct 2023","09 Oct 2023","10,000"],
@@ -54,7 +54,7 @@ function SIPReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">SIP Reports</h1>
         </div>
         <div className="flex gap-x-[50px]">

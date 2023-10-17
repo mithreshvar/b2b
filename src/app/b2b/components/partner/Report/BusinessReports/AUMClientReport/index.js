@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CustomDatePicker } from '../../../../InputFields';
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function AUMClientReport() {
+function AUMClientReport( {setActive} ) {
   const [Aum, setAum] = useState('Scheme');
   const [aumErrorMessage, setaumErrorMessage] = useState('');
   const handleAumChange = (event) => {
@@ -82,7 +82,7 @@ function AUMClientReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('BussinessReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">AUM Client Report</h1>
         </div>
         <CustomSelectField label="AUM" value={Aum} valueOptions={aumOptions} errorMessage={aumErrorMessage} handleChange={handleAumChange} />

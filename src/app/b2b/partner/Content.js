@@ -355,23 +355,23 @@ export default function Content() {
                                 (active==='registration' && <Registration /> )||
                                 (active==='reports' && <Report /> )||
                                 (active==='tripartite' && <Tripartite /> )||
-                                (active==='BussinessReports' && <BusinessReports/>)||
-                                (active==='AUMClientReports' &&<AUMClientReport/>)||
-                                (active==='PartnerInvoice' && <PartnerInvoiceReportBrokerage/>)||
-                                (active==='TransactionReports' && <TransactioReports/>)||
-                                (active==='TransactionReport' && <TransactionReport/>) ||
-                                (active==='InvestorSchemeDetails' && <InvestorSchemeDetails/>)||
-                                (active==='SIPReport' && <SIPReport/>)||
-                                (active==='STPReport' && <STPReport/>)||
-                                (active==='SWPReport' && <SWPReport/>)||
-                                (active==='AuthorizationPendingReport' &&<AuthorizationPendingReport/>)||
-                                (active==='UserManagementReports' &&<UserManagementReports/>)||
-                                (active==='InvestorDetails' && <InvestorDetails/>)||
-                                (active==='ValuationReport' && <ValuationReport/>)||
-                                (active==='ClientRTAEmailAndMobile' && <ClientRTAEmailAndMobile/>)||
-                                (active==='MandatesReport' && <MandatesReport/>)||
-                                (active==='LastLoginReport' && <LastLoginReport/>)||
-                                (active==='BirthdayDetails' && <BirthdayDetails/>)
+                                (active==='BussinessReports' && <BusinessReports setActive={setActive}/>)||
+                                (active==='AUMClientReports' &&<AUMClientReport setActive={setActive}/>)||
+                                (active==='PartnerInvoice' && <PartnerInvoiceReportBrokerage setActive={setActive}/>)||
+                                (active==='TransactionReports' && <TransactioReports setActive={setActive}/>)||
+                                (active==='TransactionReport' && <TransactionReport setActive={setActive}/>) ||
+                                (active==='InvestorSchemeDetails' && <InvestorSchemeDetails setActive={setActive}/>)||
+                                (active==='SIPReport' && <SIPReport setActive={setActive}/>)||
+                                (active==='STPReport' && <STPReport setActive={setActive}/>)||
+                                (active==='SWPReport' && <SWPReport setActive={setActive}/>)||
+                                (active==='AuthorizationPendingReport' &&<AuthorizationPendingReport setActive={setActive}/>)||
+                                (active==='UserManagementReports' &&<UserManagementReports setActive={setActive}/>)||
+                                (active==='InvestorDetails' && <InvestorDetails setActive={setActive}/>)||
+                                (active==='ValuationReport' && <ValuationReport setActive={setActive}/>)||
+                                (active==='ClientRTAEmailAndMobile' && <ClientRTAEmailAndMobile setActive={setActive}/>)||
+                                (active==='MandatesReport' && <MandatesReport setActive={setActive}/>)||
+                                (active==='LastLoginReport' && <LastLoginReport setActive={setActive}/>)||
+                                (active==='BirthdayDetails' && <BirthdayDetails setActive={setActive}/>)
                             }
 
                         </div>

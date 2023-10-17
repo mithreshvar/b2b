@@ -3,7 +3,7 @@ import Arrow from "/public/partner/Arrow";
 import {CustomTextField} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
-function MandatesReport() {
+function MandatesReport( {setActive} ) {
   const ManDatesReport =[
     ["100000001800811","Aditi","adarsh.dattani@gmail.com","25,000","04 Oct 2030","NACH","-"],
     ["100000001800812","Aditi","aditya.kittur@wipro.com","25,000","04 Oct 2030","NACH","-"],
@@ -33,7 +33,7 @@ function MandatesReport() {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <Arrow left={true} active={true}/>
+          <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
           <h1 className="text-[20px] font-semibold leading-[20px]">Mandates Report</h1>
         </div>
         <div className="flex text-[14px] font-bold gap-x-[20px]">

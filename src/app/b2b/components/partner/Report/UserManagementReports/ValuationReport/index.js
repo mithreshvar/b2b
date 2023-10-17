@@ -4,7 +4,7 @@ import {useState} from 'react';
 import CustomTable from "../../../PartnerHome/CustomTable";
 import Arrow from "/public/partner/Arrow.js";
 
-function ValuationReport() {
+function ValuationReport( {setActive} ) {
   const [Valuation,setValuation] = useState('Santosh@gmail.com');
   const handleChange = (event) => {
     const value = event.target.value;
@@ -33,7 +33,7 @@ function ValuationReport() {
       <div className="pb-[20px]">
           <div className="rounded-[20px] bg-[#ffffff]">
             <div className="flex items-center gap-x-[10px] p-[20px]">
-            <Arrow left={true} active={true}/>
+              <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
               <h1 className="font-semibold  text-[20px]">ValuationReports</h1>
             </div>
             <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">
