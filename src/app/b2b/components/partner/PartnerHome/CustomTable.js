@@ -87,7 +87,9 @@ export default function CustomTable({data, headers, setActive, pagination=true, 
             :
             <ThemeProvider theme={theme} >
                 {/* Table content */}
-                <Table headers={headers} tenData={dividedData[pageNo]} setActive={setActive} headerStyle={headerStyle} />
+                <div className="max-h-[600px]">
+                    <Table headers={headers} tenData={dividedData[pageNo]} setActive={setActive} headerStyle={headerStyle} />
+                </div>
 
                 {/* Page Number Navigator */}
                 {
