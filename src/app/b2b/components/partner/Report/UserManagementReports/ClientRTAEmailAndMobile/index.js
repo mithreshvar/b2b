@@ -5,14 +5,14 @@ import {CustomTextField} from "../../../../InputFields";
 import Arrow from "/public/partner/Arrow.js";
 
 function ClientRTAEmailAndMobile( {setActive} ) {
-  const [ClientRtaEmailandMobile, setClientRtaEmailandMobile] = useState('Pan'); 
+  const [ClientRtaEmailandMobile, setClientRtaEmailandMobile] = useState(''); 
   const handleRtaChange = (event) => {
     const value = event.target.value;
     setClientRtaEmailandMobile(value);
   };
   const ClientRtaOptions = ['Pan','Mobile Number','Email','Folio Number'];
 
-  const [Pan,setPan] = useState('BQ6653728');
+  const [Pan,setPan] = useState('');
   const handlePanChange = (event) => {
     const value = event.target.value;
     setPan(value);
@@ -39,7 +39,7 @@ function ClientRTAEmailAndMobile( {setActive} ) {
                 <h1 className="text-[20px] font-semibold">Client RTA Email and Mobile</h1>
               </div>
               <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">
-                <CustomSelectField label="User Email" value={ClientRtaEmailandMobile} valueOptions={ClientRtaOptions} handleChange={handleRtaChange}/>
+                <CustomSelectField label="Investor Type" value={ClientRtaEmailandMobile} valueOptions={ClientRtaOptions} handleChange={handleRtaChange}/>
                 <CustomTextField label="Pan" value={Pan} handleChange={handlePanChange}/>
               </div>
               <div className="pl-[20px] pb-[20px]">

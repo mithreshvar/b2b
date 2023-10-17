@@ -5,12 +5,12 @@ import CustomTable from "../../../PartnerHome/CustomTable";
 import Arrow from "/public/partner/Arrow.js";
 
 function ValuationReport( {setActive} ) {
-  const [Valuation,setValuation] = useState('Santosh@gmail.com');
+  const [Valuation,setValuation] = useState('');
   const handleChange = (event) => {
     const value = event.target.value;
     setValuation(value);
   };
-  const [Pan, setpan] = useState('PM738938292');
+  const [Pan, setpan] = useState('');
   const handlePanChange = (event) => {
     const value = event.target.value;
     setpan(value);
