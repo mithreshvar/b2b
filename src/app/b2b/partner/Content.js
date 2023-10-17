@@ -298,7 +298,7 @@ export default function Content() {
                                         onClosing={() => {setIstReportOpen(false); setActive('TransactionReports')}}
                                     >
                                         <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
-                                        <div onClick={()=>{setActive('TransactionReport')}} className={`cursor-pointer ${active==='TransactionReport'? 'text-primary': ''}`}>TransactionReport</div>
+                                        <div onClick={()=>{setActive('TransactionReport')}} className={`cursor-pointer ${active==='TransactionReport'? 'text-primary': ''}`}>Transaction Report</div>
                                         <div onClick={()=>{setActive('InvestorSchemeDetails')}} className={`cursor-pointer ${active==='InvestorSchemeDetails'? 'text-primary': ''}`} >Investor Scheme Details</div>
                                         <div onClick={()=>{setActive('SIPReport')}} className={`cursor-pointer ${active==='SIPReport'? 'text-primary': ''}`} >SIP Report</div>
                                         <div onClick={()=>{setActive('STPReport')}} className={`cursor-pointer ${active==='STPReport'? 'text-primary': ''}`} >STP Report</div>
