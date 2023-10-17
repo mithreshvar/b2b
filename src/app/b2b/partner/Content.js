@@ -29,6 +29,7 @@ import Collapsible from 'react-collapsible';
 
 import ITransactioReports from '/public/partner/TransactionReports';
 import IUserManagementReportsReports from '/public/partner/UserManagementReports.js';
+import IBusinessReports from 'public/partner/BuisnessReports.js';
 
 
 
@@ -277,8 +278,8 @@ export default function Content() {
                                 onClosing={() => setIsReportOpen(false)}
                             >
                                 <div className='pl-[16px] pt-[24px] text-[12px]'> 
-                                    <Collapsible trigger={[<IPortfolio isOpened={isBReportOpen} className='h-[3px]'/>,<span className='font-medium'>Business reports</span>,<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
-                                        triggerWhenOpen={[<IPortfolio isOpened={isBReportOpen} />, <span className='font-semibold text-primary'>Business reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
+                                    <Collapsible trigger={[<IBusinessReports isOpened={isBReportOpen} className='h-[3px]'/>,<span className='font-medium'>Business reports</span>,<HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
+                                        triggerWhenOpen={[<IBusinessReports isOpened={isBReportOpen} />, <span className='font-semibold text-primary'>Business reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
                                     triggerStyle={{cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
                                     open={isBReportOpen}
                                     onOpening={() => {handleReportOpen(setIsBReportOpen); setActive('BussinessReports')}}
