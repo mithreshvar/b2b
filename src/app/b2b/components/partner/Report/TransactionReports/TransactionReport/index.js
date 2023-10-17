@@ -21,7 +21,7 @@ function TransactionReport( {setActive} ) {
     const value = event.target.value;
     setSuccess(value);
   };
-  const SuccessOptions = ['Success','Under Process','Failed'];
+  const SuccessOptions = ['Success','Processing','Failed'];
 
   const [FilterAmount, setFilterAmount] = useState('');
   const [FilterAmountErrorMessage, setFilterAmountErrorMessage] = useState('');
