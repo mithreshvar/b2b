@@ -7,7 +7,7 @@ import Image from "next/image";
 import TransactioReports from "..";
 
 function TransactionReport( {setActive} ) {
-  const [TransactionType, setTransactionType] = useState('Purchase');
+  const [TransactionType, setTransactionType] = useState('');
   const [TransactionTypeErrorMessage, setTransactionTypeErrorMessage] = useState('');
   const handleTransactionTypeChange = (event) => {
     const value = event.target.value;
@@ -15,7 +15,7 @@ function TransactionReport( {setActive} ) {
   };
   const TransactionTypeOptions = ['Purchase','Additional purchase','Redemption','Switch'];
 
-  const [Success, setSuccess] = useState('Success');
+  const [Success, setSuccess] = useState('');
   const [SuccessErrorMessage, setSuccessErrorMessage] = useState('');
   const handleSuccessChange = (event) => {
     const value = event.target.value;
@@ -23,15 +23,15 @@ function TransactionReport( {setActive} ) {
   };
   const SuccessOptions = ['Success','Under Process','Failed'];
 
-  const [FilterAmount, setFilterAmount] = useState('Greater Than');
+  const [FilterAmount, setFilterAmount] = useState('');
   const [FilterAmountErrorMessage, setFilterAmountErrorMessage] = useState('');
   const handleFilterAmountChange = (event) => {
     const value = event.target.value;
     setFilterAmount(value);
   };
-  const FilterAmountOptions = ['Greater Than'];
+  const FilterAmountOptions = ['Greater Than', 'Less Than', 'Equal to'];
 
-  const [Amount, setAmount] = useState();
+  const [Amount, setAmount] = useState('');
   const handleAmountChange = (event) => {
     const value = event.target.value;
     setAmount(value);
@@ -57,18 +57,42 @@ function TransactionReport( {setActive} ) {
   // 
   // 
   const [TableData, setTableData] = useState(TransactionReport)
-  function filterData() {
-    const valueReg = new RegExp(Amount.trim(), 'i'); // Case-insensitive regex for name
 
-    const filteredData = TransactionReport.filter((item) => {
-      // Check if the name, email, and number match the provided regex patterns
-        return (
-            (Amount === '' || valueReg.test(item[5])) 
-        );
-    });
-    // Now, 'filteredData' contains the filtered data based on the provided criteria.
-    setTableData(filteredData);
-  }
+    function filterData() {
+      const transactionTypeMapping = {
+        'Purchase': 'PUR',
+        'Additional purchase': 'A PUR',
+        'Redemption': 'RED',
+        'Switch': 'SWI',
+      };
+    
+      const filteredData = TransactionReport.filter((item) => {
+        const [accountName, schemeName, mob, status, _, amount, txDate, txType, paidThrough, userRefID] = item;
+    
+        const mappedTransactionType = transactionTypeMapping[TransactionType];
+    
+        const matchesTransactionType = !TransactionType || txType === mappedTransactionType;
+        console.log(txType, TransactionType, mappedTransactionType);
+        const matchesSuccess = !Success || status === Success;
+    
+        let matchesAmount = true;
+        if (Amount) {
+          const filterValue = parseFloat(Amount);
+          if (FilterAmount === 'Greater Than') {
+            matchesAmount = parseFloat(amount) > filterValue;
+          } else if (FilterAmount === 'Less Than') {
+            matchesAmount = parseFloat(amount) < filterValue;
+          } else if (FilterAmount === 'Equal to') {
+            matchesAmount = parseFloat(amount) === filterValue;
+          }
+        }
+    
+        return matchesTransactionType && matchesSuccess && matchesAmount;
+      });
+    
+      setTableData(filteredData);
+    }
+  
   return (
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
@@ -85,7 +109,7 @@ function TransactionReport( {setActive} ) {
             <CustomSelectField label="Filter Amount" value={FilterAmount} valueOptions={FilterAmountOptions} errorMessage={FilterAmountErrorMessage} handleChange={handleFilterAmountChange} />
             <CustomTextField label='Amount' value={Amount} handleChange={handleAmountChange}/>
           </div>
-          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]" onClick={()=>{setAmount('')}}>
+          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]" onClick={()=>{setAmount(''); setTransactionType(''); setSuccess(''); setFilterAmount(''); setTimeout(filterData(), 1000)}}>
             <Image src={Reset}/>
             <p className="text-[14px] font-medium text-[#0066CD]">Clear</p>
           </button>
@@ -97,7 +121,7 @@ function TransactionReport( {setActive} ) {
           <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
         </div>
       </div>
-      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','TX.Date','TX.Type','Paid Through','User Ref ID']} data={TableData} />
+      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tx. Date','Tx. Type','Paid Through','User Ref ID']} data={TableData} />
     </div>
   );
 }
