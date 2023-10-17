@@ -267,8 +267,8 @@ export default function Content() {
                                         triggerWhenOpen={[<IPortfolio isOpened={isBReportOpen} />, <span className='font-semibold text-primary'>Business reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
                                     triggerStyle={{cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
                                     open={isBReportOpen}
-                                    onOpening={() => setIsBReportOpen(true)}
-                                    onClosing={() => setIsBReportOpen(false)}
+                                    onOpening={() => {setIsBReportOpen(true); setActive('BussinessReports')}}
+                                    onClosing={() => {setIsBReportOpen(false); setActive('BussinessReports')}}
                                     >
                                         <div className='pl-[10px] pt-[16px] flex flex-col gap-y-[15px]  text-[10px]'>
                                         <div onClick={()=>{setActive('AUMClientReports')}} className={`cursor-pointer ${active==='AUMClientReports'? 'text-primary': ''}`}>AUM Client Report</div>
@@ -279,8 +279,8 @@ export default function Content() {
                                         triggerWhenOpen={[<IPortfolio isOpened={istReportOpen} />, <span className='font-semibold text-primary'>Transaction reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
                                     triggerStyle={{paddingTop: '26.7px', cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
                                     open={istReportOpen}
-                                    onOpening={() => setIstReportOpen(true)}
-                                    onClosing={() => setIstReportOpen(false)}
+                                    onOpening={() => {setIstReportOpen(true); setActive('TransactionReports')}}
+                                    onClosing={() => {setIstReportOpen(false); setActive('TransactionReports')}}
                                     >
                                         <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
                                         <div onClick={()=>{setActive('TransactionReport')}} className={`cursor-pointer ${active==='TransactionReport'? 'text-primary': ''}`}>TransactionReport</div>
@@ -296,8 +296,8 @@ export default function Content() {
                                     triggerWhenOpen={[<IPortfolio isOpened={isUReportOpen} />, <span className='font-semibold text-primary'>User management reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />]}
                                     triggerStyle={{paddingTop: '28.7px', cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
                                     open={isUReportOpen}
-                                    onOpening={() => setIsUReportOpen(true)}
-                                    onClosing={() => setIsUReportOpen(false)}
+                                    onOpening={() => {setIsUReportOpen(true); setActive('UserManagementReports')}}
+                                    onClosing={() => {setIsUReportOpen(false); setActive('UserManagementReports')}}
                                     >
                                         <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
                                         <div onClick={()=>{setActive('InvestorDetails')}} className={`cursor-pointer ${active==='InvestorDetails'? 'text-primary': ''}`} >Investor Details</div>
