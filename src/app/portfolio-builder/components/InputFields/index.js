@@ -13,7 +13,7 @@ const CustomSelectField = ({ width = '380px', height = '40px',...props }) => {
   };
 
   return (
-    <div>
+    <div className="relative">
       <TextField
         id={`${props.label}-select`}
         select
@@ -67,7 +67,7 @@ const CustomSelectField = ({ width = '380px', height = '40px',...props }) => {
         ))}
       </TextField>
       {props.errorMessage !== '' ? (
-        <div className="mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">
+        <div className="absolute mt-[5px] ml-[20px] text-[#FF7922] font-medium text-[12px]">
           {props.errorMessage}
         </div>
       ) : (

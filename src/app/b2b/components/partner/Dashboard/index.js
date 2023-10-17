@@ -3,6 +3,8 @@
 import { useState } from "react";
 import DoughnutChart from "./DoughnutChart";
 import { ChevronLeftRounded, ChevronRightRounded } from "@mui/icons-material";
+import Image from "next/image";
+import fire from '/public/rrklogo/newrrk/rrklogo (1)@2x.png';
 
 function Dashboard() {
 
@@ -15,6 +17,7 @@ function Dashboard() {
     
     return (
         <div className="p-[20px] text-[14px]">
+            <Image src={fire} width={166} height={44} alt="I Aspire" className="mb-[20px] mix-blend-multiply -ml-5"/>
             <div className="flex gap-[20px] mb-[20px] text-[16px]">
                 <div className="bg-white w-[calc((100%-20px)*2/3)] h-[300px] rounded-[15px] p-[20px] flex font-bold">
                     <div className="flex flex-col w-[50%] gap-[10px] items-center border-r-[1px] border-r-[rgba(112, 112, 112, 0.1)]">
@@ -179,7 +182,7 @@ function Dashboard() {
                     }
                 </div>
             </div>
-            <p className="mt-[200px] font-medium"><strong>Disclaimer:</strong> The AUM inflow data is as of the previous day. The redemption data does not account for STP or Switch transaction. <br/> Transfer-in Partner's data may vary.</p>
+            <p className="mt-[150px] font-medium"><strong>Disclaimer:</strong> The AUM inflow data is as of the previous day. The redemption data does not account for STP or Switch transaction. <br/> Transfer-in Partner's data may vary.</p>
         </div>
     );
 }

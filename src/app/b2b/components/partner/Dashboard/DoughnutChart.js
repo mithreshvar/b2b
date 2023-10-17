@@ -47,15 +47,15 @@ function DoughnutChart({ data, totalName }) {
         </div>`
       :
     totalName.length >= 15 ?
-        `<div style="text-align: center; font-family: 'Poppins'; width: 50px; ">
+        `<div style="font-family: 'Poppins';">
             <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">${totalName}</div>
             <br/>
             <div style="font-size: 14px; font-weight: bold;">&#8377; ${totalValue.toLocaleString("en-In")}</div>
         </div>`
         :
-        `<div style="text-align: center; font-family: 'Poppins'; width: 50px; ">
-            <div style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">${totalName}</div>
-            <div style="font-size: 14px; font-weight: bold;">&#8377; ${totalValue.toLocaleString("en-In")}</div>
+        `<div style="font-family: 'Poppins';">
+            <p style="font-size: 12px; font-weight: 500; margin-bottom: 20px;">${totalName}</p>
+            <p style="font-size: 14px; font-weight: bold;">&#8377; ${totalValue.toLocaleString("en-In")}</p>
         </div>`
         ;
 
@@ -67,10 +67,10 @@ function DoughnutChart({ data, totalName }) {
     },
     title: {
       text: chartTitle,
-      x: 75,
-      width: 150,
+      x: 80,
+      width: 160,
       verticalAlign: "middle",
-      y: 15,
+      align: "center",
       floating: true,
     },
     exporting: {

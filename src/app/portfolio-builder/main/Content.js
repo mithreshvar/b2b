@@ -40,7 +40,7 @@ export default function Content() {
                     </AppBar>
                 </Box>
 
-                    <div className={`flex flex-col bg-[#F5F7FE] h-[calc(100vh-60px)] relative px-[50px] ${(!(false)) && ' mt-[60px]'} `}> {/* */}
+                    <div className={`flex flex-col bg-[#F5F7FE] h-[calc(100vh-60px)] relative px-[50px] pb-[20px] ${(!(false)) && ' mt-[60px]'} `}> {/* */}
                         
                         {/* {
                             (notificationMessage == 'Portfolio Deleted Successfully' || notificationMessage == 'Successfully Downloaded' ) &&
