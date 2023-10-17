@@ -23,7 +23,7 @@ function TransactionReport( {setActive} ) {
   };
   const SuccessOptions = ['Success','Processing','Failed'];
 
-  const [FilterAmount, setFilterAmount] = useState('');
+  const [FilterAmount, setFilterAmount] = useState('Equal to');
   const [FilterAmountErrorMessage, setFilterAmountErrorMessage] = useState('');
   const handleFilterAmountChange = (event) => {
     const value = event.target.value;
@@ -109,7 +109,7 @@ function TransactionReport( {setActive} ) {
             <CustomSelectField label="Filter Amount" value={FilterAmount} valueOptions={FilterAmountOptions} errorMessage={FilterAmountErrorMessage} handleChange={handleFilterAmountChange} />
             <CustomTextField label='Amount' value={Amount} handleChange={handleAmountChange}/>
           </div>
-          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]" onClick={()=>{setAmount(''); setTransactionType(''); setSuccess(''); setFilterAmount(''); setTimeout(filterData(), 1000)}}>
+          <button className="flex justify-center items-center pl-[18px] gap-x-[5px]" onClick={()=>{setAmount(''); setTransactionType(''); setSuccess(''); setFilterAmount('Equal to'); setTimeout(filterData(), 1000)}}>
             <Image src={Reset}/>
             <p className="text-[14px] font-medium text-[#0066CD]">Clear</p>
           </button>
