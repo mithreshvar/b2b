@@ -13,7 +13,7 @@ function Portfolio() {
 
     if (!portfolioData) return(<></>)
     
-    const [searchOpen, setSearchOpen] = useState(true);
+    const [searchOpen, setSearchOpen] = useState(false);
 
     const [showRatedSchemes, setShowRatedSchemes] = useState(false)
     const [showOnlyNFO, setShowOnlyNFO] = useState(false)
@@ -51,7 +51,7 @@ function Portfolio() {
         }
     };
 
-    const [selectAMC, setSelectAMC] = useState('')
+    const [selectAMC, setSelectAMC] = useState('Aditya Birla')
     const [schemeClassification, setSchemeClassification] = useState('')
     const [schemeName, setSchemeName] = useState('')
 
@@ -59,7 +59,7 @@ function Portfolio() {
     const [schemeClassificationErrorMessage, setSchemeClassificationErrorMessage] = useState('')
     const [schemeNameErrorMessage, setSchemeNameErrorMessage] = useState('')
 
-    const selectAMCOptions = ['HDFC Mutual Funds', 'Axis Bank Mutual Fund', 'SBI Mutual Fund','IDBI Bank','IDBI First Bank Limited','Canara Bank','Nippon Life India Assets']
+    const selectAMCOptions = ['Aditya Birla','HDFC Mutual Funds', 'Axis Bank Mutual Fund', 'SBI Mutual Fund','IDBI Bank','IDBI First Bank Limited','Canara Bank','Nippon Life India Assets']
     const schemeClassificationOptions = ['All','Debit','Equity','Gold','Hybrid','Liquid','Others']
 
     const handleAMCChange = (event) => {
@@ -182,7 +182,7 @@ function Portfolio() {
                                 <CustomTextField id="schemeName" label='Enter scheme Full/Partial Name' errorMessage={schemeNameErrorMessage} value={schemeName} handleChange={handleSchemeNameChange}/>
                             </div>
                             <div className="flex gap-x-[20px] mt-[10px] text-[14px] font-bold">
-                                <button onClick={()=>{ }} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
+                                <button onClick={()=>{}} className='w-[108px] h-[40px] bg-primary text-white rounded-[25px]'>Search</button>
                             </div>
                         </div>
 
