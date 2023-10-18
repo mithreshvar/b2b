@@ -8,17 +8,17 @@ function AuthorizationPendingReport( {setActive} ) {
   const Authorizationpendingreports =[
     ["S Nagarajan/ GPadmini","Nagaraj@gmail.com","984637678","Axis Flexi Cap Fund- Reg(G)","Purchase","40000","0","09 Oct 2023"],
     ["Dattatraya Kulkarni","Nagaraj@gmail.com","984637678","Aditva Birla SL Frontline EquityFund(G)","Purchase","35000","0","09 Oct 2023"],
-    ["Santosh Venkatachalam","Nagaraj@gmail.com","984637678","Parag Parikh Liquid Fund-Reg(G)","Purchase","150000","0","08 Oct 2023"],
-    ["Santosh Venkatachalam","Nagaraj@gmail.com","984637678","Parag Parikh Liquid Fund-Reg(G)","Purchase","150000","0","07 Oct 2023"],
-    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","HDFC Mid-Cap Opportunities Fund(G)","Purchase","10000","0","07 Oct 2023"],
-    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","Axis Midcan Fund- Reg(G)","Purchase","10000","0","07 Oct 2023"],
-    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","Kotak Bluechip Fund(G)","Purchase","10000","0","07 Oct 2023"],
-    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","SBI BlueChip Fund- Reg(G)","Purchase","10000","0","07 Oct 2023"],
-    ["Dattatraya Kulkarni","Nagaraj@gmail.com","984637678","Parag Parikh Flexi Cap Fund-Reg(G)","Purchase","30000","0","07 Oct 2023"],
-    ["Venkatachalam Sankarasubramanian","Nagaraj@gmail.com","984637678","Nippon India Growth Fund(G)","Purchase","15000","0","06 Oct 2023"]
+    ["Santosh Venkatachalam","Nagaraj@gmail.com","984637678","Parag Parikh Liquid Fund-Reg(G)","SIP","150000","0","08 Oct 2023"],
+    ["Santosh Venkatachalam","Nagaraj@gmail.com","984637678","Parag Parikh Liquid Fund-Reg(G)","SIP","150000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","HDFC Mid-Cap Opportunities Fund(G)","Redemption","10000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","Axis Midcan Fund- Reg(G)","Redemption","10000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","Kotak Bluechip Fund(G)","Switch","10000","0","07 Oct 2023"],
+    ["Shantha Narayanan","Nagaraj@gmail.com","984637678","SBI BlueChip Fund- Reg(G)","STP","10000","0","07 Oct 2023"],
+    ["Dattatraya Kulkarni","Nagaraj@gmail.com","984637678","Parag Parikh Flexi Cap Fund-Reg(G)","STP","30000","0","07 Oct 2023"],
+    ["Venkatachalam Sankarasubramanian","Nagaraj@gmail.com","984637678","Nippon India Growth Fund(G)","SWP","15000","0","06 Oct 2023"]
 ]
 
-  const [TransactionType, setTransactionType] = useState('Purchase');
+  const [TransactionType, setTransactionType] = useState('');
   const [TransactionTypeErrorMessage, setTransactionTypeErrorMessage] = useState('');
   const handleTransactionTypeChange = (event) => {
     const value = event.target.value;
@@ -45,7 +45,7 @@ function AuthorizationPendingReport( {setActive} ) {
     const filteredData = Authorizationpendingreports.filter((item) => {
       // Check if the name, email, and number match the provided regex patterns
         return (
-            (value === '' || valueReg.test(item[1]) || valueReg.test(item[2]) || valueReg.test(item[3])) 
+          item[4] === TransactionType && (value === '' || valueReg.test(item[1]) || valueReg.test(item[2]) ) 
         );
     });
     // Now, 'filteredData' contains the filtered data based on the provided criteria.

@@ -24,7 +24,7 @@ function STPReport( {setActive} ) {
     const filteredData = StpReport.filter((item) => {
       // Check if the name, email, and number match the provided regex patterns
         return (
-            (value === '' || valueReg.test(item[1]) || valueReg.test(item[3]) || valueReg.test(item[4])) 
+            (value === '' || valueReg.test(item[1])) 
         );
     });
     // Now, 'filteredData' contains the filtered data based on the provided criteria.

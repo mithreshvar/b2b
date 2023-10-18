@@ -23,7 +23,7 @@ function InvestorSchemeDetails( {setActive}) {
       const filteredData = InvestorScheme.filter((item) => {
         // Check if the name, email, and number match the provided regex patterns
           return (
-              (value === '' || valueReg.test(item[0])) 
+              (value === '' || valueReg.test(item[0]) || valueReg.test(item[1]) || valueReg.test(item[2])) 
           );
       });
   
