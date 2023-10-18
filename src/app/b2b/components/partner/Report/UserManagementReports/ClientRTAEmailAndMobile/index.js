@@ -2,15 +2,17 @@ import {CustomSelectField} from "../../../../InputFields";
 import {useState} from 'react';
 import CustomTable from "../../../PartnerHome/CustomTable";
 import {CustomTextField} from "../../../../InputFields";
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 
 function ClientRTAEmailAndMobile( {setActive} ) {
-  const [ClientRtaEmailandMobile, setClientRtaEmailandMobile] = useState(''); 
+  const ClientRtaOptions = ['PAN','Mobile Number','Email','Folio Number'];
+  const [ClientRtaEmailandMobile, setClientRtaEmailandMobile] = useState(ClientRtaOptions[0]); 
   const handleRtaChange = (event) => {
     const value = event.target.value;
     setClientRtaEmailandMobile(value);
   };
-  const ClientRtaOptions = ['Pan','Mobile Number','Email','Folio Number'];
+  
 
   const [Pan,setPan] = useState('');
   const handlePanChange = (event) => {
@@ -35,12 +37,12 @@ function ClientRTAEmailAndMobile( {setActive} ) {
         <div className="pb-[20px]">
             <div className="rounded-[20px] bg-[#ffffff]">
               <div className="flex items-center gap-x-[10px] p-[20px]">
-                <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
+                <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('UserManagementReports')}/>
                 <h1 className="text-[20px] font-semibold">Client RTA Email and Mobile</h1>
               </div>
               <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">
-                <CustomSelectField label="Investor Type" value={ClientRtaEmailandMobile} valueOptions={ClientRtaOptions} handleChange={handleRtaChange}/>
-                <CustomTextField label="PAN" value={Pan} handleChange={handlePanChange}/>
+                <CustomSelectField label="Search by" value={ClientRtaEmailandMobile} valueOptions={ClientRtaOptions} handleChange={handleRtaChange}/>
+                <CustomTextField label={ClientRtaEmailandMobile} value={Pan} handleChange={handlePanChange}/>
               </div>
               <div className="pl-[20px] pb-[20px]">
                 <button className="rounded-[25px] bg-[#0071E7] px-[30px] py-[10px] text-[#FFFFFF]">Submit</button>

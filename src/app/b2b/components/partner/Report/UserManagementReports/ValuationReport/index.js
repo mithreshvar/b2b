@@ -1,8 +1,8 @@
-
 import {CustomTextField} from "../../../../InputFields";
 import {useState} from 'react';
 import CustomTable from "../../../PartnerHome/CustomTable";
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 
 function ValuationReport( {setActive} ) {
   const [Valuation,setValuation] = useState('');
@@ -33,8 +33,8 @@ function ValuationReport( {setActive} ) {
       <div className="pb-[20px]">
           <div className="rounded-[20px] bg-[#ffffff]">
             <div className="flex items-center gap-x-[10px] p-[20px]">
-              <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
-              <h1 className="font-semibold  text-[20px]">ValuationReports</h1>
+              <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('UserManagementReports')}/>
+              <h1 className="font-semibold  text-[20px]">Client Valuation Report</h1>
             </div>
             <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">
               <CustomTextField label="Email/Mobile" value={Valuation} handleChange={handleChange}/>

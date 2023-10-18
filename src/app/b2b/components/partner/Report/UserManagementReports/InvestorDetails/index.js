@@ -1,7 +1,8 @@
 import {CustomSelectField} from "../../../../InputFields";
 import {useState} from 'react';
 import CustomTable from "../../../PartnerHome/CustomTable";
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 
 function InvestorDetails( {setActive} ) {
   const [Investor, setInvestor] = useState('');
@@ -33,7 +34,7 @@ function InvestorDetails( {setActive} ) {
       <div className="pb-[20px]">
           <div className="rounded-[20px] bg-[#ffffff]">
             <div className="flex items-center gap-x-[10px] p-[20px]">
-              <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
+              <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('UserManagementReports')}/>
               <h1 className="font-semibold text-[20px]">Investors Details</h1>
             </div>
             <div className="flex gap-x-[50px] pl-[20px] pb-[20px]">

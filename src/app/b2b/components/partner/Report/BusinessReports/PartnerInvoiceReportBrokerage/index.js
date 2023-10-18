@@ -1,5 +1,6 @@
 import CustomTable from "../../../PartnerHome/CustomTable";
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 import { useState } from "react";
 import {CustomSelectField} from "../../../../InputFields";
 
@@ -130,7 +131,7 @@ function PartnerInvoiceReportBrokerage( {setActive} ) {
     <div className="p-[20px]">
       <div className="w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF] ">
         <div className="flex gap-x-[10px] items-center justify-start p-[20px]">
-          <button onClick={()=>setActive('BussinessReports')}><Arrow left={true} active={true}/></button>
+          <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('BussinessReports')}/>
           <div className="text-[20px] font-semibold">Partner Invoice Report (Brokerage)</div>
         </div>
         <div className="flex gap-[10px] pl-[20px]">

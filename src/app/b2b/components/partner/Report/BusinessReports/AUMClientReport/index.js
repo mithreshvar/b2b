@@ -1,4 +1,5 @@
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 import {CustomSelectField} from "../../../../InputFields";
 import { useState } from "react";
 import { CustomDatePicker } from '../../../../InputFields';
@@ -82,10 +83,10 @@ function AUMClientReport( {setActive} ) {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <button onClick={()=>setActive('BussinessReports')}><Arrow left={true} active={true}/></button>
+          <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('BussinessReports')}/>
           <h1 className="text-[20px] font-semibold leading-[20px]">AUM Client Report</h1>
         </div>
-        <CustomSelectField label="AUM" value={Aum} valueOptions={aumOptions} errorMessage={aumErrorMessage} handleChange={handleAumChange} />
+        <CustomSelectField label="AUM by" value={Aum} valueOptions={aumOptions} errorMessage={aumErrorMessage} handleChange={handleAumChange} />
         <div className='flex gap-x-[50px]'>
           <CustomDatePicker label="From Date" value={fromDate} handleChange={handleFromDateChange} disableFuture={true} errorMessage={fromDateErrorMessage} />
           <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />

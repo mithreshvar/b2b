@@ -1,6 +1,7 @@
 import {CustomTextField} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
-import Arrow from "/public/partner/Arrow";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 import { useState } from "react";
 function InvestorSchemeDetails( {setActive}) {
   const InvestorScheme = [
@@ -37,7 +38,7 @@ function InvestorSchemeDetails( {setActive}) {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
+          <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('TransactionReports')}/>
           <h1 className="text-[20px] font-semibold leading-[20px]">Investor Scheme Details</h1>
         </div>
         <div className="flex gap-x-[30px]">
@@ -45,7 +46,7 @@ function InvestorSchemeDetails( {setActive}) {
           <button className="h-[40px] w-[108px] bg-[#0071E7] text-[14px] font-bold rounded-[25px] text-white" onClick={filterData}>Search</button>
         </div>
       </div>
-      <CustomTable headers={['User ID','Account Names','Scheme Name','Amount (Rs.)','Last Transaction Date']} data={tableData}/>
+      <CustomTable headers={['User ID','Account Names','Scheme Name','Invested amount','Last Transaction Date']} data={tableData}/>
     </div>
   );
 }

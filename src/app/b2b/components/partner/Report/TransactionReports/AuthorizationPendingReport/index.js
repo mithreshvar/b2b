@@ -1,4 +1,5 @@
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 import {CustomSelectField, CustomTextField, CustomDatePicker} from "../../../../InputFields";
 import { useState } from "react";
 import CustomTable from "../../../PartnerHome/CustomTable";
@@ -23,7 +24,7 @@ function AuthorizationPendingReport( {setActive} ) {
     const value = event.target.value;
     setTransactionType(value);
   };
-  const TransactionTypeOptions = ['Purchase','Additional purchase','Redemption','Switch'];
+  const TransactionTypeOptions = ['Purchase','SIP','Redemption','Switch','STP','SWP'];
 
   const[fromDate,setFromDate] = useState();
   const[toDate,setToDate] = useState();
@@ -55,23 +56,20 @@ function AuthorizationPendingReport( {setActive} ) {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
+          <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('TransactionReports')}/>
           <h1 className="text-[20px] font-semibold leading-[20px]">Authorization Pending Report</h1>
         </div>
         <div className='flex gap-x-[50px]'>
-          <CustomTextField label='Email/Mobile/Scheme Name' value={value} handleChange={(event)=>{setvalue(event.target.value)}}/>
+          <CustomTextField label='Email/Mobile' value={value} handleChange={(event)=>{setvalue(event.target.value)}}/>
           <CustomSelectField label="Transaction Type" value={TransactionType} valueOptions={TransactionTypeOptions} errorMessage={TransactionTypeErrorMessage} handleChange={handleTransactionTypeChange} />
         </div>
         <div className='flex gap-x-[50px]'>
           <CustomDatePicker label="From Date" value={fromDate} handleChange={handleFromDateChange} disableFuture={true} errorMessage={fromDateErrorMessage} />
           <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />
         </div>
-        <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]" onClick={filterData}>Search</button>
-          <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
-        </div>
+        <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
-      <CustomTable className={'justify-start'}headers={['Investor Names','Email','Mobile','Scheme Name','Transaction','Amount(Rs.)','Units',' Created Date']} data={tableData} />
+      <CustomTable className={'justify-start'}headers={['Account name(s)','Email','Mobile','Scheme Name','Transaction','Amount(Rs.)','Units',' Created Date']} data={tableData} />
     </div>
   );
 }

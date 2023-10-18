@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Arrow from "/public/partner/Arrow";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 import {CustomTextField} from "../../../../InputFields";
 import CustomTable from "../../../PartnerHome/CustomTable";
 
@@ -33,13 +34,12 @@ function LastLoginReport( {setActive} ) {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <button onClick={()=>setActive('UserManagementReports')}><Arrow left={true} active={true}/></button>
+          <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('UserManagementReports')}/>
           <h1 className="text-[20px] font-semibold leading-[20px]">Last Login Report</h1>
         </div>
-        <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <CustomTextField label='Email/Mobile/Scheme Name' value={value} handleChange={(event)=>{setvalue(event.target.value)}}/>
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]" onClick={filterData}>Search</button>
-          <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
+        <div className="flex gap-x-[20px]">
+          <CustomTextField label='Email/Mobile' value={value} handleChange={(event)=>{setvalue(event.target.value)}}/>
+          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
         </div>
       </div>
       <CustomTable headers={['User Name','Email','Last Login','Last Login Device']} data={tableData}/>

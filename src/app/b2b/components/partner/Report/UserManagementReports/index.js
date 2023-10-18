@@ -17,7 +17,7 @@ function UserManagementReports( {setActive}) {
           </button>
           <button className="flex items-center justify-start gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]" onClick={()=>{setActive('ValuationReport')}}>
             <Image height={50} width={52} src={Img2} alt="icon"/>
-            <h2 className="text-[14px] font-semibold">Valuation Report</h2>
+            <h2 className="text-[14px] font-semibold">Client Valuation Report</h2>
           </button>
           <button className="flex items-center justify-start gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]" onClick={()=>{setActive('ClientRTAEmailAndMobile')}}>
             <Image height={50} width={52} src={Img3} alt="icon"/>

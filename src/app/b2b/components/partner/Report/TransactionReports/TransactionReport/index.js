@@ -1,9 +1,9 @@
 import {CustomSelectField, CustomTextField} from "../../../../InputFields";
-import Arrow from "/public/partner/Arrow.js";
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 import { useState } from "react";
 import CustomTable from "../../../PartnerHome/CustomTable";
 import Reset from "/public/partner/reset.svg"
-import Image from "next/image";
 import TransactioReports from "..";
 
 function TransactionReport( {setActive} ) {
@@ -73,7 +73,7 @@ function TransactionReport( {setActive} ) {
     <div className="flex flex-col p-[20px] gap-y-[20px]" >
       <div className="flex flex-col w-full bg-white p-[20px] rounded-[20px] gap-y-[20px]">
         <div className="flex items-center gap-x-[10px]">
-          <button onClick={()=>setActive('TransactionReports')}><Arrow left={true} active={true}/></button>
+          <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('TransactionReports')}/>
           <h1 className="text-[20px] font-semibold leading-[20px]">Transaction Report</h1>
         </div>
         <div className='flex gap-x-[50px]'>
@@ -89,13 +89,8 @@ function TransactionReport( {setActive} ) {
             <Image src={Reset}/>
             <p className="text-[14px] font-medium text-[#0066CD]">Clear</p>
           </button>
-          
         </div>
-        
-        <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]" onClick={filterData}>Search</button>
-          <button className="w-[158px] h-[40px] border-[1px] border-[#0071E7] text-[#0066CD] rounded-[25px]">Download as Excel</button>
-        </div>
+        <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
       <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','TX.Date','TX.Type','Paid Through','User Ref ID']} data={TableData} />
     </div>
