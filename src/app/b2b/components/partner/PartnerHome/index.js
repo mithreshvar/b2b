@@ -9,10 +9,11 @@ import { useState } from "react";
 import { CustomTextField } from "../../InputFields/index.js";
 import { useDataContext } from "../../../context/DataContext.js";
 import CustomTable from "./CustomTable.js";
+import Arrow from "/public/partner/Arrow.js";
 
 export default function PartnerHome ({setActive}) {
 
-    const {data, sip} = useDataContext();
+    const {data, sip, setSip} = useDataContext();
     
     if (!data) return(<></>);
     
@@ -156,7 +157,10 @@ export default function PartnerHome ({setActive}) {
                     :
                     <>
                         <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
+                          <div className="flex justify-between items-center">
                             <h1 className="text-[20px] font-semibold">User Systematic Plan Details</h1>
+                            <button className="text-[#0066CD] text-[16px] font-semibold cursor-pointer flex items-center justify-center gap-x-[5px]" onClick={ () => setSip(false) } ><Arrow left={true} active={true} /><p>Back</p></button>
+                          </div>
                             <h4 className="text-[18px]  font-semibold">SIP Details</h4>
                             <h6 className="text-[14px]  font-semibold">Regular SIP</h6>
                             <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} />

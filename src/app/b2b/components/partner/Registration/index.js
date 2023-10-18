@@ -67,7 +67,7 @@ function Registration() {
         <div className='text-[20px] font-semibold pb-[20px]'>
           Account Creation
         </div>
-        <div className='grid gap-[30px] grid-cols-2'>
+        <div className='flex flex-col gap-[30px] '>
           <CustomTextField type='email' label="Email" width="380px" height='40px' value={email}  handleChange={handleEmailChange} errorMessage={emailErrorMessage} />
           <CustomTextField type='text' label="Name" width="380px" height='40px' value={name} setValue={setName} handleChange={handleNameChange} errorMessage={nameErrorMessage} />
           {/* <TextField  type='tel' label='Mobile Number' id='mobilenumber'/> */}
