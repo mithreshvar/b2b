@@ -9,7 +9,9 @@ import { useState } from "react";
 import { CustomTextField } from "../../InputFields/index.js";
 import { useDataContext } from "../../../context/DataContext.js";
 import CustomTable from "./CustomTable.js";
-import Arrow from "/public/partner/Arrow.js";
+
+import Image from "next/image";
+import Arrow from "public/partner/Group 508900.svg";
 
 export default function PartnerHome ({setActive}) {
 
@@ -156,33 +158,32 @@ export default function PartnerHome ({setActive}) {
                     </>
                     :
                     <>
-                        <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
-                          <div className="flex justify-between items-center">
-                            <h1 className="text-[20px] font-semibold">User Systematic Plan Details</h1>
-                            <button className="text-[#0066CD] text-[16px] font-semibold cursor-pointer flex items-center justify-center gap-x-[5px]" onClick={ () => setSip(false) } ><Arrow left={true} active={true} /><p>Back</p></button>
-                          </div>
-                            <h4 className="text-[18px]  font-semibold">SIP Details</h4>
-                            <h6 className="text-[14px]  font-semibold">Regular SIP</h6>
-                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} />
-                            <h6 className="text-[14px]  font-semibold">ADVISORS SIP TRANSACTION</h6>
-                            <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} />
-
-                        </div>
-                        <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
-                            <h1 className="text-[18px] font-semibold">VIP Details</h1>
-                            <h6 className="text-[14px]  font-semibold">REGULAR VIP DETAILS</h6>
-                            <CustomTable 
-                                headers={['VIP Reference ID', 'Folio', 'Scheme Name', 'Expected Return (%)', 'Paid/ Tot. Months', 'Next EGS/DD Date', 'Monthly Amount (Rs.)']}
-                                data={[['104476', '123/123451', 'Kotak Balance Advantage Fund-Reg(IDCW)', '12', '0/12', '-', '1,000.00']]}
-                                pagination={false} />
-                        </div>
-                        <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
-                            <h1 className="text-[18px] font-semibold">STP Details</h1>
-                            <CustomTable 
-                                headers={['Folio/Holding Profile','From Scheme','To Scheme','Frequency','STP Date','Paid/No. Of Months','Initial Investment Units/Amount','Installment Units/ Amount']}
-                                data={stpData}
-                                pagination={false} />
-                        </div>
+                      <div className="flex gap-[10px] justify-start items-center">
+                        <Image src={Arrow} alt={"Back"} className="cursor-pointer" onClick={ () => setSip(false)}/>
+                        <h1 className="text-[20px] font-semibold">User Systematic Plan Details</h1>
+                      </div>
+                      <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
+                        <h4 className="text-[18px]  font-semibold">SIP Details</h4>
+                        <h6 className="text-[14px]  font-semibold">Regular SIP</h6>
+                        <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'Paid/ Tot. Months', 'Next ECS Date', 'Monthly Amount (Rs.)']} data={sipData} pagination={false} />
+                        <h6 className="text-[14px]  font-semibold">ADVISORS SIP TRANSACTION</h6>
+                        <CustomTable headers={['SIP Reference ID', 'Folio', 'Scheme Name', 'No of Months', 'SIP Type', 'Monthly Amount (Rs.)']} data={advisorSipData} pagination={false} />
+                      </div>
+                      <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
+                          <h1 className="text-[18px] font-semibold">VIP Details</h1>
+                          <h6 className="text-[14px]  font-semibold">REGULAR VIP DETAILS</h6>
+                          <CustomTable 
+                              headers={['VIP Reference ID', 'Folio', 'Scheme Name', 'Expected Return (%)', 'Paid/ Tot. Months', 'Next EGS/DD Date', 'Monthly Amount (Rs.)']}
+                              data={[['104476', '123/123451', 'Kotak Balance Advantage Fund-Reg(IDCW)', '12', '0/12', '-', '1,000.00']]}
+                              pagination={false} />
+                      </div>
+                      <div className="bg-white flex flex-col p-[20px] gap-y-[20px] rounded-[15px]">
+                          <h1 className="text-[18px] font-semibold">STP Details</h1>
+                          <CustomTable 
+                              headers={['Folio/Holding Profile','From Scheme','To Scheme','Frequency','STP Date','Paid/No. Of Months','Initial Investment Units/Amount','Installment Units/ Amount']}
+                              data={stpData}
+                              pagination={false} />
+                      </div>
                     </>
 
                 }
