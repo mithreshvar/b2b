@@ -32,10 +32,14 @@ import ClientRisk from './components/ClientRisk';
 import ChangePassword from './components/ChangePassword';
 import Review from './components/Review';
 import { useDataContext } from './context/DataContext';
+import AddNote from './components/Portfolio/AddNote';
+import close from '/public/close.svg'
+
+
 
 export default function Content() {
 
-    const {navOpen, setNavOpen} = useDataContext();
+    const {navOpen, setNavOpen, showNote, setShowNote, deletePopup, setDeletePopup} = useDataContext();
 
     const [active, setActive] = useState('dashboard');
 
@@ -50,7 +54,7 @@ export default function Content() {
             <div className=' overflow-auto relative'>
                 <div>
                     <Box sx={{ flexGrow: 1, zIndex: 1 }}>
-                    <AppBar position={(false)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
+                    <AppBar position={(showNote || deletePopup)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                         <div className='flex gap-x-[10px] items-center'>
                             <Link href={'/advisory-dashboard'}><Image src='/logo.svg' width={125} height={36} /></Link>
@@ -86,7 +90,7 @@ export default function Content() {
                     </AppBar>
                     </Box>
 
-                    <div className={`flex h-[calc(100vh-60px)] relative ${(!(false)) && ' mt-[60px]'} `}> {/* */}
+                    <div className={`flex h-[calc(100vh-60px)] relative ${(!(showNote || deletePopup)) && ' mt-[60px]'} `}> {/* */}
                         
                         {/* {
                             (notificationMessage == 'Portfolio Deleted Successfully' || notificationMessage == 'Successfully Downloaded' ) &&
@@ -176,6 +180,27 @@ export default function Content() {
                     </div>
                 </div>   
             </div>
+            {(showNote) &&
+                <div className='absolute w-screen h-screen top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center z-[2]' >
+
+                    <div className='relative w-full rounded-t-[25px] bg-white p-[40px] flex flex-col gap-y-[50px]  items-center '>
+                        <Image src={close} className='absolute top-[15px] right-[15px] cursor-pointer text-primary' onClick={()=>{setShowNote(false)}} />
+                        <AddNote />
+                    </div>
+                </div>
+            }
+            { deletePopup && 
+                <div className='absolute w-screen h-screen top-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center z-[2]' >
+                    <div className='relative w-full h-[230px] border-t-[1px] border-[#FF7922] bg-[#FDE4D5] p-[45px] text-center flex flex-col gap-y-[22px]  items-center '>
+                        <h4 className='font-bold text-[18px]'>Delete Confirmation</h4>
+                        <p className='text-[#000000]  text-[14px]'>Are you sure, you want to delete the note created on {deletePopup.date}?</p>
+                        <div className=' flex gap-x-[40px] mt-[10px]' >
+                            <button onClick={()=>setDeletePopup('')} className='bg-[#FF7922] h-[50px] w-[150px] text-white font-bold rounded-[25px]'>CANCEL</button>
+                            <button className='bg-[#FFECE0] h-[50px] w-[150px] text-[#FF7922] font-bold rounded-[25px] border-[#FF7922] border-[1px]' onClick={()=>{deletePopup.DeleteNote(deletePopup.Index); setDeletePopup(false)}} >DELETE</button>
+                        </div>
+                    </div>
+                </div>
+            }
         </ThemeProvider>
     );
 }
