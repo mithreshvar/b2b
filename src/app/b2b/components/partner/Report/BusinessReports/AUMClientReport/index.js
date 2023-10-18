@@ -96,20 +96,20 @@ function AUMClientReport( {setActive} ) {
       {(() => {
         if (Aum=='Scheme') {
           return (
-            <CustomTable headers={['Scheme Name','Amount (Rs.)']} data={Scheme} />
+            <CustomTable headers={['Scheme Name','Amount (Rs.)']} data={Scheme} download={true}/>
           )
         } else if (Aum=='Investor') {
           return (
-            <CustomTable headers={['Investor Name','PAN','Amount (Rs.)']} data={Investor} />
+            <CustomTable headers={['Investor Name','PAN','Amount (Rs.)']} data={Investor} download={true}/>
           )
         } else if (Aum=='AMC') {
           return (
-            <CustomTable headers={['AMC','Amount (Rs.)']} data={AMC} />
+            <CustomTable headers={['AMC','Amount (Rs.)']} data={AMC} download={true}/>
           )
         }
         else if (Aum=='Asset category') {
           return (
-            <CustomTable headers={['Asset category','Amount (Rs.)']} data={AssetCategory} />
+            <CustomTable headers={['Asset category','Amount (Rs.)']} data={AssetCategory} download={true}/>
           )
         }
       })()}
