@@ -91,27 +91,25 @@ function AUMClientReport( {setActive} ) {
           <CustomDatePicker label="From Date" value={fromDate} handleChange={handleFromDateChange} disableFuture={true} errorMessage={fromDateErrorMessage} />
           <CustomDatePicker label="To Date" value={toDate} handleChange={handleToDateChange} disableFuture={true} minDate={fromDate} errorMessage={toDateErrorMessage} />
         </div>
-        <div className="flex text-[14px] font-bold gap-x-[20px]">
-          <button className="w-[108px] h-[40px] bg-[#0071E7] text-white  rounded-[25px]">Search</button>
-        </div>
+        <button className="h-[40px] w-[108px] bg-[#0071E7] text-[14px] font-bold rounded-[25px] text-white" >Search</button>
       </div>
       {(() => {
         if (Aum=='Scheme') {
           return (
-            <CustomTable className={'p-0'} headers={['Scheme Name','Amount (Rs.)']} data={Scheme} download={true} dataType="Invoice" />
+            <CustomTable headers={['Scheme Name','Amount (Rs.)']} data={Scheme} />
           )
         } else if (Aum=='Investor') {
           return (
-            <CustomTable className={'p-0 justify-between'} headers={['Investor Name','PAN','Amount (Rs.)']} data={Investor} download={true} dataType="Invoice" />
+            <CustomTable headers={['Investor Name','PAN','Amount (Rs.)']} data={Investor} />
           )
         } else if (Aum=='AMC') {
           return (
-            <CustomTable className={'p-0 justify-between'} headers={['AMC','Amount (Rs.)']} data={AMC}  download={true} dataType="Invoice"/>
+            <CustomTable headers={['AMC','Amount (Rs.)']} data={AMC} />
           )
         }
         else if (Aum=='Asset category') {
           return (
-            <CustomTable className={'p-0 justify-between'} headers={['Asset category','Amount (Rs.)']} data={AssetCategory} download={true} dataType="Invoice" />
+            <CustomTable headers={['Asset category','Amount (Rs.)']} data={AssetCategory} />
           )
         }
       })()}
