@@ -277,8 +277,20 @@ export default function Content() {
                                 onOpening={() => setIsReportOpen(true)}
                                 onClosing={() => setIsReportOpen(false)}
                             >
-                                <div className='pl-[16px] pt-[24px] text-[12px]'> 
-                                    <Collapsible trigger={[<IBusinessReports isOpened={isBReportOpen} className='h-[3px]'/>,<span className='font-medium'>Business reports</span>]}
+                                <div className='flex flex-col gap-y-[26px] pl-[16px] pt-[24px] text-[12px]'>
+                                    <button className='flex gap-[8px]' onClick={()=>setActive('BussinessReports')}>
+                                    <IBusinessReports active={active} className='h-[3px]'/><span className={`font-medium ${active === 'BussinessReports'?"text-primary":""}`}>Business reports</span>
+                                    </button>
+
+                                    <button className='flex gap-[8px]' onClick={()=>setActive('TransactionReports')}>
+                                    <ITransactioReports active={active} isOpened={istReportOpen} className='h-[3px]'/><span className={`font-medium ${active === 'TransactionReports'?"text-primary":""}`}>Transaction reports</span>
+                                    </button>
+                                    
+                                    <button className='flex gap-[8px]' onClick={()=>setActive('UserManagementReports')}>
+                                    <IUserManagementReportsReports active={active} isOpened={isUReportOpen} className='h-[3px]'/><span className={`font-medium ${active === 'UserManagementReports'?"text-primary":""}`}>User management reports</span>
+                                    </button>
+                                    
+                                    {/* <Collapsible trigger={[<IBusinessReports isOpened={isBReportOpen} className='h-[3px]'/>,<span className='font-medium'>Business reports</span>]}
                                         triggerWhenOpen={[<IBusinessReports isOpened={isBReportOpen} />, <span className='font-semibold text-primary'>Business reports</span>]}
                                     triggerStyle={{cursor: 'pointer',display: 'flex', gap:'7.8px', margin: '0',}} 
                                     open={isBReportOpen}
@@ -305,11 +317,9 @@ export default function Content() {
                                         onClosing={() => {setIsUReportOpen(false); setActive('UserManagementReports')}}
                                     >
                                         
-                                    </Collapsible>
+                                    </Collapsible> */}
                                 </div>
                             </Collapsible>
-
-
 
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'brokerage' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
