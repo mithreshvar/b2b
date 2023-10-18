@@ -152,7 +152,7 @@ export default function PartnerHome ({setActive}) {
                             </div>
                         </div>
 
-                        <CustomTable headers={['User Name', 'Email', 'Phone Number', 'Systematic Plans', 'Action']} data={tableData} setActive={setActive} />
+                        <CustomTable headers={['User Name', 'Email', 'Phone Number', 'Systematic Plans', 'Action']} data={tableData} setActive={setActive} download={true} />
                     </>
                     :
                     <>
