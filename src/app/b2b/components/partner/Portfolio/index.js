@@ -51,7 +51,7 @@ function Portfolio() {
         }
     };
 
-    const [selectAMC, setSelectAMC] = useState('Aditya Birla')
+    const [selectAMC, setSelectAMC] = useState('')
     const [schemeClassification, setSchemeClassification] = useState('')
     const [schemeName, setSchemeName] = useState('')
 
