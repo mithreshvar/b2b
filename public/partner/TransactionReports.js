@@ -1,6 +1,6 @@
 export default function Portfolio({ active }) {
     return (
-        <svg id="Group_569897" data-name="Group 569897" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="11.895" height="15.111" viewBox="0 0 11.895 15.111" fill={(active==='TransactionReports')?"#0071e7":"#b7b7b7"}>
+        <svg id="Group_569897" data-name="Group 569897" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="11.895" height="15.111" viewBox="0 0 11.895 15.111" fill={(active === 'TransactionReports' || active === 'TransactionReport' || active === 'InvestorSchemeDetails' || active === 'SIPReport' || active === 'STPReport' || active === 'SWPReport' || active === 'AuthorizationPendingReport')?"#0071e7":"#b7b7b7"}>
         <defs>
           <clipPath id="clip-path">
             <rect id="Rectangle_185090" data-name="Rectangle 185090" width="11.895" height="15.111" />

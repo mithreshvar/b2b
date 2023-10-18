@@ -1,7 +1,7 @@
 
 export default function BuisnessReports({active}) {
     return (
-        <svg id="Group_569899" data-name="Group 569899" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="13.268" height="11.05" viewBox="0 0 13.268 11.05" fill={(active==='BussinessReports')?"#0071e7":"#b7b7b7"}>
+        <svg id="Group_569899" data-name="Group 569899" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="13.268" height="11.05" viewBox="0 0 13.268 11.05" fill={(active === 'BussinessReports' || active === 'AUMClientReports' || active === 'PartnerInvoice')?"#0071e7":"#b7b7b7"}>
           <defs>
             <clipPath id="clip-path">
               <rect id="Rectangle_185091" data-name="Rectangle 185091" width="13.268" height="11.05" />

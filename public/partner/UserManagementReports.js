@@ -1,6 +1,6 @@
 export default function UserManagementReports({ active }) {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="12.669" height="15.197" viewBox="0 0 12.669 15.197" fill={(active==='UserManagementReports')?"#0071e7":"#b7b7b7"}>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="12.669" height="15.197" viewBox="0 0 12.669 15.197" fill={(active === 'UserManagementReports' || active === 'InvestorDetails' || active === 'ValuationReport' || active === 'ClientRTAEmailAndMobile' || active === 'MandatesReport' || active === 'LastLoginReport' || active === 'BirthdayDetails')?"#0071e7":"#b7b7b7"}>
       <defs>
         <clipPath id="clip-path">
           <rect id="Rectangle_185089" data-name="Rectangle 185089" width="12.669" height="15.197" />
