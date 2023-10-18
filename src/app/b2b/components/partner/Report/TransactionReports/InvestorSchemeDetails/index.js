@@ -46,7 +46,7 @@ function InvestorSchemeDetails( {setActive}) {
           <button className="h-[40px] w-[108px] bg-[#0071E7] text-[14px] font-bold rounded-[25px] text-white" onClick={filterData}>Search</button>
         </div>
       </div>
-      <CustomTable headers={['User ID','Account Names','Scheme Name','Invested amount','Last Transaction Date']} data={tableData}/>
+      <CustomTable headers={['User ID','Account Names','Scheme Name','Invested amount','Last Transaction Date']} data={tableData} rightNav={true} dataType="Invoice" />
     </div>
   );
 }

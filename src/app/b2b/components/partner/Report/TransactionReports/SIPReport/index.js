@@ -68,7 +68,7 @@ function SIPReport( {setActive} ) {
         </div>
         <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
-      <CustomTable headers={['Reference Id','Account names','Folio Number','Scheme Name','Type','Status','Amount(Rs.)','SIP Data','Total Installment','Paid / Pending Installments','Start Date','End Date','ECS (Max) Amount']} data={tableData} />
+      <CustomTable headers={['Reference Id','Account names','Folio Number','Scheme Name','Type','Status','Amount(Rs.)','SIP Data','Total Installment','Paid / Pending Installments','Start Date','End Date','ECS (Max) Amount']} data={tableData} rightNav={true}  dataType="Invoice" />
     </div>
   );
 }

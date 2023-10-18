@@ -129,7 +129,7 @@ function PartnerInvoiceReportBrokerage( {setActive} ) {
 
   return (
     <div className="p-[20px] overflow-auto ">
-      <div className="w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF] pb-[10px]">
+      <div className="w-full flex-col justify-center items-center rounded-t-[15px] bg-[#FFFFFF] pb-[10px]">
         <div className="flex gap-x-[10px] items-center justify-start p-[20px]">
           <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('BussinessReports')}/>
           <div className="text-[20px] font-semibold">Partner Invoice Report (Brokerage)</div>
@@ -140,25 +140,25 @@ function PartnerInvoiceReportBrokerage( {setActive} ) {
           <button className={`flex h-[34px] w-[65px] ${selectedOption==='nps'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setInvoiceData(npsData);setSelectedOption('nps')}}>NPS</button>
           <button className={`flex h-[34px] w-[174px] ${selectedOption==='ConsolidateInvoice'?'bg-[#DCEBFE] text-[#0071E7]':'bg-[#F7F8FF] text-[#BEBEBE]'} text-[14px] font-bold rounded-lg rounded-b-none items-center justify-center`} onClick={()=>{setSelectedOption('ConsolidateInvoice')}}>Consolidate Invoice</button>
         </div>
-        {(() => {
-        if (selectedOption=='ConsolidateInvoice') {
-          return (
-            <div className="flex gap-x-[30px] p-[20px]">
-              <div className="flex gap-x-[50px]">
-                <CustomSelectField label="Month" value={Month} valueOptions={MonthOptions} handleChange={(event)=>{setMonth(event.target.value)}}/>
-                <CustomSelectField label="Year" value={Year} valueOptions={YearOptions} handleChange={(event)=>{setYear(event.target.value)}}/>
-              </div>
-              <button className="w-[108px] h-[40px] text-[14px] text-white font-semibold bg-[#0071E7] rounded-[25px]">Download</button>
-            </div>
-          )
-        }
-        else {
-          return (
-            <CustomTable headers={['Invoice Month-Year', 'File', 'Action']} data={InvoiceData} />
-          )
-        }
-        })()}
       </div> 
+      {(() => {
+      if (selectedOption=='ConsolidateInvoice') {
+        return (
+          <div className="flex bg-white rounded-b-[15px] gap-x-[30px] p-[20px]">
+            <div className="flex gap-x-[50px]">
+              <CustomSelectField label="Month" value={Month} valueOptions={MonthOptions} handleChange={(event)=>{setMonth(event.target.value)}}/>
+              <CustomSelectField label="Year" value={Year} valueOptions={YearOptions} handleChange={(event)=>{setYear(event.target.value)}}/>
+            </div>
+            <button className="w-[108px] h-[40px] text-[14px] text-white font-semibold bg-[#0071E7] rounded-[25px]">Download</button>
+          </div>
+        )
+      }
+      else {
+        return (
+          <CustomTable headers={['Invoice Month-Year', 'File', 'Action']} data={InvoiceData} rightNav={true} mergeTable={true} dataType="Invoice" />
+        )
+      }
+      })()}
     </div>
     
   )

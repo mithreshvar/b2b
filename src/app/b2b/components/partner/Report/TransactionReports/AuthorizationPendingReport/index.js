@@ -69,7 +69,7 @@ function AuthorizationPendingReport( {setActive} ) {
         </div>
         <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
-      <CustomTable className={'justify-start'}headers={['Account name(s)','Email','Mobile','Scheme Name','Transaction','Amount(Rs.)','Units',' Created Date']} data={tableData} />
+      <CustomTable className={'justify-start'}headers={['Account name(s)','Email','Mobile','Scheme Name','Transaction','Amount(Rs.)','Units',' Created Date']} data={tableData} download={true} dataType="Invoice" />
     </div>
   );
 }

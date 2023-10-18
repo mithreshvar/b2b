@@ -56,7 +56,7 @@ function BirthdayDetails( {setActive} ) {
           <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
         </div>
       </div>
-      <CustomTable headers={['Investor name','Email','Mobile number','Date of birth']} data={tableData}/>
+      <CustomTable headers={['Investor name','Email','Mobile number','Date of birth']} data={tableData} download={true} dataType="Invoice" />
     </div>
   );
 }

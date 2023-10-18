@@ -68,7 +68,7 @@ function STPReport( {setActive} ) {
         </div>
         <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
-      <CustomTable headers={['Reference Id','Account names','Folio Number','From Scheme Name','To Scheme Name','Status','Amount(Rs.)','Units','STP Date','STP Date','Total Installments','Paid / Pending Installments','Start Date','End Date']} data={tableData} />
+      <CustomTable headers={['Reference Id','Account names','Folio Number','From Scheme Name','To Scheme Name','Status','Amount(Rs.)','Units','STP Date','STP Date','Total Installments','Paid / Pending Installments','Start Date','End Date']} data={tableData} download={true} dataType="Invoice" />
     </div>
   );
 }

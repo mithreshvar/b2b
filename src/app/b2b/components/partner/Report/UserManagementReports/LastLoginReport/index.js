@@ -42,7 +42,7 @@ function LastLoginReport( {setActive} ) {
           <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
         </div>
       </div>
-      <CustomTable headers={['User Name','Email','Last Login','Last Login Device']} data={tableData}/>
+      <CustomTable headers={['User Name','Email','Last Login','Last Login Device']} data={tableData} download={true} dataType="Invoice" />
     </div>
   );
 }

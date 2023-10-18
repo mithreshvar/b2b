@@ -47,7 +47,7 @@ function ValuationReport( {setActive} ) {
       </div>
       {(() => {
           return (
-            <CustomTable className={'p-0'} headers={['Investor Names','Product','Current Value','Gain','Today’s Changes','Annualized return']} data={ValuationReport} />
+            <CustomTable className={'p-0'} headers={['Investor Names','Product','Current Value','Gain','Today’s Changes','Annualized return']} data={ValuationReport} pagination={false} dataType="Invoice" />
           )
       })()}
     </div>

@@ -116,7 +116,7 @@ function TransactionReport( {setActive} ) {
         </div>
         <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
-      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tx. Date','Tx. Type','Paid Through','User Ref ID']} data={TableData} />
+      <CustomTable headers={['Account names','Scheme Name','Folio Number','Status','Units','Amount(Rs.)','Tx. Date','Tx. Type','Paid Through','User Ref ID']} data={TableData} download={true} dataType="Invoice" />
     </div>
   );
 }

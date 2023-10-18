@@ -54,7 +54,7 @@ function ClientRTAEmailAndMobile( {setActive} ) {
         </div>
         {(() => {
             return (
-              <CustomTable className={''} headers={['Folio Number','AMC Name','Scheme Name','Investor Name','PAN Number','Email ID','Mobile Number']} data={ClientRTAEmailandMobile} />
+              <CustomTable className={''} headers={['Folio Number','AMC Name','Scheme Name','Investor Name','PAN Number','Email ID','Mobile Number']} data={ClientRTAEmailandMobile} rightNav={true} dataType="Invoice" />
             )
         })()}
       </div>

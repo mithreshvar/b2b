@@ -42,7 +42,7 @@ function MandatesReport( {setActive} ) {
           <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
         </div>
       </div>
-      <CustomTable headers={['Consumer Code','Client Name','Email','Upper Limit (in Rs.)','End Date','Form Type','Status']} data={tableData}/>
+      <CustomTable headers={['Consumer Code','Client Name','Email','Upper Limit (in Rs.)','End Date','Form Type','Status']} data={tableData} download={true} dataType="Invoice" />
     </div>
   );
 }

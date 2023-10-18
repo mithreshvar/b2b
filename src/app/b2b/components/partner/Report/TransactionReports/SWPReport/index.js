@@ -68,7 +68,7 @@ function SWPReport( {setActive} ) {
         </div>
         <button className="w-[108px] h-[40px] bg-[#0071E7] text-white text-[14px] font-bold rounded-[25px]" onClick={filterData}>Submit</button>
       </div>
-      <CustomTable headers={['Reference Id','Account names','Folio Number','Scheme Name','Status','Amount(Rs.)','SWP Date','Total Installments','Withdrawal / Pending Installment','Start Date','End Date']} data={tableData} />
+      <CustomTable headers={['Reference Id','Account names','Folio Number','Scheme Name','Status','Amount(Rs.)','SWP Date','Total Installments','Withdrawal / Pending Installment','Start Date','End Date']} data={tableData} download={true} dataType="Invoice" />
     </div>
   );
 }
