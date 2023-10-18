@@ -84,7 +84,7 @@ export default function WhyFundsIndiaPartner({setRoute}) {
                     <div className='w-[434px] h-[398px] flex items-center justify-center bg-[#EEF9F5] rounded-[34px] '><div className='mx-[-26px]'><Image src={png4} className='w-[538px] h-[326px] ml-[-50px]'/></div></div>
                   </div>
                 </div>
-          <div className='flex justify-center items-center  mt-[182px]'>
+          {/* <div className='flex justify-center items-center  mt-[182px]'>
             <div className='w-[1080px] h-[235px] rounded-[34px] bg-[#F3F8FC] flex p-[40px] gap-x-[77px]'>
               <div className='w-[183px] h-[150px] leading-[45px]'>
                           <span className='text-[40px] font-semibold'>Empanel <br/>with us<br/> <span className='text-[#0066CD]'>for FREE!</span></span>
@@ -102,8 +102,7 @@ export default function WhyFundsIndiaPartner({setRoute}) {
                    </button>
               </div>
             </div>
-          </div>
-            
+          </div> */}
    </>
   )
 }
