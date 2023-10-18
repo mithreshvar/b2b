@@ -19,6 +19,10 @@ function TransactioReports( {setActive} ) {
             <Image height={50} width={52} src={Img2} alt="icon"/>
             <h2 className="text-[14px] font-semibold">Investor Scheme Details</h2>
           </button>
+          <button className="flex items-center justify-start gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]" onClick={()=>setActive('AuthorizationPendingReport')}>
+            <Image height={50} width={52} src={Img6} alt="icon"/>
+            <h2 className="text-[14px] font-semibold">Authorization Pending Report</h2>
+          </button>
           <button className="flex items-center justify-start gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]" onClick={()=>setActive('SIPReport')}>
             <Image height={50} width={52} src={Img3} alt="icon"/>
             <h2 className="text-[14px] font-semibold">SIP Report</h2>
@@ -30,10 +34,6 @@ function TransactioReports( {setActive} ) {
           <button className="flex items-center justify-start gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]" onClick={()=>setActive('SWPReport')}>
             <Image height={50} width={52} src={Img5} alt="icon"/>
             <h2 className="text-[14px] font-semibold">SWP Report</h2>
-          </button>
-          <button className="flex items-center justify-start gap-x-[15px] p-[20px] bg-[#F5F7FE] rounded-[25px]" onClick={()=>setActive('AuthorizationPendingReport')}>
-            <Image height={50} width={52} src={Img6} alt="icon"/>
-            <h2 className="text-[14px] font-semibold">Authorization Pending Report</h2>
           </button>
         </div>
       </div>
