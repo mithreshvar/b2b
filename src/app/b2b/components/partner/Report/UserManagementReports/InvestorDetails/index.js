@@ -48,7 +48,7 @@ function InvestorDetails( {setActive} ) {
       </div>
       {(() => {
           return (
-            <CustomTable className={'p-0'} headers={['User ID','Investor Name','PAN','DOB','City','Pincode','Contact Number','Activated','NRI','KYC Status','IrType','Activation Date','Triparatite Agreement']} data={InvestorDetails} />
+            <CustomTable className={'p-0'} headers={['User ID','Investor Name','PAN','DOB','City','Pincode','Contact Number','Activated','NRI','KYC Status','IrType','Activation Date','Triparatite Agreement']} data={InvestorDetails} rightNav={true} dataType="Invoice" />
           )
       })()}
     </div>
