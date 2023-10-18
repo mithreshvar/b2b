@@ -29,7 +29,8 @@ function About() {
   const handleExperienceChange = (event) => {
     setExperience(event.target.value)
 
-    if (event.target.value != '') setExperienceErrorMessage('');
+    if (event.target.value < 0 || event.target.value > 100) setExperienceErrorMessage('Invalid Years of Experience');
+    else if (event.target.value != '') setExperienceErrorMessage('');
     else setExperienceErrorMessage('This field can not be empty');
   }
 
@@ -97,7 +98,7 @@ function About() {
                     <Image src={close} className='w-[15px] h-[15px] absolute top-2 right-3 cursor-pointer' onClick={()=>{setUploadLogo(true); setLogoErrorMessage(false);}}/>
                   </div>
               }
-              <CustomTextField type='text' label="Experience" value={experience} handleChange={handleExperienceChange} errorMessage={experienceErrorMessage}/>  <div className='mt-[-16px]' hidden={experienceErrorMessage == ''} />
+              <CustomTextField type='number' label="Experience" value={experience} handleChange={handleExperienceChange} errorMessage={experienceErrorMessage}/>  <div className='mt-[-16px]' hidden={experienceErrorMessage == ''} />
               <CustomTextField type="text" label="About" value={about} handleChange={handleAboutChange} multiline errorMessage={aboutErrorMessage}
                   sx={{
                       '& .MuiInputBase-root': {

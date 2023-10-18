@@ -9,11 +9,11 @@ export default function Table({headers, tenData=[], setActive}) {
         type = 'portfolio';
     }
     if(headers[2]=='Rating') type = 'rating';
-    if(headers[1]=='Scheme Name' && headers[2]=='Current NAV (Rs.)') type = 'schemes';    
+    if(headers[1]=='Scheme Name' && headers[2]=='FundsIndia Rating') type = 'schemes';    
     if(headers[0]=='Scheme Name' && headers[1]=='Amount (Rs.)') type = 'AUM'
 
     return(
-        <div className=" flex flex-col bg-white p-[20px] rounded-[15px] text-left overflow-auto">
+        <div className="max-h-[600px] flex flex-col bg-white p-[20px] rounded-[15px] text-left overflow-auto">
             {
                 (tenData.length === 0) ?
                 <h1 className="text-[24px] font-bold text-center">

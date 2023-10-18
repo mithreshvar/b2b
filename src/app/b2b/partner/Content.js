@@ -189,7 +189,7 @@ export default function Content() {
                                         <div className='absolute bottom-[-384px] right-[-10px] bg-white w-[267px] h-[375px] rounded-[20px] shadow-[0px_3px_8px_#00000026] p-[20px] text-black text-[15px] flex flex-col gap-y-[15px] items-center '>
                                             <div className='flex gap-x-[10px] px-[10px] items-center '>
                                                 <Image src={avathar} className='w-[30px] h-[30px]' />
-                                                <div className='overflow-clip text-ellipsis font-semibold w-[168px] h-[20px] text-left whitespace-nowrap'>Kishore Kumar Palaniswamy</div>
+                                                <div className='overflow-clip text-ellipsis font-semibold w-[168px] h-[20px] text-left whitespace-nowrap' title='Kishore Kumar Palaniswamy'>Kishore Kumar Palaniswamy</div>
                                             </div>
 
                                             <Image src={qrcode} className='h-[150px] w-[150px]' />
