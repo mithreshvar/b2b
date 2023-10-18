@@ -300,10 +300,10 @@ export default function Content() {
                                         <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
                                         <div onClick={()=>{setActive('TransactionReport')}} className={`cursor-pointer ${active==='TransactionReport'? 'text-primary': ''}`}>Transaction Report</div>
                                         <div onClick={()=>{setActive('InvestorSchemeDetails')}} className={`cursor-pointer ${active==='InvestorSchemeDetails'? 'text-primary': ''}`} >Investor Scheme Details</div>
+                                        <div onClick={()=>{setActive('AuthorizationPendingReport')}} className={`cursor-pointer ${active==='AuthorizationPendingReport'? 'text-primary': ''}`} >Authorization Pending Report</div>
                                         <div onClick={()=>{setActive('SIPReport')}} className={`cursor-pointer ${active==='SIPReport'? 'text-primary': ''}`} >SIP Report</div>
                                         <div onClick={()=>{setActive('STPReport')}} className={`cursor-pointer ${active==='STPReport'? 'text-primary': ''}`} >STP Report</div>
                                         <div onClick={()=>{setActive('SWPReport')}} className={`cursor-pointer ${active==='SWPReport'? 'text-primary': ''}`} >SWP Report</div>
-                                        <div onClick={()=>{setActive('AuthorizationPendingReport')}} className={`cursor-pointer ${active==='AuthorizationPendingReport'? 'text-primary': ''}`} >Authorization Pending Report</div>
                                         </div>
                                     </Collapsible>
                                     <Collapsible 
@@ -316,7 +316,7 @@ export default function Content() {
                                     >
                                         <div className='pl-[10px] pt-[16px] text-[10px] flex flex-col gap-y-[15px]'>
                                         <div onClick={()=>{setActive('InvestorDetails')}} className={`cursor-pointer ${active==='InvestorDetails'? 'text-primary': ''}`} >Investor Details</div>
-                                        <div onClick={()=>{setActive('ValuationReport')}} className={`cursor-pointer ${active==='ValuationReport'? 'text-primary': ''}`} >Valuation Report</div>
+                                        <div onClick={()=>{setActive('ValuationReport')}} className={`cursor-pointer ${active==='ValuationReport'? 'text-primary': ''}`} >Client Valuation Report</div>
                                         <div onClick={()=>{setActive('ClientRTAEmailAndMobile')}} className={`cursor-pointer ${active==='ClientRTAEmailAndMobile'? 'text-primary': ''}`} >Client RTA Email and Mobile</div>
                                         <div onClick={()=>{setActive('MandatesReport')}} className={`cursor-pointer ${active==='MandatesReport'? 'text-primary': ''}`} >Mandates Report</div>
                                         <div onClick={()=>{setActive('LastLoginReport')}} className={`cursor-pointer ${active==='LastLoginReport'? 'text-primary': ''}`} >Last Login Report</div>
