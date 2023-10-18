@@ -128,8 +128,8 @@ function PartnerInvoiceReportBrokerage( {setActive} ) {
   const [Year, setYear] = useState(YearOptions[0]);
 
   return (
-    <div className="p-[20px]">
-      <div className="w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF] ">
+    <div className="p-[20px] overflow-auto ">
+      <div className="w-full flex-col justify-center items-center rounded-[15px] bg-[#FFFFFF] pb-[10px]">
         <div className="flex gap-x-[10px] items-center justify-start p-[20px]">
           <Image className="cursor-pointer" src={Arrow} onClick={()=>setActive('BussinessReports')}/>
           <div className="text-[20px] font-semibold">Partner Invoice Report (Brokerage)</div>
