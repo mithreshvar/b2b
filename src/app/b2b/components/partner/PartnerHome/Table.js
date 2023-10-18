@@ -1,6 +1,6 @@
 import TableRow from "./TableRow";
 
-export default function Table({headers, tenData=[], setActive}) {
+export default function Table({headers, tenData=[], setActive, mergeTable}) {
 
     let type, schemeData;
     if (headers[0] == "Invoice Month-Year") type = 'downloadInvoice';
@@ -13,7 +13,7 @@ export default function Table({headers, tenData=[], setActive}) {
     if(headers[0]=='Scheme Name' && headers[1]=='Amount (Rs.)') type = 'AUM'
 
     return(
-        <div className="max-h-[640px] flex flex-col bg-white p-[20px] pb-[10px] rounded-[15px] text-left overflow-auto">
+        <div className={`max-h-[640px] flex flex-col bg-white p-[20px] pb-[10px] ${ mergeTable ? " rounded-b-[15px] " : ' rounded-[15px] '} text-left overflow-auto`}>
             {
                 (tenData.length === 0) ?
                 <h1 className="text-[24px] font-bold text-center">

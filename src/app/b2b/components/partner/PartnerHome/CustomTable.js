@@ -9,7 +9,7 @@ import Logo from '/public/Logo.json'
 import Lottie from "lottie-react";
 
 
-export default function CustomTable({data, headers, setActive, pagination=true, headerStyle}) {
+export default function CustomTable({data, headers, setActive, pagination=true, headerStyle, download=false, rightNav=false, mergeTable=false, dataType='Users' }) {
 
     function splitData (data) {
         let data10 = [];
@@ -81,29 +81,34 @@ export default function CustomTable({data, headers, setActive, pagination=true, 
     return(
 
         (loading) ?
-            <div className={` bg-white p-[20px] rounded-[15px] ${(headers[0] == 'S.No')?' h-[300px] ':' h-[600px] '}`}>
+            <div className={` bg-white p-[20px] ${ mergeTable ? " rounded-b-[15px] " : ' rounded-[15px] '} ${(headers[0] == 'S.No')?' h-[300px] ':' h-[600px] '}`}>
                 <Lottie animationData={Logo} lopp={true} className="h-full" />
             </div>
             :
             <ThemeProvider theme={theme} >
-                <div className="flex flex-col gap-y-[10px]">
+                <div className="flex flex-col gap-y-[20px]">
                     {/* Table content */}
                     <div className="max-h-[640px]">
-                        <Table headers={headers} tenData={dividedData[pageNo]} setActive={setActive} headerStyle={headerStyle} />
+                        <Table headers={headers} tenData={dividedData[pageNo]} setActive={setActive} headerStyle={headerStyle} mergeTable={mergeTable} />
                     </div>
-
+                    
                     {/* partner home table hint */}
                     {
-                        (headers[3]=='Systematic Plans') && <p className="text-[#6E6E72] text-[14px] text-center mt-[-5px]">Click the client name for view client profile.</p>
+                        (headers[3]=='Systematic Plans') && <p className="text-[#6E6E72] text-[14px] text-center mt-[-10px] ">Click the client name for view client profile.</p>
                     }
 
                     {/* Page Number Navigator */}
                     {
                         (pagination) &&
                         <>
-                        <div className="flex items-center justify-center" >
+                        <div className= {` flex items-center ${download ? ' justify-between ' : ( rightNav ? ' justify-end ' : ' justify-center '  )} `} >
 
-                            <div className="flex gap-x-[30px] leading-[20px] font-medium text-[14px] items-center">
+                            {
+                                download && 
+                                <button onClick={()=>{}} className='h-[40px] border-[1px] border-primary text-[#0066CD] text-[14px] font-bold bg-white rounded-[25px] flex items-center justify-center px-[20px] '>Download as Excel</button>
+                            }
+
+                            <div className={`flex gap-x-[30px] leading-[20px] font-medium text-[14px] items-center ${ (download || rightNav) && ' self-end '} `}>
 
                                 {/* Previous Button */}
                                 <button className={`flex items-center gap-x-[5px] ${frontActive ? 'cursor-pointer' : 'cursor-default'}`} 
@@ -148,7 +153,7 @@ export default function CustomTable({data, headers, setActive, pagination=true, 
                             </div>
                         </div>
 
-                        <p className="flex justify-center items-center font-medium text-[14px]">Showing {pageNo*10+1}-{(pageNo+1)*10} of {data.length} Users</p>
+                        <p className={`flex justify-center items-center font-medium text-[14px] mt-[-5px] ${ (download || rightNav) && ' self-end '} `}>Showing {pageNo*10+1}-{ (data.length < (pageNo+1)*10) ? data.length : (pageNo+1)*10} of {data.length} {dataType}</p>
 
                         </>
                     }
