@@ -6,17 +6,17 @@ import { useRef, useState } from "react";
 import CheckBoxName from "./CheckBoxName";
 import { Checkbox } from "@mui/material";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import rightArrow from "/public/Group 547353.svg";
-import leftArrow from "/public/Group 547354.svg";
 import whatsappIcon from "/public/Group 549708.svg";
 import telegramIcon from "/public/Path 238665.svg";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useDataContext } from "../../context/DataContext";
-import Arrow from "../../../../../public/partner/Arrow";
+import Arrow from "/public/partner/Arrow";
+import threeDots from '/public/partner/threeDots.svg'
+import { Popper } from '@mui/material';
 
 export default function Portfolio() {
 
-    const {navOpen} = useDataContext()
+    const {navOpen, setShowNote} = useDataContext()
 
     // for(let i in data) {
     //     console.log(i)
@@ -67,6 +67,7 @@ export default function Portfolio() {
     const tableEquityMonitorBodyRef = useRef();
     const tableDebtMonitorBodyRef = useRef();
     const tableSIPBookBodyRef = useRef();
+    const tableActionButtonRef = useRef();
 
     function handleScroll(pos) {
         tableNameRef.current.scroll({top: pos});
@@ -80,6 +81,7 @@ export default function Portfolio() {
         tableEquityMonitorBodyRef.current.scroll({top: pos});
         tableDebtMonitorBodyRef.current.scroll({top: pos});
         tableSIPBookBodyRef.current.scroll({top: pos});
+        tableActionButtonRef.current.scroll({top: pos});
     }
 
     let tableNames = ['basicDetails','assetAllocationRisk','cashAllocation','portfolioQualityRisk','diversityRisk','liquidity','cost','equityMonitor','debtMonitor','sipBook'];
@@ -179,6 +181,14 @@ export default function Portfolio() {
     }
 
     const [showClientInfo, setShowClientInfo] = useState(-1);
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
+
+    const handleClick = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+    };
 
     return (
         <div className="bg-white m-[20px] rounded-[10px] p-[20px] h-[calc(100vh-104px)]">
@@ -593,9 +603,31 @@ export default function Portfolio() {
 
                     </div>
                 </div>
-                <div className="mr-[-15px] w-[60px] h-[30px] flex pl-[10px] pr-[5px] justify-between items-center ">
-                    <button onClick={() => handleArrows(-1) }><Arrow active={!(selectedOption=='basicDetails')} left={true} h={12} w={8} notActiveClr={'#0071e750'} /></button>
-                    <button onClick={() => handleArrows(1) }><Arrow active={!(selectedOption=='sipBook')} h={12} w={8} notActiveClr={'#0071e750'} /></button>
+                <div className=" flex flex-col gap-y-[54px]">
+                    <div className="w-[50px] h-[34px] flex px-[10px] justify-between items-center ">
+                        <button onClick={() => handleArrows(-1) }><Arrow active={!(selectedOption=='basicDetails')} left={true} h={12} w={8} notActiveClr={'#0071e750'} /></button>
+                        <button onClick={() => handleArrows(1) }><Arrow active={!(selectedOption=='sipBook')} h={12} w={8} notActiveClr={'#0071e750'} /></button>
+                    </div>
+
+                    <div ref={tableActionButtonRef} className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" onScroll={()=>{handleScroll(tableActionButtonRef.current.scrollTop)}}>
+                        {
+                            data.clients.map( (client, i) => 
+                                <div className="h-[44px] flex items-center justify-center">
+                                    <button className="h-[15px] p-[5px] flex items-center justify-center cursor-pointer" onClick={handleClick} onBlur={handleClick}>
+                                        <Image src={threeDots} />
+                                    </button>
+                                    <Popper id={id} open={open} anchorEl={anchorEl} >
+                                        <div className='w-[130px] text-[14px] flex flex-col bg-white rounded-[10px] shadow-[0px_2px_5px_#00000007] justify-around items-center mt-[5px] mr-[30px] p-[5px] '>
+                                            <p onMouseDown={()=>{ setShowMonthlyDetails(client["Client Name"]) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center ' >Monthly Details</p>
+                                            <p onMouseDown={()=>{ setShowNote(true) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Note</p>
+                                            <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Mail</p>
+                                            <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Whatsapp</p>
+                                        </div>
+                                    </Popper>
+                                </div>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
         </div>
