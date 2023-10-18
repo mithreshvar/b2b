@@ -223,7 +223,7 @@ function Portfolio() {
                             </div>
                         </div>
 
-                        <CustomTable headers={['Scheme Name', 'Current NAV (Rs.)', 'Rating', 'Launch Date', 'Minimum Invest (Rs.)', 'Expense Ratio(%)', 'Action']} data={schemeData} />
+                        <CustomTable headers={['Scheme Name', 'Current NAV (Rs.)', 'Rating', 'Launch Date', 'Minimum Invest (Rs.)', 'Expense Ratio(%)', 'Action']} data={schemeData} dataType="schemes" />
                     </>
                 }
             </div>
