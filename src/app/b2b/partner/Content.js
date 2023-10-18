@@ -76,6 +76,7 @@ import { get5Data } from '../components/partner/PartnerHome/dummyData';
 import avathar from 'public/partner/avathar/Ellipse 2700.png'
 import logout from 'public/partner/logout.svg'
 import qrcode from 'public/partner/qrcode/qrcode@2x.png'
+import { useEffect } from 'react';
 
 export default function Content() {
 
@@ -103,6 +104,12 @@ export default function Content() {
         setIsUReportOpen(false);
         setFunc(true);
     }
+
+    useEffect(() => {
+        if (!(active === 'BussinessReports' || active === 'AUMClientReports' || active === 'PartnerInvoice' || active === 'TransactionReports' || active === 'TransactionReport' || active === 'InvestorSchemeDetails' || active === 'SIPReport' || active === 'STPReport' || active === 'SWPReport' || active === 'AuthorizationPendingReport' || active === 'UserManagementReports' || active === 'InvestorDetails' || active === 'ValuationReport' || active === 'ClientRTAEmailAndMobile' || active === 'MandatesReport' || active === 'LastLoginReport' || active === 'BirthdayDetails') && isReportOpen) {
+            setIsReportOpen(false);
+        }
+    }, [active])
 
     // const portfolioData = [
     //     [ 'ICICI Prudential Nifty Next 50 Index Fund - Growth', 5, 3.58, 18.51, 18.51],
