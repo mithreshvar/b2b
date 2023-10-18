@@ -270,28 +270,31 @@ export default function Content() {
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('reports')}}><IReports active={active} /></span>
                                 <h6 className={`cursor-pointer ${active==='reports' && 'font-semibold text-primary'}`} onClick={()=>{handleRoute('reports')}} >Reports</h6>
                             </div> */}
-                            <Collapsible trigger={[<IReports isOpened={isReportOpen} />, <span className='font-medium'>Reports</span>, <HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
-                                triggerWhenOpen={[<IReports isOpened={isReportOpen} />, <span className='font-semibold text-primary'>Reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />] }
-                                triggerStyle={{cursor: 'pointer',display: 'flex', gap:'14px', margin: '0' }}
-                                open={isReportOpen}
-                                onOpening={() => setIsReportOpen(true)}
-                                onClosing={() => setIsReportOpen(false)}
-                            >
-                                <div className='flex flex-col gap-y-[26px] pl-[16px] pt-[24px] text-[12px]'>
-                                    <button className='flex gap-[8px]' onClick={()=>setActive('BussinessReports')}>
-                                    <IBusinessReports active={active} className='h-[3px]'/><span className={`font-medium ${active === 'BussinessReports' || active === 'AUMClientReports' || active === 'PartnerInvoice'?"text-primary":""}`}>Business reports</span>
-                                    </button>
+                            <div className='flex gap-x-[14px] relative '>
+                                {/* Give all the active states */}
+                                {(active === 'BussinessReports' || active === 'AUMClientReports' || active === 'PartnerInvoice' || active === 'TransactionReports' || active === 'TransactionReport' || active === 'InvestorSchemeDetails' || active === 'SIPReport' || active === 'STPReport' || active === 'SWPReport' || active === 'AuthorizationPendingReport' || active === 'UserManagementReports' || active === 'InvestorDetails' || active === 'ValuationReport' || active === 'ClientRTAEmailAndMobile' || active === 'MandatesReport' || active === 'LastLoginReport' || active === 'BirthdayDetails') && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
+                                    <Collapsible trigger={[<IReports isOpened={isReportOpen} />, <span className='font-medium'>Reports</span>, <HiOutlineChevronDown key={'downIcon'} style={{ flexShrink: 0, color: '#6E6E72', width: '18px', height: '18px' }} />]}
+                                        triggerWhenOpen={[<IReports isOpened={isReportOpen} />, <span className='font-semibold text-primary'>Reports</span>, <HiOutlineChevronUp key={'upIcon'} style={{ flexShrink: 0, color: '#005CFF', width: '18px', height: '18px' }} />] }
+                                        triggerStyle={{cursor: 'pointer',display: 'flex', gap:'14px', margin: '0' }}
+                                        open={isReportOpen}
+                                        onOpening={() => {setIsReportOpen(true);setActive('BussinessReports')}}
+                                        onClosing={() => setIsReportOpen(false)}
+                                    >
+                                        <div className='flex flex-col gap-y-[26px] pl-[16px] pt-[24px] text-[12px]'>
+                                            <button className='flex gap-[8px]' onClick={()=>setActive('BussinessReports')}>
+                                            <IBusinessReports active={active} className='h-[3px]'/><span className={`font-medium ${active === 'BussinessReports' || active === 'AUMClientReports' || active === 'PartnerInvoice'?"text-primary":""}`}>Business reports</span>
+                                            </button>
 
-                                    <button className='flex gap-[8px]' onClick={()=>setActive('TransactionReports')}>
-                                    <ITransactioReports active={active} isOpened={istReportOpen} className='h-[3px]'/><span className={`font-medium ${active === 'TransactionReports' || active === 'TransactionReport' || active === 'InvestorSchemeDetails' || active === 'SIPReport' || active === 'STPReport' || active === 'SWPReport' || active === 'AuthorizationPendingReport'?"text-primary":""}`}>Transaction reports</span>
-                                    </button>
-                                    
-                                    <button className='flex gap-[8px]' onClick={()=>setActive('UserManagementReports')}>
-                                    <IUserManagementReportsReports active={active} isOpened={isUReportOpen} className='h-[3px]'/><span className={`font-medium ${active === 'UserManagementReports' || active === 'InvestorDetails' || active === 'ValuationReport' || active === 'ClientRTAEmailAndMobile' || active === 'MandatesReport' || active === 'LastLoginReport' || active === 'BirthdayDetails'?"text-primary":""}`}>User management reports</span>
-                                    </button>
-                                </div>
-                            </Collapsible>
-
+                                            <button className='flex gap-[8px]' onClick={()=>setActive('TransactionReports')}>
+                                            <ITransactioReports active={active} isOpened={istReportOpen} className='h-[3px]'/><span className={`font-medium ${active === 'TransactionReports' || active === 'TransactionReport' || active === 'InvestorSchemeDetails' || active === 'SIPReport' || active === 'STPReport' || active === 'SWPReport' || active === 'AuthorizationPendingReport'?"text-primary":""}`}>Transaction reports</span>
+                                            </button>
+                                            
+                                            <button className='flex gap-[8px]' onClick={()=>setActive('UserManagementReports')}>
+                                            <IUserManagementReportsReports active={active} isOpened={isUReportOpen} className='h-[3px]'/><span className={`font-medium ${active === 'UserManagementReports' || active === 'InvestorDetails' || active === 'ValuationReport' || active === 'ClientRTAEmailAndMobile' || active === 'MandatesReport' || active === 'LastLoginReport' || active === 'BirthdayDetails'?"text-primary":""}`}>User management reports</span>
+                                            </button>
+                                        </div>
+                                    </Collapsible>
+                                    </div>
                             <div className='flex gap-x-[14px] items-center relative '>
                                 {active === 'brokerage' && <div className='absolute w-[4px] h-[30px] rounded-r-[2px] bg-primary ml-[-19px]' />}
                                 <span className='cursor-pointer' onClick={()=>{handleRoute('brokerage')}}><IBrokerage active={active} /></span>
