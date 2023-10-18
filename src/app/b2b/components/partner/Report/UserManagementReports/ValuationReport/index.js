@@ -16,17 +16,17 @@ function ValuationReport( {setActive} ) {
     setpan(value);
   };
   const ValuationReport =[
-    ["Santosh Venkatachalam","Mutual Funds","10,000","2,000","1,000","25%"],
-    ["","Equity","80,000","2,000","1,000","10%"],
-    ["","Fixed Deposit","10,000","2,000","1,000","25%"],
-    ["","NPS","80,000","3,000","1,000","10%"],
-    ["","Insurence","10,000","2,000","1,000","25%"],
-    ["Dattatraya Kulkarni","Mutual Funds","10,000","2,000","1,000","25%"],
-    ["","Equity","80,000","2,000","1,000","10%"],
-    ["Shantha Narayanan","Mutual Funds","10,000","2,000","1,000","25%"],
-    ["","Equity","80,000","2,000","1,000","10%"],
-    ["","Fixed Deposit","10,000","2,000","1,000","25%"],
-    ["","NPS","80,000","3,000","1,000","10%"]
+    ["Santosh Venkatachalam","Mutual Funds","10,000","10,000","2,000","1,000","25%"],
+    ["","Equity","80,000","80,000","2,000","1,000","10%"],
+    ["","Fixed Deposit","10,000","10,000","2,000","1,000","25%"],
+    ["","NPS","80,000","80,000","3,000","1,000","10%"],
+    ["","Insurence","10,000","10,000","2,000","1,000","25%"],
+    ["Dattatraya Kulkarni","Mutual Funds","10,000","10,000","2,000","1,000","25%"],
+    ["","Equity","80,000","80,000","2,000","1,000","10%"],
+    ["Shantha Narayanan","Mutual Funds","10,000","10,000","2,000","1,000","25%"],
+    ["","Equity","80,000","80,000","2,000","1,000","10%"],
+    ["","Fixed Deposit","10,000","10,000","2,000","1,000","25%"],
+    ["","NPS","80,000","80,000","3,000","1,000","10%"]
 ]
   return (
     <div className="p-[20px]">
@@ -47,7 +47,7 @@ function ValuationReport( {setActive} ) {
       </div>
       {(() => {
           return (
-            <CustomTable className={'p-0'} headers={['Investor Names','Product','Current Value','Gain','Today’s Changes','Annualized return']} data={ValuationReport} pagination={false} dataType="Invoice" />
+            <CustomTable className={'p-0'} headers={['Account Name(s)','Product','Invested Value','Current Value','Gain','Today’s Changes','Annualized return']} data={ValuationReport} pagination={false} dataType="Invoice" />
           )
       })()}
     </div>

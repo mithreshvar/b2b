@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel, OutlinedInput } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -13,27 +13,37 @@ export default function CustomDropSelectField(props) {
     const array = new Array(props.value.length);
     array.fill(true);
     const [state, setState] = React.useState(array);
+    const [AllSet, setAllSet] = React.useState(true);
+
+    const handleAllSet = (event) => {
+        setAllSet(event.target.checked);
+        // Update the state of all checkboxes based on the "All" checkbox
+        const updatedState = state.map((ele) => event.target.checked);
+        setState(updatedState);
+        const updatedColumns = AllSet ? props.value : [];
+        props.handleChange({ ...props.columns, [props.title]: updatedColumns });
+    };
 
     const handleChanges = (event, index) => {
-        if (event.target.checked) {
-            const updatedColumns = [...props.columns[event.target.name], props.value[index]];
-            const data = state.slice();
-            data[index] = true;
-            setState(data);
-            props.handleChange({ ...props.columns, [event.target.name]: updatedColumns });
-        } else {
-            const updatedColumns = props.columns[event.target.name].filter((ele) => ele !== props.value[index]);
-            const data = state.slice();
-            data[index] = false;
-            setState(data);
-            props.handleChange({ ...props.columns, [event.target.name]: updatedColumns });
-        }
+        const updatedState = state.slice();
+        updatedState[index] = event.target.checked;
+        setState(updatedState);
+
+        const updatedColumns = updatedState.reduce((acc, isChecked, idx) => {
+            if (isChecked) {
+                acc.push(props.value[idx]);
+            }
+            return acc;
+        }, []);
+
+        props.handleChange({ ...props.columns, [event.target.name]: updatedColumns });
     };
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small-label">{props.title}</InputLabel>
             <Select
+                variant={'outlined'}
                 sx={{
                     width: "300px",
                     height: "40px",
@@ -43,10 +53,11 @@ export default function CustomDropSelectField(props) {
                 id="demo-select-small"
                 value=""
                 label="Age"
+                input={<OutlinedInput className='pl-[100px]' label={props.title} />}
                 IconComponent={(props) => {
                     if (props.className.includes('MuiSelect-iconOpen'))
-                        return <KeyboardArrowDownIcon sx={{ color: "#0171E7", marginRight: "15px" }}/>
-                    return <KeyboardArrowUpIcon sx={{ color: "#0171E7", marginRight: "15px" }}/>
+                        return <KeyboardArrowDownIcon sx={{ color: "#0171E7", marginRight: "15px" }} />
+                    return <KeyboardArrowUpIcon sx={{ color: "#0171E7", marginRight: "15px" }} />
                 }}
                 MenuProps={{
                     sx: {},
@@ -59,7 +70,19 @@ export default function CustomDropSelectField(props) {
                     }
                 }}
             >
-                <FormGroup className='pl-[10px]'>
+                <FormGroup className='pl-[10px] '>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={AllSet}
+                                onChange={handleAllSet}
+                                name="All"
+                                icon={<RadioButtonUncheckedIcon />}
+                                checkedIcon={<CheckCircleIcon />}
+                            />
+                        }
+                        label="All"
+                    />
                     {props.value.map((ele, index) => (
                         <FormControlLabel
                             control={

@@ -1,13 +1,34 @@
 import React, { useState } from 'react'
 import CustomSelectField from '../InputFields'
 import CustomDropSelectField from './CustomDropSelectField';
+import { Button } from '@mui/material';
+import Image from 'next/image';
+import clearFilter from '../../../../../public/clearFilter.svg'
+import { useEffect } from 'react';
 
 function Filter() {
     const [Filter, setFilter] = useState("first")
-   
+    const hadleApplyFilter = ()=>{
+       
+    }
+      const handleClearFilter =()=>{
+        setUnSelectedColumn({
+            "Basic Details":[],
+            "Asset Allocation Risk":[],
+            "Cash Allocation": [],
+            "Portfolio Quality Risk":[],
+            "Diversification Risk":[],
+            "Liquidity" :[],
+            "Cost":[],
+            "Equity Monitor":[],
+            "Debt Monitor":[],
+            "SIP Book":[]
+           })
+      }
+  
   
     const columns = {
-        "Basic Details":["AUM","Net Inflow YTD","Net Inflow YTD","Sice Inception Returns","Risk Score"],
+        "Basic Details":["AUM","Net Inflow YTD","Net Inflow Growth","Sice Inception Returns","Risk Score"],
         
         "Asset Allocation Risk": [
             "ABC Number",
@@ -109,6 +130,7 @@ function Filter() {
     "Debt Monitor":[],
     "SIP Book":[]
   })
+  useEffect(()=>{},[unSelectedColumn])
     const handleColumnChange = (data) => {
         setUnSelectedColumn(data)
         console.log("set", data)
@@ -131,6 +153,11 @@ function Filter() {
                                return  <CustomDropSelectField title={ele} value={columns[ele]} columns={unSelectedColumn} handleChange={handleColumnChange}/>
                             })
                         }
+                        <div className='pt-[50px] flex flex-row-reverse gap-[30px]'>
+                        
+                        <div className='w-[108px] h-[40px] text-white font-semibold text-center text-[14px] pt-[10px] bg-[#0071E7] rounded-[20px] cursor-pointer' onClick={hadleApplyFilter}>Apply Filter</div>
+                        <div className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer' onClick={handleClearFilter} > <Image src={clearFilter} className='mb-[12px]'/>Clear Filter</div>
+                        </div>
                     </div>
                     :
 
