@@ -23,7 +23,7 @@ function TransactionReport( {setActive} ) {
   };
   const SuccessOptions = ['Success','Processing','Failed'];
 
-  const [FilterAmount, setFilterAmount] = useState('Equal to');
+  const [FilterAmount, setFilterAmount] = useState('');
   const [FilterAmountErrorMessage, setFilterAmountErrorMessage] = useState('');
   const handleFilterAmountChange = (event) => {
     const value = event.target.value;
