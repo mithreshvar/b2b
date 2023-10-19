@@ -29,6 +29,10 @@ export default function CustomDropSelectField(props) {
         updatedState[index] = event.target.checked;
         setState(updatedState);
 
+        // Check if any of the checkboxes are unchecked and update AllSet accordingly
+
+        setAllSet(Math.min(updatedState));
+
         const updatedColumns = updatedState.reduce((acc, isChecked, idx) => {
             if (isChecked) {
                 acc.push(props.value[idx]);

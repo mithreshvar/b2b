@@ -8,57 +8,57 @@ import { useEffect } from 'react';
 
 function Filter() {
     const [Filter, setFilter] = useState("first")
-    const hadleApplyFilter = ()=>{
-       
+    const handleApplyFilter = () => {
+
     }
-      const handleClearFilter =()=>{
+    const handleClearFilter = () => {
         setUnSelectedColumn({
-            "Basic Details":[],
-            "Asset Allocation Risk":[],
+            "Basic Details": [],
+            "Asset Allocation Risk": [],
             "Cash Allocation": [],
-            "Portfolio Quality Risk":[],
-            "Diversification Risk":[],
-            "Liquidity" :[],
-            "Cost":[],
-            "Equity Monitor":[],
-            "Debt Monitor":[],
-            "SIP Book":[]
-           })
-      }
-  
-  
+            "Portfolio Quality Risk": [],
+            "Diversification Risk": [],
+            "Liquidity": [],
+            "Cost": [],
+            "Equity Monitor": [],
+            "Debt Monitor": [],
+            "SIP Book": []
+        })
+    }
+
+
     const columns = {
-        "Basic Details":["AUM","Net Inflow YTD","Net Inflow Growth","Sice Inception Returns","Risk Score"],
-        
+        "Basic Details": ["AUM", "Net Inflow YTD", "Net Inflow Growth", "Sice Inception Returns", "Risk Score"],
+
         "Asset Allocation Risk": [
             "ABC Number",
             "Equity Exposure",
             "Target Exposure",
             "Equity Exposure Deviation",
             "Debt Exposure",
-            "Gold & Others Exposure" ],
+            "Gold & Others Exposure"],
 
-            "Cash Allocation": [
-                "Overnight/Liquid Exposure"
-            ],
-
-            "Portfolio Quality Risk": [
-                "5 star rated funds",
-                "4 star rated funds",
-                "Low Rated Fund",
-                "Not Rated Fund Exposure",
-                "FundsIndia Select Fund Exposure"
-            ],
-
-            "Diversification Risk": [
-                "Highest AMC Exposure",
-                "Highest Fund Exposure",
-                "2nd Highest Fund Exposure", 
-                "Total Number of Non Debt Funds",
-                "Total Number of Funds"
+        "Cash Allocation": [
+            "Overnight/Liquid Exposure"
         ],
 
-        "Liquidity" : [
+        "Portfolio Quality Risk": [
+            "5 star rated funds",
+            "4 star rated funds",
+            "Low Rated Fund",
+            "Not Rated Fund Exposure",
+            "FundsIndia Select Fund Exposure"
+        ],
+
+        "Diversification Risk": [
+            "Highest AMC Exposure",
+            "Highest Fund Exposure",
+            "2nd Highest Fund Exposure",
+            "Total Number of Non Debt Funds",
+            "Total Number of Funds"
+        ],
+
+        "Liquidity": [
             "% of Portfolio under lock-in",
             "ELSS Exposure"
         ],
@@ -104,7 +104,7 @@ function Filter() {
             "Credit Risk",
             "Dynamic Funds",
             "Conservative Hybrid",
-            "Others" 
+            "Others"
         ],
         "SIP Book": [
             "Total SIP Value",
@@ -118,19 +118,19 @@ function Filter() {
         ]
     }
 
-  const [unSelectedColumn,setUnSelectedColumn] = useState({
-    "Basic Details":[],
-    "Asset Allocation Risk":[],
-    "Cash Allocation": [],
-    "Portfolio Quality Risk":[],
-    "Diversification Risk":[],
-    "Liquidity" :[],
-    "Cost":[],
-    "Equity Monitor":[],
-    "Debt Monitor":[],
-    "SIP Book":[]
-  })
-  useEffect(()=>{},[unSelectedColumn])
+    const [unSelectedColumn, setUnSelectedColumn] = useState({
+        "Basic Details": [],
+        "Asset Allocation Risk": [],
+        "Cash Allocation": [],
+        "Portfolio Quality Risk": [],
+        "Diversification Risk": [],
+        "Liquidity": [],
+        "Cost": [],
+        "Equity Monitor": [],
+        "Debt Monitor": [],
+        "SIP Book": []
+    })
+    useEffect(() => { }, [unSelectedColumn])
     const handleColumnChange = (data) => {
         setUnSelectedColumn(data)
         console.log("set", data)
@@ -147,26 +147,23 @@ function Filter() {
                 Filter === "first" ?
                     <div className='w-full bg-white  '>
                         {
-                            Object.keys(columns).map((ele)=>{
+                            Object.keys(columns).map((ele) => {
 
 
-                               return  <CustomDropSelectField title={ele} value={columns[ele]} columns={unSelectedColumn} handleChange={handleColumnChange}/>
+                                return <CustomDropSelectField title={ele} value={columns[ele]} columns={unSelectedColumn} handleChange={handleColumnChange} />
                             })
                         }
                         <div className='pt-[50px] flex flex-row-reverse gap-[30px]'>
-                        
-                        <div className='w-[108px] h-[40px] text-white font-semibold text-center text-[14px] pt-[10px] bg-[#0071E7] rounded-[20px] cursor-pointer' onClick={hadleApplyFilter}>Apply Filter</div>
-                        <div className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer' onClick={handleClearFilter} > <Image src={clearFilter} className='mb-[12px]'/>Clear Filter</div>
+
+                            <div className='w-[108px] h-[40px] text-white font-semibold text-center text-[14px] pt-[10px] bg-[#0071E7] rounded-[20px] cursor-pointer' onClick={handleApplyFilter}>Apply Filter</div>
+                            <div className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer' onClick={handleClearFilter} > <Image src={clearFilter} className='mb-[12px]' />Clear Filter</div>
                         </div>
                     </div>
                     :
 
 
                     <div className='w-full h-[100px] '>
-                        <CustomDropSelectField title="Basic Details"  />
-                       <CustomDropSelectField title="sub category"  />
-                       <CustomDropSelectField title="condition"  />
-                       <CustomDropSelectField title="enter value"  />
+                        <div>Filter2</div>
                     </div>
             }
 
