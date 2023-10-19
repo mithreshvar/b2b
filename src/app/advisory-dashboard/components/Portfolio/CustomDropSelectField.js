@@ -10,38 +10,56 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 export default function CustomDropSelectField(props) {
-    const array = new Array(props.value.length);
-    array.fill(true);
-    const [state, setState] = React.useState(array);
-    const [AllSet, setAllSet] = React.useState(true);
+    const array = props.columns[props.title].map((ele) => props.data[props.title].includes(ele))
 
-    const handleAllSet = (event) => {
-        setAllSet(event.target.checked);
-        // Update the state of all checkboxes based on the "All" checkbox
-        const updatedState = state.map((ele) => event.target.checked);
-        setState(updatedState);
-        const updatedColumns = AllSet ? props.value : [];
-        props.handleChange({ ...props.columns, [props.title]: updatedColumns });
-    };
+    const [state, setState] = React.useState(array);
 
     const handleChanges = (event, index) => {
-        const updatedState = state.slice();
-        updatedState[index] = event.target.checked;
-        setState(updatedState);
 
-        // Check if any of the checkboxes are unchecked and update AllSet accordingly
 
-        setAllSet(Math.min(updatedState));
-
-        const updatedColumns = updatedState.reduce((acc, isChecked, idx) => {
-            if (isChecked) {
-                acc.push(props.value[idx]);
+        if (event.target.name === "All") {
+            const copyOfCurrState = props.columns
+            props.columns[props.title]
+            setState((prevState) => {
+                const array1 = new Array(props.value.length);
+                array1.fill(event.target.checked);
+                return array1;
+            })
+            if (event.target.checked) {
+                props.data[props.title] = copyOfCurrState[props.title]
             }
-            return acc;
-        }, []);
+            else {
+                props.data[props.title] = []
+            }
+        }
+        else {
+            const copyOfCurrState = props.data
+            setState((prevState) => {
+                const newState = [...prevState]; // Create a copy of the current state
+                newState[index] = event.target.checked; // Update the specific element
+                return newState; // Return the updated state
+            })
 
-        props.handleChange({ ...props.columns, [event.target.name]: updatedColumns });
-    };
+            if (event.target.checked) {
+                if (!copyOfCurrState[props.title].includes(event.target.name)) {
+                    copyOfCurrState[props.title].push(event.target.name)
+                }
+
+            }
+            else {
+                if (copyOfCurrState[props.title].includes(event.target.name)) {
+                    const index = copyOfCurrState[props.title].indexOf(event.target.name)
+                    copyOfCurrState[props.title].splice(index, 1);
+                }
+
+            }
+
+        }
+        props.handleChange(props.data)
+        console.log(props.data, "filterData")
+        //  console.log(props.data, event.target.name == "All", props.title, event.target.checked)
+    }
+
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -75,25 +93,14 @@ export default function CustomDropSelectField(props) {
                 }}
             >
                 <FormGroup className='pl-[10px] '>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={AllSet}
-                                onChange={handleAllSet}
-                                name="All"
-                                icon={<RadioButtonUncheckedIcon />}
-                                checkedIcon={<CheckCircleIcon />}
-                            />
-                        }
-                        label="All"
-                    />
+
                     {props.value.map((ele, index) => (
                         <FormControlLabel
                             control={
                                 <Checkbox
                                     checked={state[index]}
                                     onChange={(event) => handleChanges(event, index)}
-                                    name={props.title}
+                                    name={ele}
                                     icon={<RadioButtonUncheckedIcon />}
                                     checkedIcon={<CheckCircleIcon />}
                                 />
