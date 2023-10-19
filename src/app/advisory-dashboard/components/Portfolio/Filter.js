@@ -32,15 +32,17 @@ function Filter(props) {
                 <div className={`w-[141px] h-[33px] text-center text-bold text-[14px] rounded-t-[10px] pt-[5px] cursor-pointer ${Filter === "second" ? "bg-[#DCEBFE] text-[#0071E7]" : "bg-[#F7F8FF] text-[#BEBEBE]"}`} onClick={() => { setFilter("second") }}>Filters 2</div>
             </div>
             {
-                Filter === "first" ?
-                    <div className='w-full bg-white  '>
-                        {
-                            Object.keys(props.columns).map((ele) => {
+                Filter === "first" ? (
+                    <div className='w-[990px] bg-white  '>
+                        <div className='grid grid-cols-3 gap-[17px]'>
+                            {
+                                Object.keys(props.columns).map((ele) => {
 
 
-                                return <CustomDropSelectField data={props.data} title={ele} value={props.columns[ele]} columns={props.columns} handleChange={handleFilterChange} />
-                            })
-                        }
+                                    return <CustomDropSelectField data={props.data} title={ele} value={props.columns[ele]} columns={props.columns} handleChange={handleFilterChange} />
+                                })
+                            }
+                        </div>
                         <div className='pt-[50px] flex flex-row-reverse gap-[30px]'>
 
                             <Button >
@@ -48,13 +50,14 @@ function Filter(props) {
                             </Button>
                             <div className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer' onClick={handleClearFilter} > <Image src={clearFilter} className='mb-[12px]' />Clear Filter</div>
                         </div>
-                    </div>
+                    </div>)
                     :
 
-
-                    <div className='w-full h-[100px] '>
-                        <div>Filter2</div>
-                    </div>
+                    (
+                        <div className='w-full h-[100px] '>
+                            <div>Filter2</div>
+                        </div>
+                    )
             }
 
 
