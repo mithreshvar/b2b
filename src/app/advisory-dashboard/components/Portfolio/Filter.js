@@ -7,7 +7,7 @@ import clearFilter from '../../../../../public/clearFilter.svg'
 import { useEffect } from 'react';
 
 function Filter(props) {
-    const [CurrFilterState, setCurrFilterState] = useState(props.data)
+    const [CurrFilterState, setCurrFilterState] = useState({ ...props.data })
     const [Filter, setFilter] = useState("first")
     const handleFilterChange = (data) => {
         setCurrFilterState(data)
