@@ -63,7 +63,7 @@ export default function CustomDropSelectField(props) {
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small-label">{props.title}</InputLabel>
+            <InputLabel id="demo-select-small-label" className=' text-center pt-[5px] text-[#707070] text-[14px]'>{props.title}</InputLabel>
             <Select
                 variant={'outlined'}
                 sx={{
