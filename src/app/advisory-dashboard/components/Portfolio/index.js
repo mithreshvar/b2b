@@ -134,7 +134,7 @@ export default function Portfolio() {
     const [FilterOption, setFilterOption] = useState(columns)
     const [IsFilterOpen, setIsFilterOpen] = useState(false)
     const [Data, setData] = useState(data.clients)
-    const { navOpen, setShowNote } = useDataContext()
+    const { navOpen, setShowNote, setShowMonthlyDetails } = useDataContext()
 
     //Navigation REFS FOR NAVIGARION BAR
     const tablesNavbarRef = useRef(null);
