@@ -4,14 +4,12 @@ import { Button } from '@mui/material';
 import Image from 'next/image';
 import clearFilter from '../../../../../public/clearFilter.svg';
 import CustomSelectField from '@/app/b2b/components/InputFields';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { data } from 'autoprefixer';
 
 
-function Filter(props) {
+function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
 
     const {columns}=props
-    const [CurrFilterState, setCurrFilterState] = useState({ ...props.data });
+    const [CurrFilterState, setCurrFilterState] = useState({ ...props.FilterColumnOption });
     const [Filter, setFilter] = useState("first");
     const [state, setState] = useState('');
     const [EnterValue,setEnterValue]=useState('');
@@ -62,12 +60,12 @@ function Filter(props) {
     };
 
     const handleApplyFilter = () => {
-        props.handleChange(CurrFilterState);
+        props.handleFilterColumnOption(CurrFilterState);
         props.onBlur();
     };
 
     const handleClearFilter = () => {
-        props.handleChange(props.columns);
+        props.handleFilterColumnOption(props.columns);
         props.onBlur();
         SetSaveClick(false);
         setFiltervalue("filter1");
@@ -144,7 +142,7 @@ function Filter(props) {
 
 
     return (
-        <div className='w-full pl-[25px] mt-[33px] pr-[30px]'>
+        <div className='w-full pl-[25px] mt-[33px] pr-[30px] bg-white rounded-[25px] p-[20px] shadow-[0px_4px_20px_#0000001f]'>
 
             <p className='font-bold text-[14px]'>Filters</p>
             <div className='flex mt-[10px] gap-[10px]'>
@@ -168,7 +166,7 @@ function Filter(props) {
                         {Object.keys(props.columns).map((ele) => (
                             <CustomDropSelectField
                                 key={ele} // Add a unique key prop to the component
-                                data={props.data}
+                                data={props.FilterColumnOption}
                                 title={ele}
                                 value={props.columns[ele]}
                                 columns={props.columns}
@@ -205,62 +203,57 @@ function Filter(props) {
                         <div className={`h-[28px] ${onedit?"w-[125px]":"w-[160px]"} rounded-[20px] border-[1px] border-[#0171E7] mb-[15px] cursor-pointer`} > 
                             <div className='ml-[4px] flex flex-row'>
                                 <div><input className='font-[14px] h-[18px] w-[80px] text-[#0171E7]' type="text" value={filtervalue} onChange={handleFilterValue} disabled={disabled} /></div>
-                               { onedit && onsave && <div className='ml-[0px] cursor-pointer' onClick={handleEdit}>ed</div>}
-                               { <div className={`${onsave?"ml-[2px]":"ml-[10px]"} cursor-pointer`} onClick={handleclose}>X</div>}
-                               { !onedit && <div className='ml-[3px] mt-[2px] mr-[2px] h-[20px] w-[84px] rounded-[10px] bg-[#01A245] text-white text-[10px] p-[3px] pb-[2px] text-center cursor-pointer ' onClick={handleFilterSaveUP}> save</div>}
+                                { onedit && onsave && <div className='ml-[0px] cursor-pointer' onClick={handleEdit}>ed</div>}
+                                { <div className={`${onsave?"ml-[2px]":"ml-[10px]"} cursor-pointer`} onClick={handleclose}>X</div>}
+                                { !onedit && <div className='ml-[3px] mt-[2px] mr-[2px] h-[20px] w-[84px] rounded-[10px] bg-[#01A245] text-white text-[10px] p-[3px] pb-[2px] text-center cursor-pointer ' onClick={handleFilterSaveUP}> save</div>}
                             </div>
                         </div>
                     )
                 }
 
-             <div className='flex gap-[10px]'>          
-             <div><CustomSelectField
-                    width = '260px'
-                    height ='40px'
-                    label="Category"
-                    value={category}
-                    valueOptions={Object.keys(props.columns)}
-                    handleChange={handleFilter1Change}
-                /></div>
-                
-             <div> <CustomSelectField 
-                    width = '260px' 
-                    height='40px'
-                    label="Sub Category"
-                    value={Subcategory} 
-                    valueOptions={columns[category]  || []} 
-                    handleChange={handleFilter2Change}    
-                 /></div>
+                <div className='flex gap-[10px]'>          
+                    <CustomSelectField
+                        width = '260px'
+                        height ='40px'
+                        label="Category"
+                        value={category}
+                        valueOptions={Object.keys(props.columns)}
+                        handleChange={handleFilter1Change}
+                    />
+                    
+                    <CustomSelectField 
+                        width = '260px' 
+                        height='40px'
+                        label="Sub Category"
+                        value={Subcategory} 
+                        valueOptions={columns[category]  || []} 
+                        handleChange={handleFilter2Change}    
+                    />
+                    
+                    <CustomSelectField 
+                        width = '157px' 
+                        label="condition" 
+                        value={state} 
+                        valueOptions={condition} 
+                        handleChange={handleStateChange}    
+                    />
 
-              
-                <div className='flex gap-[10px]'>
-                <CustomSelectField 
-                    width = '157px' 
-                    label="condition" 
-                    value={state} 
-                    valueOptions={condition} 
-                    handleChange={handleStateChange}    
-                 />
+                    <CustomSelectField 
+                        width = '190px' 
+                        height ='40px'
+                        label="Enter Value" 
+                        value={EnterValue} 
+                        valueOptions={Evalue}  
+                        handleChange={handleValueChange}               
+                    />
 
-                <CustomSelectField 
-                    width = '190px' 
-                    height ='40px'
-                    label="Enter Value" 
-                    value={EnterValue} 
-                    valueOptions={Evalue}  
-                    handleChange={handleValueChange}               
-                />
+                    <button>
+                        <div className='h-[24px] w-[24px]  ml-2 cursor-pointer' onClick={handleopen} > ADD+
+                    </div></button>
 
-                </div>
+                </div>      
 
-                <button>
-                    <div className='h-[24px] w-[24px]  ml-2 cursor-pointer' onClick={handleopen} > ADD+
-                    {/* <FontAwesomeIcon icon="fa-thin fa-circle-plus" style={{color: "#0071E7",}} />     */}
-                </div></button>
-
-            </div>      
-
-            {
+            {/* {
             showAdditionalFields && 
                      
            <div className="flex gap-[10px] mt-[15px]">        
@@ -308,17 +301,15 @@ function Filter(props) {
                     </button>
              </div>
 
-            }
+            } */}
 
                 <div className='pt-[50px] flex flex-row-reverse gap-[30px]'>
-                        <Button>
-                            <div
-                                className='w-[108px] h-[40px] text-white font-semibold text-center text-[14px] pt-[10px] bg-[#0071E7] rounded-[20px] cursor-pointer'
-                                onClick={handleApplyFilter}
-                            >
+                        <button
+                            className='w-[108px] h-[40px] text-white font-semibold text-[14px] flex justify-center items-center bg-[#0071E7] rounded-[20px] cursor-pointer'
+                            onClick={handleApplyFilter}
+                        >
                                 Apply Filter
-                            </div>
-                        </Button>
+                        </button>
                         <div
                             className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer'
                             onClick={handleClearFilter}
@@ -327,14 +318,13 @@ function Filter(props) {
                             Clear Filter
                         </div>
                         <div className='mr-[600px]'>
-                        <Button>
-                            <div
-                                className='w-[108px] h-[40px] font-semibold text-center text-[14px] bg-white border-[#0066CD] border-[1px] pt-[8px] text-[#0066CD] rounded-[20px] cursor-pointer'
-                                onClick={handleSaveFilter}
-                            >
-                                Save Filter
-                            </div>
-                        </Button>
+                        <button 
+                        
+                            className='w-[108px] h-[40px] font-semibold text-center text-[14px] bg-white border-[#0066CD] border-[1px] pt-[8px] text-[#0066CD] rounded-[20px] cursor-pointer'
+                            onClick={handleSaveFilter}
+                        >
+                            Save Filter
+                        </button>
                         </div>
                 </div>
      
