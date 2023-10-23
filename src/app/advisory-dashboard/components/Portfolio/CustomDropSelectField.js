@@ -10,7 +10,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 export default function CustomDropSelectField(props) {
-    const array = props.columns[props.title].map((ele) => props.data[props.title].includes(ele))
+   // const array = props.columns[props.title].map((ele) => props.data[props.title].includes(ele))
+    const columnData = props.columns[props.title] || [];
+    const selectedData = props.data[props.title] || [];
+    
+    const array = columnData.map((ele) => selectedData.includes(ele));
 
     const [state, setState] = React.useState(array);
 
