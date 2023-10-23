@@ -22,6 +22,7 @@ export default function Content() {
     const [active, setActive] = useState('Client Requirement');
     const [notificationMessage, setNotificationMessage] = useState('');
     const [isLoadClientClicked, setIsLoadClientClicked] = useState(false);
+    const [isEditTriggered, setIsEditTriggered] = useState(false);
     
     function handleRoute(route) {
         setActive(route)
@@ -39,7 +40,7 @@ export default function Content() {
             <div className=' overflow-auto relative text-[14px]'>
                 <div>
                     <Box sx={{ flexGrow: 1, zIndex: 1 }}>
-                        <AppBar position={(false)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
+                        <AppBar position={(isEditTriggered)?"static":"absolute"} sx={{height: '60px', backgroundColor: "white", px: '40px', boxShadow: '0px 3px 6px #0000001A', top:0, left:0, '& .MuiToolbar-regular': {padding: '0px'}}}>
                             <Toolbar sx={{display: "flex", justifyContent: "start", alignItems: 'center'}}>
                             <div className='flex gap-x-[10px] items-center'>
                                 <Link href={'/portfolio-builder'}><Image src='/logo.svg' width={125} height={36} /></Link>
@@ -55,7 +56,7 @@ export default function Content() {
                         </AppBar>
                     </Box>
 
-                    <div className={`flex flex-col bg-[#F5F7FE] h-[calc(100vh-60px)] relative ${(!(false)) && ' mt-[60px]'} `}> {/* */}
+                    <div className={`flex flex-col bg-[#F5F7FE] h-[calc(100vh-60px)] relative ${(!(isEditTriggered)) && ' mt-[60px]'} `}> {/* */}
                         
                         {
                             (notificationMessage) &&
@@ -84,7 +85,7 @@ export default function Content() {
                                 ((active == 'Three & Half Box Money') && <ThreeAndHalf />)||
                                 ((active == 'Wealth Equation') && <WealthEquation />)||
                                 ((active == 'Discussion') && <Discussion />)||
-                                ((active == 'Suggested Portfolio') && <SuggestedPortfolio />)
+                                ((active == 'Suggested Portfolio') && <SuggestedPortfolio isEditTriggered={isEditTriggered} setIsEditTriggered={setIsEditTriggered} handleNotificationMessage={handleNotificationMessage} />)
                             }
 
                             {/* Navigation Buttons */}
