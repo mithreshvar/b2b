@@ -131,8 +131,43 @@ export default function Portfolio() {
         ]
     }
     
-    const [FilterOption, setFilterOption] = useState(columns)
+    const [FilterColumnOption, setFilterColumnOption] = useState(columns)
+    const [filterDataOptions, setFilterDataOptions] = useState({});
     const [IsFilterOpen, setIsFilterOpen] = useState(false)
+
+    const handleFilterColumnOption = (data) => {
+        setFilterColumnOption(data)
+        console.log("fitler", data)
+
+        let tempTableNames = [...tableNames];
+        let tempRefTable = [...refTable];
+        let tempRefNav = [...refNav];
+        let tempRefTableBody = [...refTableBody];
+
+        let dataAsArray = Object.entries(data);
+        dataAsArray.map(([tableName, columns]) => {
+            if (!(columns.includes("All"))) {
+                let removeIndex = tempTableNames.findIndex( name => name == tableName);
+                tempTableNames = tempTableNames.filter((name, index) => index != removeIndex);
+                tempRefTable = tempRefTable.filter((name, index) => index != removeIndex);
+                tempRefNav = tempRefNav.filter((name, index) => index != removeIndex);
+                tempRefTableBody = tempRefTableBody.filter((name, index) => index != removeIndex);
+            }
+        })
+
+        setCurrentRefTableBody(tempRefTableBody)
+        setCurrentRefNav(tempRefNav)
+        setCurrentRefTable(tempRefTable)
+        setCurrentTableNames(tempTableNames)
+
+    }
+
+    const handleFilterDataOptions = (data) => {
+        setFilterDataOptions(data);
+        console.log(data);
+
+    }
+    
     const [Data, setData] = useState(data.clients)
     const { navOpen, setShowNote, setShowMonthlyDetails } = useDataContext()
 
@@ -205,33 +240,6 @@ export default function Portfolio() {
     const [loadingScroll, setLoadingScroll] = useState(true);
 
     setTimeout(() => setLoadingScroll(false), 1000); // loading is set false only after initial render
-
-    const handleFilterOption = (data) => {
-        setFilterOption(data)
-        console.log("fitler", data)
-
-        let tempTableNames = [...tableNames];
-        let tempRefTable = [...refTable];
-        let tempRefNav = [...refNav];
-        let tempRefTableBody = [...refTableBody];
-
-        let dataAsArray = Object.entries(data);
-        dataAsArray.map(([tableName, columns]) => {
-            if (!(columns.includes("All"))) {
-                let removeIndex = tempTableNames.findIndex( name => name == tableName);
-                tempTableNames = tempTableNames.filter((name, index) => index != removeIndex);
-                tempRefTable = tempRefTable.filter((name, index) => index != removeIndex);
-                tempRefNav = tempRefNav.filter((name, index) => index != removeIndex);
-                tempRefTableBody = tempRefTableBody.filter((name, index) => index != removeIndex);
-            }
-        })
-
-        setCurrentRefTableBody(tempRefTableBody)
-        setCurrentRefNav(tempRefNav)
-        setCurrentRefTable(tempRefTable)
-        setCurrentTableNames(tempTableNames)
-
-    }
 
     const handleTableBodyScroll = event => {
         if (loadingScroll) return;
@@ -337,7 +345,7 @@ export default function Portfolio() {
                 </div>
             </div>
             {
-                IsFilterOpen && <div className="absolute bg-white z-50 mt-[-10px] w-[1210px]" onFocus={() => { setIsFilterOpen(true) }}  > <Filter data={FilterOption} handleChange={handleFilterOption} columns={columns} onBlur={() => { setIsFilterOpen(false) }} /> </div>
+                IsFilterOpen && <div className={` absolute top-[80px] ${navOpen ? " left-[270px] w-[calc(100vw-290px)] " : " left-[81px] w-[calc(100vw-100px)] " } z-[5] `} onFocus={() => { setIsFilterOpen(true) }}  > <Filter FilterColumnOption={FilterColumnOption} handleFilterColumnOption={handleFilterColumnOption} columns={columns} filterDataOptions={filterDataOptions} handleFilterDataOptions ={handleFilterDataOptions} onBlur={() => { setIsFilterOpen(false) }} /> </div>
             }
             <div className="flex">
                 <div className="w-[210px] ml-[-15px]">
@@ -413,7 +421,7 @@ export default function Portfolio() {
                             (function () {
                                 let tableNamesAsArray = Object.entries(Data[0]);
                                 return tableNamesAsArray.map(([tableName, obj], tableNamesIndex) => {
-                                    // if ( !(tableName == "Client Name" || tableName == "Email" || tableName == "Mobile") && FilterOption[tableName].includes("All") ) {
+                                    // if ( !(tableName == "Client Name" || tableName == "Email" || tableName == "Mobile") && FilterColumnOption[tableName].includes("All") ) {
                                     if ( currentTableNames.includes(tableName) ) {
                                         let currentTableNameIndex = currentTableNames.findIndex( name => name == tableName );
                                         return (
@@ -425,7 +433,7 @@ export default function Portfolio() {
                                                             (function() {
                                                                 let headersAsArray = Object.entries(Data[0][tableName])
                                                                 return headersAsArray.map(([header, val]) => {
-                                                                    if (FilterOption[tableName].includes(header))
+                                                                    if (FilterColumnOption[tableName].includes(header))
                                                                     return (
                                                                         <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">{header}</th>
                                                                     )
@@ -442,7 +450,7 @@ export default function Portfolio() {
                                                                 <tr onMouseOver={() => setHoverIndex(tableRowIndex)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == tableRowIndex) && " border-[#5DA9F8] border-y-[1px] "} `}>
                                                                 {
                                                                     asArray.map(([header, tableData]) => {
-                                                                        if (FilterOption[tableName].includes(header))
+                                                                        if (FilterColumnOption[tableName].includes(header))
                                                                         return(
                                                                             <td className="w-[150px] justify-center flex items-center">{tableData}</td>
                                                                         )
