@@ -185,6 +185,11 @@ export default function Portfolio() {
                             showClient = ( eval(compareDataString) );
                             if (showClient == false) break;
                         }
+                        if (client[currentFilter.category][columns[currentFilter.category][i]] && client[currentFilter.category][columns[currentFilter.category][i]][client[currentFilter.category][columns[currentFilter.category][i]].length-1] == '%') {
+                            let compareDataString = (client[currentFilter.category][columns[currentFilter.category][i]].slice(0. -1) + ' ' + currentFilter.condition + ' ' + currentFilter.value) 
+                            showClient = ( eval(compareDataString) );
+                            if (showClient == false) break;
+                        }
                     }
                     return showClient;
                 }
@@ -197,6 +202,11 @@ export default function Portfolio() {
                         // console.log(compareDataString);
                         // console.log( eval(compareDataString) );
                         return ( eval(compareDataString) )
+                    }
+                    else if (client[currentFilter.category][currentFilter.subcategory] && client[currentFilter.category][currentFilter.subcategory][client[currentFilter.category][currentFilter.subcategory].length-1] == '%') {
+                        let compareDataString = (client[currentFilter.category][currentFilter.subcategory].slice(0, -1) + ' ' + currentFilter.condition + ' ' + currentFilter.value) 
+                        console.log(compareDataString)
+                        return ( eval(compareDataString) );
                     }
                     else 
                         return true;
