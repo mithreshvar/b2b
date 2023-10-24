@@ -18,6 +18,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 
 export default function Portfolio() {
 
+    const [Data, setData] = useState(data.clients)
+
     const columns = {
 
         "Basic Details": [
@@ -132,7 +134,7 @@ export default function Portfolio() {
     }
     
     const [FilterColumnOption, setFilterColumnOption] = useState(columns)
-    const [filterDataOptions, setFilterDataOptions] = useState({});
+    const [filterDataOptions, setFilterDataOptions] = useState([]);
     const [IsFilterOpen, setIsFilterOpen] = useState(false)
 
     const handleFilterColumnOption = (data) => {
@@ -162,13 +164,28 @@ export default function Portfolio() {
 
     }
 
-    const handleFilterDataOptions = (data) => {
-        setFilterDataOptions(data);
-        console.log(data);
+    const handleFilterDataOptions = (filterOptions) => {
+        setFilterDataOptions(filterOptions);
+        console.log("filter data" ,filterOptions);
 
+        let newData = [...data.clients];
+        filterOptions.forEach( currentFilter => {
+            newData = newData.filter( client => {
+                if (client[currentFilter.category][currentFilter.subcategory] != '-') {
+                    let compareDataString = (client[currentFilter.category][currentFilter.subcategory].slice(1).replace(/\,/g,'') + ' ' + currentFilter.condition + ' ' + currentFilter.value) 
+                    console.log(compareDataString);
+                    console.log( eval(compareDataString) );
+                    return ( eval(compareDataString) )
+                }
+                else 
+                    return true;
+            })
+        } )
+
+        console.log(newData)
+        setData(newData)
     }
     
-    const [Data, setData] = useState(data.clients)
     const { navOpen, setShowNote, setShowMonthlyDetails } = useDataContext()
 
     //Navigation REFS FOR NAVIGARION BAR
@@ -198,7 +215,7 @@ export default function Portfolio() {
     const tableSIPBookRef = useRef(null);
 
 
-    const { events } = useDraggable(tablesNavbarRef);
+    const { events } = useDraggable(tablesNavbarRef, {isMounted: (Data.length != 0)});
 
 
     // TABLE BODY REFS FOR SCROLL
@@ -347,156 +364,163 @@ export default function Portfolio() {
             {
                 IsFilterOpen && <div className={` absolute top-[80px] ${navOpen ? " left-[270px] w-[calc(100vw-290px)] " : " left-[81px] w-[calc(100vw-100px)] " } z-[5] `} onFocus={() => { setIsFilterOpen(true) }}  > <Filter FilterColumnOption={FilterColumnOption} handleFilterColumnOption={handleFilterColumnOption} columns={columns} filterDataOptions={filterDataOptions} handleFilterDataOptions ={handleFilterDataOptions} onBlur={() => { setIsFilterOpen(false) }} /> </div>
             }
-            <div className="flex">
-                <div className="w-[210px] ml-[-15px]">
-                    <div className="flex gap-x-[15.68px] h-[34px] items-center pl-[10px]">
-                        <div className="text-[14px] text-[#6E6E72]">Share via</div>
-                        <Image src={whatsappIcon} />
-                        <Image src={telegramIcon} />
+            {
+                (Data.length == 0) ?
+                    <div className="flex justify-center items-center h-full w-full text-[25px] font-semibold">
+                        <p>No Users Found</p>
                     </div>
-                    <table>
-                        <thead>
-                            <th className="h-[54px] w-[165px] pt-[10px] flex items-center text-[12px] text-[#6E6E72] font-normal">
-                                <Checkbox
-                                    checked={selectAll}
-                                    onChange={(e) => {
-                                        setSelectAll(e.target.checked);
-                                        handleCheckAll(e.target.checked)
-                                    }}
-                                    sx={{
-                                        "& .MuiSvgIcon-root": {
-                                            fontSize: '20px',
-                                        },
-                                        color: '#c2c2c5',
-                                        margin: "-5px"
-                                    }}
-                                />
-                                <p>Client Name</p>
-                            </th>
-                        </thead>
+                :
+                    <div className="flex">
+                        <div className="w-[210px] ml-[-15px]">
+                            <div className="flex gap-x-[15.68px] h-[34px] items-center pl-[10px]">
+                                <div className="text-[14px] text-[#6E6E72]">Share via</div>
+                                <Image src={whatsappIcon} />
+                                <Image src={telegramIcon} />
+                            </div>
+                            <table>
+                                <thead>
+                                    <th className="h-[54px] w-[165px] pt-[10px] flex items-center text-[12px] text-[#6E6E72] font-normal">
+                                        <Checkbox
+                                            checked={selectAll}
+                                            onChange={(e) => {
+                                                setSelectAll(e.target.checked);
+                                                handleCheckAll(e.target.checked)
+                                            }}
+                                            sx={{
+                                                "& .MuiSvgIcon-root": {
+                                                    fontSize: '20px',
+                                                },
+                                                color: '#c2c2c5',
+                                                margin: "-5px"
+                                            }}
+                                        />
+                                        <p>Client Name</p>
+                                    </th>
+                                </thead>
 
-                        <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar z-[0]" ref={tableNameRef} onScroll={() => { handleScroll(tableNameRef.current.scrollTop) }}>
-                            <tbody >
-                                {
-                                    Data.map((client, i) =>
-                                        <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == i) && " border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}>
-                                            <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} />
-                                            <p>{client["Client Name"]}</p>
-                                            <div onMouseOver={() => setShowClientInfo(i)} onMouseLeave={() => setShowClientInfo(-1)} className="relative">
-                                                <InfoOutlinedIcon className="ml-[5px] mb-[-2px] text-[13px] text-primary " />
-                                                <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} absolute flex flex-col h-auto w-[250px] top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
-                                                    <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[20px] py-[10px] ">{client["Client Name"]}</h6>
-                                                    <div className="py-[10px] px-[20px] flex-col flex gap-y-[10px]">
-                                                        <p>Email : {client["Email"]}</p>
-                                                        <p>Mobile : {client["Mobile"]}</p>
+                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar z-[0]" ref={tableNameRef} onScroll={() => { handleScroll(tableNameRef.current.scrollTop) }}>
+                                    <tbody >
+                                        {
+                                            Data.map((client, i) =>
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == i) && " border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}>
+                                                    <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} />
+                                                    <p>{client["Client Name"]}</p>
+                                                    <div onMouseOver={() => setShowClientInfo(i)} onMouseLeave={() => setShowClientInfo(-1)} className="relative">
+                                                        <InfoOutlinedIcon className="ml-[5px] mb-[-2px] text-[13px] text-primary " />
+                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} absolute flex flex-col h-auto w-[250px] top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
+                                                            <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[20px] py-[10px] ">{client["Client Name"]}</h6>
+                                                            <div className="py-[10px] px-[20px] flex-col flex gap-y-[10px]">
+                                                                <p>Email : {client["Email"]}</p>
+                                                                <p>Mobile : {client["Mobile"]}</p>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                </div>
+                                                </tr>
+                                            ) //<input value={''} type="checkbox" className="appearance-none  w-[16px] h-[16px] rounded-[3px] border-[2px] border-solid outline-none border-[#ceced0] checked:bg-primary" />
+                                        }
+                                    </tbody>
+                                </div>
 
-                                            </div>
-                                        </tr>
-                                    ) //<input value={''} type="checkbox" className="appearance-none  w-[16px] h-[16px] rounded-[3px] border-[2px] border-solid outline-none border-[#ceced0] checked:bg-primary" />
-                                }
-                            </tbody>
+                            </table>
+
                         </div>
+                        
+                        
+                        <div className="flex flex-col">
+                            <div ref={tablesNavbarRef} {...events} className={`h-[44px] flex gap-x-[10px] overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] `}>
+                                {
+                                    currentTableNames.map( (tableName, index) => 
+                                        <button ref={currentRefNav[index]} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption === tableName ? 'bg-[#DCEBFE] text-[#0071E7]' : 'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={() => { handleSelectOption(tableName, index) }}>
+                                            <p>{tableName}</p>
+                                            <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${selectedOption == tableName ? ' opacity-100 ' : ' opacity-0 '} `} />
+                                        </button>
+                                    )
+                                }
+                            </div>
 
-                    </table>
-
-                </div>
-                
-                
-                <div className="flex flex-col">
-                    <div ref={tablesNavbarRef} {...events} className={`h-[44px] flex gap-x-[10px] overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] `}>
-                        {
-                            currentTableNames.map( (tableName, index) => 
-                                <button ref={currentRefNav[index]} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption === tableName ? 'bg-[#DCEBFE] text-[#0071E7]' : 'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={() => { handleSelectOption(tableName, index) }}>
-                                    <p>{tableName}</p>
-                                    <div className={`absolute h-0 w-0 border-x-[7px] border-x-transparent border-b-[9px] border-b-primary bottom-[-10px] left-[calc(50%-5px)] pointer-events-none ${selectedOption == tableName ? ' opacity-100 ' : ' opacity-0 '} `} />
-                                </button>
-                            )
-                        }
-                    </div>
-
-                    <div ref={tablesContainerRef} onScroll={handleTableBodyScroll} className={`flex overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] pt-0 gap-x-[10px] no-scrollbar `}>
-                        {
-                            (function () {
-                                let tableNamesAsArray = Object.entries(Data[0]);
-                                return tableNamesAsArray.map(([tableName, obj], tableNamesIndex) => {
-                                    // if ( !(tableName == "Client Name" || tableName == "Email" || tableName == "Mobile") && FilterColumnOption[tableName].includes("All") ) {
-                                    if ( currentTableNames.includes(tableName) ) {
-                                        let currentTableNameIndex = currentTableNames.findIndex( name => name == tableName );
-                                        return (
-                                            <div ref={currentRefTable[currentTableNameIndex]} className={` ${(selectedOption === tableName) && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
-                                                <table>
-                                                    <thead>
-                                                        <tr className="flex">
-                                                        {
-                                                            (function() {
-                                                                let headersAsArray = Object.entries(Data[0][tableName])
-                                                                return headersAsArray.map(([header, val]) => {
-                                                                    if (FilterColumnOption[tableName].includes(header))
-                                                                    return (
-                                                                        <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">{header}</th>
-                                                                    )
-                                                                })
-                                                            })()
-                                                        }
-                                                        </tr>
-                                                    </thead>
-                                                    <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={currentRefTableBody[currentTableNameIndex]} onScroll={() => { handleScroll(currentRefTableBody[currentTableNameIndex].current.scrollTop) }}>
-                                                    {
-                                                        Data.map((client, tableRowIndex) => {
-                                                            let asArray = Object.entries(client[tableName]);
-                                                            return (
-                                                                <tr onMouseOver={() => setHoverIndex(tableRowIndex)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == tableRowIndex) && " border-[#5DA9F8] border-y-[1px] "} `}>
+                            <div ref={tablesContainerRef} onScroll={handleTableBodyScroll} className={`flex overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] pt-0 gap-x-[10px] no-scrollbar `}>
+                                {
+                                    (function () {
+                                        let tableNamesAsArray = Object.entries(Data[0]);
+                                        return tableNamesAsArray.map(([tableName, obj], tableNamesIndex) => {
+                                            // if ( !(tableName == "Client Name" || tableName == "Email" || tableName == "Mobile") && FilterColumnOption[tableName].includes("All") ) {
+                                            if ( currentTableNames.includes(tableName) ) {
+                                                let currentTableNameIndex = currentTableNames.findIndex( name => name == tableName );
+                                                return (
+                                                    <div ref={currentRefTable[currentTableNameIndex]} className={` ${(selectedOption === tableName) && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
+                                                        <table>
+                                                            <thead>
+                                                                <tr className="flex">
                                                                 {
-                                                                    asArray.map(([header, tableData]) => {
-                                                                        if (FilterColumnOption[tableName].includes(header))
-                                                                        return(
-                                                                            <td className="w-[150px] justify-center flex items-center">{tableData}</td>
-                                                                        )
-                                                                    })
+                                                                    (function() {
+                                                                        let headersAsArray = Object.entries(Data[0][tableName])
+                                                                        return headersAsArray.map(([header, val]) => {
+                                                                            if (FilterColumnOption[tableName].includes(header))
+                                                                            return (
+                                                                                <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">{header}</th>
+                                                                            )
+                                                                        })
+                                                                    })()
                                                                 }
                                                                 </tr>
-                                                            )
-                                                        })
-                                                    }
+                                                            </thead>
+                                                            <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={currentRefTableBody[currentTableNameIndex]} onScroll={() => { handleScroll(currentRefTableBody[currentTableNameIndex].current.scrollTop) }}>
+                                                            {
+                                                                Data.map((client, tableRowIndex) => {
+                                                                    let asArray = Object.entries(client[tableName]);
+                                                                    return (
+                                                                        <tr onMouseOver={() => setHoverIndex(tableRowIndex)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == tableRowIndex) && " border-[#5DA9F8] border-y-[1px] "} `}>
+                                                                        {
+                                                                            asArray.map(([header, tableData]) => {
+                                                                                if (FilterColumnOption[tableName].includes(header))
+                                                                                return(
+                                                                                    <td className="w-[150px] justify-center flex items-center">{tableData}</td>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        </tr>
+                                                                    )
+                                                                })
+                                                            }
+                                                            </div>
+                                                        </table>
                                                     </div>
-                                                </table>
-                                            </div>
-                                        )
-                                    }
-                                })
-                            })()
-                        }
-                    </div>
-                </div>
-                <div className=" flex flex-col gap-y-[54px]">
-                    <div className="w-[50px] h-[34px] flex px-[10px] justify-between items-center ">
-                        <button onClick={() => handleArrows(-1)}><Arrow active={!(selectedOption == currentTableNames[0])} left={true} h={12} w={8} notActiveClr={'#0071e750'} /></button>
-                        <button onClick={() => handleArrows(1)}><Arrow active={!(selectedOption == currentTableNames[currentTableNames.length -1])} h={12} w={8} notActiveClr={'#0071e750'} /></button>
-                    </div>
+                                                )
+                                            }
+                                        })
+                                    })()
+                                }
+                            </div>
+                        </div>
+                        <div className=" flex flex-col gap-y-[54px]">
+                            <div className="w-[50px] h-[34px] flex px-[10px] justify-between items-center ">
+                                <button onClick={() => handleArrows(-1)}><Arrow active={!(selectedOption == currentTableNames[0])} left={true} h={12} w={8} notActiveClr={'#0071e750'} /></button>
+                                <button onClick={() => handleArrows(1)}><Arrow active={!(selectedOption == currentTableNames[currentTableNames.length -1])} h={12} w={8} notActiveClr={'#0071e750'} /></button>
+                            </div>
 
-                    <div ref={tableActionButtonRef} className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" onScroll={() => { handleScroll(tableActionButtonRef.current.scrollTop) }}>
-                        {
-                            Data.map((client, i) =>
-                                <div className="h-[44px] flex items-center justify-center">
-                                    <button className="h-[15px] p-[5px] flex items-center justify-center cursor-pointer" onClick={handleClick} onBlur={handleClick}>
-                                        <Image src={threeDots} />
-                                    </button>
-                                    <Popper id={id} open={open} anchorEl={anchorEl} >
-                                        <div className='w-[130px] text-[14px] flex flex-col bg-white rounded-[10px] shadow-[0px_2px_5px_#00000007] justify-around items-center mt-[5px] mr-[30px] p-[5px] '>
-                                            <p onMouseDown={() => { setShowMonthlyDetails(client["Client Name"]) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center ' >Monthly Details</p>
-                                            <p onMouseDown={() => { setShowNote(true) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Note</p>
-                                            <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Mail</p>
-                                            <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Whatsapp</p>
+                            <div ref={tableActionButtonRef} className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" onScroll={() => { handleScroll(tableActionButtonRef.current.scrollTop) }}>
+                                {
+                                    Data.map((client, i) =>
+                                        <div className="h-[44px] flex items-center justify-center">
+                                            <button className="h-[15px] p-[5px] flex items-center justify-center cursor-pointer" onClick={handleClick} onBlur={handleClick}>
+                                                <Image src={threeDots} />
+                                            </button>
+                                            <Popper id={id} open={open} anchorEl={anchorEl} >
+                                                <div className='w-[130px] text-[14px] flex flex-col bg-white rounded-[10px] shadow-[0px_2px_5px_#00000007] justify-around items-center mt-[5px] mr-[30px] p-[5px] '>
+                                                    <p onMouseDown={() => { setShowMonthlyDetails(client["Client Name"]) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center ' >Monthly Details</p>
+                                                    <p onMouseDown={() => { setShowNote(true) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Note</p>
+                                                    <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Mail</p>
+                                                    <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Whatsapp</p>
+                                                </div>
+                                            </Popper>
                                         </div>
-                                    </Popper>
-                                </div>
-                            )
-                        }
+                                    )
+                                }
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+            }
         </div>
     )
 }

@@ -2,29 +2,29 @@ import React, { useState } from 'react';
 import CustomDropSelectField from './CustomDropSelectField';
 import { Button } from '@mui/material';
 import Image from 'next/image';
-import clearFilter from '../../../../../public/clearFilter.svg';
+import clearFilter from '/public/clearFilter.svg';
+import add from '/public/add.svg'
+import subract from '/public/subract.svg'
+import edit from '/public/edit.svg'
+import closeSmall from '/public/closeSmall.svg'
 import CustomSelectField from '@/app/b2b/components/InputFields';
 
 
-function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
-
+function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
+    
     const {columns}=props
     const [CurrFilterState, setCurrFilterState] = useState({ ...props.FilterColumnOption });
+    const [currentFilterDataOptions, setCurrentFilterDataOptions] = useState([...filterDataOptions]);
     const [Filter, setFilter] = useState("first");
     const [state, setState] = useState('');
     const [EnterValue,setEnterValue]=useState('');
     const [SaveClick,SetSaveClick]=useState(false);
-    const [showAdditionalFields, setShowAdditionalFields] = useState(false);
     const [disabled,setDisabled]=useState(true);
     const [filtervalue,setFiltervalue]=useState("filter1");
     const [onedit,SetOnedit]=useState(true)
     const [onsave,setonsave]=useState(true)
     const [Subcategory,Setsubcategory]=useState("")
     const [category,Setcategory]=useState("")
-    const [Subcategory1,Setsubcategory1]=useState("")
-    const [category1,Setcategory1]=useState("")
-    const [state1, setState1] = useState('');
-    const [EnterValue1,setEnterValue1]=useState('');
 
     const condition = ['<'];
     const Evalue = ["500000"]; 
@@ -45,22 +45,21 @@ function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
         setEnterValue(value);
     }
 
-    const handleState1Change = (event)=>{
-        const value= event.target.value
-            setState1(value);
-    }
-
-    const handleValue1Change=(event)=>{
-        const value= event.target.value;
-        setEnterValue1(value);
-    }
-
     const handleFilterChange = (data) => {
         setCurrFilterState(data);
     };
 
     const handleApplyFilter = () => {
         props.handleFilterColumnOption(CurrFilterState);
+        if (Filter == 'second') {
+            if (category!="" && Subcategory!="" && EnterValue !="" && state!="") // if all values are entered -> push into array and send
+                handleFilterDataOptions([...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]);
+
+            else if (category!="" || Subcategory!="" || EnterValue !="" || state!="") // if values are partially entered -> do nothing
+                return;
+
+            else handleFilterDataOptions(currentFilterDataOptions); // if values are not entered -> send added values
+        }
         props.onBlur();
     };
 
@@ -71,10 +70,6 @@ function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
         setFiltervalue("filter1");
         setState('');
         setEnterValue('');
-        setState1('');
-        setEnterValue1('');
-        Setcategory1('');
-        Setsubcategory1('');
         Setcategory('');
         Setsubcategory('');
         setonsave(true);
@@ -85,16 +80,6 @@ function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
         event.preventDefault()
         if(category!="" && Subcategory!="" && EnterValue !="" && state!="")
         SetSaveClick(true)  
-    }
-
-    const handleopen = (event)=>{
-        event.preventDefault()
-        if(category!="" && Subcategory!="" && EnterValue !="" && state!="")
-        setShowAdditionalFields(true);
-    }
-
-    const handleClose = () => {
-        setShowAdditionalFields(false); 
     }
 
     const handleEdit =(event)=>{
@@ -130,30 +115,40 @@ function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
         Setcategory(value)
     }
 
-    const handleFilter22Change=(event)=>{
-        let value=event.target.value;
-        Setsubcategory1(value)
+
+    const handleAddFilterData = ()=>{
+        if(category!="" && Subcategory!="" && EnterValue !="" && state!=""){
+            setCurrentFilterDataOptions([...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]);
+            setState('');
+            setEnterValue('');
+            Setcategory('');
+            Setsubcategory('');
+        }
     }
 
-    const handleFilter11Change=(event)=>{
-        let value=event.target.value;
-        Setcategory1(value)
+    function handleCurrentFilterDataChange (value, field, index) {
+        let newData = [...currentFilterDataOptions];
+        newData[index][field] = value;
+        setCurrentFilterDataOptions(newData);
     }
 
+    function handleDeleteCurrentFilter (index) {
+        setCurrentFilterDataOptions(currentFilterDataOptions.filter((_, i) => index != i));
+    }
 
     return (
-        <div className='w-full pl-[25px] mt-[33px] pr-[30px] bg-white rounded-[25px] p-[20px] shadow-[0px_4px_20px_#0000001f]'>
+        <div className='w-full pl-[25px] pr-[30px] bg-white rounded-[25px] p-[20px] flex flex-col gap-y-[20px] shadow-[0px_4px_20px_#0000001f]'>
 
-            <p className='font-bold text-[14px]'>Filters</p>
-            <div className='flex mt-[10px] gap-[10px]'>
+            <p className='font-semibold text-[16px]'>Filters</p>
+            <div className='flex gap-[10px]'>
                 <div
-                    className={`w-[141px] h-[33px] text-center text-bold text-[14px] rounded-t-[10px] pt-[5px] cursor-pointer ${Filter === "first" ? "bg-[#DCEBFE] text-[#0071E7]" : "bg-[#F7F8FF] text-[#BEBEBE]"}`}
+                    className={`w-[141px] h-[33px] text-center font-semibold text-[14px] rounded-t-[10px] pt-[5px] cursor-pointer ${Filter === "first" ? "bg-[#DCEBFE] text-[#0071E7]" : "bg-[#F7F8FF] text-[#BEBEBE]"}`}
                     onClick={() => setFilter("first")}
                 >
                     Display columns
                 </div>
                 <div
-                    className={`w-[141px] h-[33px] text-center text-bold text-[14px] rounded-t-[10px] pt-[5px] cursor-pointer ${Filter === "second" ? "bg-[#DCEBFE] text-[#0071E7]" : "bg-[#F7F8FF] text-[#BEBEBE]"}`}
+                    className={`w-[141px] h-[33px] text-center font-semibold text-[14px] rounded-t-[10px] pt-[5px] cursor-pointer ${Filter === "second" ? "bg-[#DCEBFE] text-[#0071E7]" : "bg-[#F7F8FF] text-[#BEBEBE]"}`}
                     onClick={() => setFilter("second")}
                 >
                     Filters 2
@@ -161,7 +156,7 @@ function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
             </div>
 
             {Filter === "first" ? (
-                <div className='w-[990px] bg-white'>
+                <div className='w-full bg-white'>
                     <div className='grid grid-cols-3 gap-[17px]'>
                         {Object.keys(props.columns).map((ele) => (
                             <CustomDropSelectField
@@ -197,138 +192,135 @@ function Filter(props, {filterDataOptions, handleFilterDataOptions}) {
             :
             
             (
-                <div className={`w-[990px] bg-white ${SaveClick?("mt-[9px] ml-[3px]"):"mt-[10px]"}`}>
-                {   
-                    SaveClick && (
-                        <div className={`h-[28px] ${onedit?"w-[125px]":"w-[160px]"} rounded-[20px] border-[1px] border-[#0171E7] mb-[15px] cursor-pointer`} > 
-                            <div className='ml-[4px] flex flex-row'>
-                                <div><input className='font-[14px] h-[18px] w-[80px] text-[#0171E7]' type="text" value={filtervalue} onChange={handleFilterValue} disabled={disabled} /></div>
-                                { onedit && onsave && <div className='ml-[0px] cursor-pointer' onClick={handleEdit}>ed</div>}
-                                { <div className={`${onsave?"ml-[2px]":"ml-[10px]"} cursor-pointer`} onClick={handleclose}>X</div>}
-                                { !onedit && <div className='ml-[3px] mt-[2px] mr-[2px] h-[20px] w-[84px] rounded-[10px] bg-[#01A245] text-white text-[10px] p-[3px] pb-[2px] text-center cursor-pointer ' onClick={handleFilterSaveUP}> save</div>}
+                <div className={`w-full bg-white flex flex-col gap-y-[20px] `}>
+                    {   
+                        SaveClick && ( 
+                            <div className={` h-[28px] ml-[3px] pl-[4px] ${onedit?"w-[125px]":"w-[160px]"} flex items-center justify-center rounded-[20px] border-[1px] border-[#0171E7]  `}>
+                                <div><input className='text-[14px] h-[18px] w-[80px] text-[#0171E7] bg-transparent px-[4px]' type="text" value={filtervalue} onChange={handleFilterValue} disabled={disabled} /></div>
+                                { onedit && onsave && <Image src={edit} className=' cursor-pointer' onClick={handleEdit} />}
+                                { <Image src={closeSmall} className={`${onsave?"ml-[5px]":"ml-[10px]"} mt-[1px] cursor-pointer`} onClick={handleclose} />}
+                                { !onedit && <div className='ml-[5px] mr-[2px] my-[1px] h-[calc(100%-4px)] w-full flex items-center justify-center rounded-[10px] bg-[#01A245] text-white text-[10px] text-center cursor-pointer ' onClick={handleFilterSaveUP}> save</div>}
                             </div>
-                        </div>
-                    )
-                }
+                        )
+                    }
 
-                <div className='flex gap-[10px]'>          
-                    <CustomSelectField
-                        width = '260px'
-                        height ='40px'
-                        label="Category"
-                        value={category}
-                        valueOptions={Object.keys(props.columns)}
-                        handleChange={handleFilter1Change}
-                    />
-                    
-                    <CustomSelectField 
-                        width = '260px' 
-                        height='40px'
-                        label="Sub Category"
-                        value={Subcategory} 
-                        valueOptions={columns[category]  || []} 
-                        handleChange={handleFilter2Change}    
-                    />
-                    
-                    <CustomSelectField 
-                        width = '157px' 
-                        label="condition" 
-                        value={state} 
-                        valueOptions={condition} 
-                        handleChange={handleStateChange}    
-                    />
+                    <div className='flex flex-col gap-y-[20px] '>
+                        <div className='flex gap-[10px]'>   
 
-                    <CustomSelectField 
-                        width = '190px' 
-                        height ='40px'
-                        label="Enter Value" 
-                        value={EnterValue} 
-                        valueOptions={Evalue}  
-                        handleChange={handleValueChange}               
-                    />
+                            <CustomSelectField
+                                width = '260px'
+                                height ='40px'
+                                label="Category"
+                                value={category}
+                                valueOptions={Object.keys(props.columns)}
+                                handleChange={handleFilter1Change}
+                            />
+                            
+                            <CustomSelectField 
+                                width = '260px' 
+                                height='40px'
+                                label="Sub Category"
+                                value={Subcategory} 
+                                valueOptions={columns[category]  || []} 
+                                handleChange={handleFilter2Change}    
+                            />
+                            
+                            <CustomSelectField 
+                                width = '157px' 
+                                label="condition" 
+                                value={state} 
+                                valueOptions={condition} 
+                                handleChange={handleStateChange}    
+                            />
 
-                    <button>
-                        <div className='h-[24px] w-[24px]  ml-2 cursor-pointer' onClick={handleopen} > ADD+
-                    </div></button>
+                            <CustomSelectField 
+                                width = '190px' 
+                                height ='40px'
+                                label="Enter Value" 
+                                value={EnterValue} 
+                                valueOptions={Evalue}  
+                                handleChange={handleValueChange}               
+                            />
 
-                </div>      
+                            <button onClick={handleAddFilterData}>
+                                <Image src={add} />
+                            </button>
 
-            {/* {
-            showAdditionalFields && 
-                     
-           <div className="flex gap-[10px] mt-[15px]">        
-             <div><CustomSelectField
-                    width = '260px'
-                    height ='40px'
-                    label="Category"
-                    value={category1}
-                    valueOptions={Object.keys(props.columns)}
-                    handleChange={handleFilter11Change}
-                /></div>
-                
-             <div> <CustomSelectField 
-                    width = '260px' 
-                    height='40px'
-                    label="Sub Category"
-                    value={Subcategory1} 
-                    valueOptions={columns[category]  || []} 
-                    handleChange={handleFilter22Change}    
-                 /></div>
+                        </div>      
 
-              
-               <div className='mt-[9px] flex gap-[10px]'>
-                <CustomSelectField 
-                    width = '157px' 
-                    label="condition" 
-                    value={state1} 
-                    valueOptions={condition} 
-                    handleChange={handleState1Change}    
-                  />
+                        {
+                            currentFilterDataOptions?.map((data, index) => 
+                                <div className='flex gap-[10px]'>   
 
-                <CustomSelectField 
-                    width = '190px' 
-                    height ='40px'
-                    label="Enter Value" 
-                    value={EnterValue1} 
-                    valueOptions={Evalue}  
-                    handleChange={handleValue1Change}               
-                />
-                </div>
+                                    <CustomSelectField
+                                        width = '260px'
+                                        height ='40px'
+                                        label="Category"
+                                        value={data.category}
+                                        valueOptions={Object.keys(props.columns)}
+                                        handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "category", index)}
+                                    />
+                                    <CustomSelectField 
+                                        width = '260px' 
+                                        height='40px'
+                                        label="Sub Category"
+                                        value={data.subcategory} 
+                                        valueOptions={columns[data.category]  || []} 
+                                        handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "subcategory", index)}    
+                                    />
+                                    <CustomSelectField 
+                                        width = '157px' 
+                                        label="condition" 
+                                        value={data.condition} 
+                                        valueOptions={condition} 
+                                        handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "condition", index)}    
+                                    />
+                                    <CustomSelectField 
+                                        width = '190px' 
+                                        height ='40px'
+                                        label="Enter Value" 
+                                        value={data.value} 
+                                        valueOptions={Evalue}  
+                                        handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "value", index)}               
+                                    />
+                                    <button onClick={() => handleDeleteCurrentFilter(index)}>
+                                        <Image src={subract} />
+                                    </button>
 
-                    <button>
-                        <div className='h-[24px] w-[24px] mt-4 ml-2 cursor-pointer' onClick={handleClose} > Sub-
-                        </div>
-                    </button>
-             </div>
+                                </div>
+                            )
+                        }
+                    </div>
 
-            } */}
-
-                <div className='pt-[50px] flex flex-row-reverse gap-[30px]'>
-                        <button
-                            className='w-[108px] h-[40px] text-white font-semibold text-[14px] flex justify-center items-center bg-[#0071E7] rounded-[20px] cursor-pointer'
-                            onClick={handleApplyFilter}
-                        >
-                                Apply Filter
-                        </button>
-                        <div
-                            className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer'
-                            onClick={handleClearFilter}
-                        >
-                            <Image src={clearFilter} className='mb-[12px]' />
-                            Clear Filter
-                        </div>
-                        <div className='mr-[600px]'>
+                    <div className='pt-[50px] flex justify-between items-center'>
+                        
                         <button 
                         
-                            className='w-[108px] h-[40px] font-semibold text-center text-[14px] bg-white border-[#0066CD] border-[1px] pt-[8px] text-[#0066CD] rounded-[20px] cursor-pointer'
+                            className='w-[108px] h-[40px] font-semibold text-center text-[14px] bg-white border-[#0066CD] border-[1px]  text-[#0066CD] rounded-[20px] '
                             onClick={handleSaveFilter}
                         >
                             Save Filter
                         </button>
+
+                        <div className='flex gap-[30px] items-center'>
+                            <button
+                                className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] '
+                                onClick={handleClearFilter}
+                            >
+                                <Image src={clearFilter} className='mb-[12px]' />
+                                Clear Filter
+                            </button>
+
+                            <button
+                                className='w-[108px] h-[40px] text-white font-semibold text-[14px] flex justify-center items-center bg-[#0071E7] rounded-[20px] '
+                                onClick={handleApplyFilter}
+                            >
+                                Apply Filter
+                            </button>
                         </div>
+
+                    </div>
                 </div>
-     
-             </div>
             )}
         </div>
     );
