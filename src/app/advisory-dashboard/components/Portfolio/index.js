@@ -352,7 +352,7 @@ export default function Portfolio() {
 
     }
 
-    const [checked, setChecked] = useState([false, false, false, false, false]);
+    const [checked, setChecked] = useState(new Array(Data.length).fill(false));
     const [selectAll, setSelectAll] = useState(false);
     const handleChecked = i => {
         setChecked(checked.map((e, index) => {
@@ -365,6 +365,7 @@ export default function Portfolio() {
     }
 
     const [showClientInfo, setShowClientInfo] = useState(-1);
+    const [activeActionButtonName, setActiveActionButtonName] = useState('')
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -384,7 +385,7 @@ export default function Portfolio() {
                 </div>
             </div>
             {
-                IsFilterOpen && <div className={` absolute top-[80px] ${navOpen ? " left-[270px] w-[calc(100vw-290px)] " : " left-[81px] w-[calc(100vw-100px)] " } z-[5] `} onFocus={() => { setIsFilterOpen(true) }}  > <Filter FilterColumnOption={FilterColumnOption} handleFilterColumnOption={handleFilterColumnOption} columns={columns} filterDataOptions={filterDataOptions} handleFilterDataOptions ={handleFilterDataOptions} onBlur={() => { setIsFilterOpen(false) }} /> </div>
+                IsFilterOpen && <div className={` absolute top-[120px] ${navOpen ? " left-[270px] w-[calc(100vw-290px)] " : " left-[81px] w-[calc(100vw-100px)] " } z-[5] `} onFocus={() => { setIsFilterOpen(true) }}  > <Filter FilterColumnOption={FilterColumnOption} handleFilterColumnOption={handleFilterColumnOption} columns={columns} filterDataOptions={filterDataOptions} handleFilterDataOptions ={handleFilterDataOptions} onBlur={() => { setIsFilterOpen(false) }} /> </div>
             }
             {
                 (Data.length == 0) ?
@@ -428,7 +429,7 @@ export default function Portfolio() {
                                                     <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} />
                                                     <p>{client["Client Name"]}</p>
                                                     <div onMouseOver={() => setShowClientInfo(i)} onMouseLeave={() => setShowClientInfo(-1)} className="relative">
-                                                        <InfoOutlinedIcon className="ml-[5px] mb-[-2px] text-[13px] text-primary " />
+                                                        <InfoOutlinedIcon className="ml-[5px] mb-[-2px] h-[13px] w-[12px] text-[13px] text-primary " />
                                                         <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} absolute flex flex-col h-auto w-[250px] top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
                                                             <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[20px] py-[10px] ">{client["Client Name"]}</h6>
                                                             <div className="py-[10px] px-[20px] flex-col flex gap-y-[10px]">
@@ -523,21 +524,23 @@ export default function Portfolio() {
 
                             <div ref={tableActionButtonRef} className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" onScroll={() => { handleScroll(tableActionButtonRef.current.scrollTop) }}>
                                 {
-                                    Data.map((client, i) =>
-                                        <div className="h-[44px] flex items-center justify-center">
-                                            <button className="h-[15px] p-[5px] flex items-center justify-center cursor-pointer" onClick={handleClick} onBlur={handleClick}>
-                                                <Image src={threeDots} />
-                                            </button>
-                                            <Popper id={id} open={open} anchorEl={anchorEl} >
-                                                <div className='w-[130px] text-[14px] flex flex-col bg-white rounded-[10px] shadow-[0px_2px_5px_#00000007] justify-around items-center mt-[5px] mr-[30px] p-[5px] '>
-                                                    <p onMouseDown={() => { setShowMonthlyDetails(client["Client Name"]) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center ' >Monthly Details</p>
-                                                    <p onMouseDown={() => { setShowNote(true) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Note</p>
-                                                    <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Mail</p>
-                                                    <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Whatsapp</p>
-                                                </div>
-                                            </Popper>
-                                        </div>
-                                    )
+                                    Data.map((client, i) => {
+                                        return(
+                                            <div key={i} className="h-[44px] flex items-center justify-center">
+                                                <button className="h-[15px] p-[5px] flex items-center justify-center cursor-pointer" onClick={(event) => { setActiveActionButtonName(client["Client Name"]); handleClick(event) }} onBlur={handleClick}>
+                                                    <Image src={threeDots} />
+                                                </button>
+                                                <Popper id={id} open={open} anchorEl={anchorEl} >
+                                                    <div className='w-[130px] text-[14px] flex flex-col bg-white rounded-[10px] shadow-[0px_2px_5px_#00000007] justify-around items-center mt-[5px] mr-[30px] p-[5px] '>
+                                                        <p onMouseDown={() => { setShowMonthlyDetails(activeActionButtonName) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center ' >Monthly Details</p>
+                                                        <p onMouseDown={() => { setShowNote(true) }} className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Note</p>
+                                                        <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Mail</p>
+                                                        <p className='cursor-pointer hover:font-semibold hover:bg-[#F9FBFF] h-[37px] w-[120px] flex items-center justify-center '>Whatsapp</p>
+                                                    </div>
+                                                </Popper>
+                                            </div>
+                                        )
+                                    })
                                 }
                             </div>
                         </div>
