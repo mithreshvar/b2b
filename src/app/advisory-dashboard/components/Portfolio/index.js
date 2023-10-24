@@ -171,18 +171,40 @@ export default function Portfolio() {
         let newData = [...data.clients];
         filterOptions.forEach( currentFilter => {
             newData = newData.filter( client => {
-                if (client[currentFilter.category][currentFilter.subcategory] != '-') {
-                    let compareDataString = (client[currentFilter.category][currentFilter.subcategory].slice(1).replace(/\,/g,'') + ' ' + currentFilter.condition + ' ' + currentFilter.value) 
-                    console.log(compareDataString);
-                    console.log( eval(compareDataString) );
-                    return ( eval(compareDataString) )
+                if (currentFilter.subcategory == 'All') {
+                    let showClient = true;
+                    for (let i=1; i<columns[currentFilter.category].length; i++) {
+                        console.log(columns[currentFilter.category][i])
+                        if (client[currentFilter.category][columns[currentFilter.category][i]] == '-') {
+                            continue;
+                        }
+                        if (client[currentFilter.category][columns[currentFilter.category][i]] && client[currentFilter.category][columns[currentFilter.category][i]][0] == '₹' ) {
+                            let compareDataString = (client[currentFilter.category][columns[currentFilter.category][i]].slice(1).replace(/\,/g,'') + ' ' + currentFilter.condition + ' ' + currentFilter.value) 
+                            // console.log(compareDataString);
+                            // console.log( eval(compareDataString) );
+                            showClient = ( eval(compareDataString) );
+                            if (showClient == false) break;
+                        }
+                    }
+                    return showClient;
                 }
-                else 
-                    return true;
+                else{
+                    if (client[currentFilter.category][currentFilter.subcategory] == '-') {
+                        return true;
+                    }
+                    else if (client[currentFilter.category][currentFilter.subcategory] && client[currentFilter.category][currentFilter.subcategory][0] == '₹' ) {
+                        let compareDataString = (client[currentFilter.category][currentFilter.subcategory].slice(1).replace(/\,/g,'') + ' ' + currentFilter.condition + ' ' + currentFilter.value) 
+                        // console.log(compareDataString);
+                        // console.log( eval(compareDataString) );
+                        return ( eval(compareDataString) )
+                    }
+                    else 
+                        return true;
+                }
             })
         } )
 
-        console.log(newData)
+        console.log("newData", newData)
         setData(newData)
     }
     
