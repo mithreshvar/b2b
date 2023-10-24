@@ -8,6 +8,7 @@ import subract from '/public/subract.svg'
 import edit from '/public/edit.svg'
 import closeSmall from '/public/closeSmall.svg'
 import CustomSelectField from '@/app/b2b/components/InputFields';
+import { CustomTextField } from '@/app/b2b/components/InputFields';
 
 
 function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
@@ -25,6 +26,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
     const [onsave,setonsave]=useState(true)
     const [Subcategory,Setsubcategory]=useState("")
     const [category,Setcategory]=useState("")
+    const [saved,setSaved]=useState(false)
 
     const condition = ['<'];
     const Evalue = ["500000"]; 
@@ -78,8 +80,10 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
 
     const handleSaveFilter=(event)=>{
         event.preventDefault()
+        setSaved(true)
         if(category!="" && Subcategory!="" && EnterValue !="" && state!="")
-        SetSaveClick(true)  
+        SetSaveClick(true) 
+        
     }
 
     const handleEdit =(event)=>{
@@ -96,6 +100,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
         SetOnedit(true)
         setonsave(true)
         setDisabled(true);
+        setSaved(false)
     }
 
     const handleFilterSaveUP=(event)=>{
@@ -103,6 +108,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
         setDisabled(true)
         SetOnedit(true)
         setonsave(false)
+        setSaved(false)
     }
 
     const handleFilter2Change=(event)=>{
@@ -233,14 +239,13 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
                                 handleChange={handleStateChange}    
                             />
 
-                            <CustomSelectField 
+                            <CustomTextField 
                                 width = '190px' 
-                                height ='40px'
-                                label="Enter Value" 
+                                label="Enter Value"
                                 value={EnterValue} 
-                                valueOptions={Evalue}  
-                                handleChange={handleValueChange}               
+                                handleChange={handleValueChange} 
                             />
+
 
                             <button onClick={handleAddFilterData}>
                                 <Image src={add} />
@@ -275,14 +280,15 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
                                         valueOptions={condition} 
                                         handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "condition", index)}    
                                     />
-                                    <CustomSelectField 
+        
+                                    <CustomTextField 
                                         width = '190px' 
                                         height ='40px'
                                         label="Enter Value" 
                                         value={data.value} 
-                                        valueOptions={Evalue}  
-                                        handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "value", index)}               
+                                        handleChange={(event) => handleCurrentFilterDataChange(event.target.value, "value", index)}
                                     />
+
                                     <button onClick={() => handleDeleteCurrentFilter(index)}>
                                         <Image src={subract} />
                                     </button>
@@ -295,8 +301,8 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
                     <div className='pt-[50px] flex justify-between items-center'>
                         
                         <button 
-                        
-                            className='w-[108px] h-[40px] font-semibold text-center text-[14px] bg-white border-[#0066CD] border-[1px]  text-[#0066CD] rounded-[20px] '
+                            
+                            className={`w-[108px] h-[40px] font-semibold text-center text-[14px] bg-white border-[#0066CD] border-[1px]  text-[#0066CD] rounded-[20px] ${saved?"opacity-[0.5]":""}`}
                             onClick={handleSaveFilter}
                         >
                             Save Filter
