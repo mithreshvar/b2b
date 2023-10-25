@@ -566,7 +566,7 @@ export default function Portfolio() {
                                                                                     if(header == "Equity Exposure Deviation" ){
                                                                                         if(parseInt(tableData) < -5 || parseInt(tableData) > 5){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
@@ -580,15 +580,15 @@ export default function Portfolio() {
                                                                                     if(header == "Gold & Others Exposure"){
                                                                                         if(parseInt(tableData)>30){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=20 && parseInt(tableData)<=30){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -598,15 +598,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Overnight/Liquid Exposure'){
                                                                                         if(parseInt(tableData)>15){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=5 && parseInt(tableData)<=15){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)<5){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -616,7 +616,7 @@ export default function Portfolio() {
                                                                                     if(header == '5 star rated funds' || header == '5 Star Funds' || header == '5 Star'){
                                                                                         if(parseInt(tableData)>0){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -626,7 +626,7 @@ export default function Portfolio() {
                                                                                     if(header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star'){
                                                                                         if(parseInt(tableData)>0){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -636,11 +636,11 @@ export default function Portfolio() {
                                                                                     if(header == 'Low Rated Fund'){
                                                                                         if(parseInt(tableData)>20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=0 && parseInt(tableData)<=20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -650,11 +650,11 @@ export default function Portfolio() {
                                                                                     if(header == 'Not Rated Fund Exposure'){
                                                                                         if(parseInt(tableData)>20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=0 && parseInt(tableData)<=20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -664,15 +664,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Highest AMC Exposure'){
                                                                                         if(parseInt(tableData)>50){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=30 && parseInt(tableData)<=50){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -682,15 +682,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Highest Fund Exposure'){
                                                                                         if(parseInt(tableData)>30){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=20 && parseInt(tableData)<=30){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -700,15 +700,15 @@ export default function Portfolio() {
                                                                                     if(header == '2nd Highest Fund Exposure'){
                                                                                         if(parseInt(tableData)>50){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=30 && parseInt(tableData)<=50){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -718,15 +718,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Total Number of Non Debt Funds'){
                                                                                         if(parseInt(tableData)>10){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=5 && parseInt(tableData)<=10){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -736,15 +736,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure'){
                                                                                         if(parseInt(tableData)>20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=10 && parseInt(tableData)<=20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)<10){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -754,7 +754,7 @@ export default function Portfolio() {
                                                                                     if(header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star'){
                                                                                         if(parseInt(tableData)>0)
                                                                                         return(
-                                                                                            <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                         )
                                                                                     }
                                                                                     
@@ -763,15 +763,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global'){
                                                                                         if(parseInt(tableData)>40){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=20 && parseInt(tableData)<=40){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)<20){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -781,15 +781,15 @@ export default function Portfolio() {
                                                                                     if(header == 'Others'){
                                                                                         if(parseInt(tableData)>40){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>=10 && parseInt(tableData)<=40){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>0){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -799,11 +799,11 @@ export default function Portfolio() {
                                                                                     if(header == '% of AAA Equivalent'){
                                                                                         if(parseInt(tableData)<80){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else if(parseInt(tableData)>0){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#00A345] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }
                                                                                     }
@@ -813,7 +813,7 @@ export default function Portfolio() {
                                                                                     if(header == 'Medium Duration' || header == 'Conservative Hybrid'){
                                                                                         if(parseInt(tableData)>0){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#EBC135] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
@@ -827,7 +827,7 @@ export default function Portfolio() {
                                                                                     if(header == 'Long Duration' || header == 'Dynamic Funds'){
                                                                                         if(parseInt(tableData)>10){
                                                                                             return(
-                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                                <td className="w-[150px] text-[#F56902] justify-center flex items-center">{tableData}</td>
                                                                                             )
                                                                                         }else{
                                                                                             return(
