@@ -15,6 +15,8 @@ import threeDots from '/public/partner/threeDots.svg'
 import { Popper } from '@mui/material';
 import Filter from "./Filter";
 import FilterListIcon from '@mui/icons-material/FilterList';
+import TradeUp from '/public/TradeUp.svg';
+import TradeDown from '/public/TradeDown.svg';
 
 export default function Portfolio() {
 
@@ -491,7 +493,7 @@ export default function Portfolio() {
                                                                         return headersAsArray.map(([header, val]) => {
                                                                             if (FilterColumnOption[tableName].includes(header))
                                                                             return (
-                                                                                <th className="h-[44px] w-[150px] justify-center flex items-center text-[12px] text-[#6E6E72] font-normal">{header}</th>
+                                                                                    <th className="flex items-center justify-center h-[44px] w-[150px] text-[12px] text-[#6E6E72] font-normal">{header}</th>
                                                                             )
                                                                         })
                                                                     })()
@@ -506,10 +508,338 @@ export default function Portfolio() {
                                                                         <tr onMouseOver={() => setHoverIndex(tableRowIndex)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == tableRowIndex) && " border-[#5DA9F8] border-y-[1px] "} `}>
                                                                         {
                                                                             asArray.map(([header, tableData]) => {
-                                                                                if (FilterColumnOption[tableName].includes(header))
-                                                                                return(
-                                                                                    <td className="w-[150px] justify-center flex items-center">{tableData}</td>
-                                                                                )
+                                                                                
+                                                                                if (FilterColumnOption[tableName].includes(header)){
+
+                                                                                    // For Net Inflow YTD (without MTM)
+
+                                                                                    if(header == "Net Inflow YTD (without MTM)" ){
+                                                                                        if(tableData == '-' ){
+                                                                                            return(
+                                                                                                <td className="w-[150px] justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                        if(tableData.search('-') == 1){
+                                                                                            return(
+                                                                                                <div className="flex w-[150px] items-center justify-center gap-[5px]">
+                                                                                                    <Image height={10} width={15} src={TradeDown} alt="TradeUP"/>
+                                                                                                    <td className="justify-center flex items-center">{tableData}</td>
+                                                                                                </div>
+                                                                                                
+                                                                                            )
+                                                                                        }
+                                                                                        return(
+                                                                                            <div className="flex w-[150px] items-center justify-center gap-[5px]">
+                                                                                                <Image height={10} width={15} src={TradeUp} alt="TradeUP"/>
+                                                                                                <td className="justify-center flex items-center">{tableData}</td>
+                                                                                            </div>
+                                                                                        )
+                                                                                    }
+
+                                                                                    // For Net Inflow Growth (without MTM)
+
+                                                                                    if(header == "Net Inflow Growth (without MTM)" ){
+                                                                                        if(tableData == '-' ){
+                                                                                            return(
+                                                                                                <td className="w-[150px] justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                        if(tableData.search('-') == 0){
+                                                                                            return(
+                                                                                                <div className="flex w-[150px] items-center justify-center gap-[5px]">
+                                                                                                    <Image height={10} width={15} src={TradeDown} alt="TradeUP"/>
+                                                                                                    <td className="justify-center flex items-center">{tableData}</td>
+                                                                                                </div>
+                                                                                                
+                                                                                            )
+                                                                                        }
+                                                                                        return(
+                                                                                            <div className="flex w-[150px] items-center justify-center gap-[5px]">
+                                                                                                <Image height={10} width={15} src={TradeUp} alt="TradeUP"/>
+                                                                                                <td className="justify-center flex items-center">{tableData}</td>
+                                                                                            </div>
+                                                                                        )
+                                                                                    }
+
+                                                                                    // For Equity Exposure Deviation 
+                                                                                    
+                                                                                    if(header == "Equity Exposure Deviation" ){
+                                                                                        if(parseInt(tableData) < -5 || parseInt(tableData) > 5){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-500 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Gold & Others Exposure
+
+                                                                                    if(header == "Gold & Others Exposure"){
+                                                                                        if(parseInt(tableData)>30){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=20 && parseInt(tableData)<=30){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Overnight/Liquid Exposure
+
+                                                                                    if(header == 'Overnight/Liquid Exposure'){
+                                                                                        if(parseInt(tableData)>15){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=5 && parseInt(tableData)<=15){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)<5){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For 5 star rated funds
+
+                                                                                    if(header == '5 star rated funds' || header == '5 Star Funds' || header == '5 Star'){
+                                                                                        if(parseInt(tableData)>0){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For 4 star rated funds
+
+                                                                                    if(header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star'){
+                                                                                        if(parseInt(tableData)>0){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Low Rated Fund
+
+                                                                                    if(header == 'Low Rated Fund'){
+                                                                                        if(parseInt(tableData)>20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=0 && parseInt(tableData)<=20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Not Rated Fund Exposure
+
+                                                                                    if(header == 'Not Rated Fund Exposure'){
+                                                                                        if(parseInt(tableData)>20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=0 && parseInt(tableData)<=20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Highest AMC Exposure
+
+                                                                                    if(header == 'Highest AMC Exposure'){
+                                                                                        if(parseInt(tableData)>50){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=30 && parseInt(tableData)<=50){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    // For Highest Fund Exposure
+
+                                                                                    if(header == 'Highest Fund Exposure'){
+                                                                                        if(parseInt(tableData)>30){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=20 && parseInt(tableData)<=30){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For 2nd Highest Fund Exposure
+
+                                                                                    if(header == '2nd Highest Fund Exposure'){
+                                                                                        if(parseInt(tableData)>50){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=30 && parseInt(tableData)<=50){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Total Number of Non Debt Funds
+
+                                                                                    if(header == 'Total Number of Non Debt Funds'){
+                                                                                        if(parseInt(tableData)>10){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=5 && parseInt(tableData)<=10){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Total Number of Funds
+
+                                                                                    if(header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure'){
+                                                                                        if(parseInt(tableData)>20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=10 && parseInt(tableData)<=20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)<10){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For <3 Star funds
+
+                                                                                    if(header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star'){
+                                                                                        if(parseInt(tableData)>0)
+                                                                                        return(
+                                                                                            <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                        )
+                                                                                    }
+                                                                                    
+                                                                                    // For  "Blend","Quality","Value","Mid & Small", "Global"
+
+                                                                                    if(header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global'){
+                                                                                        if(parseInt(tableData)>40){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=20 && parseInt(tableData)<=40){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)<20){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For others
+
+                                                                                    if(header == 'Others'){
+                                                                                        if(parseInt(tableData)>40){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>=10 && parseInt(tableData)<=40){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>0){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For % of AAA Equivalent
+
+                                                                                    if(header == '% of AAA Equivalent'){
+                                                                                        if(parseInt(tableData)<80){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else if(parseInt(tableData)>0){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-green-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+
+                                                                                    // For Medium Duration
+
+                                                                                    if(header == 'Medium Duration' || header == 'Conservative Hybrid'){
+                                                                                        if(parseInt(tableData)>0){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-yellow-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    // For Long Duration, Dynamic Funds
+
+                                                                                    if(header == 'Long Duration' || header == 'Dynamic Funds'){
+                                                                                        if(parseInt(tableData)>10){
+                                                                                            return(
+                                                                                                <td className="w-[150px] text-red-400 justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }else{
+                                                                                            return(
+                                                                                                <td className="w-[150px] justify-center flex items-center">{tableData}</td>
+                                                                                            )
+                                                                                        }
+                                                                                    }
+                                                                                    
+                                                                                    return(
+                                                                                        <td className="w-[150px] justify-center flex items-center">{tableData}</td>
+                                                                                    )
+                                                                                }
                                                                             })
                                                                         }
                                                                         </tr>
