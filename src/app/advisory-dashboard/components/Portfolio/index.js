@@ -391,7 +391,7 @@ export default function Portfolio() {
                 <h1 className="text-[18px] font-bold leading-[20px]">Client Portfolio Monitor</h1>
                 <div className="flex gap-x-[20px]">
                     <CustomTextField width="309px" label={<div className="flex gap-x-[8px] justify-center items-center"><SearchIcon className="text-[20px] text-[#0071E7]" /><p>Search</p></div>} />
-                    <button className="flex items-center justify-center border-[1px] border-[#E4E5E5] hover:border-[#6f7070] rounded-[7px] gap-x-[10px] h-[40px] w-[100px]" onBlur={() => { setIsFilterOpen(false) }} onClick={() => { setIsFilterOpen(!IsFilterOpen) }}><div className="text-[14px] text-[#6E6E72] font-medium leading-[18px]"><FilterListIcon color="primary" />Filter</div></button>
+                    <button className="flex items-center justify-center border-[1px] border-[#E4E5E5] hover:border-[#6f7070] rounded-[7px] gap-x-[10px] h-[40px] w-[100px]" onClick={() => { setIsFilterOpen(!IsFilterOpen) }}><div className="text-[14px] text-[#6E6E72] font-medium leading-[18px]"><FilterListIcon color="primary" />Filter</div></button>
                 </div>
             </div>
             {
