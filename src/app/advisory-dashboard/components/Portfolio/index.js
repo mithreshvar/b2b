@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import data from './data.json';
 import { useRef, useState } from "react";
 import CheckBoxName from "./CheckBoxName";
-import { Checkbox } from "@mui/material";
+import { Checkbox, InputAdornment } from "@mui/material";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import whatsappIcon from "/public/Group 549708.svg";
 import telegramIcon from "/public/Path 238665.svg";
@@ -21,6 +21,7 @@ import TradeDown from '/public/TradeDown.svg';
 import unsorted from "/public/unsorted.svg"
 import sortedAscending from "/public/sortedAscending.svg"
 import sortedDecending from "/public/sortedDecending.svg"
+import { Search } from "@mui/icons-material";
 
 export default function Portfolio() {
 
@@ -369,6 +370,7 @@ export default function Portfolio() {
     }
 
     const defaultSortedState = {
+        "Client Name" : 0,
         "Basic Details": {
             "AUM": 0,
             "Net Inflow YTD (without MTM)": 0,
@@ -514,12 +516,54 @@ export default function Portfolio() {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     };
 
+    const [SearchValue, setSearchValue] = useState('')
+    function filterData() {
+        const valueReg = new RegExp(SearchValue.trim(), 'i'); // Case-insensitive regex for name
+        const filteredData = data.clients.filter((item) => {
+          // Check if the name, email, and number match the provided regex patterns
+            return (
+              valueReg.test(item['Client Name'])
+            );
+        });
+        // Now, 'filteredData' contains the filtered data based on the provided criteria.
+        setData(filteredData);
+      }
+
+    function sortString() {
+        if(sortedStateArray["Client Name"] == 0 || sortedStateArray["Client Name"] == -1){
+            Data.sort((a,b)=>a['Client Name'].toLowerCase().localeCompare(b['Client Name'].toLowerCase()));
+            let newSortedState = defaultSortedState;
+            newSortedState["Client Name"] = 1;
+            setSortedStateArray(newSortedState);
+        }
+        else if(sortedStateArray["Client Name"] == 1){
+            Data.sort((a,b)=>b['Client Name'].toLowerCase().localeCompare(a['Client Name'].toLowerCase()));
+            let newSortedState = defaultSortedState;
+            newSortedState["Client Name"] = -1;
+            setSortedStateArray(newSortedState);
+        }
+        
+        setSortedStateArray(defaultSortedState);
+    }
     return (
         <div className="bg-white m-[20px] rounded-[10px] p-[20px] h-[calc(100vh-104px)]">
             <div className="flex justify-between items-center pb-[30px] pt-[10px]">
                 <h1 className="text-[18px] font-bold leading-[20px]">Client Portfolio Monitor</h1>
                 <div className="flex gap-x-[20px]">
-                    <CustomTextField width="309px" label={<div className="flex gap-x-[8px] justify-center items-center"><SearchIcon className="text-[20px] text-[#0071E7]" /><p>Search</p></div>} />
+                    <CustomTextField 
+                        type="text" 
+                        value={SearchValue} 
+                        width="309px" 
+                        InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start" >
+                            <Search className="text-[18px] text-primary" />
+                            </InputAdornment>
+                        ),
+                        }} 
+                        label="Search"
+                        handleChange={(event)=>{setSearchValue(event.target.value);filterData()}}
+                    />
                     <button className="flex items-center justify-center border-[1px] border-[#E4E5E5] hover:border-[#6f7070] rounded-[7px] gap-x-[10px] h-[40px] w-[100px]" onClick={() => { setIsFilterOpen(!IsFilterOpen) }}><div className="text-[14px] text-[#6E6E72] font-medium leading-[18px]"><FilterListIcon color="primary" />Filter</div></button>
                 </div>
             </div>
@@ -556,7 +600,7 @@ export default function Portfolio() {
                                                 margin: "-5px"
                                             }}
                                         />
-                                        <p>Client Name</p>
+                                        <button className="flex items-center justify-center gap-[4px]" onClick={()=>sortString()}>Client Name{sortedStateArray["Client Name"] == 0 && <Image className=" cursor-pointer " src={unsorted} />} {sortedStateArray["Client Name"] == 1 && <Image className=" cursor-pointer " src={sortedAscending}/>} {sortedStateArray["Client Name"] == -1 && <Image className=" cursor-pointer " src={sortedDecending}/>} </button>
                                     </th>
                                 </thead>
 
