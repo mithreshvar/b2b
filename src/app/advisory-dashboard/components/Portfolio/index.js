@@ -18,6 +18,10 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import TradeUp from '/public/TradeUp.svg';
 import TradeDown from '/public/TradeDown.svg';
 
+import unsorted from "/public/unsorted.svg"
+import sortedAscending from "/public/sortedAscending.svg"
+import sortedDecending from "/public/sortedDecending.svg"
+
 export default function Portfolio() {
 
     const [Data, setData] = useState(data.clients)
@@ -363,7 +367,103 @@ export default function Portfolio() {
         setTimeout(() => setLoadingScroll(false), 500);
 
     }
-    function sort(header){
+
+    const defaultSortedState = {
+        "Basic Details": {
+            "AUM": 0,
+            "Net Inflow YTD (without MTM)": 0,
+            "Net Inflow Growth (without MTM)": 0,
+            "Since Inception Returns": 0,
+            "Risk Score": 0
+        },
+        "Asset Allocation Risk": {
+            "ABC Number": 0,
+            "Equity Exposure": 0,
+            "Target Exposure": 0,
+            "Equity Exposure Deviation": 0,
+            "Debt Exposure": 0,
+            "Gold & Others Exposure": 0
+        },
+        "Cash Allocation": {
+            "Overnight/Liquid Exposure": 0
+        },
+        "Portfolio Quality Risk": {
+            "5 star rated funds": 0,
+            "4 star rated funds": 0,
+            "Low Rated Fund": 0,
+            "Not Rated Fund Exposure": 0,
+            "FundsIndia Select Fund Exposure": 0
+        },
+        "Diversification Risk": {
+            "Highest AMC Exposure": 0,
+            "Highest Fund Exposure": 0,
+            "2nd Highest Fund Exposure": 0, 
+            "Total Number of Non Debt Funds": 0,
+            "Total Number of Funds": 0
+        },
+        "Liquidity" : {
+            "% of Portfolio under lock-in": 0,
+            "ELSS Exposure":  0
+        },
+        "Cost": {
+            "Portfolio Expense Ratio": 0
+        },
+        "Equity Monitor": {
+            "Equity Exposure": 0,
+            "Active Large Cap Fund Exposure": 0,
+            "Sector/Thematic Exposure": 0,
+            "Small Cap Exposure": 0,
+            "5 Star Funds": 0,
+            "4 Star Funds": 0,
+            "<3 Star Funds": 0,
+            "1 Star Funds": 0,
+            "2 Star Funds": 0,
+            "3 Star Funds": 0,
+            "Not Rated": 0,
+            "Blend": 0,
+            "Quality": 0,
+            "Value": 0,
+            "Mid & Small": 0,
+            "Global": 0,
+            "Others": 0
+        },
+        "Debt Monitor": {
+            "Debt Exposure": 0,
+            "Net YTM": 0,
+            "% of AAA Equivalent": 0,
+            "5 Star Funds": 0,
+            "4 Star Funds": 0,
+            "<3 Star Funds": 0,
+            "1 Star Funds": 0,
+            "2 Star Funds": 0,
+            "3 Star Funds": 0,
+            "Not Rated": 0,
+            "Liquid & Overnight": 0,
+            "UST": 0,
+            "Low Duration": 0,
+            "Short Duration": 0,
+            "Medium Duration": 0,
+            "Long Duration": 0,
+            "Credit Risk": 0,
+            "Dynamic Funds": 0,
+            "Conservative Hybrid": 0,
+            "Others": 0
+        },
+        "SIP Book": {
+            "Total SIP Value": 0,
+            "Equity": 0,
+            "Debt": 0,
+            "Others": 0,
+            "5 Star": 0,
+            "4 Star": 0,
+            "<3 Star": 0,
+            "Not Rated": 0
+        }
+    }
+
+    const [sortedStateArray, setSortedStateArray] = useState(defaultSortedState)
+
+    function sort(header, tableName){
         const category = Object.keys(columns).find(categoryName => columns[categoryName].includes(header));
         const top = `${category}`;
         const sorted = [...Data].sort((a, b) => {
@@ -377,8 +477,20 @@ export default function Portfolio() {
             var b1 = parseFloat(y.replace(/[₹,]/g, ''))
             return a1 - b1;
         });
-        setData(sorted);
+        if (sortedStateArray[tableName][header] == 0 || sortedStateArray[tableName][header] == -1){
+            let newSortedState = defaultSortedState;
+            newSortedState[tableName][header] = 1;
+            setSortedStateArray(newSortedState);
+            setData(sorted);
+        }
+        if (sortedStateArray[tableName][header] == 1) {
+            let newSortedState = defaultSortedState;
+            newSortedState[tableName][header] = -1;
+            setSortedStateArray(newSortedState);
+            setData(sorted.reverse());
+        }
     }
+
     const [checked, setChecked] = useState(new Array(Data.length).fill(false));
     const [selectAll, setSelectAll] = useState(false);
     const handleChecked = i => {
@@ -508,7 +620,12 @@ export default function Portfolio() {
                                                                         return headersAsArray.map(([header, val]) => {
                                                                             if (FilterColumnOption[tableName].includes(header))
                                                                             return (
-                                                                                    <th className="flex items-center justify-center h-[44px] w-[150px] text-[12px] text-[#6E6E72] font-normal">{header}</th>
+                                                                                <th className="flex items-center justify-center gap-x-[5px] h-[44px] w-[150px] text-[12px] text-[#6E6E72] font-normal " onClick={() => sort(header, tableName)}> 
+                                                                                    <button>{header}</button> 
+                                                                                    {sortedStateArray[tableName][header] == 0 && <Image className=" cursor-pointer " src={unsorted} onClick={() => sort(header, tableName)} /> }
+                                                                                    {sortedStateArray[tableName][header] == 1 && <Image className=" cursor-pointer " src={sortedAscending} onClick={() => sort(header, tableName)} />}
+                                                                                    {sortedStateArray[tableName][header] == -1 && <Image className=" cursor-pointer " src={sortedDecending} onClick={() => sort(header, tableName)} />}
+                                                                                </th>
                                                                             )
                                                                         })
                                                                     })()
