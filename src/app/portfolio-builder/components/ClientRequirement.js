@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomSelectField, { CustomTextField } from "./InputFields";
 import { InputAdornment } from "@mui/material";
 import data from '../data/clientRequirement.json';
+import { ClearRounded } from "@mui/icons-material";
 
 export default function ClientRequirement({ isLoadClientClicked, setIsLoadClientClicked, handleNotificationMessage }) {
 
@@ -357,6 +358,22 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
         }
     };
 
+    const [loadMobileNo, setLoadMobileNo] = useState('');
+    const [loadMobileNoErrorMessage, setLoadMobileNoErrorMessage] = useState('');
+
+    const handleLoadMobileNoChange = (event) => {
+    const value = event.target.value;
+    setLoadMobileNo(value);
+
+    if (value === "") {
+        setLoadMobileNoErrorMessage("Mobile Number cannot be empty");
+    } else if (!isValidMobileNo(value)) {
+        setLoadMobileNoErrorMessage("Please enter a valid mobile number");
+    } else {
+        setLoadMobileNoErrorMessage("");
+    }
+    };
+
     const inputData = [
         { name, setState: setName, errorMessage: nameErrorMessage, setErrorMessage: setNameErrorMessage },
         { age, setState: setAge, errorMessage: ageErrorMessage, setErrorMessage: setAgeErrorMessage },
@@ -381,24 +398,26 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
         { covidFall, setState: setCovidFall, errorMessage: covidFallErrorMessage, setErrorMessage: setCovidFallErrorMessage },
         { otherComments, setState: setOtherComments, errorMessage: otherCommentsErrorMessage, setErrorMessage: setOtherCommentsErrorMessage },
       ];
-      
-    
-    useEffect(() => {
-        if (isLoadClientClicked) {
-            const foundClient = data.savedClients.find(client => client.emailId === emailId || client.mobileNo === mobileNo);
-            console.log(foundClient);
-            if (foundClient){
-                handleNotificationMessage('Client Loaded Successfully')
-                inputData.forEach(field => 
-                    {
-                        field.setState(foundClient[Object.keys(field)[0]]);
-                        field.setErrorMessage('');
-                    }
-                )
-            }
-            setIsLoadClientClicked(false);
+
+    const handleLoadClient = () => {
+        const foundClient = data.savedClients.find(client => client.mobileNo === loadMobileNo);
+        console.log(foundClient);
+        if (foundClient){
+            handleNotificationMessage('Client Loaded Successfully');
+            setLoadMobileNoErrorMessage('');
+            inputData.forEach(field => 
+                {
+                    field.setState(foundClient[Object.keys(field)[0]]);
+                    field.setErrorMessage('');
+                }
+            )
+            
+            setTimeout(() => setIsLoadClientClicked(false), 500);
         }
-    }, [isLoadClientClicked]);
+        else{
+            setLoadMobileNoErrorMessage('Client not found');
+        }
+    }
 
     return(
         <div className="flex flex-col gap-[20px] text-[14px] px-[50px]">
@@ -504,6 +523,22 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
                     <CustomTextField width="810px" label="Other Comments" value={otherComments} errorMessage={otherCommentsErrorMessage} handleChange={handleOtherCommentsChange} />
                 </div>
             </div>
+
+            {
+                (isLoadClientClicked) &&
+                <div className='absolute w-screen h-screen top-[-60px] left-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center z-[100]' >
+                    <div className={`relative w-full h-[284px] rounded-t-[25px] bg-white px-[30px] pt-[40px] flex flex-col gap-y-[20px] overflow-auto`}>
+                        <ClearRounded className='absolute top-[15px] right-[15px] border-[1px] border-gray-300 rounded-[30px] p-[1px] cursor-pointer text-primary text-[18px]' onClick={() => setIsLoadClientClicked(false)} />
+                        
+
+                        <h1 className="text-[20px] font-semibold">Load Client</h1>
+                        <p>Lorem ipsum is placeholder text commonly used in the graphic, print,</p>
+                        <CustomTextField label="Mobile Number" type="number" value={loadMobileNo} errorMessage={loadMobileNoErrorMessage} handleChange={handleLoadMobileNoChange} />
+
+                        <button className="w-[230px] h-[50px] bg-primary rounded-[25px] text-white font-semibold text-[18px] mt-[20px]" onClick={handleLoadClient}>Proceed</button>
+                    </div>
+                </div>
+            }
         </div>
     );
 }
