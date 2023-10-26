@@ -64,20 +64,7 @@ export default function CustomDropSelectField(props) {
                     props.data[props.title].push(event.target.name);
                 }
 
-                const indexOfAll = props.data[props.title].indexOf("All");
-                let currState = true;
 
-                for (let i = 0; i < updatedState.length; i++) {
-                    if (i !== indexOfAll) {
-                        currState = currState && updatedState[i];
-                    }
-                }
-
-                setState((prevState) => {
-                    const newState = [...prevState];
-                    newState[indexOfAll] = currState;
-                    return newState;
-                });
             } else {
                 if (props.data[props.title].includes(event.target.name)) {
                     const index = props.data[props.title].indexOf(event.target.name);
