@@ -49,6 +49,7 @@ function AddNote() {
         if (edit) {
             const data = Description
             data[Index].Notes = text
+            data[Index].Date = moment().format("DD-MM-YYYY")
         }
         else {
             setDescription([{ "Date": moment().format("DD-MM-YYYY"), "Notes": text }, ...Description])
@@ -89,7 +90,7 @@ function AddNote() {
                 <button className={`w-[114px] h-[40px] ${edit ? "opacity-100" : "opacity-0"}  rounded-[25px] text-[#0071E7] font-medium text-[14px]`} onClick={() => {
                     settext(""); setEdit(false); 
                 }}>Cancel</button>
-                <button className={`w-[114px] h-[40px] ${text !== "" ? "bg-[#0071E7] opacity-1" : "bg-[#0071E7] opacity-[0.5]"}  rounded-[25px] text-white font-semibold text-[14px]`} onClick={handleSave}>Save</button>
+                <button disabled={text === "" } className={`w-[114px] h-[40px] ${text !== "" ? "bg-[#0071E7] opacity-1" : "bg-[#0071E7] opacity-[0.5]"}  rounded-[25px] text-white font-semibold text-[14px]`} onClick={handleSave}>Save</button>
             </div>
             <div className={` w-full ${edit ? "opacity-30" : "opacity-100"}`}>
                 <p className='text-[16px] font-semibold h-[17px] mt-[20px]'>Previous Notes</p>
