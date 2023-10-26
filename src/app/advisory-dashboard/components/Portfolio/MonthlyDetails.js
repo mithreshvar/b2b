@@ -4,6 +4,7 @@ import back from 'public/back.svg';
 import close from '/public/close.svg'
 import Image from 'next/image';
 import { useDataContext } from "../../context/DataContext";
+import { BreakfastDiningOutlined } from "@mui/icons-material";
 
 export default function MonthlyDetails(props){
 
@@ -105,41 +106,50 @@ export default function MonthlyDetails(props){
     const [Nav,setNav] = useState(true); 
     const ref = [AumAndFlowDetails,AssetAllocationRef,performanceRef,PortfolioQualityRef,ConcentrationRef,PortfoliounderlockinRef,EquityQualityCheckStyleSplitRef,DebtQualityCheckStyleSplitRef,SIPDetailsRef];
     const selectedTable = ['AUM & Flow','Asset Allocation','Performance','Portfolio Quality','Concentration','% of Portfolio under lock-in','Equity - Quality Check & StyleSplit','Debt - Quality Check & StyleSplit','SIP Details'];
+    let selectedSection = -1;
     useEffect(() => {
         const handleScroll = () => {
             const container = scrollingContainerRef.current;
-            const selectedSection = ref.findIndex((r) => {
-                if (r.current){
-                    const rect = r.current.getBoundingClientRect();
-                    return rect.top >= 0 && rect.top <= container.clientHeight;
+            const scrollTop = container.scrollTop;
+        
+            for (let i = 0; i < ref.length; i++) {
+                const sectionRef = ref[i].current;
+                if (sectionRef) {
+                    const sectionTop = sectionRef.offsetTop;
+                    const sectionBottom = sectionTop + sectionRef.offsetHeight;
+        
+                    if (scrollTop >= sectionTop - 10 && scrollTop < sectionBottom) {
+                        selectedSection = i;
+                        break;
+                    }
                 }
-                return false;
-            });
-    
-            if (selectedSection !== -1) {
-                setSelectedOption(selectedTable[selectedSection]);
             }
+            setSelectedOption(selectedTable[selectedSection]);
         };
-    
+        
         if (scrollingContainerRef.current) {
             scrollingContainerRef.current.addEventListener("scroll", handleScroll);
         }
+        
         return () => {
             if (scrollingContainerRef.current) {
                 scrollingContainerRef.current.removeEventListener("scroll", handleScroll);
             }
         };
-    }, []); 
+        
+    }, []);
+    
+    
     const scrollToHeading = (sectionRef) => {
         if (sectionRef.current) {
             sectionRef.current.scrollIntoView({
-                behavior: "auto",
+                behavior: "auto"
             });
         }
     };
     return(
         <div className="w-screen h-full">
-            <div className="flex justify-between items-center text-[14px] pt-[20px] pb-[15.5px]">
+            <div className="flex justify-between items-center text-[14px] pt-[20px] pb-[15.5px] bg-white">
                     <div className="ml-[30px] text-[20px] font-semibold">{props.name}</div>
                     <div className="flex ml-[275px]">
                         <div className="flex mr-[25px] bg-[#F1F7FD] rounded-md p-[8px]">
@@ -162,21 +172,21 @@ export default function MonthlyDetails(props){
             <div className="flex  border-t">
                 <div className="mt-[6.5px] ml-[15px]">
                     <Image src={back} alt="back" className={`absolute ${(Nav) ? 'left-[245px]' : 'left-[18px]  rotate-180'} z-[2] cursor-pointer  transition-all duration-[0.5s]`} onClick={()=>{setNav(!Nav)}} />
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='AUM & Flow'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(AumAndFlowDetails),setSelectedOption('AUM & Flow')}}>AUM & Flow Details</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Asset Allocation'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(AssetAllocationRef),setSelectedOption('Asset Allocation')}}>Asset Allocation</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Performance'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(performanceRef),setSelectedOption('Performance')} }>Performance</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Portfolio Quality'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(PortfolioQualityRef),setSelectedOption('Portfolio Quality')} }>Portfolio Quality</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Concentration'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(ConcentrationRef),setSelectedOption('Concentration')} }>Concentration</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='% of Portfolio under lock-in'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(PortfoliounderlockinRef),setSelectedOption('% of Portfolio under lock-in')} }>% of Portfolio under lock-in</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Equity - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(EquityQualityCheckStyleSplitRef),setSelectedOption('Equity - Quality Check & StyleSplit')} }>Equity - Quality Check & StyleSplit</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Debt - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(DebtQualityCheckStyleSplitRef),setSelectedOption('Debt - Quality Check & StyleSplit')} }>Debt - Quality Check & StyleSplit</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='SIP Details'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(SIPDetailsRef),setSelectedOption('SIP Details')}}>SIP Details</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='AUM & Flow'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(AumAndFlowDetails),setSelectedOption('AUM & Flow')}}>AUM & Flow Details</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Asset Allocation'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(AssetAllocationRef),setSelectedOption('Asset Allocation')}}>Asset Allocation</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Performance'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(performanceRef),setSelectedOption('Performance')} }>Performance</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Portfolio Quality'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(PortfolioQualityRef),setSelectedOption('Portfolio Quality')} }>Portfolio Quality</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Concentration'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(ConcentrationRef),setSelectedOption('Concentration')} }>Concentration</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='% of Portfolio under lock-in'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(PortfoliounderlockinRef),setSelectedOption('% of Portfolio under lock-in')} }>% of Portfolio under lock-in</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Equity - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(EquityQualityCheckStyleSplitRef),setSelectedOption('Equity - Quality Check & StyleSplit')} }>Equity - Quality Check & StyleSplit</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Debt - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(DebtQualityCheckStyleSplitRef),setSelectedOption('Debt - Quality Check & StyleSplit')} }>Debt - Quality Check & StyleSplit</button><br></br>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='SIP Details'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(SIPDetailsRef),setSelectedOption('SIP Details')}}>SIP Details</button><br></br>
                 </div>
-                <div  className="h-[calc(100vh*0.8-72.5px)] w-[180vh] overflow-hidden">
+                <div  className="h-[calc(100vh*0.90-72.5px)] w-[180vh] overflow-hidden">
                     <div ref={scrollingContainerRef} className="h-[100%]  overflow-scroll">
                     <table className={`${Nav ? 'w-[100vw]' : 'absolute left-[25px] w-[100vw]'} duration-[0.6s] transition-all border-l border-t`}>
                         <thead>
-                            <tr className="sticky top-1 border-b bg-white">
+                            <tr className="sticky top-[-5px] border-b bg-white">
                                 <td className="p-[20px] text-[16px] text-[#0071E7] font-bold">{selectedOption}</td>
                                 <td className="p-[20px]">April</td>
                                 <td className="p-[20px]">May</td>
