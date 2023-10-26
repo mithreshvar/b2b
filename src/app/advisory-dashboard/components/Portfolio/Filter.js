@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import CustomDropSelectField from './CustomDropSelectField';
-import { Button } from '@mui/material';
 import Image from 'next/image';
 import clearFilter from '/public/clearFilter.svg';
 import add from '/public/add.svg'
 import subract from '/public/subract.svg'
-import edit from '/public/edit.svg'
-import closeSmall from '/public/closeSmall.svg'
 import CustomSelectField from '@/app/b2b/components/InputFields';
 import { CustomTextField } from '@/app/b2b/components/InputFields';
+import SaveFilter from './SaveFilter';
 
 
 function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
@@ -19,23 +17,12 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
     const [Filter, setFilter] = useState("first");
     const [state, setState] = useState('');
     const [EnterValue,setEnterValue]=useState('');
-    const [SaveClick,SetSaveClick]=useState(false);
-    const [disabled,setDisabled]=useState(true);
-    const [filtervalue,setFiltervalue]=useState("filter1");
-    const [onedit,SetOnedit]=useState(true)
-    const [onsave,setonsave]=useState(true)
     const [Subcategory,Setsubcategory]=useState("")
     const [category,Setcategory]=useState("")
     const [saved,setSaved]=useState(false)
+    const [savedFilter, setSavedFilter] = useState([]);
 
     const condition = ['<'];
-    const Evalue = ["500000"]; 
-
-
-    const handleFilterValue=(event)=>{
-        let value= event.target.value;
-        setFiltervalue(value)
-    }
 
     const handleStateChange = (event)=>{
         const value= event.target.value
@@ -46,6 +33,17 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
         const value= event.target.value;
         setEnterValue(value);
     }
+    
+    const handleFilter2Change=(event)=>{
+        let value=event.target.value;
+        Setsubcategory(value)
+    }
+
+    const handleFilter1Change=(event)=>{
+        let value=event.target.value;
+        Setcategory(value)
+    }
+
 
     const handleFilterChange = (data) => {
         setCurrFilterState(data);
@@ -68,59 +66,40 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
     const handleClearFilter = () => {
         props.handleFilterColumnOption(props.columns);
         props.onBlur();
-        SetSaveClick(false);
-        setFiltervalue("filter1");
         setState('');
         setEnterValue('');
         Setcategory('');
         Setsubcategory('');
-        setonsave(true);
-        SetOnedit(true);
     };
 
     const handleSaveFilter=(event)=>{
         event.preventDefault()
-        setSaved(true)
-        if(category!="" && Subcategory!="" && EnterValue !="" && state!="")
-        SetSaveClick(true) 
+        if(category!="" && Subcategory!="" && EnterValue !="" && state!=""){
+            setCurrentFilterDataOptions([...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]);
+            let name = `filter ${savedFilter.length+1}`;
+            setSavedFilter([...savedFilter, {name, data: [...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]}]);
+            console.log([...savedFilter, {name, data: [...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]}])
+            setState('');
+            setEnterValue('');
+            Setcategory('');
+            Setsubcategory('');
+        }
+        else if(currentFilterDataOptions.length != 0 ){
+            let name = `filter ${savedFilter.length+1}`;
+            setSavedFilter([...savedFilter, {name, data: [...currentFilterDataOptions]}]);
+            console.log([...savedFilter, {name, data: currentFilterDataOptions}])
+        }
         
     }
-
-    const handleEdit =(event)=>{
-        event.preventDefault()
-        setDisabled(false)
-        SetOnedit(false)
+    
+    const handleSavedFilterNameChange=(name, index)=>{
+        savedFilter[index].name = name;
+        setSavedFilter(savedFilter)
     }
 
-    const handleclose=(event)=>{
-        event.preventDefault()
-        SetSaveClick(false)
-        setFiltervalue("filter1")
-        setDisabled(true)
-        SetOnedit(true)
-        setonsave(true)
-        setDisabled(true);
-        setSaved(false)
+    const removeSavedFilter = (index) => {
+        setSavedFilter(savedFilter.filter((_, i) => index != i));
     }
-
-    const handleFilterSaveUP=(event)=>{
-        event.preventDefault()
-        setDisabled(true)
-        SetOnedit(true)
-        setonsave(false)
-        setSaved(false)
-    }
-
-    const handleFilter2Change=(event)=>{
-        let value=event.target.value;
-        Setsubcategory(value)
-    }
-
-    const handleFilter1Change=(event)=>{
-        let value=event.target.value;
-        Setcategory(value)
-    }
-
 
     const handleAddFilterData = ()=>{
         if(category!="" && Subcategory!="" && EnterValue !="" && state!=""){
@@ -136,6 +115,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
         let newData = [...currentFilterDataOptions];
         newData[index][field] = value;
         setCurrentFilterDataOptions(newData);
+        console.log(savedFilter)
     }
 
     function handleDeleteCurrentFilter (index) {
@@ -157,7 +137,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
                     className={`w-[141px] h-[33px] text-center font-semibold text-[14px] rounded-t-[10px] pt-[5px] cursor-pointer ${Filter === "second" ? "bg-[#DCEBFE] text-[#0071E7]" : "bg-[#F7F8FF] text-[#BEBEBE]"}`}
                     onClick={() => setFilter("second")}
                 >
-                    Filters 2
+                    Filters
                 </div>
             </div>
 
@@ -175,15 +155,13 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
                             />
                         ))}
                     </div>
-                    <div className='pt-[50px] flex flex-row-reverse gap-[30px]'>
-                        <Button>
-                            <div
-                                className='w-[108px] h-[40px] text-white font-semibold text-center text-[14px] pt-[10px] bg-[#0071E7] rounded-[20px] cursor-pointer'
-                                onClick={handleApplyFilter}
-                            >
-                                Apply Filter
-                            </div>
-                        </Button>
+                    <div className='pt-[50px] flex flex-row-reverse items-center gap-[30px]'>
+                        <button
+                            className='w-[108px] h-[40px] text-white flex justify-center items-center font-semibold text-[14px] bg-[#0071E7] rounded-[20px] cursor-pointer'
+                            onClick={handleApplyFilter}
+                        >
+                            Apply Filter
+                        </button>
                         <div
                             className='w-[108px] h-[40px] text-[#0071E7] flex gap-[5px] font-semibold justify-center align-middle text-[14px] pt-[10px] bg-white rounded-[20px] cursor-pointer'
                             onClick={handleClearFilter}
@@ -199,16 +177,13 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
             
             (
                 <div className={`w-full bg-white flex flex-col gap-y-[20px] `}>
+                    <div className='flex gap-x-[10px]'>
                     {   
-                        SaveClick && ( 
-                            <div className={` h-[28px] ml-[3px] pl-[4px] ${onedit?"w-[125px]":"w-[160px]"} flex items-center justify-center rounded-[20px] border-[1px] border-[#0171E7]  `}>
-                                <div><input className='text-[14px] h-[18px] w-[80px] text-[#0171E7] bg-transparent px-[4px]' type="text" value={filtervalue} onChange={handleFilterValue} disabled={disabled} /></div>
-                                { onedit && onsave && <Image src={edit} className=' cursor-pointer' onClick={handleEdit} />}
-                                { <Image src={closeSmall} className={`${onsave?"ml-[5px]":"ml-[10px]"} mt-[1px] cursor-pointer`} onClick={handleclose} />}
-                                { !onedit && <div className='ml-[5px] mr-[2px] my-[1px] h-[calc(100%-4px)] w-full flex items-center justify-center rounded-[10px] bg-[#01A245] text-white text-[10px] text-center cursor-pointer ' onClick={handleFilterSaveUP}> save</div>}
-                            </div>
+                        savedFilter.map((filter, filterIndex) => 
+                            <SaveFilter filter={filter} filterIndex={filterIndex} setCurrentFilterDataOptions={setCurrentFilterDataOptions} handleSavedFilterNameChange={handleSavedFilterNameChange} removeSavedFilter={removeSavedFilter} />
                         )
                     }
+                    </div>
 
                     <div className='flex flex-col gap-y-[20px] '>
                         <div className='flex gap-[10px]'>   
