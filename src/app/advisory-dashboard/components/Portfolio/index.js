@@ -600,7 +600,7 @@ export default function Portfolio() {
                         
                         
                         <div className={`flex flex-col ${ showClientInfo!=-1 && ' ml-[-45px] '} `}>
-                            <div ref={tablesNavbarRef} {...events} className={`h-[44px] flex gap-x-[10px] overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] `}>
+                            <div ref={tablesNavbarRef} {...events} className={`h-[44px] flex gap-x-[10px] overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} no-scrollbar text-[14px] text-[#BEBEBE] font-semibold transition-all duration-[0.5s] `}>
                                 {
                                     currentTableNames.map( (tableName, index) => 
                                         <button ref={currentRefNav[index]} className={`relative h-[34px] rounded-t-[10px] p-[10px] shrink-0  ${selectedOption === tableName ? 'bg-[#DCEBFE] text-[#0071E7]' : 'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={() => { handleSelectOption(tableName, index) }}>
