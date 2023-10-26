@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import data from '../../data/SuggestedPortfolio.json';
+import data from '../../data/suggestedPortfolio.json';
 import { ClearRounded, Search } from "@mui/icons-material";
 import { CustomTextField } from '../InputFields';
 import { InputAdornment } from "@mui/material";
