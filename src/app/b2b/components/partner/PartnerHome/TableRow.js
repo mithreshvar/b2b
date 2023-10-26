@@ -64,7 +64,7 @@ export default function TableRow ({data , setActive, type}) {
                     return <td className='text-[#0066CD] cursor-pointer' onClick={()=>setSip(true)}>{ele}</td>
                 if (type == 'sip' && index == 2)
                     return (<><td>{ele}</td><td className='text-[#0171E7] cursor-pointer font-medium flex items-center gap-x-[5px] pl-[25px]' onClick={()=>setSip(true)} >View <Arrow active={true} left={false} w={5} h={8.5} /> </td></>)
-                return <td>{ele}</td>
+                return <td className='whitespace-nowrap'>{ele}</td>
             })}
             {
                 setActive &&

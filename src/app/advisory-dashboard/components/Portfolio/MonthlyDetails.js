@@ -1,10 +1,14 @@
 "use client";
 import { useState , useRef ,useEffect} from "react";
 import back from 'public/back.svg';
-import wrong from 'public/Component.svg';
+import close from '/public/close.svg'
 import Image from 'next/image';
+import { useDataContext } from "../../context/DataContext";
 
-export default function Popup(props){
+export default function MonthlyDetails(props){
+
+    const {setShowMonthlyDetails} = useDataContext()
+    
     const [selectedOption,setSelectedOption]=useState("AUM & Flow");
 
     const AumAndFlowDetails = useRef();
@@ -134,7 +138,7 @@ export default function Popup(props){
         }
     };
     return(
-        <div>
+        <div className="w-screen h-full">
             <div className="flex justify-between items-center text-[14px] pt-[20px] pb-[15.5px]">
                     <div className="ml-[30px] text-[20px] font-semibold">{props.name}</div>
                     <div className="flex ml-[275px]">
@@ -151,7 +155,7 @@ export default function Popup(props){
                             <div className="font-semibold">05-Nov-2022</div>
                         </div>
                         <div className="ml-[35px] mr-[15px] mt-[7px]">
-                        <Image src={wrong} alt="wrong"></Image>
+                            <Image src={close} alt="wrong" onClick={()=>{setShowMonthlyDetails(false)}} className="cursor-pointer"></Image>
                         </div>
                     </div>
                 </div>
@@ -168,7 +172,7 @@ export default function Popup(props){
                     <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='Debt - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(DebtQualityCheckStyleSplitRef),setSelectedOption('Debt - Quality Check & StyleSplit')} }>Debt - Quality Check & StyleSplit</button><br></br>
                     <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[24px] w-[240px] h-[40px] ${selectedOption==='SIP Details'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(SIPDetailsRef),setSelectedOption('SIP Details')}}>SIP Details</button><br></br>
                 </div>
-                <div  className="h-[100vh] w-[180vh] overflow-hidden">
+                <div  className="h-[calc(100vh*0.8-72.5px)] w-[180vh] overflow-hidden">
                     <div ref={scrollingContainerRef} className="h-[100%]  overflow-scroll">
                     <table className={`${Nav ? 'w-[100vw]' : 'absolute left-[25px] w-[100vw]'} duration-[0.6s] transition-all border-l border-t`}>
                         <thead>
@@ -190,7 +194,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={AssetAllocationRef}>Asset Allocation</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={AssetAllocationRef}>Asset Allocation</td>
                             </tr>
                             {data2.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -200,7 +204,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={performanceRef}>Performance</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={performanceRef}>Performance</td>
                             </tr>
                             <tr>
                             {
@@ -210,7 +214,7 @@ export default function Popup(props){
                             }
                             </tr>
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={PortfolioQualityRef}>Portfolio Quality</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={PortfolioQualityRef}>Portfolio Quality</td>
                             </tr>
                             {data3.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-[#F9FBFF] odd:bg-white  text-[14px] font-medium" key={rowIndex}>
@@ -220,7 +224,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-medium" ref={ConcentrationRef}>Concentration</td>
+                            <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={ConcentrationRef}>Concentration</td>
                             </tr>
                             {data4.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -230,7 +234,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-medium" ref={PortfoliounderlockinRef}>% of Portfolio under lock-in</td>
+                            <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={PortfoliounderlockinRef}>% of Portfolio under lock-in</td>
                             </tr>
                             {data5.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -240,10 +244,10 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={EquityQualityCheckStyleSplitRef}>Equity - Quality Check & StyleSplit</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={EquityQualityCheckStyleSplitRef}>Equity - Quality Check & StyleSplit</td>
                             </tr>
                             <tr className="bg-[#F9FBFF]">
-                                <td className="p-[20px] text-[14px] font-semibold">QUALITY CHECK</td>
+                                <td className="p-[20px] text-[16px] font-semibold">QUALITY CHECK</td>
                                 <td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             {data6.map((row, rowIndex) => (
@@ -254,7 +258,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">STYLE SPLIT</td>
+                            <td className="p-[20px] text-[16px] font-semibold">STYLE SPLIT</td>
                             </tr>
                             {data7.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -264,7 +268,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">HIGH RISK EXPOSURE</td>
+                            <td className="p-[20px] text-[16px] font-semibold">HIGH RISK EXPOSURE</td>
                             </tr>
                             {data8.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -274,10 +278,10 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={DebtQualityCheckStyleSplitRef}>Debt - Quality Check & StyleSplit</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={DebtQualityCheckStyleSplitRef}>Debt - Quality Check & StyleSplit</td>
                             </tr>
                             <tr className="bg-[#F9FBFF]">
-                                <td className=" p-[20px] text-[14px] font-semibold">QUALITY CHECK</td>
+                                <td className=" p-[20px] text-[16px] font-semibold">QUALITY CHECK</td>
                                 <td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             {data9.map((row, rowIndex) => (
@@ -288,7 +292,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">STYLE SPLIT</td>
+                            <td className="p-[20px] text-[16px] font-semibold">STYLE SPLIT</td>
                             </tr>
                             {data10.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-[#F9FBFF]  odd:bg-white text-[14px] font-medium" key={rowIndex}>
@@ -298,7 +302,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td  className="p-[20px] text-[14px] font-medium" ref={SIPDetailsRef}>SIP Details</td>
+                            <td  className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={SIPDetailsRef}>SIP Details</td>
                             </tr>
                             {data11.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -308,7 +312,7 @@ export default function Popup(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">QUALITY CHECK</td>
+                            <td className="p-[20px] text-[16px] font-semibold">QUALITY CHECK</td>
                             </tr>
                             {data12.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>

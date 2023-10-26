@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelectField, { CustomTextField } from "./InputFields";
 import { InputAdornment } from "@mui/material";
+import data from '../data/clientRequirement.json';
 
-export default function ClientRequirement() {
+export default function ClientRequirement({ isLoadClientClicked, setIsLoadClientClicked, handleNotificationMessage }) {
 
     const [name, setName] = useState('');
     const [nameErrorMessage, setNameErrorMessage] = useState('');
@@ -30,6 +31,50 @@ export default function ClientRequirement() {
         } else {
             setAgeErrorMessage("");
         }
+    };
+
+    const [emailId, setEmailId] = useState('');
+    const [emailIdErrorMessage, setEmailIdErrorMessage] = useState('');
+
+    const isValidEmail = (email) => {
+        // Regular expression for basic email validation
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        return emailRegex.test(email);
+      };
+
+    const handleEmailIdChange = (event) => {
+        const value = event.target.value;
+        setEmailId(value);
+    
+        if (value === "") {
+          setEmailIdErrorMessage("Email ID cannot be empty");
+        } else if (!isValidEmail(value)) {
+          setEmailIdErrorMessage("Please enter a valid email address");
+        } else {
+          setEmailIdErrorMessage("");
+        }
+      };
+
+    const [mobileNo, setMobileNo] = useState('');
+    const [mobileNoErrorMessage, setMobileNoErrorMessage] = useState('');
+
+    const isValidMobileNo = (mobile) => {
+        // Regular expression for basic mobile number validation
+        const mobileRegex = /^[0-9]{10}$/;
+        return mobileRegex.test(mobile);
+    };
+
+    const handleMobileNoChange = (event) => {
+    const value = event.target.value;
+    setMobileNo(value);
+
+    if (value === "") {
+        setMobileNoErrorMessage("Mobile Number cannot be empty");
+    } else if (!isValidMobileNo(value)) {
+        setMobileNoErrorMessage("Please enter a valid mobile number");
+    } else {
+        setMobileNoErrorMessage("");
+    }
     };
 
     const [location, setLocation] = useState('');
@@ -146,9 +191,9 @@ export default function ClientRequirement() {
         }
     };
 
-    const [investmentHistory, setInvestmentHistory] = useState([]);
+    const [investmentHistory, setInvestmentHistory] = useState('');
     const [investmentErrorMessage, setInvestmentErrorMessage] = useState('');
-    const investmentHistoryOptions = ['< 1 Year', '2 - 5 Years', '> 5 Years'];
+    const investmentHistoryOptions = ['New to investment', '< 1 Year', '2 - 5 Years', '> 5 Years'];
 
     const handleInvestmentHistoryChange = (event) => {
         const value = event.target.value;
@@ -175,17 +220,198 @@ export default function ClientRequirement() {
         setAssetClassesErrorMessage("");
         }
     };
+
+    const [concerns, setConcerns] = useState('');
+    const [concernsErrorMessage, setConcernsErrorMessage] = useState('');
+
+    const handleConcernsChange = (event) => {
+        const value = event.target.value;
+        setConcerns(value);
+
+        if (value === "") {
+            setConcernsErrorMessage("Concerns cannot be empty");
+        } else {
+            setConcernsErrorMessage("");
+        }
+    };
+
+    const [existingAmount, setExistingAmount] = useState('0');
+    const [existingAmountErrorMessage, setExistingAmountErrorMessage] = useState('');
+
+    const handleExistingAmountChange = (event) => {
+        const value = event.target.value.replace(/^0+/, '');
+        const formattedValue = Number(value.replace(/\D/g,'')).toLocaleString("en-In")
+        setExistingAmount(formattedValue);
+
+        const max = 10000000;
+
+        if (value === ''){
+            setExistingAmount('0');
+        }
+        else if (Number(value.replace(/\D/g,'')) > max){
+            setExistingAmountErrorMessage(`The max amount is ₹ ${max.toLocaleString("en-IN")}`)
+        }
+        else{
+            setExistingAmountErrorMessage('');
+        } 
+    };
+
+    const [equityPercentage, setEquityPercentage] = useState('');
+    const [equityPercentageErrorMessage, setEquityPercentageErrorMessage] = useState('');
+
+    const handleEquityPercentageChange = (event) => {
+        const value = event.target.value;
+        setEquityPercentage(value);
+
+        if (parseFloat(value) < 0 || parseFloat(value) > 100) {
+            setEquityPercentageErrorMessage("Invalid Equity Percentage");
+        } else {
+            setEquityPercentageErrorMessage("");
+        }
+    };
+
+    const [debtPercentage, setDebtPercentage] = useState('');
+    const [debtPercentageErrorMessage, setDebtPercentageErrorMessage] = useState('');
+
+    const handleDebtPercentageChange = (event) => {
+        const value = event.target.value;
+        setDebtPercentage(value);
+
+        if (parseFloat(value) < 0 || parseFloat(value) > 100) {
+            setDebtPercentageErrorMessage("Invalid Debt Percentage");
+        } else {
+            setDebtPercentageErrorMessage("");
+        }
+    };
+
+    const [emiPercentage, setEmiPercentage] = useState('');
+    const [emiPercentageErrorMessage, setEmiPercentageErrorMessage] = useState('');
+    const emiPercentageOptions = ['< 10%', '10% - 30%', '30% - 50%', '50% - 80%'];
+
+    const handleEmiPercentageChange = (event) => {
+        const value = event.target.value;
+        setEmiPercentage(value);
+
+        if (value === "") {
+            setEmiPercentageErrorMessage("Investment history cannot be empty");
+        } else {
+            setEmiPercentageErrorMessage("");
+        }
+    };
+
+    const [risk, setRisk] = useState('');
+    const [riskErrorMessage, setRiskErrorMessage] = useState('');
+    const riskOptions = ['Low', 'Medium', 'High'];
+
+    const handleRiskChange = (event) => {
+        const value = event.target.value;
+        setRisk(value);
+
+        if (value === "") {
+        setRiskErrorMessage("Risk level cannot be empty");
+        } else {
+        setRiskErrorMessage("");
+        }
+    };
+
+    const [temporaryDrop, setTemporaryDrop] = useState('');
+    const [temporaryDropErrorMessage, setTemporaryDropErrorMessage] = useState('');
+    const temporaryDropOptions = ['Option 1', 'Option 2', 'Option 3'];
+
+    const handleTemporaryDropChange = (event) => {
+        const value = event.target.value;
+        setTemporaryDrop(value);
+
+        if (value === "") {
+        setTemporaryDropErrorMessage("Temporary Drop cannot be empty");
+        } else {
+        setTemporaryDropErrorMessage("");
+        }
+    };
+
+    const [covidFall, setCovidFall] = useState('');
+    const [covidFallErrorMessage, setCovidFallErrorMessage] = useState('');
+
+    const handleCovidFallChange = (event) => {
+        const value = event.target.value;
+        setCovidFall(value);
+
+        if (value === "") {
+        setCovidFallErrorMessage("COVID Fall cannot be empty");
+        } else {
+        setCovidFallErrorMessage("");
+        }
+    };
+
+    const [otherComments, setOtherComments] = useState('');
+    const [otherCommentsErrorMessage, setOtherCommentsErrorMessage] = useState('');
+
+    const handleOtherCommentsChange = (event) => {
+        const value = event.target.value;
+        setOtherComments(value);
+
+        if (value === "") {
+        setOtherCommentsErrorMessage("Comments cannot be empty");
+        } else {
+        setOtherCommentsErrorMessage("");
+        }
+    };
+
+    const inputData = [
+        { name, setState: setName, errorMessage: nameErrorMessage, setErrorMessage: setNameErrorMessage },
+        { age, setState: setAge, errorMessage: ageErrorMessage, setErrorMessage: setAgeErrorMessage },
+        { emailId, setState: setEmailId, errorMessage: emailIdErrorMessage, setErrorMessage: setEmailIdErrorMessage },
+        { mobileNo, setState: setMobileNo, errorMessage: mobileNoErrorMessage, setErrorMessage: setMobileNoErrorMessage },
+        { location, setState: setLocation, errorMessage: locationErrorMessage, setErrorMessage: setLocationErrorMessage },
+        { family, setState: setFamily, errorMessage: familyErrorMessage, setErrorMessage: setFamilyErrorMessage },
+        { occupation, setState: setOccupation, errorMessage: occupationErrorMessage, setErrorMessage: setOccupationErrorMessage },
+        { requirement, setState: setRequirement, errorMessage: requirementErrorMessage, setErrorMessage: setRequirementErrorMessage },
+        { lumpsum, setState: setLumpsum, errorMessage: lumpsumErrorMessage, setErrorMessage: setLumpsumErrorMessage },
+        { sip, setState: setSip, errorMessage: sipErrorMessage, setErrorMessage: setSipErrorMessage },
+        { timeFrame, setState: setTimeFrame, errorMessage: timeFrameErrorMessage, setErrorMessage: setTimeFrameErrorMessage },
+        { investmentHistory, setState: setInvestmentHistory, errorMessage: investmentErrorMessage, setErrorMessage: setInvestmentErrorMessage },
+        { assetClasses, setState: setAssetClasses, errorMessage: assetClassesErrorMessage, setErrorMessage: setAssetClassesErrorMessage },
+        { concerns, setState: setConcerns, errorMessage: concernsErrorMessage, setErrorMessage: setConcernsErrorMessage },
+        { existingAmount, setState: setExistingAmount, errorMessage: existingAmountErrorMessage, setErrorMessage: setExistingAmountErrorMessage },
+        { equityPercentage, setState: setEquityPercentage, errorMessage: equityPercentageErrorMessage, setErrorMessage: setEquityPercentageErrorMessage },
+        { debtPercentage, setState: setDebtPercentage, errorMessage: debtPercentageErrorMessage, setErrorMessage: setDebtPercentageErrorMessage },
+        { emiPercentage, setState: setEmiPercentage, errorMessage: emiPercentageErrorMessage, setErrorMessage: setEmiPercentageErrorMessage },
+        { risk, setState: setRisk, errorMessage: riskErrorMessage, setErrorMessage: setRiskErrorMessage },
+        { temporaryDrop, setState: setTemporaryDrop, errorMessage: temporaryDropErrorMessage, setErrorMessage: setTemporaryDropErrorMessage },
+        { covidFall, setState: setCovidFall, errorMessage: covidFallErrorMessage, setErrorMessage: setCovidFallErrorMessage },
+        { otherComments, setState: setOtherComments, errorMessage: otherCommentsErrorMessage, setErrorMessage: setOtherCommentsErrorMessage },
+      ];
+      
     
+    useEffect(() => {
+        if (isLoadClientClicked) {
+            const foundClient = data.savedClients.find(client => client.emailId === emailId || client.mobileNo === mobileNo);
+            console.log(foundClient);
+            if (foundClient){
+                handleNotificationMessage('Client Loaded Successfully')
+                inputData.forEach(field => 
+                    {
+                        field.setState(foundClient[Object.keys(field)[0]]);
+                        field.setErrorMessage('');
+                    }
+                )
+            }
+            setIsLoadClientClicked(false);
+        }
+    }, [isLoadClientClicked]);
+
     return(
-        <div className="flex flex-col gap-[20px] text-[14px]">
-            <h3 className="text-[20px] font-semibold leading-[38px]">Understand Client Requirement (B.R.O.T.H.E.R Framework)</h3>
+        <div className="flex flex-col gap-[20px] text-[14px] px-[50px]">
+            <h3 className="text-[20px] font-semibold leading-[38px]">Client Requirement</h3>
 
             {/* Backdrop */}
-            <div className="h-[248px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
+            <div className="h-[325px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
                 <h3 className="text-[18px] font-semibold leading-[10px]">Backdrop</h3>
-                <div className="flex flex-wrap gap-x-[50px] gap-y-[25px] pr-[200px]">
+                <div className="flex flex-wrap gap-x-[50px] gap-y-[30px] pr-[200px]">
                     <CustomTextField label="Name" value={name} errorMessage={nameErrorMessage} handleChange={handleNameChange} />
                     <CustomTextField label="Age" value={age} type="number" errorMessage={ageErrorMessage} handleChange={handleAgeChange} />
+                    <CustomTextField label="Email ID" value={emailId} errorMessage={emailIdErrorMessage} handleChange={handleEmailIdChange}/>
+                    <CustomTextField label="Mobile Number" type="number" value={mobileNo} errorMessage={mobileNoErrorMessage} handleChange={handleMobileNoChange} />
                     <CustomTextField label="Location" value={location} errorMessage={locationErrorMessage} handleChange={handleLocationChange} />
                     <CustomSelectField label="Family" value={family} valueOptions={familyOptions} handleChange={handleFamilyChange} errorMessage={familyErrorMessage} />
                     <CustomTextField label="Occupation (Role/Company)" value={occupation} errorMessage={occupationErrorMessage} handleChange={handleOccupationChange} />
@@ -207,8 +433,8 @@ export default function ClientRequirement() {
                         <CustomTextField value={lumpsum} errorMessage={lumpsumErrorMessage} handleChange={handleLumpsumChange}
                             InputProps={{
                                 startAdornment: (
-                                  <InputAdornment position="start">
-                                    ₹
+                                  <InputAdornment position="start" >
+                                    <p className="font-medium text-black">₹</p>
                                   </InputAdornment>
                                 ),
                               }}
@@ -220,7 +446,7 @@ export default function ClientRequirement() {
                             InputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
-                                    ₹
+                                    <p className="font-medium text-black">₹</p>
                                   </InputAdornment>
                                 ),
                               }}
@@ -236,11 +462,46 @@ export default function ClientRequirement() {
             </div>
 
             {/* History */}
-            <div className="h-[128px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
+            <div className="h-[190px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
                 <h3 className="text-[18px] font-semibold leading-[10px]">History</h3>
-                <div className="flex flex-wrap gap-x-[50px] gap-y-[25px] pr-[200px]">
+                <div className="flex flex-wrap gap-x-[50px] gap-y-[30px] pr-[200px]">
                     <CustomSelectField label="How long have you been investing ?" value={investmentHistory} valueOptions={investmentHistoryOptions} handleChange={handleInvestmentHistoryChange} errorMessage={investmentErrorMessage} />
                     <CustomSelectField label="What type of asset classes do you invest?" value={assetClasses} valueOptions={assetClassesOptions} handleChange={handleAssetClassesChange} errorMessage={assetClassesErrorMessage} />
+                    <CustomTextField width="810px" label="How has been your investment experience so far? Any concerns?" value={concerns} errorMessage={concernsErrorMessage} handleChange={handleConcernsChange}/>
+                </div> 
+            </div>
+
+            {/* Existing Portfolio */}
+            <div className="h-[320px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
+                <h3 className="text-[18px] font-semibold leading-[10px]">Existing portfolio</h3>
+                <div className="flex flex-col gap-[15px]">
+                    <p className="text-[#6E6E72] font-medium">Amount</p>
+                    <CustomTextField value={existingAmount} errorMessage={existingAmountErrorMessage} handleChange={handleExistingAmountChange}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start" >
+                                <p className="font-medium text-black">₹</p>
+                                </InputAdornment>
+                            ),
+                            }}
+                    />
+                </div>
+                <p className="font-semibold">Asset Allocation</p>
+                <div className="flex flex-wrap gap-x-[50px] gap-y-[30px] pr-[200px]">
+                    <CustomTextField label="Equity %" type='number' value={equityPercentage} errorMessage={equityPercentageErrorMessage} handleChange={handleEquityPercentageChange} />
+                    <CustomTextField label="Debt %" type='number' value={debtPercentage} errorMessage={debtPercentageErrorMessage} handleChange={handleDebtPercentageChange} />
+                    <CustomSelectField width='810px' label="What % of your income goes towards monthly EMIs?" value={emiPercentage} valueOptions={emiPercentageOptions} handleChange={handleEmiPercentageChange} errorMessage={emiPercentageErrorMessage} />
+                </div> 
+            </div>
+
+            {/* Risk */}
+            <div className="h-[330px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
+                <h3 className="text-[18px] font-semibold leading-[10px]">Backdrop</h3>
+                <div className="flex flex-wrap gap-x-[50px] gap-y-[30px] pr-[200px]">
+                    <CustomSelectField label="Risk" value={risk} valueOptions={riskOptions} handleChange={handleRiskChange} errorMessage={riskErrorMessage} />
+                    <CustomSelectField width="810px" label="What can you handle as a temporary drop in your portfolio?" value={temporaryDrop} valueOptions={temporaryDropOptions} handleChange={handleTemporaryDropChange} errorMessage={temporaryDropErrorMessage} />
+                    <CustomTextField width="810px" label="What did you do during the Covid fall?" value={covidFall} errorMessage={covidFallErrorMessage} handleChange={handleCovidFallChange} />
+                    <CustomTextField width="810px" label="Other Comments" value={otherComments} errorMessage={otherCommentsErrorMessage} handleChange={handleOtherCommentsChange} />
                 </div>
             </div>
         </div>
