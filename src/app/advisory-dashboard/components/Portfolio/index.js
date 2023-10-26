@@ -532,7 +532,7 @@ export default function Portfolio() {
                         <p>No Users Found</p>
                     </div>
                 :
-                    <div className="flex w-full">
+                    <div className="flex ">
                         <div className="w-[210px] ml-[-15px]">
                             <div className="flex gap-x-[15.68px] h-[34px] items-center pl-[10px]">
                                 <div className="text-[14px] text-[#6E6E72]">Share via</div>
@@ -564,12 +564,12 @@ export default function Portfolio() {
                                     <tbody >
                                         {
                                             Data.map((client, i) =>
-                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px]  flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == i) && " border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}>
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] w-full flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == i) && " border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}>
                                                     <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} />
                                                     <p className="whitespace-nowrap">{client["Client Name"]}</p>
                                                     <div onMouseOver={() => setShowClientInfo(i)} onMouseLeave={() => setShowClientInfo(-1)} className="relative">
                                                         <InfoOutlinedIcon className={` ml-[5px] mb-[-2px] h-[13px] w-[12px] text-[13px] text-primary ${(showClientInfo == i) ? " opacity-0 hidden " : ' opacity-100 '} `} />
-                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} whitespace-nowrap relative ml-[110px] flex flex-col h-auto p-[15px] pt-0 top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
+                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} whitespace-nowrap relative mb-[-90px] ml-[110px] flex flex-col h-auto p-[15px] pt-0 left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
                                                             <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[10px] py-[10px] ">{client["Client Name"]}</h6>
                                                             <table cellPadding={8} >
                                                                 <tr>
@@ -599,7 +599,7 @@ export default function Portfolio() {
                         </div>
                         
                         
-                        <div className="flex flex-col">
+                        <div className={`flex flex-col ${ showClientInfo!=-1 && ' ml-[-45px] '} `}>
                             <div ref={tablesNavbarRef} {...events} className={`h-[44px] flex gap-x-[10px] overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} no-scrollbar text-[14px] text-[#BEBEBE] font-bold transition-all duration-[0.5s] `}>
                                 {
                                     currentTableNames.map( (tableName, index) => 
