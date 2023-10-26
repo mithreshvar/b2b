@@ -532,7 +532,7 @@ export default function Portfolio() {
                         <p>No Users Found</p>
                     </div>
                 :
-                    <div className="flex">
+                    <div className="flex w-full">
                         <div className="w-[210px] ml-[-15px]">
                             <div className="flex gap-x-[15.68px] h-[34px] items-center pl-[10px]">
                                 <div className="text-[14px] text-[#6E6E72]">Share via</div>
@@ -564,17 +564,27 @@ export default function Portfolio() {
                                     <tbody >
                                         {
                                             Data.map((client, i) =>
-                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == i) && " border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}>
+                                                <tr onMouseOver={() => setHoverIndex(i)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px]  flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == i) && " border-[#5DA9F8] border-y-[1px] border-l-[1px] "} `}>
                                                     <CheckBoxName index={i} checked={checked} handleChecked={handleChecked} />
-                                                    <p>{client["Client Name"]}</p>
+                                                    <p className="whitespace-nowrap">{client["Client Name"]}</p>
                                                     <div onMouseOver={() => setShowClientInfo(i)} onMouseLeave={() => setShowClientInfo(-1)} className="relative">
-                                                        <InfoOutlinedIcon className="ml-[5px] mb-[-2px] h-[13px] w-[12px] text-[13px] text-primary " />
-                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} absolute flex flex-col h-auto w-[250px] top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
-                                                            <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[20px] py-[10px] ">{client["Client Name"]}</h6>
-                                                            <div className="py-[10px] px-[20px] flex-col flex gap-y-[10px]">
-                                                                <p>Email : {client["Email"]}</p>
-                                                                <p>Mobile : {client["Mobile"]}</p>
-                                                            </div>
+                                                        <InfoOutlinedIcon className={` ml-[5px] mb-[-2px] h-[13px] w-[12px] text-[13px] text-primary ${(showClientInfo == i) ? " opacity-0 hidden " : ' opacity-100 '} `} />
+                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} whitespace-nowrap relative ml-[110px] flex flex-col h-auto p-[15px] pt-0 top-[20px] left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
+                                                            <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[10px] py-[10px] ">{client["Client Name"]}</h6>
+                                                            <table cellPadding={8} >
+                                                                <tr>
+                                                                    <td className="text-[#707070]">Investing Since</td>
+                                                                    <td className="pl-[10px]">05-Nov-2022. (10.8 Years)</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td className="text-[#707070]">Email</td>
+                                                                    <td className="pl-[10px]">{client["Email"]}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td className="text-[#707070]">Mobile</td>
+                                                                    <td className="pl-[10px]">{client["Mobile"]}</td>
+                                                                </tr>
+                                                            </table>
                                                         </div>
 
                                                     </div>
