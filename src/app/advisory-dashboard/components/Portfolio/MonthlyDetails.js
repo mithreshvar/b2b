@@ -194,7 +194,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={AssetAllocationRef}>Asset Allocation</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={AssetAllocationRef}>Asset Allocation</td>
                             </tr>
                             {data2.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -204,7 +204,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={performanceRef}>Performance</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={performanceRef}>Performance</td>
                             </tr>
                             <tr>
                             {
@@ -214,7 +214,7 @@ export default function MonthlyDetails(props){
                             }
                             </tr>
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={PortfolioQualityRef}>Portfolio Quality</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={PortfolioQualityRef}>Portfolio Quality</td>
                             </tr>
                             {data3.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-[#F9FBFF] odd:bg-white  text-[14px] font-medium" key={rowIndex}>
@@ -224,7 +224,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-medium" ref={ConcentrationRef}>Concentration</td>
+                            <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={ConcentrationRef}>Concentration</td>
                             </tr>
                             {data4.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -234,7 +234,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-medium" ref={PortfoliounderlockinRef}>% of Portfolio under lock-in</td>
+                            <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={PortfoliounderlockinRef}>% of Portfolio under lock-in</td>
                             </tr>
                             {data5.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -244,10 +244,10 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={EquityQualityCheckStyleSplitRef}>Equity - Quality Check & StyleSplit</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={EquityQualityCheckStyleSplitRef}>Equity - Quality Check & StyleSplit</td>
                             </tr>
                             <tr className="bg-[#F9FBFF]">
-                                <td className="p-[20px] text-[14px] font-semibold">QUALITY CHECK</td>
+                                <td className="p-[20px] text-[16px] font-semibold">QUALITY CHECK</td>
                                 <td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             {data6.map((row, rowIndex) => (
@@ -258,7 +258,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">STYLE SPLIT</td>
+                            <td className="p-[20px] text-[16px] font-semibold">STYLE SPLIT</td>
                             </tr>
                             {data7.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -268,7 +268,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">HIGH RISK EXPOSURE</td>
+                            <td className="p-[20px] text-[16px] font-semibold">HIGH RISK EXPOSURE</td>
                             </tr>
                             {data8.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -278,10 +278,10 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                                <td className="p-[20px] text-[14px] font-medium" ref={DebtQualityCheckStyleSplitRef}>Debt - Quality Check & StyleSplit</td>
+                                <td className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={DebtQualityCheckStyleSplitRef}>Debt - Quality Check & StyleSplit</td>
                             </tr>
                             <tr className="bg-[#F9FBFF]">
-                                <td className=" p-[20px] text-[14px] font-semibold">QUALITY CHECK</td>
+                                <td className=" p-[20px] text-[16px] font-semibold">QUALITY CHECK</td>
                                 <td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             {data9.map((row, rowIndex) => (
@@ -292,7 +292,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">STYLE SPLIT</td>
+                            <td className="p-[20px] text-[16px] font-semibold">STYLE SPLIT</td>
                             </tr>
                             {data10.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-[#F9FBFF]  odd:bg-white text-[14px] font-medium" key={rowIndex}>
@@ -302,7 +302,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td  className="p-[20px] text-[14px] font-medium" ref={SIPDetailsRef}>SIP Details</td>
+                            <td  className="p-[20px] text-[16px] font-bold text-[#0071E7]" ref={SIPDetailsRef}>SIP Details</td>
                             </tr>
                             {data11.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
@@ -312,7 +312,7 @@ export default function MonthlyDetails(props){
                                 </tr>
                             ))}
                             <tr>
-                            <td className="p-[20px] text-[14px] font-semibold">QUALITY CHECK</td>
+                            <td className="p-[20px] text-[16px] font-semibold">QUALITY CHECK</td>
                             </tr>
                             {data12.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>

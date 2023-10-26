@@ -363,7 +363,22 @@ export default function Portfolio() {
         setTimeout(() => setLoadingScroll(false), 500);
 
     }
-
+    function sort(header){
+        const category = Object.keys(columns).find(categoryName => columns[categoryName].includes(header));
+        const top = `${category}`;
+        const sorted = [...Data].sort((a, b) => {
+            var x = a[top][header] || '';
+            var y = b[top][header] || '';
+            if(x === "-" && y!=="-")return -1;
+            if(x !== "-" && y === "-")return 1;
+            x = x.toString();
+            y = y.toString();
+            var a1 = parseFloat(x.replace(/[₹,]/g, ''));
+            var b1 = parseFloat(y.replace(/[₹,]/g, ''))
+            return a1 - b1;
+        });
+        setData(sorted);
+    }
     const [checked, setChecked] = useState(new Array(Data.length).fill(false));
     const [selectAll, setSelectAll] = useState(false);
     const handleChecked = i => {
