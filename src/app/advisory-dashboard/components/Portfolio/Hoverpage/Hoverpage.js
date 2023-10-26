@@ -26,7 +26,7 @@ export default function Hoverpage() {
 
             <table>
                 <tr>
-                    <td><p className='bg-sky-100 h-8 rounded-[8px]'>Equity - Blend</p></td>
+                    <td><p className='bg-[#f1f7fd] h-8 rounded-[8px]'>Equity - Blend</p></td>
                 </tr>
             </table>
 
@@ -91,7 +91,7 @@ export default function Hoverpage() {
 
             <table>
                 <tr>
-                    <td><p className='bg-sky-100 h-8 rounded-[8px]'>Hybrid - Multi Asset Allocation</p></td>
+                    <td><p className='bg-[#f1f7fd] h-8 rounded-[8px]'>Hybrid - Multi Asset Allocation</p></td>
                 </tr>
             </table>
 
