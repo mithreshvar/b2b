@@ -170,6 +170,8 @@ export default function Portfolio() {
 
     }
 
+    const [savedFilterData, setSavedFilterData] = useState([])
+
     const handleFilterDataOptions = (filterOptions) => {
         setFilterDataOptions(filterOptions);
         console.log("filter data" ,filterOptions);
@@ -524,7 +526,7 @@ export default function Portfolio() {
                 </div>
             </div>
             {
-                IsFilterOpen && <div className={` absolute top-[120px] ${navOpen ? " left-[270px] w-[calc(100vw-290px)] " : " left-[81px] w-[calc(100vw-100px)] " } z-[5] `} onFocus={() => { setIsFilterOpen(true) }}  > <Filter FilterColumnOption={FilterColumnOption} handleFilterColumnOption={handleFilterColumnOption} columns={columns} filterDataOptions={filterDataOptions} handleFilterDataOptions ={handleFilterDataOptions} onBlur={() => { setIsFilterOpen(false) }} /> </div>
+                IsFilterOpen && <div className={` absolute top-[120px] ${navOpen ? " left-[270px] w-[calc(100vw-290px)] " : " left-[81px] w-[calc(100vw-100px)] " } z-[5] `} onFocus={() => { setIsFilterOpen(true) }}  > <Filter FilterColumnOption={FilterColumnOption} handleFilterColumnOption={handleFilterColumnOption} columns={columns} filterDataOptions={filterDataOptions} handleFilterDataOptions ={handleFilterDataOptions} onBlur={() => { setIsFilterOpen(false) }} savedFilterData={savedFilterData} setSavedFilterData={setSavedFilterData} /> </div>
             }
             {
                 (Data.length == 0) ?

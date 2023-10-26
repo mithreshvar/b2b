@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomDropSelectField from './CustomDropSelectField';
 import Image from 'next/image';
 import clearFilter from '/public/clearFilter.svg';
@@ -9,7 +9,7 @@ import { CustomTextField } from '@/app/b2b/components/InputFields';
 import SaveFilter from './SaveFilter';
 
 
-function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
+function Filter({filterDataOptions=[], handleFilterDataOptions, savedFilterData, setSavedFilterData, ...props}) {
     
     const {columns}=props
     const [CurrFilterState, setCurrFilterState] = useState({ ...props.FilterColumnOption });
@@ -20,7 +20,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
     const [Subcategory,Setsubcategory]=useState("")
     const [category,Setcategory]=useState("")
     const [saved,setSaved]=useState(false)
-    const [savedFilter, setSavedFilter] = useState([]);
+    const [savedFilter, setSavedFilter] = useState([...savedFilterData]);
 
     const condition = ['<'];
 
@@ -72,10 +72,13 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
         Setsubcategory('');
     };
 
+    useEffect(()=> {
+        setSavedFilterData(savedFilter);
+    },[savedFilter])
+
     const handleSaveFilter=(event)=>{
         event.preventDefault()
         if(category!="" && Subcategory!="" && EnterValue !="" && state!=""){
-            setCurrentFilterDataOptions([...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]);
             let name = `filter ${savedFilter.length+1}`;
             setSavedFilter([...savedFilter, {name, data: [...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]}]);
             console.log([...savedFilter, {name, data: [...currentFilterDataOptions, { category: category, subcategory: Subcategory, condition: state, value: EnterValue }]}])
@@ -83,13 +86,14 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
             setEnterValue('');
             Setcategory('');
             Setsubcategory('');
+            setCurrentFilterDataOptions([])
         }
         else if(currentFilterDataOptions.length != 0 ){
             let name = `filter ${savedFilter.length+1}`;
-            setSavedFilter([...savedFilter, {name, data: [...currentFilterDataOptions]}]);
+            setSavedFilter([...savedFilter, {name, data: currentFilterDataOptions.map(e => {return({...e})} )}]);
             console.log([...savedFilter, {name, data: currentFilterDataOptions}])
+            setCurrentFilterDataOptions([])
         }
-        
     }
     
     const handleSavedFilterNameChange=(name, index)=>{
@@ -112,7 +116,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, ...props}) {
     }
 
     function handleCurrentFilterDataChange (value, field, index) {
-        let newData = [...currentFilterDataOptions];
+        let newData = currentFilterDataOptions.map(e => {return({...e})});
         newData[index][field] = value;
         setCurrentFilterDataOptions(newData);
         console.log(savedFilter)
