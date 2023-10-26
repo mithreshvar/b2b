@@ -10,55 +10,94 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 export default function CustomDropSelectField(props) {
-    const array = props.columns[props.title].map((ele) => props.data[props.title].includes(ele))
+    console.log(props)
+    console.log(props.columns[props.title].length, props.data[props.title].length, "length")
+
+    const array = props.columns[props.title].map((ele) => {
+        if (ele == "All" && props.columns[props.title].length != props.data[props.title].length) {
+            return false
+        }
+        return props.data[props.title].includes(ele)
+    })
 
     const [state, setState] = React.useState(array);
 
+
+
+    React.useEffect(() => {
+        const allSelected = state.every((value, index) => {
+            return props.value[index] === "All" || value;
+        });
+
+        if (allSelected && !state[0]) {
+            // If all options are selected (except "All") and "All" is not selected, update the state
+            setState((prevState) => {
+                const updatedState = [...prevState];
+                updatedState[0] = true; // Assuming "All" is at index 0
+                return updatedState;
+            });
+        }
+    }, [state, props.value]);
     const handleChanges = (event, index) => {
-
-
         if (event.target.name === "All") {
-            const copyOfCurrState = props.columns
-            props.columns[props.title]
             setState((prevState) => {
-                const array1 = new Array(props.value.length);
-                array1.fill(event.target.checked);
-                return array1;
-            })
+                const updatedState = prevState.map(() => event.target.checked);
+                return updatedState;
+            });
             if (event.target.checked) {
-                props.data[props.title] = copyOfCurrState[props.title]
+                props.data[props.title] = props.columns[props.title];
+            } else {
+                props.data[props.title] = [];
             }
-            else {
-                props.data[props.title] = []
-            }
-        }
-        else {
-            const copyOfCurrState = props.data
+        } else {
             setState((prevState) => {
-                const newState = [...prevState]; // Create a copy of the current state
-                newState[index] = event.target.checked; // Update the specific element
-                return newState; // Return the updated state
-            })
+                const updatedState = [...prevState];
+                updatedState[index] = event.target.checked;
+                return updatedState;
+            });
 
             if (event.target.checked) {
-                if (!copyOfCurrState[props.title].includes(event.target.name)) {
-                    copyOfCurrState[props.title].push(event.target.name)
+                if (!props.data[props.title].includes(event.target.name)) {
+                    if (!props.data[props.title].includes("All")) {
+                        props.data[props.title].push("All");
+                    }
+                    props.data[props.title].push(event.target.name);
                 }
 
-            }
-            else {
-                if (copyOfCurrState[props.title].includes(event.target.name)) {
-                    const index = copyOfCurrState[props.title].indexOf(event.target.name)
-                    copyOfCurrState[props.title].splice(index, 1);
+                const indexOfAll = props.data[props.title].indexOf("All");
+                let currState = true;
+
+                for (let i = 0; i < updatedState.length; i++) {
+                    if (i !== indexOfAll) {
+                        currState = currState && updatedState[i];
+                    }
                 }
 
-            }
+                setState((prevState) => {
+                    const newState = [...prevState];
+                    newState[indexOfAll] = currState;
+                    return newState;
+                });
+            } else {
+                if (props.data[props.title].includes(event.target.name)) {
+                    const index = props.data[props.title].indexOf(event.target.name);
+                    props.data[props.title].splice(index, 1);
+                }
+                const indexOfAll = props.data[props.title].indexOf("All");
 
+                setState((prevState) => {
+                    const newState = [...prevState];
+                    newState[indexOfAll] = false;
+                    return newState;
+                });
+            }
         }
-        props.handleChange(props.data)
-        console.log(props.data, "filterData")
-        //  console.log(props.data, event.target.name == "All", props.title, event.target.checked)
+
+        props.handleChange(props.data);
+        console.log(props.data, "filterData");
+        console.log(state, "state of check");
     }
+
 
 
     return (
@@ -97,6 +136,8 @@ export default function CustomDropSelectField(props) {
                     {props.value.map((ele, index) => (
                         <FormControlLabel
                             control={
+
+
                                 <Checkbox
                                     checked={state[index]}
                                     onChange={(event) => handleChanges(event, index)}
