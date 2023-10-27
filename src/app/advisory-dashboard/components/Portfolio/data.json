@@ -15,12 +15,12 @@
                 "ABC Number": "94-6-0",
                 "Equity Exposure": 94,
                 "Target Exposure": 70,
-                "Equity Exposure Deviation": 24,
+                "Equity Exposure Deviation": "24%",
                 "Debt Exposure": 6,
                 "Gold & Others Exposure": "-"
             },
             "Cash Allocation": {
-                "Overnight/Liquid Exposure": 3
+                "Overnight/Liquid Exposure": "3%"
             },
             "Portfolio Quality Risk": {
                 "5 star rated funds": 48,
@@ -111,7 +111,7 @@
                 "ABC Number": "100-0-0",
                 "Equity Exposure": 100,
                 "Target Exposure": 80,
-                "Equity Exposure Deviation": 20,
+                "Equity Exposure Deviation": "20%",
                 "Debt Exposure": "-",
                 "Gold & Others Exposure": "-"
             },
@@ -207,7 +207,7 @@
                 "ABC Number": "94-6-0",
                 "Equity Exposure": 94,
                 "Target Exposure": 80,
-                "Equity Exposure Deviation": 14,
+                "Equity Exposure Deviation": "14%",
                 "Debt Exposure": 6,
                 "Gold & Others Exposure": "-"
             },
@@ -302,12 +302,12 @@
                 "ABC Number": "86-14-0",
                 "Equity Exposure": 86,
                 "Target Exposure": 67.8,
-                "Equity Exposure Deviation": 18,
+                "Equity Exposure Deviation": "18%",
                 "Debt Exposure": 14,
                 "Gold & Others Exposure": "-"
             },
             "Cash Allocation": {
-                "Overnight/Liquid Exposure": 3
+                "Overnight/Liquid Exposure": "3%"
             },
             "Portfolio Quality Risk": {
                 "5 star rated funds": 26,
@@ -397,7 +397,7 @@
                 "ABC Number": "100-0-0",
                 "Equity Exposure": 100,
                 "Target Exposure": 50,
-                "Equity Exposure Deviation": 50,
+                "Equity Exposure Deviation": "50%",
                 "Debt Exposure": "-",
                 "Gold & Others Exposure": "-"
             },
@@ -492,12 +492,12 @@
                 "ABC Number": "94-6-0",
                 "Equity Exposure": 94,
                 "Target Exposure": 70,
-                "Equity Exposure Deviation": 24,
+                "Equity Exposure Deviation": "24%",
                 "Debt Exposure": 6,
                 "Gold & Others Exposure": "-"
             },
             "Cash Allocation": {
-                "Overnight/Liquid Exposure": 3
+                "Overnight/Liquid Exposure": "3%"
             },
             "Portfolio Quality Risk": {
                 "5 star rated funds": 48,
@@ -588,7 +588,7 @@
                 "ABC Number": "100-0-0",
                 "Equity Exposure": 100,
                 "Target Exposure": 80,
-                "Equity Exposure Deviation": 20,
+                "Equity Exposure Deviation": "20%",
                 "Debt Exposure": "-",
                 "Gold & Others Exposure": "-"
             },
@@ -684,7 +684,7 @@
                 "ABC Number": "94-6-0",
                 "Equity Exposure": 94,
                 "Target Exposure": 80,
-                "Equity Exposure Deviation": 14,
+                "Equity Exposure Deviation": "14%",
                 "Debt Exposure": 6,
                 "Gold & Others Exposure": "-"
             },
@@ -779,12 +779,12 @@
                 "ABC Number": "86-14-0",
                 "Equity Exposure": 86,
                 "Target Exposure": 67.8,
-                "Equity Exposure Deviation": 18,
+                "Equity Exposure Deviation": "18%",
                 "Debt Exposure": 14,
                 "Gold & Others Exposure": "-"
             },
             "Cash Allocation": {
-                "Overnight/Liquid Exposure": 3
+                "Overnight/Liquid Exposure": "3%"
             },
             "Portfolio Quality Risk": {
                 "5 star rated funds": 26,
@@ -874,7 +874,7 @@
                 "ABC Number": "100-0-0",
                 "Equity Exposure": 100,
                 "Target Exposure": 50,
-                "Equity Exposure Deviation": 50,
+                "Equity Exposure Deviation": "50%",
                 "Debt Exposure": "-",
                 "Gold & Others Exposure": "-"
             },
@@ -969,12 +969,12 @@
                 "ABC Number": "94-6-0",
                 "Equity Exposure": 94,
                 "Target Exposure": 70,
-                "Equity Exposure Deviation": 24,
+                "Equity Exposure Deviation": "24%",
                 "Debt Exposure": 6,
                 "Gold & Others Exposure": "-"
             },
             "Cash Allocation": {
-                "Overnight/Liquid Exposure": 3
+                "Overnight/Liquid Exposure": "3%"
             },
             "Portfolio Quality Risk": {
                 "5 star rated funds": 48,
@@ -1065,7 +1065,7 @@
                 "ABC Number": "100-0-0",
                 "Equity Exposure": 100,
                 "Target Exposure": 80,
-                "Equity Exposure Deviation": 20,
+                "Equity Exposure Deviation": "20%",
                 "Debt Exposure": "-",
                 "Gold & Others Exposure": "-"
             },
@@ -1161,7 +1161,7 @@
                 "ABC Number": "94-6-0",
                 "Equity Exposure": 94,
                 "Target Exposure": 80,
-                "Equity Exposure Deviation": 14,
+                "Equity Exposure Deviation": "14%",
                 "Debt Exposure": 6,
                 "Gold & Others Exposure": "-"
             },
@@ -1256,12 +1256,12 @@
                 "ABC Number": "86-14-0",
                 "Equity Exposure": 86,
                 "Target Exposure": 67.8,
-                "Equity Exposure Deviation": 18,
+                "Equity Exposure Deviation": "18%",
                 "Debt Exposure": 14,
                 "Gold & Others Exposure": "-"
             },
             "Cash Allocation": {
-                "Overnight/Liquid Exposure": 3
+                "Overnight/Liquid Exposure": "3%"
             },
             "Portfolio Quality Risk": {
                 "5 star rated funds": 26,
@@ -1351,7 +1351,7 @@
                 "ABC Number": "100-0-0",
                 "Equity Exposure": 100,
                 "Target Exposure": 50,
-                "Equity Exposure Deviation": 50,
+                "Equity Exposure Deviation": "50%",
                 "Debt Exposure": "-",
                 "Gold & Others Exposure": "-"
             },
