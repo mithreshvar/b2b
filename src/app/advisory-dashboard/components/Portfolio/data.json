@@ -6,6 +6,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹31,14,580",
+                "Total SIP Value": "18,500" ,
                 "Net Inflow YTD (without MTM)": "₹5,34,000",
                 "Net Inflow Growth (without MTM)": "22%",
                 "Since Inception Returns": "22%",
@@ -17,7 +18,7 @@
                 "Target Exposure": 70,
                 "Equity Exposure Deviation": "24%",
                 "Debt Exposure": 6,
-                "Gold & Others Exposure": "-"
+                "Gold & Others Exposure": "2%"
             },
             "Cash Allocation": {
                 "Overnight/Liquid Exposure": "3%"
@@ -102,6 +103,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹50,08,290",
+                "Total SIP Value": "2,000",
                 "Net Inflow YTD (without MTM)": "₹-15,14,054",
                 "Net Inflow Growth (without MTM)": "-27%",
                 "Since Inception Returns": "43%",
@@ -198,6 +200,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹25,32,887",
+                "Total SIP Value": "-",
                 "Net Inflow YTD (without MTM)": "-",
                 "Net Inflow Growth (without MTM)": "-",
                 "Since Inception Returns": "15%",
@@ -293,6 +296,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹5,10,86,234",
+                "Total SIP Value": "18,500",
                 "Net Inflow YTD (without MTM)": "₹1,11,000",
                 "Net Inflow Growth (without MTM)": "-",
                 "Since Inception Returns": "63%",
@@ -388,6 +392,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹47,25,488",
+                "Total SIP Value": "10,000",
                 "Net Inflow YTD (without MTM)": "₹30,000",
                 "Net Inflow Growth (without MTM)": "1%",
                 "Since Inception Returns": "14%",
@@ -483,6 +488,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹31,14,580",
+                "Total SIP Value": "18,500",
                 "Net Inflow YTD (without MTM)": "₹5,34,000",
                 "Net Inflow Growth (without MTM)": "22%",
                 "Since Inception Returns": "22%",
@@ -579,6 +585,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹50,08,290",
+                "Total SIP Value": "2,000",
                 "Net Inflow YTD (without MTM)": "₹-15,14,054",
                 "Net Inflow Growth (without MTM)": "-27%",
                 "Since Inception Returns": "43%",
@@ -675,6 +682,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹25,32,887",
+                "Total SIP Value": "-",
                 "Net Inflow YTD (without MTM)": "-",
                 "Net Inflow Growth (without MTM)": "-",
                 "Since Inception Returns": "15%",
@@ -770,6 +778,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹5,10,86,234",
+                "Total SIP Value": "18,500",
                 "Net Inflow YTD (without MTM)": "₹1,11,000",
                 "Net Inflow Growth (without MTM)": "-",
                 "Since Inception Returns": "63%",
@@ -865,6 +874,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹47,25,488",
+                "Total SIP Value": "10,000",
                 "Net Inflow YTD (without MTM)": "₹30,000",
                 "Net Inflow Growth (without MTM)": "1%",
                 "Since Inception Returns": "14%",
@@ -960,6 +970,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹31,14,580",
+                "Total SIP Value": "18,500",
                 "Net Inflow YTD (without MTM)": "₹5,34,000",
                 "Net Inflow Growth (without MTM)": "22%",
                 "Since Inception Returns": "22%",
@@ -1056,6 +1067,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹50,08,290",
+                "Total SIP Value": "2,000",
                 "Net Inflow YTD (without MTM)": "₹-15,14,054",
                 "Net Inflow Growth (without MTM)": "-27%",
                 "Since Inception Returns": "43%",
@@ -1152,6 +1164,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹25,32,887",
+                "Total SIP Value": "-",
                 "Net Inflow YTD (without MTM)": "-",
                 "Net Inflow Growth (without MTM)": "-",
                 "Since Inception Returns": "15%",
@@ -1247,6 +1260,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹5,10,86,234",
+                "Total SIP Value": "18,500",
                 "Net Inflow YTD (without MTM)": "₹1,11,000",
                 "Net Inflow Growth (without MTM)": "-",
                 "Since Inception Returns": "63%",
@@ -1342,6 +1356,7 @@
             "Mobile": 987654321,
             "Basic Details": {
                 "AUM": "₹47,25,488",
+                "Total SIP Value": "10,000",
                 "Net Inflow YTD (without MTM)": "₹30,000",
                 "Net Inflow Growth (without MTM)": "1%",
                 "Since Inception Returns": "14%",
