@@ -178,7 +178,7 @@ export default function MonthlyDetails(props){
                     <div ref={scrollingContainerRef} className="h-[100%]  overflow-scroll">
                     <table className={` duration-[0.6s] transition-all border-l border-t`}> {/*${Nav ? 'w-[100vw]' : 'absolute left-[25px] w-[100vw]'}*/}
                         <thead>
-                            <tr className="sticky top-[-5px] border-b bg-white">
+                            <tr className="sticky top-[-5px] border-b bg-white shadow-[0px_3px_6px_#0000001A]">
                                 <td className="p-[20px]  text-[16px] text-[#0071E7] font-bold">{selectedOption}</td>
                                 <td className="p-[20px] ">April</td>
                                 <td className="p-[20px] ">May</td>
