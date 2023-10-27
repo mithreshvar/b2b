@@ -4,7 +4,6 @@ import back from 'public/back.svg';
 import close from '/public/close.svg'
 import Image from 'next/image';
 import { useDataContext } from "../../context/DataContext";
-import { BreakfastDiningOutlined } from "@mui/icons-material";
 
 export default function MonthlyDetails(props){
 
@@ -110,20 +109,21 @@ export default function MonthlyDetails(props){
     useEffect(() => {
         const handleScroll = () => {
             const container = scrollingContainerRef.current;
-            const scrollTop = container.scrollTop;
-        
-            for (let i = 0; i < ref.length; i++) {
+            const scrollTop = container.scrollTop + 20;
+            for (let i = 0; i < ref.length - 1; i++) {
                 const sectionRef = ref[i].current;
-                if (sectionRef) {
+                const nextRef =  ref[i+1].current;
+                if (sectionRef &&  nextRef) {
                     const sectionTop = sectionRef.offsetTop;
-                    const sectionBottom = sectionTop + sectionRef.offsetHeight;
-        
-                    if (scrollTop >= sectionTop - 10 && scrollTop < sectionBottom) {
+                    const sectionBottom = nextRef.offsetTop;
+                    if (scrollTop >= sectionTop  && scrollTop < sectionBottom ) {
                         selectedSection = i;
                         break;
                     }
                 }
             }
+            const last = SIPDetailsRef.current.offsetTop;
+            if(Math.abs(last - scrollTop) <= 65)selectedSection = 8;
             setSelectedOption(selectedTable[selectedSection]);
         };
         
@@ -179,12 +179,12 @@ export default function MonthlyDetails(props){
                     <table className={` duration-[0.6s] transition-all border-l border-t`}> {/*${Nav ? 'w-[100vw]' : 'absolute left-[25px] w-[100vw]'}*/}
                         <thead>
                             <tr className="sticky top-[-5px] border-b bg-white">
-                                <td className="p-[20px] w-[280px]  text-[16px] text-[#0071E7] font-bold">{selectedOption}</td>
-                                <td className="p-[20px] w-[200px] ">April</td>
-                                <td className="p-[20px] w-[200px] ">May</td>
-                                <td className="p-[20px] w-[200px] ">June</td>
-                                <td className="p-[20px] w-[200px] ">July</td>
-                                <td className="p-[20px] w-[200px] ">August</td>
+                                <td className="p-[20px]  text-[16px] text-[#0071E7] font-bold">{selectedOption}</td>
+                                <td className="p-[20px] ">April</td>
+                                <td className="p-[20px] ">May</td>
+                                <td className="p-[20px] ">June</td>
+                                <td className="p-[20px] ">July</td>
+                                <td className="p-[20px] ">August</td>
                             </tr>
                         </thead>
                         <tbody>
