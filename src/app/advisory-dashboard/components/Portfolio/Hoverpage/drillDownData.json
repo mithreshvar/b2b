@@ -143,6 +143,25 @@
                   "exp": 1.48
                 }
             ]              
+        },
+
+        "Gold" : {
+          "Gold and others" : [
+            {
+              "name": "LIC MF Gold ETF FoF(G)",
+              "rating": 5,
+              "amount": 54544,
+              "exp": 1.6
+            }
+          ],
+          "Others" : [
+            {
+              "name": "SBI Gold-Reg(G)",
+              "rating": 5,
+              "amount": 32082,
+              "exp": 0.9
+            }
+          ]
         }
     }
 }
