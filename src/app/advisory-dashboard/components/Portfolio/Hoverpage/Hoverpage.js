@@ -15,7 +15,7 @@ export default function AUMHoverPage() {
 
         {/* Darkest */}
         <div className='h-[430px] overflow-auto'>
-            <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
+            <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
                 <p className='w-[50%]'>Total AUM</p>
                 <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
                 <p className='w-[16%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
@@ -81,7 +81,7 @@ export function SIPHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
+          <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
               <p className='w-[50%]'>Total SIP</p>
               <p className='w-[19.5%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
               <p className='w-[16%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
@@ -355,7 +355,7 @@ export function StarRatedHoverPage({ rate }) {
             </div>
     
             {/* Darkest */}
-            <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
+            <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
                 <p className='w-[50%]'>Total - {rate[0] === 0 ? "Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate)} Funds</p>
                 <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
                 <p className='w-[16%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
