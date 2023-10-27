@@ -152,14 +152,6 @@ export default function MonthlyDetails(props){
             <div className="flex justify-between items-center text-[14px] pt-[20px] pb-[15.5px] bg-white">
                     <div className="ml-[30px] text-[20px] font-semibold">{props.name}</div>
                     <div className="flex ml-[275px]">
-                        <div className="flex mr-[25px] bg-[#F1F7FD] rounded-md p-[8px]">
-                            <div className="mr-[15px] font-medium">No of years with FundsIndia</div>
-                            <div className="font-semibold">10.8</div>
-                        </div>
-                        <div className="flex mr-[25px] bg-[#F1F7FD] rounded-md p-[8px]">
-                            <div className="mr-[15px] font-medium">Investing Since</div>
-                            <div className="font-semibold">05-Nov-2022</div>
-                        </div>
                         <div className="flex bg-[#F1F7FD] rounded-md p-[8px]">
                             <div className="mr-[15px] font-medium">Last Contacted Date</div>
                             <div className="font-semibold">05-Nov-2022</div>
@@ -169,30 +161,30 @@ export default function MonthlyDetails(props){
                         </div>
                     </div>
                 </div>
-            <div className="flex  border-t">
-                <div className="mt-[6.5px] ml-[15px]">
-                    <Image src={back} alt="back" className={`absolute ${(Nav) ? 'left-[245px]' : 'left-[18px]  rotate-180'} z-[2] cursor-pointer  transition-all duration-[0.5s]`} onClick={()=>{setNav(!Nav)}} />
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='AUM & Flow'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(AumAndFlowDetails),setSelectedOption('AUM & Flow')}}>AUM & Flow Details</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Asset Allocation'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(AssetAllocationRef),setSelectedOption('Asset Allocation')}}>Asset Allocation</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Performance'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(performanceRef),setSelectedOption('Performance')} }>Performance</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Portfolio Quality'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(PortfolioQualityRef),setSelectedOption('Portfolio Quality')} }>Portfolio Quality</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Concentration'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(ConcentrationRef),setSelectedOption('Concentration')} }>Concentration</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='% of Portfolio under lock-in'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(PortfoliounderlockinRef),setSelectedOption('% of Portfolio under lock-in')} }>% of Portfolio under lock-in</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Equity - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(EquityQualityCheckStyleSplitRef),setSelectedOption('Equity - Quality Check & StyleSplit')} }>Equity - Quality Check & StyleSplit</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='Debt - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(DebtQualityCheckStyleSplitRef),setSelectedOption('Debt - Quality Check & StyleSplit')} }>Debt - Quality Check & StyleSplit</button><br></br>
-                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-t-[10px] mb-[20px] w-[240px] h-[40px] ${selectedOption==='SIP Details'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium'} `} onClick={()=>{scrollToHeading(SIPDetailsRef),setSelectedOption('SIP Details')}}>SIP Details</button><br></br>
+            <div className=" h-[calc(100vh*0.80-72.5px)] overflow-auto flex  border-t">
+                <div className={`px-[15px] pt-[5px] flex flex-col gap-y-[7px] ${(Nav) ? 'w-[270px]' : 'w-[40px] '} transition-all duration-[0.5s] `}>
+                    <Image src={back} alt="back" className={`absolute ${(Nav) ? 'left-[262px]' : 'left-[30px]  rotate-180'} z-[2] cursor-pointer  transition-all duration-[0.5s]`} onClick={()=>{setNav(!Nav)}} />
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='AUM & Flow'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(AumAndFlowDetails),setSelectedOption('AUM & Flow')}}>AUM & Flow Details</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='Asset Allocation'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(AssetAllocationRef),setSelectedOption('Asset Allocation')}}>Asset Allocation</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='Performance'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(performanceRef),setSelectedOption('Performance')} }>Performance</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='Portfolio Quality'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(PortfolioQualityRef),setSelectedOption('Portfolio Quality')} }>Portfolio Quality</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='Concentration'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(ConcentrationRef),setSelectedOption('Concentration')} }>Concentration</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='% of Portfolio under lock-in'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(PortfoliounderlockinRef),setSelectedOption('% of Portfolio under lock-in')} }>% of Portfolio under lock‑in</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='Equity - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(EquityQualityCheckStyleSplitRef),setSelectedOption('Equity - Quality Check & StyleSplit')} }>Equity - Quality Check & StyleSplit</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='Debt - Quality Check & StyleSplit'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(DebtQualityCheckStyleSplitRef),setSelectedOption('Debt - Quality Check & StyleSplit')} }>Debt - Quality Check & StyleSplit</button>
+                    <button className={`${Nav ? 'opacity-100' : 'opacity-0'} text-left text-[16px] rounded-[5px] w-[240px] min-h-[40px] p-[10px] transition-[opacity] duration-[0.5s] ${selectedOption==='SIP Details'?'bg-[#F1F7FD] text-[#0071E7] font-bold':'bg-[#00000000] text-[#000000] font-medium '} `} onClick={()=>{scrollToHeading(SIPDetailsRef),setSelectedOption('SIP Details')}}>SIP Details</button><br></br>
                 </div>
-                <div  className="h-[calc(100vh*0.90-72.5px)] w-[180vh] overflow-hidden">
+                <div  className=" w-[180vw] overflow-hidden">
                     <div ref={scrollingContainerRef} className="h-[100%]  overflow-scroll">
-                    <table className={`${Nav ? 'w-[100vw]' : 'absolute left-[25px] w-[100vw]'} duration-[0.6s] transition-all border-l border-t`}>
+                    <table className={` duration-[0.6s] transition-all border-l border-t`}> {/*${Nav ? 'w-[100vw]' : 'absolute left-[25px] w-[100vw]'}*/}
                         <thead>
                             <tr className="sticky top-[-5px] border-b bg-white">
-                                <td className="p-[20px] text-[16px] text-[#0071E7] font-bold">{selectedOption}</td>
-                                <td className="p-[20px]">April</td>
-                                <td className="p-[20px]">May</td>
-                                <td className="p-[20px]">June</td>
-                                <td className="p-[20px]">July</td>
-                                <td className="p-[20px]">August</td>
+                                <td className="p-[20px] w-[280px]  text-[16px] text-[#0071E7] font-bold">{selectedOption}</td>
+                                <td className="p-[20px] w-[200px] ">April</td>
+                                <td className="p-[20px] w-[200px] ">May</td>
+                                <td className="p-[20px] w-[200px] ">June</td>
+                                <td className="p-[20px] w-[200px] ">July</td>
+                                <td className="p-[20px] w-[200px] ">August</td>
                             </tr>
                         </thead>
                         <tbody>

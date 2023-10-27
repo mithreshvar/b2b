@@ -4,7 +4,6 @@ import data from './data.json';
 import { useRef, useState } from "react";
 import CheckBoxName from "./CheckBoxName";
 import { Checkbox, InputAdornment } from "@mui/material";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import whatsappIcon from "/public/Group 549708.svg";
 import telegramIcon from "/public/Path 238665.svg";
 import { useDraggable } from "react-use-draggable-scroll";
