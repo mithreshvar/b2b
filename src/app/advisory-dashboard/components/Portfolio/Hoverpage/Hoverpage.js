@@ -45,7 +45,7 @@ export default function DefaultHoverPage() {
                                                 {
                                                     data.AUM[split][category].map(row => 
                                                         <div className='flex'> 
-                                                            <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : "text-[#F56902]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                            <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : [3,2].includes(row.rating) ? "text-[#F56902]" : "text-[#E30005]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
                                                             <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
                                                             <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
                                                             <p className='w-[15%] text-right'></p>
