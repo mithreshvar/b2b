@@ -1,114 +1,147 @@
 import React from 'react'
+import data from './drillDownData.json'
+import { Star } from '@mui/icons-material';
 
-export default function Hoverpage() {
+export default function DefaultHoverPage() {
   return (
     
-    <div className='flex flex-col gap-y-[20px]'>
-            
-            <table>
-                <tr className="flex w-full">
-                    <th className="h-[44px] w-[340px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal pr-[10px]">Asset Class/Category/Scheme Name</th>
-                    <th className="h-[44px] w-[100px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">Amount</p></th>
-                    <th className="h-[44px] w-[100px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">% Exposure</p></th>
-                    <th className="h-[44px] w-[500px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">AMC</p></th>
-                    <th className="h-[44px] w-[100px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p>rating</p></th>
-                    <th className="h-[44px] w-[100px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">exp ratio</p></th>
-                    <th className="h-[44px] w-[100px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">ytm</p></th>
-                    <th className="h-[44px] w-[100px] justify-start flex items-center text-[12px] text-[#6E6E72] font-normal"><p className="w-[135px]">AAA Equivalent</p></th>
-                </tr>
-            </table>
-            
-            <table>
-                <tr>
-                    <td><b>Equity</b></td>
-                </tr>
-            </table>
+    <div className='flex flex-col gap-y-[10px] p-[20px]'>
+        <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+            <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
+            <p className='w-[19%] text-right'>Amount</p>
+            <p className='w-[16%] text-right'>% Exposure</p>
+            <p className='w-[15%] text-right'>No of funds</p>
+        </div>
 
-            <table>
-                <tr>
-                    <td><p className='bg-[#f1f7fd] h-8 rounded-[8px]'>Equity - Blend</p></td>
-                </tr>
-            </table>
-
-            <table>
-            <tr className="flex w-full">
-                    <th className="h-[70px]  w-[340px] flex justify-items-start text-[12px font-normal"><p>SBI Long Term Equity Fund-Reg(IDCW)</p></th>
-                    <th className="h-[70px]  w-[100px] flex justify-items-start text-[12px font-normal"><p>16316</p></th>
-                    <th className="h-[70px]  w-[100px] flex justify-items-start text-[12px font-normal"><p>0.34%</p></th>
-                    <th className="h-[70px]  w-[500px] flex justify-items-start text-[12px font-normal"><p>SBI Funds Management Limited</p></th>
-                    <th className="h-[70px]  w-[100px] flex justify-items-start text-[12px font-normal"><p>3</p></th>
-                    <th className="h-[70px]  w-[100px] flex justify-items-start text-[12px font-normal"><p>1.75</p></th>
-            </tr>
-            <tr className="flex w-full">
-                    <th className="h-[70px] w-[340px] flex justify-items-start text-[12px font-normal"><p>HSBC ELSS Fund-Reg(G)</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>134815</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>2.80%</p></th>
-                    <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>HSBC Global Asset Management (India) Private Limited</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>2</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.92</p></th>
-            </tr>
-            <tr className="flex w-full">
-                    <th className="h-[70px] w-[340px] flex justify-items-start  text-[12px font-normal"><p>HSBC Flexi Cap Fund-Reg(G)</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>638271</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>13.27%</p></th>
-                    <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>HSBC Global Asset Management (India) Private Limited</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>2</p></th>
-                    <th className="h-700px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.98</p></th>
-            </tr>
-            <tr className="flex w-full">
-                    <th className="h-[70px] w-[340px] flex justify-items-start  text-[12px font-normal"><p>Mirae Asset Large Cap Fund-Reg(G)</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><>1241821</></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>25.83%</p></th>
-                    <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>Mirae Asset Investment Managers (India) Private Limited</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>5</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.42</p></th>
-            </tr>
-            <tr className="flex w-full">
-                    <th className="h-[70px] w-[340px] flex justify-items-start  text-[12px font-normal"><p>HSBC Large & Mid Cap Fund-Reg(G)</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>84190</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.75%</p></th>
-                    <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>HSBC Global Asset Management (India) Private Limited</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>0</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>2.04</p></th>
-            </tr>
-            <tr className="flex ">
-                    <th className="h-[70px] w-[340px] flex justify-items-start text-[12px font-normal"><p>ICICI Pru LT Equity Fund (Tax Saving)(G)</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1323542</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>27.53%</p></th>
-                    <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>ICICI Prudential Asset Management Company Limited</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>3</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.74</p></th>
-            </tr>
-            <tr className="flex w-full">
-                    <th className="h-[70px] w-[340px] flex justify-items-start text-[12px font-normal"><p>Nippon India Tax Saver (ELSS) Fund(G)</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>92831</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.93%</p></th>
-                    <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>Nippon Life India Asset Management Limited</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1</p></th>
-                    <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.72</p></th>
-            </tr>
-            </table>
-
-            <table>
-                <tr>
-                    <td><p className='bg-[#f1f7fd] h-8 rounded-[8px]'>Hybrid - Multi Asset Allocation</p></td>
-                </tr>
-            </table>
-
-            <table>
-                <tr className="flex w-full">
-                        <th className="h-[70px] w-[340px] flex justify-items-start text-[12px font-normal"><p>ICICI Pru Multi-Asset Fund(G)</p></th>
-                        <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1276620</p></th>
-                        <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>26.55%</p></th>
-                        <th className="h-[70px] w-[500px] flex justify-items-start text-[12px font-normal"><p>ICICI Prudential Asset Management Company Limited</p></th>
-                        <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>0</p></th>
-                        <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>1.68</p></th>
-                        <th className="h-[70px] w-[100px] flex justify-items-start text-[12px font-normal"><p>6.98</p></th>
-                </tr>
-            </table>
-            
-
+        {/* Darkest */}
+        <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
+            <p className='w-[50%]'>Total AUM</p>
+            <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+            <p className='w-[16%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+            <p className='w-[14%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).length }</p>
+        </div>
+        <div className='flex flex-col gap-[20px]'>
+            {
+                Object.keys(data.AUM).map((split) => {
+                    return (
+                        <div className='flex flex-col gap-[10px]'>
+                            <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
+                                <p className='w-[50%]'>{split}</p>
+                                <p className='w-[19.5%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                                <p className='w-[16%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                                <p className='w-[14%] text-right'>{ Object.values(data.AUM[split]).flat().length }</p>
+                            </div>
+                            {
+                                Object.keys(data.AUM[split]).map((category) => {
+                                    return (
+                                        <div>
+                                            <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                                                <p className='w-[50%]'>{category}</p>
+                                                <p className='w-[20%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
+                                                <p className='w-[16%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
+                                                <p className='w-[14%] text-right'>{data.AUM[split][category].length}</p>
+                                            </div>
+                                            <div className='flex flex-col gap-[15px] pl-[10px]'>
+                                                {
+                                                    data.AUM[split][category].map(row => 
+                                                        <div className='flex'> 
+                                                            <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : "text-[#F56902]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                            <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
+                                                            <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
+                                                            <p className='w-[15%] text-right'></p>
+                                                        </div>    
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        
+                    )
+                })
+            }
+        </div>
     </div>
   )
 }
 
+
+export function EquityExposureHoverPage() {
+    return (
+        <div className='flex flex-col gap-y-[10px] p-[20px]'>
+        <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+            <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
+            <p className='w-[19%] text-right'>Amount</p>
+            <p className='w-[16%] text-right'>% Exposure</p>
+            <p className='w-[15%] text-right'>No of funds</p>
+        </div>
+        <div className='flex flex-col gap-[20px]'>
+            {
+                Object.keys(data.AUM).filter(option => option === "Equity").map((split) => {
+                    return (
+                        <div className='flex flex-col gap-[10px]'>
+                            <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
+                                <p className='w-[50%]'>{split}</p>
+                                <p className='w-[19.5%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                                <p className='w-[16%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                                <p className='w-[14%] text-right'>{ Object.values(data.AUM[split]).flat().length }</p>
+                            </div>
+                            {
+                                Object.keys(data.AUM[split]).map((category) => {
+                                    return (
+                                        <div>
+                                            <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                                                <p className='w-[50%]'>{category}</p>
+                                                <p className='w-[20%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
+                                                <p className='w-[16%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
+                                                <p className='w-[14%] text-right'>{data.AUM[split][category].length}</p>
+                                            </div>
+                                            <div className='flex flex-col gap-[15px] pl-[10px]'>
+                                                {
+                                                    data.AUM[split][category].map(row => 
+                                                        <div className='flex'> 
+                                                            <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : "text-[#F56902]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                            <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
+                                                            <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
+                                                            <p className='w-[15%] text-right'></p>
+                                                        </div>    
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        
+                    )
+                })
+            }
+        </div>
+    </div>
+    )
+};
+
+export function LowRatedHoverPage() {
+    return (
+        <div className='flex flex-col gap-y-[10px] p-[20px]'>
+        <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+            <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
+            <p className='w-[19%] text-right'>Amount</p>
+            <p className='w-[16%] text-right'>% Exposure</p>
+            <p className='w-[15%] text-right'>No of funds</p>
+        </div>
+        <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
+            <p className='w-[50%]'>Low Rated Funds</p>
+            <p className='w-[19.5%] text-right'></p>
+            <p className='w-[16%] text-right'></p>
+            <p className='w-[14%] text-right'></p>
+        </div>
+        <div className='flex flex-col gap-[20px]'>
+        
+        </div>
+        </div>
+    )
+}
