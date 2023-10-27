@@ -329,5 +329,48 @@
           }
         ]
       }
+    },
+
+    "FISelect" : {
+      "Equity" : {
+          "Equity - Low Volatility" : [
+              {
+                  "name": "HDFC Short Term Debt Fund(G)",
+                  "rating" : 5,
+                  "amount" : 32082,
+                  "exp": 0.9
+              },
+              {
+                "name": "Aditya Birla SL Corp Bond Fund(G)",
+                "rating" : 5,
+                "amount" : 50258,
+                "exp": 1.4
+              },
+              {
+                "name": "Axis Long Term Equity Fund-Reg(G)",
+                "rating" : 4,
+                "amount" : 107135,
+                "exp": 3.1
+              }
+          ]
+      },
+
+      "Debt" : {
+          "Debt - Liquid & Overnight Funds" : [
+            {
+              "name": "Bandhan Liquid Fund-Reg(G)",
+              "rating": 5,
+              "amount": 54558,
+              "exp": 1.60
+            },  
+            {
+                "name": "HDFC Liquid Fund(G)",
+                "rating": 4,
+                "amount": 32082,
+                "exp": 0.9
+              }
+          ]            
+      }
   }
+
 }
