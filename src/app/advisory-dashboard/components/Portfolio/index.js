@@ -22,6 +22,7 @@ import sortedDecending from "/public/sortedDecending.svg"
 import { Search } from "@mui/icons-material";
 import info from "/public/infoIcon.svg"
 import drillDownIcon from '/public/drillDown.svg'
+import DefaultHoverPage from "./Hoverpage/Hoverpage";
 
 export default function Portfolio() {
 
@@ -660,7 +661,7 @@ export default function Portfolio() {
                                 }
                             </div>
 
-                            <div ref={tablesContainerRef} onScroll={handleTableBodyScroll} className={`flex overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] pt-0 gap-x-[10px] no-scrollbar `}>
+                            <div ref={tablesContainerRef} onScroll={handleTableBodyScroll} className={`flex overflow-x-scroll ${navOpen ? ' w-[calc(100vw-507px)] ' : ' w-[calc(100vw-325px)] '} transition-all duration-[0.6s] p-[10px] pt-0 gap-x-[10px] no-scrollbar relative `}>
                                 {
                                     (function () {
                                         let tableNamesAsArray = Object.entries(Data[0]);
@@ -699,7 +700,7 @@ export default function Portfolio() {
                                                                         <tr onMouseOver={() => setHoverIndex(tableRowIndex)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == tableRowIndex) && " border-[#5DA9F8] border-y-[1px] "} `}>
                                                                         {
                                                                             asArray.map(([header, tableData]) => {
-                                                                                
+                                                                                const drillRef = useRef()
                                                                                 if (FilterColumnOption[tableName].includes(header)){
 
                                                                                     let colorStyle;
@@ -760,14 +761,19 @@ export default function Portfolio() {
                                                                                                     header == "Debt Exposure" || header == "Net YTM" || header == "% of AAA Equivalent" || header == "5 Star Funds" || header == "4 Star Funds" || header == "<3 Star Funds" || header == "1 Star Funds" || header == "2 Star Funds" || header == "3 Star Funds" || header == "Not Rated" || 
                                                                                                     header == "Liquid & Overnight" || header == "UST" || header == "Low Duration" || header == "Short Duration" || header == "Medium Duration" || header == "Long Duration" || header == "Credit Risk" || header == "Dynamic Funds" || header == "Conservative Hybrid" || header == "Others" || 
                                                                                                     header == "Total SIP Value" || header == "Equity" || header == "Debt" || header == "Others" || header == "5 Star" || header == "4 Star" || header == "<3 Star" || header == "Not Rated")) && 
-                                                                                                    <button className="absolute bottom-[-5px] right-0 h-[6px] flex items-center " onClick={() => {setShowDrillDown({tableName, header, tableRowIndex}); console.log(tableName, header, tableRowIndex) } } onBlur={()=>setShowDrillDown(null)} >
+                                                                                                    <button 
+                                                                                                        ref={drillRef} 
+                                                                                                        className="absolute bottom-[-5px] right-0 h-[6px] flex items-center " 
+                                                                                                        onClick={() => {
+                                                                                                            setShowDrillDown(
+                                                                                                                {  
+                                                                                                                    top: drillRef.current.offsetParent.offsetParent.offsetTop + drillRef.current.offsetParent.offsetTop + drillRef.current.offsetTop +7 - currentRefTableBody[currentTableNameIndex].current.scrollTop
+                                                                                                                }); 
+                                                                                                            }} 
+                                                                                                        onBlur={()=>setShowDrillDown(null)} 
+                                                                                                    >
                                                                                                         <Image className="shrink-0 h-[3px] w-[15px]" src={drillDownIcon}/>
                                                                                                     </button> 
-                                                                                                }
-                                                                                                {(showDrillDown != null && showDrillDown.tableName == tableName && showDrillDown.header == header && showDrillDown.tableRowIndex == tableRowIndex) && 
-                                                                                                    <div className=" absolute top-[30px] left-0 rounded-[25px] h-[200px] w-[200px] p-[15px] bg-white border-[2px] z-[2] " >
-                                                                                                        <h1>hi</h1>
-                                                                                                    </div>
                                                                                                 }
                                                                                             </div> 
                                                                                         </td>
@@ -786,6 +792,11 @@ export default function Portfolio() {
                                             }
                                         })
                                     })()
+                                }
+                                {(showDrillDown != null) && 
+                                    <div className={` absolute top-[30px] left-0 rounded-[25px] p-[5px] bg-white border-[2px] z-[2] `} style={{width: tablesContainerRef.current.offsetWidth-60+'px', height: tablesContainerRef.current.offsetHeight+'px' , left: tablesContainerRef.current.scrollLeft +30 +'px', top: showDrillDown.top+'px' }}  >
+                                        <DefaultHoverPage />
+                                    </div>
                                 }
                             </div>
                         </div>

@@ -14,54 +14,56 @@ export default function DefaultHoverPage() {
         </div>
 
         {/* Darkest */}
-        <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
-            <p className='w-[50%]'>Total AUM</p>
-            <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
-            <p className='w-[16%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
-            <p className='w-[14%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).length }</p>
-        </div>
-        <div className='flex flex-col gap-[20px]'>
-            {
-                Object.keys(data.AUM).map((split) => {
-                    return (
-                        <div className='flex flex-col gap-[10px]'>
-                            <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
-                                <p className='w-[50%]'>{split}</p>
-                                <p className='w-[19.5%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
-                                <p className='w-[16%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
-                                <p className='w-[14%] text-right'>{ Object.values(data.AUM[split]).flat().length }</p>
+        <div className='h-[430px] overflow-auto'>
+            <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex'> 
+                <p className='w-[50%]'>Total AUM</p>
+                <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                <p className='w-[16%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                <p className='w-[14%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).length }</p>
+            </div>
+            <div className='flex flex-col gap-[20px]'>
+                {
+                    Object.keys(data.AUM).map((split) => {
+                        return (
+                            <div className='flex flex-col gap-[10px]'>
+                                <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
+                                    <p className='w-[50%]'>{split}</p>
+                                    <p className='w-[19.5%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                                    <p className='w-[16%] text-right'>{ Object.values(data.AUM[split]).flat().reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                                    <p className='w-[14%] text-right'>{ Object.values(data.AUM[split]).flat().length }</p>
+                                </div>
+                                {
+                                    Object.keys(data.AUM[split]).map((category) => {
+                                        return (
+                                            <div>
+                                                <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                                                    <p className='w-[50%]'>{category}</p>
+                                                    <p className='w-[20%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
+                                                    <p className='w-[16%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
+                                                    <p className='w-[14%] text-right'>{data.AUM[split][category].length}</p>
+                                                </div>
+                                                <div className='flex flex-col gap-[15px] pl-[10px]'>
+                                                    {
+                                                        data.AUM[split][category].map(row => 
+                                                            <div className='flex'> 
+                                                                <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : "text-[#F56902]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                                <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
+                                                                <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
+                                                                <p className='w-[15%] text-right'></p>
+                                                            </div>    
+                                                        )
+                                                    }
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
-                            {
-                                Object.keys(data.AUM[split]).map((category) => {
-                                    return (
-                                        <div>
-                                            <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
-                                                <p className='w-[50%]'>{category}</p>
-                                                <p className='w-[20%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
-                                                <p className='w-[16%] text-right'>{data.AUM[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
-                                                <p className='w-[14%] text-right'>{data.AUM[split][category].length}</p>
-                                            </div>
-                                            <div className='flex flex-col gap-[15px] pl-[10px]'>
-                                                {
-                                                    data.AUM[split][category].map(row => 
-                                                        <div className='flex'> 
-                                                            <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : "text-[#F56902]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
-                                                            <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
-                                                            <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
-                                                            <p className='w-[15%] text-right'></p>
-                                                        </div>    
-                                                    )
-                                                }
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                        
-                    )
-                })
-            }
+                            
+                        )
+                    })
+                }
+            </div>
         </div>
     </div>
   )
