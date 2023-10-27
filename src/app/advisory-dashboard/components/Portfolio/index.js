@@ -22,7 +22,8 @@ import sortedDecending from "/public/sortedDecending.svg"
 import { Search } from "@mui/icons-material";
 import info from "/public/infoIcon.svg"
 import drillDownIcon from '/public/drillDown.svg'
-import DefaultHoverPage from "./Hoverpage/Hoverpage";
+import { DebtExposureHoverPage, EquityExposureHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, OvernightLiquidExposureHoverPage, SIPHoverPage, StarRatedHoverPage } from "./Hoverpage/Hoverpage";
+import AUMHoverPage from "./Hoverpage/Hoverpage";
 
 export default function Portfolio() {
 
@@ -33,6 +34,7 @@ export default function Portfolio() {
         "Basic Details": [
             "All",
             "AUM", 
+            "Total SIP Value",
             "Net Inflow YTD (without MTM)", 
             "Net Inflow Growth (without MTM)", 
             "Since Inception Returns", 
@@ -376,6 +378,7 @@ export default function Portfolio() {
         "Client Name" : 0,
         "Basic Details": {
             "AUM": 0,
+            "Total SIP Value": 0,
             "Net Inflow YTD (without MTM)": 0,
             "Net Inflow Growth (without MTM)": 0,
             "Since Inception Returns": 0,
@@ -767,7 +770,9 @@ export default function Portfolio() {
                                                                                                         onClick={() => {
                                                                                                             setShowDrillDown(
                                                                                                                 {  
-                                                                                                                    top: drillRef.current.offsetParent.offsetParent.offsetTop + drillRef.current.offsetParent.offsetTop + drillRef.current.offsetTop +7 - currentRefTableBody[currentTableNameIndex].current.scrollTop
+                                                                                                                    top: drillRef.current.offsetParent.offsetParent.offsetTop + drillRef.current.offsetParent.offsetTop + drillRef.current.offsetTop +7 - currentRefTableBody[currentTableNameIndex].current.scrollTop,
+                                                                                                                    tableName,
+                                                                                                                    header
                                                                                                                 }); 
                                                                                                             }} 
                                                                                                         onBlur={()=>setShowDrillDown(null)} 
@@ -795,7 +800,19 @@ export default function Portfolio() {
                                 }
                                 {(showDrillDown != null) && 
                                     <div className={` absolute top-[30px] left-0 rounded-[25px] p-[5px] bg-white border-[2px] z-[2] `} style={{width: tablesContainerRef.current.offsetWidth-60+'px', height: tablesContainerRef.current.offsetHeight+'px' , left: tablesContainerRef.current.scrollLeft +30 +'px', top: showDrillDown.top+'px' }}  >
-                                        <DefaultHoverPage />
+                                        {
+                                            (showDrillDown.tableName == 'Basic Details' && showDrillDown.header == 'AUM' ) && <AUMHoverPage /> ||
+                                            (showDrillDown.tableName == 'Basic Details' && showDrillDown.header == 'Total SIP Value' ) && <SIPHoverPage /> ||
+                                            (showDrillDown.tableName == 'Asset Allocation Risk' && showDrillDown.header == 'Equity Exposure' ) && <EquityExposureHoverPage /> ||
+                                            (showDrillDown.tableName == 'Asset Allocation Risk' && showDrillDown.header == 'Debt Exposure' ) && <DebtExposureHoverPage /> ||
+                                            (showDrillDown.tableName == 'Asset Allocation Risk' && showDrillDown.header == 'Gold & Others Exposure' ) && <GoldOthersExposureHoverPage /> ||
+                                            (showDrillDown.tableName == 'Cash Allocation' && showDrillDown.header == 'Overnight/Liquid Exposure' ) && <OvernightLiquidExposureHoverPage /> ||
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == '5 star rated funds' ) && <StarRatedHoverPage rate={[5]} /> ||
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == '4 star rated funds' ) && <StarRatedHoverPage rate={[4]} /> ||
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Low Rated Fund' ) && <StarRatedHoverPage rate={[3,1]} /> ||
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Not Rated Fund Exposure' ) && <StarRatedHoverPage rate={[0]} /> ||
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'FundsIndia Select Fund Exposure' ) && <FISelectHoverPage /> 
+                                        }
                                     </div>
                                 }
                             </div>
