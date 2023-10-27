@@ -799,7 +799,7 @@ export default function Portfolio() {
                                     })()
                                 }
                                 {(showDrillDown != null) && 
-                                    <div className={` absolute top-[30px] left-0 rounded-[25px] p-[5px] bg-white border-[2px] z-[2] `} style={{width: tablesContainerRef.current.offsetWidth-60+'px', height: tablesContainerRef.current.offsetHeight+'px' , left: tablesContainerRef.current.scrollLeft +30 +'px', top: showDrillDown.top+'px' }}  >
+                                    <div className={` absolute top-[30px] left-0 rounded-[25px] p-[5px] bg-white border-[2px] z-[2] `} style={{width: tablesContainerRef.current.offsetWidth-60+'px', maxHeight: tablesContainerRef.current.offsetHeight+'px' , left: tablesContainerRef.current.scrollLeft +30 +'px', top: showDrillDown.top+'px' }}  >
                                         {
                                             (showDrillDown.tableName == 'Basic Details' && showDrillDown.header == 'AUM' ) && <AUMHoverPage /> ||
                                             (showDrillDown.tableName == 'Basic Details' && showDrillDown.header == 'Total SIP Value' ) && <SIPHoverPage /> ||
