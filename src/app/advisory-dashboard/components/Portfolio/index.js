@@ -22,7 +22,7 @@ import sortedDecending from "/public/sortedDecending.svg"
 import { Search } from "@mui/icons-material";
 import info from "/public/infoIcon.svg"
 import drillDownIcon from '/public/drillDown.svg'
-import { DebtExposureHoverPage, EquityExposureHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, OvernightLiquidExposureHoverPage, SIPHoverPage, StarRatedHoverPage } from "./Hoverpage/Hoverpage";
+import { DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, SIPHoverPage, StarRatedHoverPage } from "./Hoverpage/Hoverpage";
 import AUMHoverPage from "./Hoverpage/Hoverpage";
 
 export default function Portfolio() {
@@ -811,7 +811,10 @@ export default function Portfolio() {
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == '4 star rated funds' ) && <StarRatedHoverPage rate={[4]} /> ||
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Low Rated Fund' ) && <StarRatedHoverPage rate={[3,1]} /> ||
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Not Rated Fund Exposure' ) && <StarRatedHoverPage rate={[0]} /> ||
-                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'FundsIndia Select Fund Exposure' ) && <FISelectHoverPage /> 
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'FundsIndia Select Fund Exposure' ) && <FISelectHoverPage /> ||
+                                            (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Highest AMC Exposure' ) && <HighestAUMHoverPage /> ||
+                                            (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Highest Fund Exposure' ) && <HighestFundHoverPage /> ||
+                                            (showDrillDown.tableName == 'Liquidity' && showDrillDown.header == 'ELSS Exposure' ) && <ELSSExposureHoverPage /> 
                                         }
                                     </div>
                                 }

@@ -625,3 +625,52 @@ export function HighestFundHoverPage() {
     )
 }
 
+
+export function ELSSExposureHoverPage() {
+
+    return (
+      
+      <div className='flex flex-col gap-y-[10px] p-[20px]'>
+          <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+              <p className='w-[50%]'>Scheme Name</p>
+              <p className='w-[19%] text-right'>Amount</p>
+              <p className='w-[16%] text-right'>% Exposure</p>
+              <p className='w-[15%] text-right'>No of funds</p>
+          </div>
+  
+          {/* Darkest */}
+          <div className='max-h-[430px] overflow-auto'>
+            <div className='flex flex-col gap-[20px]'>
+                <div className='flex flex-col gap-[10px]'>
+                    <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                        <p className='w-[50%]'>ELSS Exposure</p>
+                        <p className='w-[20%] text-right'>3,25,700</p>
+                        <p className='w-[16%] text-right'>31.7%</p>
+                        <p className='w-[14%] text-right'>2</p>
+                    </div>
+                    <div>
+                        <div className='flex flex-col gap-[15px] pl-[10px]'>
+                            <div className='flex'> 
+                                <p className='w-[50%] flex items-center'>Mirae Asset Tax Saver Fund-Reg(G)<span className={`ml-[5px] whitespace-nowrap flex items-center text-[#00A345] `}><Star className='text-[15px] mr-[3px]' />5</span></p>
+                                <p className='w-[19%] text-right'>7,79,731</p>
+                                <p className='w-[16%] text-right'>22.9%</p>
+                                <p className='w-[15%] text-right'></p>
+                            </div>    
+                        </div>
+                    </div>
+                    <div>
+                        <div className='flex flex-col gap-[15px] pl-[10px]'>
+                            <div className='flex'> 
+                                <p className='w-[50%] flex items-center'>Invesco India Tax Plan(G)<span className={`ml-[5px] whitespace-nowrap flex items-center text-[#00A345] `}><Star className='text-[15px] mr-[3px]' />5</span></p>
+                                <p className='w-[19%] text-right'>2,54,520</p>
+                                <p className='w-[16%] text-right'>7.4%</p>
+                                <p className='w-[15%] text-right'></p>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    )
+}
