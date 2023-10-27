@@ -614,7 +614,7 @@ export default function Portfolio() {
                                                     <p className="whitespace-nowrap">{client["Client Name"]}</p>
                                                     <div onMouseOver={() => setShowClientInfo(i)} onMouseLeave={() => setShowClientInfo(-1)} className="relative">
                                                         <Image src={info} className={` ml-[5px] mb-[-2px] h-[13px] w-[12px] ${(showClientInfo == i) ? " opacity-0 hidden " : ' opacity-100 '} `} />
-                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} whitespace-nowrap relative mb-[-90px] ml-[110px] flex flex-col h-auto p-[15px] pt-0 left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
+                                                        <div className={` ${(showClientInfo == i) ? "opacity-100 cursor-auto" : 'opacity-0 hidden'} whitespace-nowrap relative mb-[-130px] ml-[110px] flex flex-col h-auto p-[15px] pt-0 left-[-125px] bg-white rounded-[10px] shadow-[0px_3px_8px_#00000026] z-[3] `}>
                                                             <h6 className="h-[40px] border-b-[1px] border-[#f6f6f6] px-[10px] py-[10px] ">{client["Client Name"]}</h6>
                                                             <table cellPadding={8} >
                                                                 <tr>
