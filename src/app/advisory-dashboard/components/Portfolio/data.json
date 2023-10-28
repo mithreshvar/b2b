@@ -165,12 +165,12 @@
                 "Net YTM": "-",
                 "% of AAA Equivalent": "-",
                 "5 Star Funds": "-",
-                "4 Star Funds": "-",
+                "4 Star Funds": "4",
                 "<3 Star Funds": "-",
                 "1 Star Funds": "-",
                 "2 Star Funds": "-",
                 "3 Star Funds": "-",
-                "Not Rated": "-",
+                "Not Rated": "1",
                 "Liquid & Overnight": "-",
                 "UST": "-",
                 "Low Duration": "-",
@@ -180,7 +180,7 @@
                 "Credit Risk": "-",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
-                "Others": "-"
+                "Others": "3"
             },
             "SIP Book": {
                 "Total SIP Value": "2,000",
@@ -275,8 +275,8 @@
                 "Medium Duration": "-",
                 "Long Duration": "-",
                 "Credit Risk": "-",
-                "Dynamic Funds": "-",
-                "Conservative Hybrid": "-",
+                "Dynamic Funds": "1",
+                "Conservative Hybrid": "2",
                 "Others": "-"
             },
             "SIP Book": {
@@ -368,9 +368,9 @@
                 "UST": "-",
                 "Low Duration": 1,
                 "Short Duration": 1,
-                "Medium Duration": "-",
+                "Medium Duration": "1",
                 "Long Duration": 12,
-                "Credit Risk": "-",
+                "Credit Risk": "2",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
                 "Others": "-"
@@ -454,12 +454,12 @@
                 "Net YTM": "-",
                 "% of AAA Equivalent": "-",
                 "5 Star Funds": "-",
-                "4 Star Funds": "-",
+                "4 Star Funds": "4",
                 "<3 Star Funds": "-",
                 "1 Star Funds": "-",
                 "2 Star Funds": "-",
                 "3 Star Funds": "-",
-                "Not Rated": "-",
+                "Not Rated": "1",
                 "Liquid & Overnight": "-",
                 "UST": "-",
                 "Low Duration": "-",
@@ -469,7 +469,7 @@
                 "Credit Risk": "-",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
-                "Others": "-"
+                "Others": "3"
             },
             "SIP Book": {
                 "Total SIP Value": "10,000",
@@ -647,12 +647,12 @@
                 "Net YTM": "-",
                 "% of AAA Equivalent": "-",
                 "5 Star Funds": "-",
-                "4 Star Funds": "-",
+                "4 Star Funds": "4",
                 "<3 Star Funds": "-",
                 "1 Star Funds": "-",
                 "2 Star Funds": "-",
                 "3 Star Funds": "-",
-                "Not Rated": "-",
+                "Not Rated": "1",
                 "Liquid & Overnight": "-",
                 "UST": "-",
                 "Low Duration": "-",
@@ -662,7 +662,7 @@
                 "Credit Risk": "-",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
-                "Others": "-"
+                "Others": "3"
             },
             "SIP Book": {
                 "Total SIP Value": "2,000",
@@ -757,8 +757,8 @@
                 "Medium Duration": "-",
                 "Long Duration": "-",
                 "Credit Risk": "-",
-                "Dynamic Funds": "-",
-                "Conservative Hybrid": "-",
+                "Dynamic Funds": "1",
+                "Conservative Hybrid": "2",
                 "Others": "-"
             },
             "SIP Book": {
@@ -850,9 +850,9 @@
                 "UST": "-",
                 "Low Duration": 1,
                 "Short Duration": 1,
-                "Medium Duration": "-",
+                "Medium Duration": "1",
                 "Long Duration": 12,
-                "Credit Risk": "-",
+                "Credit Risk": "2",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
                 "Others": "-"
@@ -936,12 +936,12 @@
                 "Net YTM": "-",
                 "% of AAA Equivalent": "-",
                 "5 Star Funds": "-",
-                "4 Star Funds": "-",
+                "4 Star Funds": "4",
                 "<3 Star Funds": "-",
                 "1 Star Funds": "-",
                 "2 Star Funds": "-",
                 "3 Star Funds": "-",
-                "Not Rated": "-",
+                "Not Rated": "1",
                 "Liquid & Overnight": "-",
                 "UST": "-",
                 "Low Duration": "-",
@@ -951,7 +951,7 @@
                 "Credit Risk": "-",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
-                "Others": "-"
+                "Others": "3"
             },
             "SIP Book": {
                 "Total SIP Value": "10,000",
@@ -1129,12 +1129,12 @@
                 "Net YTM": "-",
                 "% of AAA Equivalent": "-",
                 "5 Star Funds": "-",
-                "4 Star Funds": "-",
+                "4 Star Funds": "4",
                 "<3 Star Funds": "-",
                 "1 Star Funds": "-",
                 "2 Star Funds": "-",
                 "3 Star Funds": "-",
-                "Not Rated": "-",
+                "Not Rated": "1",
                 "Liquid & Overnight": "-",
                 "UST": "-",
                 "Low Duration": "-",
@@ -1144,7 +1144,7 @@
                 "Credit Risk": "-",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
-                "Others": "-"
+                "Others": "3"
             },
             "SIP Book": {
                 "Total SIP Value": "2,000",
@@ -1239,8 +1239,8 @@
                 "Medium Duration": "-",
                 "Long Duration": "-",
                 "Credit Risk": "-",
-                "Dynamic Funds": "-",
-                "Conservative Hybrid": "-",
+                "Dynamic Funds": "1",
+                "Conservative Hybrid": "2",
                 "Others": "-"
             },
             "SIP Book": {
@@ -1332,9 +1332,9 @@
                 "UST": "-",
                 "Low Duration": 1,
                 "Short Duration": 1,
-                "Medium Duration": "-",
+                "Medium Duration": "1",
                 "Long Duration": 12,
-                "Credit Risk": "-",
+                "Credit Risk": "2",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
                 "Others": "-"
@@ -1418,12 +1418,12 @@
                 "Net YTM": "-",
                 "% of AAA Equivalent": "-",
                 "5 Star Funds": "-",
-                "4 Star Funds": "-",
+                "4 Star Funds": "4",
                 "<3 Star Funds": "-",
                 "1 Star Funds": "-",
                 "2 Star Funds": "-",
                 "3 Star Funds": "-",
-                "Not Rated": "-",
+                "Not Rated": "1",
                 "Liquid & Overnight": "-",
                 "UST": "-",
                 "Low Duration": "-",
@@ -1433,7 +1433,7 @@
                 "Credit Risk": "-",
                 "Dynamic Funds": "-",
                 "Conservative Hybrid": "-",
-                "Others": "-"
+                "Others": "3"
             },
             "SIP Book": {
                 "Total SIP Value": "10,000",

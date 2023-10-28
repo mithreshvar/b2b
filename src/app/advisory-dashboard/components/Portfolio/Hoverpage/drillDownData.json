@@ -133,6 +133,72 @@
                   "rating": 5,
                   "amount": 54558,
                   "exp": 1.60
+                },
+                {
+                  "name": "HDFC Liquid Fund(G)",
+                  "rating": 4,
+                  "amount": 54544,
+                  "exp": 1.60
+                },
+                {
+                  "name": "Bandhan Liquid Fund-Reg(G)",
+                  "rating": 4,
+                  "amount": 54558,
+                  "exp": 1.60
+                },
+                {
+                  "name": "HDFC Liquid Fund(G)",
+                  "rating": 3,
+                  "amount": 54544,
+                  "exp": 1.60
+                },
+                {
+                  "name": "Bandhan Liquid Fund-Reg(G)",
+                  "rating": 3,
+                  "amount": 54558,
+                  "exp": 1.60
+                },
+                {
+                  "name": "HDFC Liquid Fund(G)",
+                  "rating": 2,
+                  "amount": 54544,
+                  "exp": 1.60
+                },
+                {
+                  "name": "Bandhan Liquid Fund-Reg(G)",
+                  "rating": 2,
+                  "amount": 54558,
+                  "exp": 1.60
+                },
+                {
+                  "name": "HDFC Liquid Fund(G)",
+                  "rating": 1,
+                  "amount": 54544,
+                  "exp": 1.60
+                },
+                {
+                  "name": "Bandhan Liquid Fund-Reg(G)",
+                  "rating": 1,
+                  "amount": 54558,
+                  "exp": 1.60
+                },
+                {
+                  "name": "Axis Midcap Fund-Reg(G)",
+                  "rating": 1,
+                  "amount": 32000,
+                  "exp": 0.50
+                },
+                {
+                  "name": "HDFC Liquid Fund(G)",
+                  "rating": 0,
+                  "amount": 54544,
+                  "exp": 1.60
+                },
+                {
+                  "name": "Bandhan Liquid Fund-Reg(G)",
+                  "rating": 0,
+                  "amount": 54558,
+                  "exp": 1.60
                 }
             ],
             "Debt - Short Duration/Banking & PSU/Corporate Bond" : [
@@ -145,6 +211,18 @@
                 {
                   "name": "Aditya Birla SL Corp Bond Fund(G)",
                   "rating": 5,
+                  "amount": 50258,
+                  "exp": 1.48
+                },
+                {
+                  "name": "HDFC Short Term Debt Fund(G)",
+                  "rating": 4,
+                  "amount": 32082,
+                  "exp": 0.94
+                },
+                {
+                  "name": "Aditya Birla SL Corp Bond Fund(G)",
+                  "rating": 4,
                   "amount": 50258,
                   "exp": 1.48
                 }
