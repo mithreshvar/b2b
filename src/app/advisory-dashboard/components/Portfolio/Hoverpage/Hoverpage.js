@@ -69,32 +69,35 @@ export default function AUMHoverPage() {
   )
 };
 
-export function SIPHoverPage() {
+export function SIPHoverPage({ fundType = ["Equity", "Debt", "Gold"] }) {
     return (
       
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
                 <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
-                <p className='w-[19%] text-right'>Amount</p>
+                <p className='w-[19%] text-right'>SIP Amount</p>
                 <p className='w-[16%] text-right'>% Exposure</p>
                 <p className='w-[15%] text-right'>No of funds</p>
             </div>
     
             {/* Darkest */}
             <div className='max-h-[430px] overflow-auto'>
-                <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
-                    <p className='w-[50%]'>Total SIP</p>
-                    <p className='w-[19.5%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
-                    <p className='w-[16%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
-                    <p className='w-[14%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).length }</p>
-                </div>
+                {
+                    fundType.length === 3 &&
+                    <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
+                        <p className='w-[50%]'>Total SIP</p>
+                        <p className='w-[19.5%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                        <p className='w-[16%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                        <p className='w-[14%] text-right'>{ Object.values(data.SIP).flatMap((category) => Object.values(category).flat()).length }</p>
+                    </div>
+                }
                 <div className='flex flex-col gap-[20px]'>
                     {
-                        Object.keys(data.SIP).map((split) => {
+                        Object.keys(data.SIP).filter(option => fundType.length === 1 ? fundType[0] === "Others" ? option === "Gold" : option === fundType[0] : true).map((split) => {
                             return (
                                 <div className='flex flex-col gap-[10px]'>
                                     <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
-                                        <p className='w-[50%]'>{split}</p>
+                                        <p className='w-[50%]'>{fundType.length === 1 ? "Total SIP - " + fundType[0] : split}</p>
                                         <p className='w-[19.5%] text-right'>{ Object.values(data.SIP[split]).flat().reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
                                         <p className='w-[16%] text-right'>{ Object.values(data.SIP[split]).flat().reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
                                         <p className='w-[14%] text-right'>{ Object.values(data.SIP[split]).flat().length }</p>
@@ -353,13 +356,13 @@ export function OvernightLiquidExposureHoverPage() {
     )
 };
 
-export function StarRatedHoverPage({ rate = [0,1,2,3,4,5], fundType = ["Equity", "Debt", "Gold"] }) {
+export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fundType = ["Equity", "Debt", "Gold"] }) {
     return (
       
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
                 <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
-                <p className='w-[19%] text-right'>Amount</p>
+                <p className='w-[19%] text-right'>{toplevel === "SIP" ? toplevel + " " : ""}Amount</p>
                 <p className='w-[16%] text-right'>% Exposure</p>
                 <p className='w-[15%] text-right'>No of funds</p>
             </div>
@@ -369,38 +372,38 @@ export function StarRatedHoverPage({ rate = [0,1,2,3,4,5], fundType = ["Equity",
                 {
                     fundType.length === 3 &&
                     <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
-                        <p className='w-[50%]'>Total - {rate[0] === 0 ? "Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate)} Funds</p>
-                        <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
-                        <p className='w-[16%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
-                        <p className='w-[14%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).length }</p>
+                        <p className='w-[50%]'>Total {toplevel === "SIP" ? toplevel : ""} - {rate[0] === 0 ? "Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate)} Funds</p>
+                        <p className='w-[19.5%] text-right'>{ Object.values(data[toplevel]).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                        <p className='w-[16%] text-right'>{ Object.values(data[toplevel]).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                        <p className='w-[14%] text-right'>{ Object.values(data[toplevel]).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).length }</p>
                     </div>
                 }
                 <div className='flex flex-col gap-[20px]'>
                     {
-                        Object.keys(data.AUM).filter(option => fundType.includes(option)).map((split) => {
+                        Object.keys(data[toplevel]).filter(option => fundType.includes(option)).map((split) => {
                             return (
-                                Object.values(data.AUM[split]).flat().filter(fund => rate.includes(fund.rating)).length > 0 ?
+                                Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).length > 0 ?
                                     <div className='flex flex-col gap-[10px]'>
                                         <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
                                             <p className='w-[50%]'>{fundType.length === 3 ? split : "Total " + split + " - " + (rate[0] === 0 ? "Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate)) + " Funds"}</p>
-                                            <p className='w-[19.5%] text-right'>{ Object.values(data.AUM[split]).flat().filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
-                                            <p className='w-[16%] text-right'>{ Object.values(data.AUM[split]).flat().filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
-                                            <p className='w-[14%] text-right'>{ Object.values(data.AUM[split]).flat().filter(fund => rate.includes(fund.rating)).length }</p>
+                                            <p className='w-[19.5%] text-right'>{ Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                                            <p className='w-[16%] text-right'>{ Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                                            <p className='w-[14%] text-right'>{ Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).length }</p>
                                         </div>
                                         {
-                                            Object.keys(data.AUM[split]).map((category) => {
+                                            Object.keys(data[toplevel][split]).map((category) => {
                                                 return (
-                                                    data.AUM[split][category].filter(fund => rate.includes(fund.rating)).length > 0 ?
+                                                    data[toplevel][split][category].filter(fund => rate.includes(fund.rating)).length > 0 ?
                                                     <div>
                                                             <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                                                                 <p className='w-[50%]'>{category}</p>
-                                                                <p className='w-[20%] text-right'>{data.AUM[split][category].filter(fund => rate.includes(fund.rating)).reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
-                                                                <p className='w-[16%] text-right'>{data.AUM[split][category].filter(fund => rate.includes(fund.rating)).reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
-                                                                <p className='w-[14%] text-right'>{data.AUM[split][category].filter(fund => rate.includes(fund.rating)).length}</p>
+                                                                <p className='w-[20%] text-right'>{data[toplevel][split][category].filter(fund => rate.includes(fund.rating)).reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
+                                                                <p className='w-[16%] text-right'>{data[toplevel][split][category].filter(fund => rate.includes(fund.rating)).reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
+                                                                <p className='w-[14%] text-right'>{data[toplevel][split][category].filter(fund => rate.includes(fund.rating)).length}</p>
                                                             </div>
                                                             <div className='flex flex-col gap-[15px] pl-[10px]'>
                                                                 {
-                                                                    data.AUM[split][category].filter(fund => rate.includes(fund.rating)).map(row => 
+                                                                    data[toplevel][split][category].filter(fund => rate.includes(fund.rating)).map(row => 
                                                                         <div className='flex'> 
                                                                             <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "text-[#6E6E72]" : [4,5].includes(row.rating) ? "text-[#00A345]" : [3,2].includes(row.rating) ? "text-[#F56902]" : "text-[#E30005]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating === 0 ? "Not Rated" : row.rating}</span></p>
                                                                             <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
@@ -1324,3 +1327,4 @@ export function SpecificDebtHoverPage({ specific = "Debt - Liquid & Overnight Fu
       </div>
     )
 };
+
