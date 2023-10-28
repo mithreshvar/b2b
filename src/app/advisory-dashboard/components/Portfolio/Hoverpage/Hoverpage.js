@@ -1020,7 +1020,7 @@ export function SpecificEquityHoverPage({ specific = "Equity - Blend"}) {
     )
 };
 
-export function EquityOthersHoverPage() {
+export function MonitorOthersHoverPage({ fund = "Equity" }) {
 
     const filteredData = {
         AUM: {
@@ -1058,7 +1058,7 @@ export function EquityOthersHoverPage() {
             <div className='max-h-[430px] overflow-auto'>
                 <div className='flex flex-col'>
                         <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
-                            <p className='w-[50%]'>Total Equity - Others</p>
+                            <p className='w-[50%]'>Total {fund} - Others</p>
                             <p className='w-[20%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
                             <p className='w-[16%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
                             <p className='w-[14%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).length }</p>
@@ -1077,6 +1077,227 @@ export function EquityOthersHoverPage() {
                                                         <p className='w-[15%] text-right'>{filteredData.AUM[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%"}</p>
                                                         <p className='w-[15%] text-right'>{filteredData.AUM[split][category].length }</p>
                                                     </div>
+                                                    <div className='flex flex-col gap-[15px] pl-[10px]'>
+                                                            {
+                                                                filteredData.AUM[split][category].map(row => 
+                                                                    <div className='flex'> 
+                                                                        <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : [3,2].includes(row.rating) ? "text-[#F56902]" : "text-[#E30005]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                                        <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
+                                                                        <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
+                                                                        <p className='w-[15%] text-right'></p>
+                                                                    </div>  
+                                                                )
+                                                            }
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                
+                            )
+                        })
+                    }
+                </div>
+            </div>
+      </div>
+    )
+};
+
+export function YTMHoverPage() {
+    return (
+        <div className='flex flex-col gap-y-[10px] p-[20px]'>
+            <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+                <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
+                <p className='w-[16%] text-right'>YTM</p>
+                <p className='w-[18%] text-right'>Amount</p>
+                <p className='w-[15.5%] text-right'>% Exposure</p>
+            </div>
+            <div className='max-h-[430px] overflow-auto'>
+                <div className='flex flex-col gap-[20px]'>
+                    {
+                        Object.keys(data.PortfolioExpense).filter(option => option === "Debt").map((split) => {
+                            return (
+                                <div className='flex flex-col gap-[10px]'>
+                                    <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
+                                        <p className='w-[50%]'>Total Debt - Net YTM</p>
+                                        <p className='w-[16%] text-right'>{ Object.values(data.PortfolioExpense[split]).flat().reduce((sum, fund) => sum + fund.ytm, 0.0).toFixed(1) + "%" }</p>
+                                        <p className='w-[18%] text-right'>{ Object.values(data.PortfolioExpense[split]).flat().reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                                        <p className='w-[16%] text-right'>{ Object.values(data.PortfolioExpense[split]).flat().reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                                    </div>
+                                    {
+                                        Object.keys(data.PortfolioExpense[split]).map((category) => {
+                                            return (
+                                                <div>
+                                                    <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                                                        <p className='w-[50%]'>{category}</p>
+                                                        <p className='w-[20%] text-right'>{data.PortfolioExpense[split][category].reduce((sum, fund) => sum + fund.ytm, 0.0).toFixed(1) + "%"}</p>
+                                                        <p className='w-[20%] text-right'>{data.PortfolioExpense[split][category].reduce((accum, curr) => accum + curr.amount, 0).toLocaleString("en-IN")}</p>
+                                                        <p className='w-[16%] text-right'>{data.PortfolioExpense[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%" }</p>
+                                                    </div>
+                                                    <div className='flex flex-col gap-[15px] pl-[10px]'>
+                                                        {
+                                                            data.PortfolioExpense[split][category].map(row => 
+                                                                <div className='flex'> 
+                                                                    <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : [3,2].includes(row.rating) ? "text-[#F56902]" : "text-[#E30005]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                                    <p className='w-[15%] text-right'>{row.ytm.toFixed(1) + "%"}</p>
+                                                                    <p className='w-[18.7%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
+                                                                    <p className='w-[15%] text-right'>{row.exp.toFixed(1) + "%"}</p>
+                                                                </div>    
+                                                            )
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+    )
+};
+
+export function AAAHoverPage() {
+
+    const filteredData = {
+        AUM: {
+            Debt: {
+                "Debt - Liquid & Overnight Funds" : [
+                    {
+                      "name": "HDFC Liquid Fund(G)",
+                      "rating": 5,
+                      "amount": 54544,
+                      "exp": 1.60,
+                      "aaa": 98,
+                    },
+                    {
+                      "name": "Bandhan Liquid Fund-Reg(G)",
+                      "rating": 5,
+                      "amount": 54558,
+                      "exp": 1.60,
+                      "aaa": 90,
+                    }
+                ],
+                "Debt - Short Duration/Banking & PSU/Corporate Bond" : [
+                    {
+                      "name": "HDFC Liquid Fund(G)",
+                      "rating": 5,
+                      "amount": 54544,
+                      "exp": 1.60,
+                      "aaa": 81,
+                    },
+                    {
+                      "name": "Bandhan Liquid Fund-Reg(G)",
+                      "rating": 5,
+                      "amount": 54558,
+                      "exp": 1.60,
+                      "aaa": 97,
+                    }
+                ],
+            },
+        },
+    };
+
+    return (
+      <div className='flex flex-col gap-y-[10px] p-[20px]'>
+            <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+                <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
+                <p className='w-[15%] text-right'>% of AAA Equivalent</p>              
+                <p className='w-[19%] text-right'>Amount</p>
+                <p className='w-[16%] text-right'>% Exposure</p>
+            </div>
+    
+            {/* Darkest */}
+            <div className='max-h-[430px] overflow-auto'>
+                <div className='flex flex-col'>
+                        <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                            <p className='w-[50%]'>Total Debt - % of AAA Equivalent</p>
+                            <p className='w-[18%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.aaa, 0.0).toFixed(1) + "%" }</p>
+                            <p className='w-[20%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                            <p className='w-[15%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                        </div>
+                    {
+                        Object.keys(filteredData.AUM).map((split) => {
+                            return (
+                                <div className='flex flex-col gap-[10px]'>
+                                    {
+                                        Object.keys(filteredData.AUM[split]).map((category) => {
+                                            return (
+                                                <div>
+                                                    <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                                                        <p className='w-[50%]'>{category}</p>
+                                                        <p className='w-[18%] text-right'>{filteredData.AUM[split][category].reduce((accum, curr) => accum + curr.aaa, 0.0).toFixed(1) + "%" }</p>
+                                                        <p className='w-[20%] text-right'>{filteredData.AUM[split][category].reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN")}</p>
+                                                        <p className='w-[15%] text-right'>{filteredData.AUM[split][category].reduce((accum, curr) => accum + curr.exp, 0.0).toFixed(1) + "%"}</p>
+                                                    </div>
+                                                    <div className='flex flex-col gap-[15px] pl-[10px]'>
+                                                            {
+                                                                filteredData.AUM[split][category].map(row => 
+                                                                    <div className='flex'> 
+                                                                        <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : [3,2].includes(row.rating) ? "text-[#F56902]" : "text-[#E30005]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
+                                                                        <p className='w-[15%] text-right'>{row.aaa.toFixed(1) + "%"}</p>
+                                                                        <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
+                                                                        <p className='w-[14.5%] text-right'>{row.exp.toFixed(1) + "%"}</p>
+                                                                    </div>  
+                                                                )
+                                                            }
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                
+                            )
+                        })
+                    }
+                </div>
+            </div>
+      </div>
+    )
+};
+
+export function SpecificDebtHoverPage({ specific = "Debt - Liquid & Overnight Funds"}) {
+
+    const filteredData = {
+        AUM: {
+          Debt: {
+            specific: data.AUM.Debt[(specific === "Debt - UST" || specific === "Debt - Medium Duration" || specific === "Debt - Long Duration" || specific === "Debt - Credit Risk" || specific === "Debt - Dynamic Funds" || specific === "Debt - Conservative Hybrid" ) ? "Debt - Liquid & Overnight Funds" : specific === "Debt - Short Duration" ? "Debt - Short Duration/Banking & PSU/Corporate Bond" : specific]
+          },
+        },
+    };
+
+    return (
+      <div className='flex flex-col gap-y-[10px] p-[20px]'>
+            <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
+                <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
+                <p className='w-[19%] text-right'>Amount</p>
+                <p className='w-[16%] text-right'>% Exposure</p>
+                <p className='w-[15%] text-right'>No of funds</p>
+            </div>
+    
+            {/* Darkest */}
+            <div className='max-h-[430px] overflow-auto'>
+                <div className='flex flex-col'>
+                        <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
+                            <p className='w-[50%]'>{specific}</p>
+                            <p className='w-[20%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
+                            <p className='w-[16%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
+                            <p className='w-[14%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).length }</p>
+                        </div>
+                    {
+                        Object.keys(filteredData.AUM).map((split) => {
+                            return (
+                                <div className='flex flex-col gap-[10px]'>
+                                    {
+                                        Object.keys(filteredData.AUM[split]).map((category) => {
+                                            return (
+                                                <div>
                                                     <div className='flex flex-col gap-[15px] pl-[10px]'>
                                                             {
                                                                 filteredData.AUM[split][category].map(row => 
