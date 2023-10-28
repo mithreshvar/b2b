@@ -185,12 +185,12 @@
             "SIP Book": {
                 "Total SIP Value": "2,000",
                 "Equity": "2,000",
-                "Debt": "-",
-                "Others": "-",
+                "Debt": "2,000",
+                "Others": "1,000",
                 "5 Star": "-",
                 "4 Star": "-",
-                "<3 Star": "2,000",
-                "Not Rated": "-"
+                "<3 Star": "2",
+                "Not Rated": "3"
             }
         },
 
@@ -378,8 +378,8 @@
             "SIP Book": {
                 "Total SIP Value": "18,500",
                 "Equity": "18,500",
-                "Debt": "-",
-                "Others": "-",
+                "Debt": "2000",
+                "Others": "1000",
                 "5 Star": "2,000",
                 "4 Star": "1,000",
                 "<3 Star": "15,500",
@@ -667,12 +667,12 @@
             "SIP Book": {
                 "Total SIP Value": "2,000",
                 "Equity": "2,000",
-                "Debt": "-",
-                "Others": "-",
+                "Debt": "2,000",
+                "Others": "1,000",
                 "5 Star": "-",
                 "4 Star": "-",
-                "<3 Star": "2,000",
-                "Not Rated": "-"
+                "<3 Star": "2",
+                "Not Rated": "3"
             }
         },
 
@@ -860,8 +860,8 @@
             "SIP Book": {
                 "Total SIP Value": "18,500",
                 "Equity": "18,500",
-                "Debt": "-",
-                "Others": "-",
+                "Debt": "2000",
+                "Others": "1000",
                 "5 Star": "2,000",
                 "4 Star": "1,000",
                 "<3 Star": "15,500",
@@ -1149,12 +1149,12 @@
             "SIP Book": {
                 "Total SIP Value": "2,000",
                 "Equity": "2,000",
-                "Debt": "-",
-                "Others": "-",
+                "Debt": "2,000",
+                "Others": "1,000",
                 "5 Star": "-",
                 "4 Star": "-",
-                "<3 Star": "2,000",
-                "Not Rated": "-"
+                "<3 Star": "2",
+                "Not Rated": "3"
             }
         },
 
@@ -1342,8 +1342,8 @@
             "SIP Book": {
                 "Total SIP Value": "18,500",
                 "Equity": "18,500",
-                "Debt": "-",
-                "Others": "-",
+                "Debt": "2000",
+                "Others": "1000",
                 "5 Star": "2,000",
                 "4 Star": "1,000",
                 "<3 Star": "15,500",

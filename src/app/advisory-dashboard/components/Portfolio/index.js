@@ -765,15 +765,25 @@ export default function Portfolio() {
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == '3 Star Funds' ) && <StarRatedHoverPage fundType={["Debt"]} rate={[3]} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Not Rated' ) && <StarRatedHoverPage fundType={["Debt"]} rate={[0]} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Others' ) && <MonitorOthersHoverPage fund={"Debt"} /> ||
-
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Liquid & Overnight' ) && <SpecificDebtHoverPage specific={"Debt - Liquid & Overnight Funds"} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'UST' ) && <SpecificDebtHoverPage specific={"Debt - UST"} /> ||
+                                            (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Low Duration' ) && <SpecificDebtHoverPage specific={"Debt - Low Duration"} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Short Duration' ) && <SpecificDebtHoverPage specific={"Debt - Short Duration"} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Medium Duration' ) && <SpecificDebtHoverPage specific={"Debt - Medium Duration"} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Long Duration' ) && <SpecificDebtHoverPage specific={"Debt - Long Duration"} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Credit Risk' ) && <SpecificDebtHoverPage specific={"Debt - Credit Risk"} /> ||
                                             (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Dynamic Funds' ) && <SpecificDebtHoverPage specific={"Debt - Dynamic Funds"} /> ||
-                                            (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Conservative Hybrid' ) && <SpecificDebtHoverPage specific={"Debt - Conservative Hybrid"} />
+                                            (showDrillDown.tableName == 'Debt Monitor' && showDrillDown.header == 'Conservative Hybrid' ) && <SpecificDebtHoverPage specific={"Debt - Conservative Hybrid"} /> ||
+
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == 'Total SIP Value' ) && <SIPHoverPage /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == 'Equity' ) && <SIPHoverPage fundType={["Equity"]} /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == 'Debt' ) && <SIPHoverPage fundType={["Debt"]} /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == 'Others' ) && <SIPHoverPage fundType={["Others"]} /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == '5 Star' ) && <StarRatedHoverPage toplevel="SIP" rate={[5]} /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == '4 Star' ) && <StarRatedHoverPage toplevel="SIP" rate={[4]} /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == '<3 Star' ) && <StarRatedHoverPage toplevel="SIP" rate={[3,2,1]} /> ||
+                                            (showDrillDown.tableName == 'SIP Book' && showDrillDown.header == 'Not Rated' ) && <StarRatedHoverPage toplevel="SIP" rate={[0]} /> 
+
                                         }
                                     </div>
                                 }
