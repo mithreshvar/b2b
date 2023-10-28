@@ -1,11 +1,10 @@
-import React from 'react'
 import data from './drillDownData.json'
 import { Star } from '@mui/icons-material';
 
-export default function AUMHoverPage() {
+export default function AUMHoverPage({height}) {
   return (
     
-    <div className='flex flex-col gap-y-[10px] p-[20px]'>
+    <div className='flex flex-col gap-y-[10px] p-[20px]' >
         <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
             <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
             <p className='w-[19%] text-right'>Amount</p>
@@ -14,7 +13,7 @@ export default function AUMHoverPage() {
         </div>
 
         {/* Darkest */}
-        <div className='max-h-[430px] overflow-auto'>
+        <div className=' overflow-auto' style={{maxHeight: height}} >
             <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
                 <p className='w-[50%]'>Total AUM</p>
                 <p className='w-[19.5%] text-right'>{ Object.values(data.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
@@ -69,7 +68,7 @@ export default function AUMHoverPage() {
   )
 };
 
-export function SIPHoverPage({ fundType = ["Equity", "Debt", "Gold"] }) {
+export function SIPHoverPage({ fundType = ["Equity", "Debt", "Gold"], height }) {
     return (
       
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
@@ -81,7 +80,7 @@ export function SIPHoverPage({ fundType = ["Equity", "Debt", "Gold"] }) {
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 {
                     fundType.length === 3 &&
                     <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
@@ -139,7 +138,7 @@ export function SIPHoverPage({ fundType = ["Equity", "Debt", "Gold"] }) {
     )
 };
 
-export function EquityExposureHoverPage() {
+export function EquityExposureHoverPage({height}) {
     return (
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
@@ -148,7 +147,7 @@ export function EquityExposureHoverPage() {
                 <p className='w-[16%] text-right'>% Exposure</p>
                 <p className='w-[15%] text-right'>No of funds</p>
             </div>
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col gap-[20px]'>
                     {
                         Object.keys(data.AUM).filter(option => option === "Equity").map((split) => {
@@ -197,7 +196,7 @@ export function EquityExposureHoverPage() {
     )
 };
 
-export function DebtExposureHoverPage() {
+export function DebtExposureHoverPage({height}) {
     return (
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
@@ -206,7 +205,7 @@ export function DebtExposureHoverPage() {
                 <p className='w-[16%] text-right'>% Exposure</p>
                 <p className='w-[15%] text-right'>No of funds</p>
             </div>
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col gap-[20px]'>
                     {
                         Object.keys(data.AUM).filter(option => option === "Debt").map((split) => {
@@ -255,7 +254,7 @@ export function DebtExposureHoverPage() {
     )
 };
 
-export function GoldOthersExposureHoverPage() {
+export function GoldOthersExposureHoverPage({height}) {
     return (
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
@@ -264,7 +263,7 @@ export function GoldOthersExposureHoverPage() {
                 <p className='w-[16%] text-right'>% Exposure</p>
                 <p className='w-[15%] text-right'>No of funds</p>
             </div>
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col gap-[20px]'>
                     {
                         Object.keys(data.AUM).filter(option => option === "Gold").map((split) => {
@@ -313,7 +312,7 @@ export function GoldOthersExposureHoverPage() {
     )
 };
 
-export function OvernightLiquidExposureHoverPage() {
+export function OvernightLiquidExposureHoverPage({height}) {
     return (
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
@@ -322,7 +321,7 @@ export function OvernightLiquidExposureHoverPage() {
                 <p className='w-[16%] text-right'>% Exposure</p>
                 <p className='w-[15%] text-right'>No of funds</p>
             </div>
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
             <div className='flex flex-col gap-[20px]'>
                 {
                     Object.keys(data.AUM.Debt).filter(option => option === "Debt - Liquid & Overnight Funds").map((category) => {
@@ -356,7 +355,7 @@ export function OvernightLiquidExposureHoverPage() {
     )
 };
 
-export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fundType = ["Equity", "Debt", "Gold"] }) {
+export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fundType = ["Equity", "Debt", "Gold"], height }) {
     return (
       
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
@@ -368,7 +367,7 @@ export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fun
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 {
                     fundType.length === 3 &&
                     <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
@@ -431,7 +430,7 @@ export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fun
     )
 };
 
-export function FISelectHoverPage() {
+export function FISelectHoverPage({height}) {
     return (
       
       <div className='flex flex-col gap-y-[10px] p-[20px]'>
@@ -443,7 +442,7 @@ export function FISelectHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='max-h-[430px] overflow-auto'>
+          <div className=' overflow-auto' style={{maxHeight: height}} >
               <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
                   <p className='w-[50%]'>Total - FI Select Funds</p>
                   <p className='w-[19.5%] text-right'>{ Object.values(data.FISelect).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
@@ -498,7 +497,7 @@ export function FISelectHoverPage() {
     )
 };
 
-export function HighestAUMHoverPage() {
+export function HighestAUMHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -519,7 +518,7 @@ export function HighestAUMHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='max-h-[430px] overflow-auto'>
+          <div className=' overflow-auto' style={{maxHeight: height}} >
               <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
                   <p className='w-[50%]'>Mirae Asset Investment Managers (India) Private Limited</p>
                   <p className='w-[19.5%] text-right'>{ Object.values(filteredData.AUM).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
@@ -574,7 +573,7 @@ export function HighestAUMHoverPage() {
     )
 };
 
-export function HighestFundHoverPage() {
+export function HighestFundHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -595,7 +594,7 @@ export function HighestFundHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='max-h-[430px] overflow-auto'>
+          <div className=' overflow-auto' style={{maxHeight: height}} >
               <div className='flex flex-col gap-[20px]'>
                   {
                       Object.keys(filteredData.AUM).map((split) => {
@@ -632,7 +631,7 @@ export function HighestFundHoverPage() {
     )
 };
 
-export function ELSSExposureHoverPage() {
+export function ELSSExposureHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -655,7 +654,7 @@ export function ELSSExposureHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='max-h-[430px] overflow-auto'>
+          <div className=' overflow-auto' style={{maxHeight: height}} >
               <div className='flex flex-col'>
                     <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                         <p className='w-[50%]'>ELSS Exposure</p>
@@ -698,7 +697,7 @@ export function ELSSExposureHoverPage() {
     )
 };
 
-export function PortfolioExpenseRatioHoverPage() {
+export function PortfolioExpenseRatioHoverPage({height}) {
     return (
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
@@ -707,7 +706,7 @@ export function PortfolioExpenseRatioHoverPage() {
                 <p className='w-[18%] text-right'>Amount</p>
                 <p className='w-[15.5%] text-right'>% Exposure</p>
             </div>
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
                     <p className='w-[50%]'>Total Portfolio Expense Ratio</p>
                     <p className='w-[16%] text-right'>{ Object.values(data.PortfolioExpense).flatMap((category) => Object.values(category).flat()).reduce((sum, fund) => sum + fund.ratio, 0.0).toFixed(1) + "%" }</p>
@@ -762,7 +761,7 @@ export function PortfolioExpenseRatioHoverPage() {
     )
 };
 
-export function ActiveLargeCapHoverPage() {
+export function ActiveLargeCapHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -783,7 +782,7 @@ export function ActiveLargeCapHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='max-h-[430px] overflow-auto'>
+          <div className=' overflow-auto' style={{maxHeight: height}} >
               <div className='flex flex-col'>
                     <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                         <p className='w-[50%]'>Equity - Active Large Cap Fund</p>
@@ -826,7 +825,7 @@ export function ActiveLargeCapHoverPage() {
     )
 };
 
-export function SectorThematicHoverPage() {
+export function SectorThematicHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -850,7 +849,7 @@ export function SectorThematicHoverPage() {
           </div>
   
           {/* Darkest */}
-          <div className='max-h-[430px] overflow-auto'>
+          <div className=' overflow-auto' style={{maxHeight: height}} >
               <div className='flex flex-col'>
                     <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                         <p className='w-[50%]'>Equity - Sector/Thematic</p>
@@ -893,7 +892,7 @@ export function SectorThematicHoverPage() {
     )
 };
 
-export function SmallCapHoverPage() {
+export function SmallCapHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -917,7 +916,7 @@ export function SmallCapHoverPage() {
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col'>
                         <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                             <p className='w-[50%]'>Equity - Small Cap</p>
@@ -960,7 +959,7 @@ export function SmallCapHoverPage() {
     )
 };
 
-export function SpecificEquityHoverPage({ specific = "Equity - Blend"}) {
+export function SpecificEquityHoverPage({ specific = "Equity - Blend", height}) {
 
     const filteredData = {
         AUM: {
@@ -980,7 +979,7 @@ export function SpecificEquityHoverPage({ specific = "Equity - Blend"}) {
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col'>
                         <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                             <p className='w-[50%]'>{specific}</p>
@@ -1023,7 +1022,7 @@ export function SpecificEquityHoverPage({ specific = "Equity - Blend"}) {
     )
 };
 
-export function MonitorOthersHoverPage({ fund = "Equity" }) {
+export function MonitorOthersHoverPage({ fund = "Equity", height }) {
 
     const filteredData = {
         AUM: {
@@ -1058,7 +1057,7 @@ export function MonitorOthersHoverPage({ fund = "Equity" }) {
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col'>
                         <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                             <p className='w-[50%]'>Total {fund} - Others</p>
@@ -1107,7 +1106,7 @@ export function MonitorOthersHoverPage({ fund = "Equity" }) {
     )
 };
 
-export function YTMHoverPage() {
+export function YTMHoverPage({height}) {
     return (
         <div className='flex flex-col gap-y-[10px] p-[20px]'>
             <div className='text-[#6E6E72] font-medium text-[12px] flex px-[10px]'>
@@ -1116,7 +1115,7 @@ export function YTMHoverPage() {
                 <p className='w-[18%] text-right'>Amount</p>
                 <p className='w-[15.5%] text-right'>% Exposure</p>
             </div>
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col gap-[20px]'>
                     {
                         Object.keys(data.PortfolioExpense).filter(option => option === "Debt").map((split) => {
@@ -1165,7 +1164,7 @@ export function YTMHoverPage() {
     )
 };
 
-export function AAAHoverPage() {
+export function AAAHoverPage({height}) {
 
     const filteredData = {
         AUM: {
@@ -1216,7 +1215,7 @@ export function AAAHoverPage() {
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col'>
                         <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                             <p className='w-[50%]'>Total Debt - % of AAA Equivalent</p>
@@ -1265,7 +1264,7 @@ export function AAAHoverPage() {
     )
 };
 
-export function SpecificDebtHoverPage({ specific = "Debt - Liquid & Overnight Funds"}) {
+export function SpecificDebtHoverPage({ specific = "Debt - Liquid & Overnight Funds", height}) {
 
     const filteredData = specific === "Debt - Low Duration" ? 
         {
@@ -1301,7 +1300,7 @@ export function SpecificDebtHoverPage({ specific = "Debt - Liquid & Overnight Fu
             </div>
     
             {/* Darkest */}
-            <div className='max-h-[430px] overflow-auto'>
+            <div className=' overflow-auto' style={{maxHeight: height}} >
                 <div className='flex flex-col'>
                         <div className='bg-[#F1F7FD] p-[10px] font-semibold rounded-[10px] mb-[10px] flex pr-[20px]'> 
                             <p className='w-[50%]'>{specific}</p>
