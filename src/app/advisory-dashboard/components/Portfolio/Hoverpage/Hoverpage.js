@@ -1267,13 +1267,29 @@ export function AAAHoverPage() {
 
 export function SpecificDebtHoverPage({ specific = "Debt - Liquid & Overnight Funds"}) {
 
-    const filteredData = {
-        AUM: {
-          Debt: {
-            specific: data.AUM.Debt[(specific === "Debt - UST" || specific === "Debt - Medium Duration" || specific === "Debt - Long Duration" || specific === "Debt - Credit Risk" || specific === "Debt - Dynamic Funds" || specific === "Debt - Conservative Hybrid" ) ? "Debt - Liquid & Overnight Funds" : specific === "Debt - Short Duration" ? "Debt - Short Duration/Banking & PSU/Corporate Bond" : specific]
-          },
-        },
-    };
+    const filteredData = specific === "Debt - Low Duration" ? 
+        {
+            AUM: {
+                Debt: {
+                    "Debt - Short Duration/Banking & PSU/Corporate Bond" : [
+                        {
+                        "name": "Aditya Birla SL Corp Bond Fund(G)",
+                        "rating": 5,
+                        "amount": 50258,
+                        "exp": 1.48
+                        }
+                    ]
+                }
+            }
+        }
+        :
+        {
+            AUM: {
+            Debt: {
+                specific: data.AUM.Debt[(specific === "Debt - UST" || specific === "Debt - Medium Duration" || specific === "Debt - Long Duration" || specific === "Debt - Credit Risk" || specific === "Debt - Dynamic Funds" || specific === "Debt - Conservative Hybrid" ) ? "Debt - Liquid & Overnight Funds" : specific === "Debt - Short Duration" ? "Debt - Short Duration/Banking & PSU/Corporate Bond" : specific]
+            },
+            },
+        };
 
     return (
       <div className='flex flex-col gap-y-[10px] p-[20px]'>
