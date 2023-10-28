@@ -13,17 +13,15 @@ import threeDots from '/public/partner/threeDots.svg'
 import { Popper } from '@mui/material';
 import Filter from "./Filter";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import TradeUp from '/public/TradeUp.svg';
-import TradeDown from '/public/TradeDown.svg';
 
 import unsorted from "/public/unsorted.svg"
 import sortedAscending from "/public/sortedAscending.svg"
 import sortedDecending from "/public/sortedDecending.svg"
 import { Search } from "@mui/icons-material";
 import info from "/public/infoIcon.svg"
-import drillDownIcon from '/public/drillDown.svg'
 import { DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, SIPHoverPage, StarRatedHoverPage } from "./Hoverpage/Hoverpage";
 import AUMHoverPage from "./Hoverpage/Hoverpage";
+import Cell from "./Cell";
 
 export default function Portfolio() {
 
@@ -528,12 +526,13 @@ export default function Portfolio() {
         const filteredData = data.clients.filter((item) => {
           // Check if the name, email, and number match the provided regex patterns
             return (
-              valueReg.test(item['Client Name'])
+                valueReg.test(item['Client Name'])
             );
         });
         // Now, 'filteredData' contains the filtered data based on the provided criteria.
+        console.log(filteredData);
         setData(filteredData);
-      }
+    }
 
     function sortString() {
         if(sortedStateArray["Client Name"] == 0 || sortedStateArray["Client Name"] == -1){
@@ -553,7 +552,7 @@ export default function Portfolio() {
     }
 
     const [showDrillDown, setShowDrillDown] = useState(null)
-
+    
     return (
         <div className="bg-white m-[20px] rounded-[10px] p-[20px] h-[calc(100vh-104px)]">
             <div className="flex justify-between items-center pb-[30px] pt-[10px]">
@@ -703,86 +702,8 @@ export default function Portfolio() {
                                                                         <tr onMouseOver={() => setHoverIndex(tableRowIndex)} onMouseLeave={() => setHoverIndex(-1)} className={`h-[44px] flex items-center text-[#1F2125] text-[14px] font-medium even:bg-white odd:bg-[#F9FBFF] ${(hoverIndex == tableRowIndex) && " border-[#5DA9F8] border-y-[1px] "} `}>
                                                                         {
                                                                             asArray.map(([header, tableData]) => {
-                                                                                const drillRef = useRef()
                                                                                 if (FilterColumnOption[tableName].includes(header)){
-
-                                                                                    let colorStyle;
-                                                                                    if (header == "Equity Exposure Deviation" ){
-                                                                                        let num = Number(tableData.slice(0,-1))
-                                                                                        colorStyle = (num < -5 || num > 5) ? ' text-[#F56902] ' : ' text-[#00A345] ';
-                                                                                    }
-                                                                                    else if( tableData != '-' && ( header == "Gold & Others Exposure" || header == 'Overnight/Liquid Exposure' || header == '5 star rated funds' || header == '5 Star Funds' || header == '5 Star' ||  header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star' || header == 'Low Rated Fund' || header == 'Not Rated Fund Exposure' || header == 'Highest AMC Exposure' || header == 'Highest Fund Exposure' || header == '2nd Highest Fund Exposure' || header == 'Total Number of Non Debt Funds' || header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure' || header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star' || header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star' || header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global' || header == 'Others' || header == '% of AAA Equivalent' || header == 'Long Duration' || header == 'Dynamic Funds' || header == 'Medium Duration' || header == 'Conservative Hybrid' )){
-                                                                                        if(
-                                                                                            (header == "Gold & Others Exposure" && parseInt(tableData)>30) || 
-                                                                                            (header == 'Overnight/Liquid Exposure' && parseInt(tableData)>15) || 
-                                                                                            ((header == 'Low Rated Fund' || header == 'Not Rated Fund Exposure') && parseInt(tableData)>20) ||
-                                                                                            (header == 'Highest AMC Exposure' && parseInt(tableData)>50) || 
-                                                                                            (header == 'Highest Fund Exposure' && parseInt(tableData)>30) ||
-                                                                                            (header == '2nd Highest Fund Exposure' && parseInt(tableData)>50) || 
-                                                                                            (header == 'Total Number of Non Debt Funds' && parseInt(tableData)>10) ||
-                                                                                            ((header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure') && parseInt(tableData)>20) ||
-                                                                                            ((header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star') && parseInt(tableData)>0) ||
-                                                                                            ((header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global') && parseInt(tableData)>40) || 
-                                                                                            (header == 'Others' && parseInt(tableData)>40) || 
-                                                                                            (header == '% of AAA Equivalent' && parseInt(tableData)<80) ||
-                                                                                            ((header == 'Long Duration' || header == 'Dynamic Funds') && parseInt(tableData)>10)
-                                                                                        ){
-                                                                                            colorStyle = ' text-[#F56902] '; // Red
-                                                                                        }
-                                                                                        else if(
-                                                                                            (header == "Gold & Others Exposure" && parseInt(tableData)>=20 && parseInt(tableData)<=30) || 
-                                                                                            (header == 'Overnight/Liquid Exposure' && parseInt(tableData)>=5 && parseInt(tableData)<=15) || 
-                                                                                            (header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star') || 
-                                                                                            (header == 'Low Rated Fund' && parseInt(tableData)>=0 && parseInt(tableData)<=20) || 
-                                                                                            (header == 'Not Rated Fund Exposure' && parseInt(tableData)>=0 && parseInt(tableData)<=20) ||
-                                                                                            (header == 'Highest AMC Exposure' && parseInt(tableData)>=30 && parseInt(tableData)<=50)|| 
-                                                                                            (header == 'Highest Fund Exposure' && parseInt(tableData)>=20 && parseInt(tableData)<=30) ||
-                                                                                            (header == '2nd Highest Fund Exposure' && parseInt(tableData)>=30 && parseInt(tableData)<=50) ||
-                                                                                            (header == 'Total Number of Non Debt Funds' && parseInt(tableData)>=5 && parseInt(tableData)<=10) ||
-                                                                                            ((header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure') && parseInt(tableData)>=10 && parseInt(tableData)<=20) ||
-                                                                                            ((header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global') && parseInt(tableData)>=20 && parseInt(tableData)<=40) || 
-                                                                                            (header == 'Others' && parseInt(tableData)>=10 && parseInt(tableData)<=40) ||
-                                                                                            ((header == 'Medium Duration' || header == 'Conservative Hybrid') && parseInt(tableData)>0)
-                                                                                        ){
-                                                                                            colorStyle = ' text-[#EBC135] ' // Yellow
-                                                                                        }
-                                                                                        else {
-                                                                                            colorStyle = ' text-[#00A345] ' // Green
-                                                                                        }
-                                                                                    }  
-                                                                                    
-                                                                                    return(
-                                                                                        <td className="w-[150px] justify-center flex items-center gap-x-[5px] relative">
-                                                                                            { (header == "Net Inflow YTD (without MTM)" || header == "Net Inflow Growth (without MTM)") && tableData != '-' && ((tableData[1] == '-' || tableData[0] == '-' ) ? <Image height={10} width={15} src={TradeDown} alt="TradeUP"/> : <Image height={10} width={15} src={TradeUp} alt="TradeUP"/>)}
-                                                                                            <div className="relative min-w-[15px]"> 
-                                                                                                <p className={` ${colorStyle} `}> {tableData} </p>
-                                                                                                {
-                                                                                                    (tableData!= '-' && (header == "AUM" || header == "Equity Exposure" || header == "Debt Exposure" || header == "Gold & Others Exposure" || header == "Overnight/Liquid Exposure" || header == "5 star rated funds" || header == "4 star rated funds" || header == "Low Rated Fund" || header == "Not Rated Fund Exposure" || header == "FundsIndia Select Fund Exposure" ||
-                                                                                                    header == "Highest AMC Exposure" || header == "Highest Fund Exposure" || 
-                                                                                                    header == "ELSS Exposure" || header == "Portfolio Expense Ratio" || 
-                                                                                                    header == "Equity Exposure" || header == "Active Large Cap Fund Exposure" || header == "Sector/Thematic Exposure" || header == "Small Cap Exposure" || header == "5 Star Funds" || header == "4 Star Funds" || header == "<3 Star Funds" || header == "1 Star Funds" || header == "2 Star Funds" || header == "3 Star Funds" || header == "Not Rated" || header == "Blend" || header == "Quality" || header == "Value" || header == "Mid & Small" || header == "Global" || header == "Others" || 
-                                                                                                    header == "Debt Exposure" || header == "Net YTM" || header == "% of AAA Equivalent" || header == "5 Star Funds" || header == "4 Star Funds" || header == "<3 Star Funds" || header == "1 Star Funds" || header == "2 Star Funds" || header == "3 Star Funds" || header == "Not Rated" || 
-                                                                                                    header == "Liquid & Overnight" || header == "UST" || header == "Low Duration" || header == "Short Duration" || header == "Medium Duration" || header == "Long Duration" || header == "Credit Risk" || header == "Dynamic Funds" || header == "Conservative Hybrid" || header == "Others" || 
-                                                                                                    header == "Total SIP Value" || header == "Equity" || header == "Debt" || header == "Others" || header == "5 Star" || header == "4 Star" || header == "<3 Star" || header == "Not Rated")) && 
-                                                                                                    <button 
-                                                                                                        ref={drillRef} 
-                                                                                                        className="absolute bottom-[-5px] right-0 h-[6px] flex items-center " 
-                                                                                                        onClick={() => {
-                                                                                                            setShowDrillDown(
-                                                                                                                {  
-                                                                                                                    top: drillRef.current.offsetParent.offsetParent.offsetTop + drillRef.current.offsetParent.offsetTop + drillRef.current.offsetTop +7 - currentRefTableBody[currentTableNameIndex].current.scrollTop,
-                                                                                                                    tableName,
-                                                                                                                    header
-                                                                                                                }); 
-                                                                                                            }} 
-                                                                                                        onBlur={()=>setShowDrillDown(null)} 
-                                                                                                    >
-                                                                                                        <Image className="shrink-0 h-[3px] w-[15px]" src={drillDownIcon}/>
-                                                                                                    </button> 
-                                                                                                }
-                                                                                            </div> 
-                                                                                        </td>
-                                                                                    )
+                                                                                    return (<Cell header={header} tableData={tableData} setShowDrillDown={setShowDrillDown} currentRefTableBody={currentRefTableBody} currentTableNameIndex={currentTableNameIndex} tableName ={tableName} />)
                                                                                 }
                                                                             })
                                                                         }
