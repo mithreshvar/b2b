@@ -19,7 +19,7 @@ import sortedAscending from "/public/sortedAscending.svg"
 import sortedDecending from "/public/sortedDecending.svg"
 import { Search } from "@mui/icons-material";
 import info from "/public/infoIcon.svg"
-import { DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, SIPHoverPage, StarRatedHoverPage } from "./Hoverpage/Hoverpage";
+import { ActiveLargeCapHoverPage, DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, EquityOthersHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, PortfolioExpenseRatioHoverPage, SIPHoverPage, SectorThematicHoverPage, SmallCapHoverPage, SpecificEquityHoverPage, StarRatedHoverPage } from "./Hoverpage/Hoverpage";
 import AUMHoverPage from "./Hoverpage/Hoverpage";
 import Cell from "./Cell";
 
@@ -731,11 +731,29 @@ export default function Portfolio() {
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == '5 star rated funds' ) && <StarRatedHoverPage rate={[5]} /> ||
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == '4 star rated funds' ) && <StarRatedHoverPage rate={[4]} /> ||
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Low Rated Fund' ) && <StarRatedHoverPage rate={[3,1]} /> ||
-                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Not Rated Fund Exposure' ) && <StarRatedHoverPage rate={[0]} /> ||
+                                            (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'Not Rated Fund Exposure' ) && <StarRatedHoverPage /> ||
                                             (showDrillDown.tableName == 'Portfolio Quality Risk' && showDrillDown.header == 'FundsIndia Select Fund Exposure' ) && <FISelectHoverPage /> ||
                                             (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Highest AMC Exposure' ) && <HighestAUMHoverPage /> ||
                                             (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Highest Fund Exposure' ) && <HighestFundHoverPage /> ||
-                                            (showDrillDown.tableName == 'Liquidity' && showDrillDown.header == 'ELSS Exposure' ) && <ELSSExposureHoverPage /> 
+                                            (showDrillDown.tableName == 'Liquidity' && showDrillDown.header == 'ELSS Exposure' ) && <ELSSExposureHoverPage /> ||
+                                            (showDrillDown.tableName == 'Cost' && showDrillDown.header == 'Portfolio Expense Ratio' ) && <PortfolioExpenseRatioHoverPage /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Equity Exposure' ) && <EquityExposureHoverPage /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Active Large Cap Fund Exposure' ) && <ActiveLargeCapHoverPage /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Sector/Thematic Exposure' ) && <SectorThematicHoverPage /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Small Cap Exposure' ) && <SmallCapHoverPage /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == '5 Star Funds' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[5]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == '4 Star Funds' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[4]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == '<3 Star Funds' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[2,1]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == '1 Star Funds' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[1]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == '2 Star Funds' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[2]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == '3 Star Funds' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[3]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Not Rated' ) && <StarRatedHoverPage fundType={["Equity"]} rate={[0]} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Blend' ) && <SpecificEquityHoverPage specific={"Equity - Blend"} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Quality' ) && <SpecificEquityHoverPage specific={"Equity - Quality"} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Value' ) && <SpecificEquityHoverPage specific={"Equity - Value"} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Mid & Small' ) && <SpecificEquityHoverPage specific={"Equity - Mid/Small"} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Global' ) && <SpecificEquityHoverPage specific={"Equity - Global"} /> ||
+                                            (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Others' ) && <EquityOthersHoverPage /> 
                                         }
                                     </div>
                                 }
