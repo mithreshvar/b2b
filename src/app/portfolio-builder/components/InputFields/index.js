@@ -85,7 +85,7 @@ const CustomTextField = ({ width = "380px", height = "40px",...props }) => {
     return (
         <div className="relative">
             <TextField
-                id={`${props.label}-input`}
+                id={`${props.label}_input`}
                 label={props.label}
                 onChange={props.handleChange}
                 onBlur={props.handleChange}
