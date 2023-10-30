@@ -413,7 +413,7 @@ export default function Dashboard({ setActive }) {
                 </div>
             </div>
 
-            {/* SIP Analytics */}
+            {/* SIP Analytics
             <div className="flex items-center justify-between w-full bg-white rounded-[10px] p-[20px]">
                 <div className="w-2/3 flex flex-col">
                     <div className="text-[16px] font-bold pb-[15px]">SIP Analytics</div>
@@ -422,17 +422,17 @@ export default function Dashboard({ setActive }) {
                 <button className="w-[136px] h-[34px] text-[#0066CD] text-[14px] font-semibold border-[#0066CD] border-[1px] rounded-[17px]">Analytics</button>
             </div>
 
-            {/* SIP Analytics view */}
+            {/* SIP Analytics view */}{/*
             <div className="flex items-center justify-between w-full bg-white rounded-[10px] p-[20px]">
                 <div className="text-[16px] font-bold">SIP Analytics</div>
                 <button className="w-[136px] h-[34px] text-[#0066CD] text-[14px] font-semibold border-[#0066CD] border-[1px] rounded-[17px]">View</button>
             </div>
 
-            {/* Broker Change */}
+            {/* Broker Change */}{/*
             <div className="flex items-center justify-between w-full bg-white rounded-[10px] p-[20px]">
                 <div className="text-[16px] font-bold">Broker Change</div>
                 <button className="w-[136px] h-[34px] text-[#0066CD] text-[14px] font-semibold border-[#0066CD] border-[1px] rounded-[17px]">Broker</button>
-            </div>
+            </div> */}
 
         </div>
     )
