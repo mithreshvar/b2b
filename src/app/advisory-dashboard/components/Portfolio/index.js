@@ -283,6 +283,11 @@ export default function Portfolio() {
         tableActionButtonRef.current.scroll({ top: pos });
     }
 
+    function scrollLeft (evt) {
+        let scroll = (evt.deltaY > 0)? 150: -150;
+        tablesContainerRef.current.scroll({left : tablesContainerRef.current.scrollLeft +  scroll , behavior: 'smooth'});
+    }
+
     let tableNames = ['Basic Details', 'Asset Allocation Risk', 'Cash Allocation', 'Portfolio Quality Risk', 'Diversification Risk', 'Liquidity', 'Cost', 'Equity Monitor', 'Debt Monitor', 'SIP Book'];
     let refTable = [tableBasicDetailsRef, tableAssetAllocationRef, tableCashAllocationRef, tablePortfolioQualityRef, tableDiversificationRiskRef, tableLiquidityRef, tableCostRef, tableEquityMonitorRef, tableDebtMonitorRef, tableSIPBookRef]
     let refNav = [navBasicDetailsRef, navAssetAllocationRef, navCashAllocationRef, navPortfolioQualityRef, navDiversificationRiskRef, navLiquidityRef, navCostRef, navEquityMonitorRef, navDebtMonitorRef, navSIPBookRef]
@@ -551,7 +556,7 @@ export default function Portfolio() {
         setSortedStateArray(defaultSortedState);
     }
 
-    const [showDrillDown, setShowDrillDown] = useState(null)
+    const [showDrillDown, setShowDrillDown] = useState(null);
     
     return (
         <div className="bg-white m-[20px] rounded-[10px] p-[20px] h-[calc(100vh-104px)]">
@@ -612,7 +617,7 @@ export default function Portfolio() {
                                     </th>
                                 </thead>
 
-                                <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar z-[0]" ref={tableNameRef} onScroll={() => { handleScroll(tableNameRef.current.scrollTop) }}>
+                                <div className="overflow-scroll max-h-[calc(100vh-310px)] no-scrollbar z-[0]" ref={tableNameRef} onScroll={() => { handleScroll(tableNameRef.current.scrollTop) }}>
                                     <tbody >
                                         {
                                             Data.map((client, i) =>
@@ -674,7 +679,7 @@ export default function Portfolio() {
                                                 return (
                                                     <div ref={currentRefTable[currentTableNameIndex]} className={` ${(selectedOption === tableName) && "border-[#7EB7F270] border-[2px] "} rounded-[10px] pb-[2px] px-[4px] shadow-[0px_1px_5px_#0000000F]`}>
                                                         <table>
-                                                            <thead>
+                                                            <thead onWheel={scrollLeft}>
                                                                 <tr className="flex">
                                                                 {
                                                                     (function() {
@@ -694,7 +699,7 @@ export default function Portfolio() {
                                                                 }
                                                                 </tr>
                                                             </thead>
-                                                            <div className="overflow-scroll h-[calc(100vh-310px)] no-scrollbar" ref={currentRefTableBody[currentTableNameIndex]} onScroll={() => { handleScroll(currentRefTableBody[currentTableNameIndex].current.scrollTop) }}>
+                                                            <div className="overflow-scroll max-h-[calc(100vh-310px)] no-scrollbar" ref={currentRefTableBody[currentTableNameIndex]} onScroll={() => { handleScroll(currentRefTableBody[currentTableNameIndex].current.scrollTop) }}>
                                                             {
                                                                 Data.map((client, tableRowIndex) => {
                                                                     let asArray = Object.entries(client[tableName]);
