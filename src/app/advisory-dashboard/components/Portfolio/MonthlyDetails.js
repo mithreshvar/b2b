@@ -189,9 +189,9 @@ export default function MonthlyDetails(props){
                         </thead>
                         <tbody>
                             {data.map((row, rowIndex) => (
-                                <tr ref={rowIndex === 0 ? AumAndFlowDetails : null} className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
+                                <tr ref={rowIndex === 0 ? AumAndFlowDetails : null} className={`p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium`} key={rowIndex}>
                                 {row.map((value, cellIndex) => (
-                                    <td className={`p-[20px]`} key={cellIndex}>{value}</td>
+                                    <td className={`p-[20px] ${row[0] == 'Net Inflow' && cellIndex != 0 ? parseFloat(value.replace(/[₹,]/g, '')) > 0 ? 'text-[#00A345]':'text-[#F56902]':''}`} key={cellIndex}>{value}</td>
                                 ))}
                                 </tr>
                             ))}
@@ -221,7 +221,7 @@ export default function MonthlyDetails(props){
                             {data3.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-[#F9FBFF] odd:bg-white  text-[14px] font-medium" key={rowIndex}>
                                 {row.map((value, cellIndex) => (
-                                    <td className={`p-[20px]`} key={cellIndex}>{value}</td>
+                                    <td className={`p-[20px] ${row[0] == '5 Star Rated Fund Exposure' && cellIndex != 0 ? 'text-[#00A345]':'' || (row[0] == 'Low Rated Fund' ||  row[0] == 'Not Rated Fund Exposure' ) && cellIndex != 0 ? 'text-[#F56902]':''}`} key={cellIndex}>{value}</td>
                                 ))}
                                 </tr>
                             ))}
@@ -231,7 +231,7 @@ export default function MonthlyDetails(props){
                             {data4.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
                                 {row.map((value, cellIndex) => (
-                                    <td className={`p-[20px]`} key={cellIndex}>{value}</td>
+                                    <td className={`p-[20px] ${(row[0] == 'Highest Fund House Exposure') && cellIndex != 0 ? 'text-[#F56902]':'' || (row[0] == 'Total Number of Funds' || row[0] == 'Non Debt Funds' || row[0] == '2nd Highest Fund Exposure' || row[0] == 'Highest Fund Exposure' ) && cellIndex != 0 ? 'text-[#EBC135]':''}`} key={cellIndex}>{value}</td>
                                 ))}
                                 </tr>
                             ))}
@@ -255,7 +255,7 @@ export default function MonthlyDetails(props){
                             {data6.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
                                 {row.map((value, cellIndex) => (
-                                    <td className={`p-[20px]`} key={cellIndex}>{value}</td>
+                                    <td className={`p-[20px] ${(row[0] == '1 Star Rated Fund' || row[0] == '2 Star Rated Fund' || row[0] == '3 Star Rated Fund') && cellIndex != 0 ? 'text-[#F56902]':'' || (row[0] == 'Not Rated Funds' || row[0] == '5 Star Rated Fund') && cellIndex != 0 ? 'text-[#00A345]':''}`} key={cellIndex}>{value}</td>
                                 ))}
                                 </tr>
                             ))}
@@ -265,7 +265,7 @@ export default function MonthlyDetails(props){
                             {data7.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
                                 {row.map((value, cellIndex) => (
-                                    <td className={`p-[20px]`} key={cellIndex}>{value}</td>
+                                    <td className={`p-[20px] ${(row[0] == 'Blend' || row[0] == 'Quality' || row[0] == 'Value' || row[0] == 'Largecap Active') && cellIndex != 0 ? 'text-[#F56902]':'' || row[0] == 'others' && cellIndex !=0 ? 'text-[#EBC135]' :'' }`} key={cellIndex}>{value}</td>
                                 ))}
                                 </tr>
                             ))}
@@ -319,7 +319,7 @@ export default function MonthlyDetails(props){
                             {data12.map((row, rowIndex) => (
                                 <tr className="p-[20px] even:bg-white odd:bg-[#F9FBFF]  text-[14px] font-medium" key={rowIndex}>
                                 {row.map((value, cellIndex) => (
-                                    <td className={`p-[20px]`} key={cellIndex}>{value}</td>
+                                    <td className={`p-[20px] ${row[0] == 'Liquid/Overnight' && cellIndex != 0 ? parseFloat(value.replace(/[₹,]/g, '')) > 0 ? 'text-[#00A345]':'text-[#F56902]':''}`} key={cellIndex}>{value}</td>
                                 ))}
                                 </tr>
                             ))}
