@@ -33,9 +33,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "23%",
                 "Highest Fund Exposure": "23%",
-                "2nd Highest Fund Exposure": "10%", 
-                "Total Number of Non Debt Funds": 2,
-                "Total Number of Funds": 20
+                "Total Number of Non Debt Funds with <3% Exposure": "2"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -130,9 +128,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "31%",
                 "Highest Fund Exposure": "27%",
-                "2nd Highest Fund Exposure": "20%", 
-                "Total Number of Non Debt Funds": 6,
-                "Total Number of Funds": 16
+                "Total Number of Non Debt Funds with <3% Exposure": "6"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -227,9 +223,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "16%",
                 "Highest Fund Exposure": "7%",
-                "2nd Highest Fund Exposure": "7%", 
-                "Total Number of Non Debt Funds": 14,
-                "Total Number of Funds": 31
+                "Total Number of Non Debt Funds with <3% Exposure": "14"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -323,9 +317,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "35%",
                 "Highest Fund Exposure": "19%",
-                "2nd Highest Fund Exposure": "15%", 
-                "Total Number of Non Debt Funds": 50,
-                "Total Number of Funds": 71
+                "Total Number of Non Debt Funds with <3% Exposure": "50"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -419,9 +411,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "54%",
                 "Highest Fund Exposure": "28%",
-                "2nd Highest Fund Exposure": "27%", 
-                "Total Number of Non Debt Funds": 3,
-                "Total Number of Funds": 8
+                "Total Number of Non Debt Funds with <3% Exposure": "3"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -515,9 +505,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "23%",
                 "Highest Fund Exposure": "23%",
-                "2nd Highest Fund Exposure": "10%", 
-                "Total Number of Non Debt Funds": 2,
-                "Total Number of Funds": 20
+                "Total Number of Non Debt Funds with <3% Exposure": "2"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -612,9 +600,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "31%",
                 "Highest Fund Exposure": "27%",
-                "2nd Highest Fund Exposure": "20%", 
-                "Total Number of Non Debt Funds": 6,
-                "Total Number of Funds": 16
+                "Total Number of Non Debt Funds with <3% Exposure": "6"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -709,9 +695,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "16%",
                 "Highest Fund Exposure": "7%",
-                "2nd Highest Fund Exposure": "7%", 
-                "Total Number of Non Debt Funds": 14,
-                "Total Number of Funds": 31
+                "Total Number of Non Debt Funds with <3% Exposure": "14"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -805,9 +789,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "35%",
                 "Highest Fund Exposure": "19%",
-                "2nd Highest Fund Exposure": "15%", 
-                "Total Number of Non Debt Funds": 50,
-                "Total Number of Funds": 71
+                "Total Number of Non Debt Funds with <3% Exposure": "50"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -901,9 +883,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "54%",
                 "Highest Fund Exposure": "28%",
-                "2nd Highest Fund Exposure": "27%", 
-                "Total Number of Non Debt Funds": 3,
-                "Total Number of Funds": 8
+                "Total Number of Non Debt Funds with <3% Exposure": "3"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -997,9 +977,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "23%",
                 "Highest Fund Exposure": "23%",
-                "2nd Highest Fund Exposure": "10%", 
-                "Total Number of Non Debt Funds": 2,
-                "Total Number of Funds": 20
+                "Total Number of Non Debt Funds with <3% Exposure": "2"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -1094,9 +1072,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "31%",
                 "Highest Fund Exposure": "27%",
-                "2nd Highest Fund Exposure": "20%", 
-                "Total Number of Non Debt Funds": 6,
-                "Total Number of Funds": 16
+                "Total Number of Non Debt Funds with <3% Exposure": "6"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -1191,9 +1167,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "16%",
                 "Highest Fund Exposure": "7%",
-                "2nd Highest Fund Exposure": "7%", 
-                "Total Number of Non Debt Funds": 14,
-                "Total Number of Funds": 31
+                "Total Number of Non Debt Funds with <3% Exposure": "14"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -1287,9 +1261,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "35%",
                 "Highest Fund Exposure": "19%",
-                "2nd Highest Fund Exposure": "15%", 
-                "Total Number of Non Debt Funds": 50,
-                "Total Number of Funds": 71
+                "Total Number of Non Debt Funds with <3% Exposure": "50"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",
@@ -1383,9 +1355,7 @@
             "Diversification Risk": {
                 "Highest AMC Exposure": "54%",
                 "Highest Fund Exposure": "28%",
-                "2nd Highest Fund Exposure": "27%", 
-                "Total Number of Non Debt Funds": 3,
-                "Total Number of Funds": 8
+                "Total Number of Non Debt Funds with <3% Exposure": "3"
             },
             "Liquidity" : {
                 "% of Portfolio under lock-in": "-",

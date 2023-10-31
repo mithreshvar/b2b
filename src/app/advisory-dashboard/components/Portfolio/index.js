@@ -67,9 +67,7 @@ export default function Portfolio() {
             "All", 
             "Highest AMC Exposure",
             "Highest Fund Exposure",
-            "2nd Highest Fund Exposure",
-            "Total Number of Non Debt Funds",
-            "Total Number of Funds"
+            "Total Number of Non Debt Funds with <3% Exposure"
         ],
 
         "Liquidity": [
@@ -408,9 +406,7 @@ export default function Portfolio() {
         "Diversification Risk": {
             "Highest AMC Exposure": 0,
             "Highest Fund Exposure": 0,
-            "2nd Highest Fund Exposure": 0, 
-            "Total Number of Non Debt Funds": 0,
-            "Total Number of Funds": 0
+            "Total Number of Non Debt Funds with <3% Exposure": 0
         },
         "Liquidity" : {
             "% of Portfolio under lock-in": 0,
