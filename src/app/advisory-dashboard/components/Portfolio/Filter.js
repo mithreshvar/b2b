@@ -22,7 +22,7 @@ function Filter({filterDataOptions=[], handleFilterDataOptions, savedFilterData,
     const [saved,setSaved]=useState(false)
     const [savedFilter, setSavedFilter] = useState([...savedFilterData]);
 
-    const condition = ['<'];
+    const condition = ['<', '>', '=='];
 
     const handleStateChange = (event)=>{
         const value= event.target.value

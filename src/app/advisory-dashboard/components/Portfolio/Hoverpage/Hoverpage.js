@@ -371,7 +371,7 @@ export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fun
                 {
                     fundType.length === 3 &&
                     <div className='bg-[#CFE5F8] p-[10px] font-extrabold rounded-[10px] flex mb-[10px]'> 
-                        <p className='w-[50%]'>Total {toplevel === "SIP" ? toplevel : ""} - {rate[0] === 0 ? "Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate)} Funds</p>
+                        <p className='w-[50%]'>Total {toplevel === "SIP" ? toplevel : ""} {rate[0] === 0 ? " - Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate) + " Star"} Funds</p>
                         <p className='w-[19.5%] text-right'>{ Object.values(data[toplevel]).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
                         <p className='w-[16%] text-right'>{ Object.values(data[toplevel]).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
                         <p className='w-[14%] text-right'>{ Object.values(data[toplevel]).flatMap((category) => Object.values(category).flat()).filter(fund => rate.includes(fund.rating)).length }</p>
@@ -384,7 +384,7 @@ export function StarRatedHoverPage({ toplevel = "AUM", rate = [0,1,2,3,4,5], fun
                                 Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).length > 0 ?
                                     <div className='flex flex-col gap-[10px]'>
                                         <div className='bg-[#E2F0FD] p-[10px] font-bold rounded-[10px] flex'> 
-                                            <p className='w-[50%]'>{fundType.length === 3 ? split : "Total " + split + " - " + (rate[0] === 0 ? "Not Rated" : rate.length === 1 ? rate[0] + " Star" : "<" + Math.max(...rate)) + " Funds"}</p>
+                                            <p className='w-[50%]'>{fundType.length === 3 ? split : "Total " + split + (rate[0] === 0 ? "Not Rated" : rate.length === 1 ? " - " + rate[0] : " <" + Math.max(...rate)) + " Star Funds"}</p>
                                             <p className='w-[19.5%] text-right'>{ Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.amount, 0).toLocaleString("en-IN") }</p>
                                             <p className='w-[16%] text-right'>{ Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).reduce((sum, fund) => sum + fund.exp, 0.0).toFixed(1) + "%" }</p>
                                             <p className='w-[14%] text-right'>{ Object.values(data[toplevel][split]).flat().filter(fund => rate.includes(fund.rating)).length }</p>
@@ -590,7 +590,7 @@ export function HighestFundHoverPage({height}) {
               <p className='w-[50%]'>Asset Class/Category/Scheme Name</p>
               <p className='w-[19%] text-right'>Amount</p>
               <p className='w-[16%] text-right'>% Exposure</p>
-              <p className='w-[15%] text-right'>No of funds</p>
+              {/* <p className='w-[15%] text-right'>No of funds</p> */}
           </div>
   
           {/* Darkest */}
@@ -611,7 +611,7 @@ export function HighestFundHoverPage({height}) {
                                                                   <p className='w-[50%] flex items-center'>{row.name} <span className={`ml-[5px] whitespace-nowrap flex items-center ${row.rating === 0 ? "hidden" : [4,5].includes(row.rating) ? "text-[#00A345]" : [3,2].includes(row.rating) ? "text-[#F56902]" : "text-[#E30005]"}`}><Star className='text-[15px] mr-[3px]' />{row.rating}</span></p>
                                                                   <p className='w-[19%] text-right'>{row.amount.toLocaleString("en-IN")}</p>
                                                                   <p className='w-[16%] text-right'>{row.exp.toFixed(1) + "%"}</p>
-                                                                  <p className='w-[15%] text-right'></p>
+                                                                  {/* <p className='w-[15%] text-right'></p> */}
                                                               </div>    
                                                           )
                                                       }
