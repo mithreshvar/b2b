@@ -14,16 +14,15 @@ export default function Cell({header, tableData, setShowDrillDown, currentRefTab
             let num = Number(tableData.slice(0,-1))
             colorStyle = (num < -5 || num > 5) ? ' text-[#F56902] ' : ' text-[#00A345] ';
         }
-        else if( tableData != '-' && ( header == "Gold & Others Exposure" || header == 'Overnight/Liquid Exposure' || header == '5 star rated funds' || header == '5 Star Funds' || header == '5 Star' ||  header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star' || header == 'Low Rated Fund' || header == 'Not Rated Fund Exposure' || header == 'Highest AMC Exposure' || header == 'Highest Fund Exposure' || header == '2nd Highest Fund Exposure' || header == 'Total Number of Non Debt Funds' || header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure' || header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star' || header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star' || header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global' || header == 'Others' || header == '% of AAA Equivalent' || header == 'Long Duration' || header == 'Dynamic Funds' || header == 'Medium Duration' || header == 'Conservative Hybrid' )){
+        else if( tableData != '-' && ( header == "Gold & Others Exposure" || header == 'Overnight/Liquid Exposure' || header == '5 star rated funds' || header == '5 Star Funds' || header == '5 Star' ||  header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star' || header == 'Low Rated Fund' || header == 'Not Rated Fund Exposure' || header == 'Highest AMC Exposure' || header == 'Highest Fund Exposure' || header == 'Total Number of Non Debt Funds with <3% Exposure' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure' || header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star' || header == '4 star rated funds' || header == '4 Star Funds' || header == '4 Star' || header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global' || header == 'Others' || header == '% of AAA Equivalent' || header == 'Long Duration' || header == 'Dynamic Funds' || header == 'Medium Duration' || header == 'Conservative Hybrid' )){
             if(
                 (header == "Gold & Others Exposure" && parseInt(tableData)>30) || 
                 (header == 'Overnight/Liquid Exposure' && parseInt(tableData)>15) || 
                 ((header == 'Low Rated Fund' || header == 'Not Rated Fund Exposure') && parseInt(tableData)>20) ||
                 (header == 'Highest AMC Exposure' && parseInt(tableData)>50) || 
                 (header == 'Highest Fund Exposure' && parseInt(tableData)>30) ||
-                (header == '2nd Highest Fund Exposure' && parseInt(tableData)>50) || 
-                (header == 'Total Number of Non Debt Funds' && parseInt(tableData)>10) ||
-                ((header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure') && parseInt(tableData)>20) ||
+                (header == 'Total Number of Non Debt Funds with <3% Exposure' && parseInt(tableData)>10) || 
+                ((header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure') && parseInt(tableData)>20) ||
                 ((header == '<3 Star Funds' || header == '1 Star Funds' || header == '2 Star Funds' || header == '3 Star Funds' || header == 'Credit Risk' || header == 'Not Rated' || header == '<3 Star') && parseInt(tableData)>0) ||
                 ((header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global') && parseInt(tableData)>40) || 
                 (header == 'Others' && parseInt(tableData)>40) || 
@@ -40,9 +39,8 @@ export default function Cell({header, tableData, setShowDrillDown, currentRefTab
                 (header == 'Not Rated Fund Exposure' && parseInt(tableData)>=0 && parseInt(tableData)<=20) ||
                 (header == 'Highest AMC Exposure' && parseInt(tableData)>=30 && parseInt(tableData)<=50)|| 
                 (header == 'Highest Fund Exposure' && parseInt(tableData)>=20 && parseInt(tableData)<=30) ||
-                (header == '2nd Highest Fund Exposure' && parseInt(tableData)>=30 && parseInt(tableData)<=50) ||
-                (header == 'Total Number of Non Debt Funds' && parseInt(tableData)>=5 && parseInt(tableData)<=10) ||
-                ((header == 'Total Number of Funds' || header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure') && parseInt(tableData)>=10 && parseInt(tableData)<=20) ||
+                (header == 'Total Number of Non Debt Funds with <3% Exposure' && parseInt(tableData)>=5 && parseInt(tableData)<=10) ||
+                ((header == '% of Portfolio under lock-in' || header == 'Active Large Cap Fund Exposure' || header == 'Sector/Thematic Exposure' || header == 'Small Cap Exposure') && parseInt(tableData)>=10 && parseInt(tableData)<=20) ||
                 ((header == 'Blend' || header == 'Quality' || header == 'Value' || header == 'Mid & Small' || header == 'Global') && parseInt(tableData)>=20 && parseInt(tableData)<=40) || 
                 (header == 'Others' && parseInt(tableData)>=10 && parseInt(tableData)<=40) ||
                 ((header == 'Medium Duration' || header == 'Conservative Hybrid') && parseInt(tableData)>0)
