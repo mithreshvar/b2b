@@ -59,7 +59,7 @@ export default function Cell({header, tableData, setShowDrillDown, currentRefTab
                     <p className={` ${colorStyle} `}> {tableData} </p>
                     {
                         (tableData!= '-' && (header == "AUM" || header == "Equity Exposure" || header == "Debt Exposure" || header == "Gold & Others Exposure" || header == "Overnight/Liquid Exposure" || header == "5 star rated funds" || header == "4 star rated funds" || header == "Low Rated Fund" || header == "Not Rated Fund Exposure" || header == "FundsIndia Select Fund Exposure" ||
-                        header == "Highest AMC Exposure" || header == "Highest Fund Exposure" || 
+                        header == "Highest AMC Exposure" || header == "Highest Fund Exposure" || header == "Total Number of Non Debt Funds with <3% Exposure" ||
                         header == "ELSS Exposure" || header == "Portfolio Expense Ratio" || 
                         header == "Equity Exposure" || header == "Active Large Cap Fund Exposure" || header == "Sector/Thematic Exposure" || header == "Small Cap Exposure" || header == "5 Star Funds" || header == "4 Star Funds" || header == "<3 Star Funds" || header == "1 Star Funds" || header == "2 Star Funds" || header == "3 Star Funds" || header == "Not Rated" || header == "Blend" || header == "Quality" || header == "Value" || header == "Mid & Small" || header == "Global" || header == "Others" || 
                         header == "Debt Exposure" || header == "Net YTM" || header == "% of AAA Equivalent" || header == "5 Star Funds" || header == "4 Star Funds" || header == "<3 Star Funds" || header == "1 Star Funds" || header == "2 Star Funds" || header == "3 Star Funds" || header == "Not Rated" || 
