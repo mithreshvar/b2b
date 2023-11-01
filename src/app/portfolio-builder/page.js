@@ -19,7 +19,18 @@ import FD from '/public/FD.svg'
 import insurance from '/public/insurance.svg'
 import nfs from '/public/nfs.svg'
 import loanMF from '/public/loanMF.svg'
+import icon1 from '/public/icon1.svg'
+import icon2 from '/public/icon2.svg'
+import icon3 from '/public/icon3.svg'
+import icon4 from '/public/icon4.svg'
+import icon5 from '/public/icon5.svg'
+import touchicon from '/public/touchicon.png'
+import service from '/public/service.svg'
+import fi from '/public/fi.svg'
+import research from '/public/research.svg'
+import SwiperCustom from './SwiperCustom';
 export default function Home() {
+    const data = [["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", "James Bond", "Business"], ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", "James Bond", "Business"], ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", "James Bond", "Business"]]
 
     return (
         <ThemeProvider theme={theme} >
@@ -121,14 +132,68 @@ export default function Home() {
                         </div>
 
                     </div>
-                    <div className={`bg-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
-
+                    <div className={`flex flex-col justify-center items-center bg-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
+                        <p className='font-medium text-[30px]'>Our <span className='font-bold text-[#0066CD] '>Testimonials</span></p>
+                        <SwiperCustom content={data} />
                     </div>
-                    <div className={`bg-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
+                    <div className={`bg-white h-screen  duration-[0.6s] transition-all overflow-auto z-0`}>
+                        <div className='mx-[85px] rounded-[17px] bg-[#F2F8FE] bg-opacity-50 pt-[40px] px-[35px] pb-[77px] flex flex-col'>
 
+                            <p className='text-[30px] font-medium  text-black opacity-1'>Why do you need an </p>
+                            <p className='text-[#0066CD] text-[30px] font-bold'>Expert Guided Investing?</p>
+                            <div className="flex w-full pt-[30px]">
+                                <div className='flex flex-col w-1/2 gap-[29px]'>
+                                    <div className='flex gap-[28px] text-left align-center'>
+                                        <Image src={icon1} />
+                                        <p className='text-[16px]  font-medium '>Peace of Mind</p>
+                                    </div>
+                                    <div className='flex gap-[28px] text-left'>
+                                        <Image src={icon2} />
+                                        <p className='text-[16px] font-medium '>Avoid Big Mistakes - Cost of going wrong is very high and will be known only after several years</p>
+                                    </div>
+                                    <div className='flex gap-[28px] text-left'>
+                                        <Image src={icon3} />
+                                        <p className='text-[16px] font-medium '>Superior Performance via Intelligent Investment Portfolios and Improved Behavior - guided by Behavioral Science</p>
+                                    </div>
+                                    <div className='flex gap-[28px] text-left'>
+                                        <Image src={icon4} />
+                                        <p className='text-[16px] font-medium '>Evidence Based, Framework driven Investment Approach - Guided by Best In Class Research Insights</p>
+                                    </div>
+                                    <div className='flex gap-[28px] text-left'>
+                                        <Image src={icon5} />
+                                        <p className='text-[16px] font-medium '>Simplify your Investing Experience and Save Time & Effort - Outsource it to the experts to monitor and navigate the constantly evolving complex regulations, tax changes, new strategies, changing market environment, news flow etc</p>
+                                    </div>
+
+
+                                </div>
+                                <div className='w-1/2 flex justify-center items-start'>
+                                    <Image src={touchicon} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className={`bg-gradient-to-t from-[#f6fafe] to-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
+                    <div className={`px-[150px]  bg-gradient-to-t from-[#f6fafe] to-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
+                        <div className='flex flex-col justify-center items-center gap-[40px]'>
+                            <p className='font-medium text-[30px]'>Explain the <span className='text-[#0066CD] font-bold'>Offering</span> </p>
+                            <div className='flex gap-[40px] w-full'>
+                                <div className='w-[300px] h-[322px] text-center flex flex-col gap-[20px] justify-evenly mx-[16px] p-[20px] items-center hover:shadow-[0px_10px_20px_#00000014] '>
+                                    <Image src={service} />
+                                    <p className='text-[18px] font-semibold'>Service Offerings</p>
+                                    <p className='text-[14px] text-[#6E6E72]'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown</p>
+                                </div>
+                                <div className='w-[300px] h-[322px] text-center flex flex-col gap-[20px] justify-evenly mx-[16px] p-[20px] items-center hover:shadow-[0px_10px_20px_#00000014] '>
+                                    <Image src={fi} />
+                                    <p className='text-[18px] font-semibold'>FI Bluebook - Investment Approach</p>
+                                    <p className='text-[14px] text-[#6E6E72]'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown</p>
+                                </div>
+                                <div className='w-[300px] h-[322px] text-center flex flex-col gap-[20px] justify-evenly mx-[16px] p-[20px] items-center hover:shadow-[0px_10px_20px_#00000014] '>
+                                    <Image src={research} />
+                                    <p className='text-[18px] font-semibold'>Research Track Record</p>
+                                    <p className='text-[14px] text-[#6E6E72]'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown</p>
+                                </div>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

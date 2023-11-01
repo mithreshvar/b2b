@@ -94,7 +94,7 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
 
     const [family, setFamily] = useState('');
     const [familyErrorMessage, setFamilyErrorMessage] = useState('');
-    const familyOptions = ['Father', 'Mother', 'Sister', 'Brother'];
+    const familyOptions = ['Married' , 'Unmarried'];
     
     const handleFamilyChange = (event) => {
         const value = event.target.value;
@@ -104,6 +104,51 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
             setFamilyErrorMessage("Family cannot be empty");
         } else {
             setFamilyErrorMessage("");
+        }
+    };
+
+    const [spouse, setSpouse] = useState('');
+    const [spouseErrorMessage, setSpouseErrorMessage] = useState('');
+    const spouseOptions = ['Working Spouse', 'Non Working Spouse', 'Not Applicable'];
+    
+    const handleSpouseChange = (event) => {
+        const value = event.target.value;
+        setSpouse(value);
+        
+        if (value === "") {
+            setSpouseErrorMessage("Spouse cannot be empty");
+        } else {
+            setSpouseErrorMessage("");
+        }
+    };
+
+    const [noofKids, setNoofKids] = useState('');
+    const [noofKidsErrorMessage, setNoofKidsErrorMessage] = useState('');
+    const noofKidsOptions = ['No Kids', '1 Kids', '2 Kids', '3 Kids', '3+ Kids'];
+    
+    const handleNoofKidsChange = (event) => {
+        const value = event.target.value;
+        setNoofKids(value);
+        
+        if (value === "") {
+            setNoofKidsErrorMessage("No of Kids cannot be empty");
+        } else {
+            setNoofKidsErrorMessage("");
+        }
+    };
+
+    const [parents, setParents] = useState('');
+    const [parentsErrorMessage, setParentsErrorMessage] = useState('');
+    const parentsOptions = ['Dependent Parents', 'Non Dependent Parents'];
+    
+    const handleParentsChange = (event) => {
+        const value = event.target.value;
+        setParents(value);
+        
+        if (value === "") {
+            setParentsErrorMessage("Parents cannot be empty");
+        } else {
+            setParentsErrorMessage("");
         }
     };
 
@@ -179,7 +224,7 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
 
     const [timeFrame, setTimeFrame] = useState('');
     const [timeFrameErrorMessage, setTimeFrameErrorMessage] = useState('');
-    const timeFrameOptions = ['Short Term', 'Mid Term', 'Long Term'];
+    const timeFrameOptions = ['>3Y', '3Y to 5Y', '5Y to 10Y', '>10Y', '3+ Kids'];
 
     const handleTimeFrameChange = (event) => {
         const value = event.target.value;
@@ -424,7 +469,7 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
             <h3 className="text-[20px] font-semibold leading-[38px]">Client Requirement</h3>
 
             {/* Backdrop */}
-            <div className="h-[325px] w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
+            <div className="h-fit w-full bg-white rounded-[15px] p-[20px] flex flex-col gap-[20px]">
                 <h3 className="text-[18px] font-semibold leading-[10px]">Backdrop</h3>
                 <div className="flex flex-wrap gap-x-[50px] gap-y-[30px] pr-[200px]">
                     <CustomTextField label="Name" value={name} errorMessage={nameErrorMessage} handleChange={handleNameChange} />
@@ -433,6 +478,14 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
                     <CustomTextField label="Mobile Number" type="number" value={mobileNo} errorMessage={mobileNoErrorMessage} handleChange={handleMobileNoChange} />
                     <CustomTextField label="Location" value={location} errorMessage={locationErrorMessage} handleChange={handleLocationChange} />
                     <CustomSelectField label="Family" value={family} valueOptions={familyOptions} handleChange={handleFamilyChange} errorMessage={familyErrorMessage} />
+                    {
+                        (family == 'Married') &&
+                        <>
+                        <CustomSelectField label="Spouse" value={spouse} valueOptions={spouseOptions} handleChange={handleSpouseChange} errorMessage={spouseErrorMessage}/>
+                        <CustomSelectField label="No of Kids" value={noofKids} valueOptions={noofKidsOptions} handleChange={handleNoofKidsChange} errorMessage={noofKidsErrorMessage}/>
+                        <CustomSelectField label="Parents" value={parents} valueOptions={parentsOptions} handleChange={handleParentsChange} errorMessage={parentsErrorMessage}/>
+                        </>
+                    }
                     <CustomTextField label="Occupation (Role/Company)" value={occupation} errorMessage={occupationErrorMessage} handleChange={handleOccupationChange} />
                 </div>
             </div>
@@ -520,7 +573,7 @@ export default function ClientRequirement({ isLoadClientClicked, setIsLoadClient
                     <CustomSelectField label="Risk" value={risk} valueOptions={riskOptions} handleChange={handleRiskChange} errorMessage={riskErrorMessage} />
                     <CustomSelectField width="810px" label="What can you handle as a temporary drop in your portfolio?" value={temporaryDrop} valueOptions={temporaryDropOptions} handleChange={handleTemporaryDropChange} errorMessage={temporaryDropErrorMessage} />
                     <CustomTextField width="810px" label="What did you do during the Covid fall?" value={covidFall} errorMessage={covidFallErrorMessage} handleChange={handleCovidFallChange} />
-                    <CustomTextField width="810px" label="Other Comments" value={otherComments} errorMessage={otherCommentsErrorMessage} handleChange={handleOtherCommentsChange} />
+                    <CustomTextField width="810px" label="Any other Comments" value={otherComments} errorMessage={otherCommentsErrorMessage} handleChange={handleOtherCommentsChange} />
                 </div>
             </div>
 
