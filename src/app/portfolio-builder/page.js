@@ -133,7 +133,7 @@ export default function Home() {
 
                     </div>
                     <div className={`flex flex-col justify-center items-center bg-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
-                        <p className='font-medium text-[30px]'>Our <span className='font-bold text-[#0066CD] font-bold'>Testimonials</span></p>
+                        <p className='font-medium text-[30px]'>Our <span className='font-bold text-[#0066CD] '>Testimonials</span></p>
                         <SwiperCustom content={data} />
                     </div>
                     <div className={`bg-white h-screen  duration-[0.6s] transition-all overflow-auto z-0`}>
