@@ -3,8 +3,11 @@ import data from '../../data/suggestedPortfolio.json';
 import { ClearRounded, Search } from "@mui/icons-material";
 import { CustomTextField } from '../InputFields';
 import { InputAdornment } from "@mui/material";
+import addFilled from '/public/addFilled.svg';
+import remove from '/public/removeOutlined.svg';
+import Image from 'next/image';
 
-export default function SafetyBox({isEditTriggered, setIsEditTriggered, handleNotificationMessage}) {
+export default function SafetyBox({ handleNotificationMessage }) {
 
 
     const [emergencyFunds, setEmergencyFunds] = useState(data["Safety Box"]["Emergency Fund"]);
@@ -92,181 +95,171 @@ export default function SafetyBox({isEditTriggered, setIsEditTriggered, handleNo
 
 
     return (
-        <>
-            <div className="bg-[#FBFBFF] w-full p-[15px] rounded-[9px]">
-                            
-                {/* Emergency Fund */}
-                <div className="flex flex-col gap-[20px] w-full">
-                    <div className="flex text-[#6E6E72] font-semibold">
-                        <span className="w-[50%]">Emergency Fund</span>
-                        <span className="w-[25%]">SIP</span>
-                        <span className="w-[25%]">Lumpsum</span>
-                    </div>
-                    {
-                        emergencyFunds.map(fund => (
-                            <div className="flex font-medium">
-                                <span className="w-[50%]">{fund.name}</span>
-                                <span className="w-[25%]">{fund.sip}</span>
-                                <span className="w-[25%]">{fund.lumpsum}</span>
-                            </div>
-                            )
-                        )
-                    }
+        <div className='flex flex-col gap-[20px]'>                         
+            <div className='flex flex-col gap-[20px] bg-white rounded-b-[10px] p-[20px]'>
+                <div className="leading-[15px] font-semibold bg-[#F1F7FD] px-[15px] py-[13px] rounded-[9px] flex">
+                    <div>Emergency Funds</div>
+                    <button className="ml-auto" onClick={() => addEmergencyFund('emergency')}>
+                        <Image src={addFilled} className="text-primary inline" />
+                        <span className="text-primary ml-[5px]">Add</span>
+                    </button>
+                </div>
 
-                    {/* Health Insurance */}
-                    <div className="flex text-[#6E6E72] font-medium">
-                        <span className="w-[50%]">Health Insurance</span>
-                        <span className="w-[25%]">Cover</span>
-                        <span className="w-[25%]">Per Year</span>
+                {/* Emergency Fund */}
+                <div className="flex flex-col gap-[15px] w-full">
+                    <div className="flex font-semibold">
+                        <span className="w-[50%]"></span>
+                        <span className="w-[20%]">SIP</span>
+                        <span className="w-[20%]">Lumpsum</span>
                     </div>
-                    {
-                        healthInsuranceFunds.map(fund => (
-                            <div className="flex font-medium">
-                                <span className="w-[50%]">{fund.name}</span>
-                                <span className="w-[25%]">{fund.cover}</span>
-                                <span className="w-[25%]">{fund.perYear}</span>
-                            </div>
+                    <ul className="flex flex-col gap-[20px] w-full">
+                        {
+                            emergencyFunds.map((fund, index) => (
+                                <li key={"abc"  + index} className="flex font-medium items-center">
+                                    <div className="w-[50%]">
+                                        <CustomTextField 
+                                            width="400px" 
+                                            value={editedEmergencyFundsData[index].name}
+                                            handleChange={(event) => handleInputChange(event, index, 'emergency', 'name')} 
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" >
+                                                    <Search className="text-[18px]" />
+                                                    </InputAdornment>
+                                                ),
+                                                }}
+                                        />
+                                    </div>
+                                    <div className="w-[20%]">
+                                        <CustomTextField 
+                                            width="125px" 
+                                            value={editedEmergencyFundsData[index].sip} 
+                                            handleChange={(event) => handleInputChange(event, index, 'emergency', 'sip')} 
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" >
+                                                    <p className="font-medium text-black">₹</p>
+                                                    </InputAdornment>
+                                                ),
+                                                }}
+                                        />
+                                    </div>
+                                    <div className="w-[18%]">
+                                        <CustomTextField 
+                                            width="125px" 
+                                            value={editedEmergencyFundsData[index].lumpsum} 
+                                            handleChange={(event) => handleInputChange(event, index, 'emergency', 'lumpsum')} 
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" >
+                                                    <p className="font-medium text-black">₹</p>
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </div>
+                                    <button className="text-primary w-[24px] h-[24px] text-[16px] font-bold" onClick={() => removeEmergencyFund('emergency', index)}><Image src={remove} /></button>
+                                </li>
+                                )
                             )
-                        )
-                    }
+                        }
+                    </ul>
+                    </div>
+                    {/* <button className="mr-auto text-primary text-[16px] font-medium" onClick={() => addEmergencyFund('emergency')}>+ Add</button> */}
+                    
+                    {/* Health Insurance Funds */}
+                    <div className="leading-[15px] font-semibold bg-[#F1F7FD] px-[15px] py-[13px] rounded-[9px] flex">
+                        <div>Health Insurance</div>
+                        <button className="ml-auto" onClick={() => addEmergencyFund('health')}>
+                            <Image src={addFilled} className="text-primary inline" />
+                            <span className="text-primary ml-[5px]">Add</span>
+                        </button>
+                    </div>
+
+                    <div className="flex flex-col gap-[15px] w-full">
+                    <div className="flex font-semibold">
+                        <span className="w-[50%]"></span>
+                        <span className="w-[20%]">Cover</span>
+                        <span className="w-[20%]">Per Year</span>
+                    </div>
+                    <ul className="flex flex-col gap-[20px] w-full">
+                        {
+                            healthInsuranceFunds.map((fund, index) => (
+                                <li key={"def"  + index} className="flex font-medium items-center">
+                                    <div className="w-[50%]">
+                                        <CustomTextField 
+                                            width="400px" 
+                                            value={editedHealthInsuranceFundsData[index].name}
+                                            handleChange={(event) => handleInputChange(event, index, 'health', 'name')} 
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" >
+                                                    <Search className="text-[18px]" />
+                                                    </InputAdornment>
+                                                ),
+                                                }}
+                                        />
+                                    </div>
+                                    <div className="w-[20%]">
+                                        <CustomTextField 
+                                            width="125px" 
+                                            value={editedHealthInsuranceFundsData[index].cover} 
+                                            handleChange={(event) => handleInputChange(event, index, 'health', 'cover')} 
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" >
+                                                    <p className="font-medium text-black">₹</p>
+                                                    </InputAdornment>
+                                                ),
+                                                }}
+                                        />
+                                    </div>
+                                    <div className="w-[18%]">
+                                        <CustomTextField 
+                                            width="125px" 
+                                            value={editedHealthInsuranceFundsData[index].perYear} 
+                                            handleChange={(event) => handleInputChange(event, index, 'health', 'perYear')} 
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start" >
+                                                    <p className="font-medium text-black">₹</p>
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </div>
+                                    <button className="text-primary w-[24px] h-[24px] text-[16px] font-bold" onClick={() => removeEmergencyFund('health', index)}><Image src={remove} /></button>
+                                </li>
+                                )
+                            )
+                        }
+                    </ul>
                 </div>
             </div>
- 
-            {
-                (isEditTriggered) &&
-                <div className='absolute w-screen h-screen top-[-60px] left-0 bg-[rgba(10,22,8,0.3)] flex items-end justify-center z-[100]' >
-                    <div className='relative w-full h-[530px] rounded-t-[25px] bg-white px-[30px] py-[40px] flex flex-col gap-y-[20px] overflow-auto'>
-                        <ClearRounded className='absolute top-[15px] right-[15px] border-[1px] border-gray-300 rounded-[30px] p-[1px] cursor-pointer text-primary text-[18px]' onClick={() => setIsEditTriggered(false)} />
-                        
 
-                        <h1 className="text-[20px] font-semibold">Edit Safety Box</h1>
-
-                        {/* Emergency Fund */}
-                        <div className="flex flex-col gap-[20px] w-full">
-                            <div className="flex text-[#6E6E72] font-medium">
-                                <span className="w-[38%]">Emergency Fund</span>
-                                <span className="w-[20%]">SIP</span>
-                                <span className="w-[20%]">Lumpsum</span>
-                            </div>
-                            <ul className="flex flex-col gap-[20px] w-full">
-                                {
-                                    emergencyFunds.map((fund, index) => (
-                                        <li key={"abc"  + index} className="flex font-medium items-center">
-                                            <div className="w-[38%]">
-                                                <CustomTextField 
-                                                    width="500px" 
-                                                    value={editedEmergencyFundsData[index].name}
-                                                    handleChange={(event) => handleInputChange(event, index, 'emergency', 'name')} 
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                          <InputAdornment position="start" >
-                                                            <Search className="text-[18px]" />
-                                                          </InputAdornment>
-                                                        ),
-                                                      }}
-                                                />
-                                            </div>
-                                            <div className="w-[20%]">
-                                                <CustomTextField 
-                                                    width="240px" 
-                                                    value={editedEmergencyFundsData[index].sip} 
-                                                    handleChange={(event) => handleInputChange(event, index, 'emergency', 'sip')} 
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                          <InputAdornment position="start" >
-                                                            <p className="font-medium text-black">₹</p>
-                                                          </InputAdornment>
-                                                        ),
-                                                      }}
-                                                />
-                                            </div>
-                                            <div className="w-[18%]">
-                                                <CustomTextField 
-                                                    width="240px" 
-                                                    value={editedEmergencyFundsData[index].lumpsum} 
-                                                    handleChange={(event) => handleInputChange(event, index, 'emergency', 'lumpsum')} 
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                          <InputAdornment position="start" >
-                                                            <p className="font-medium text-black">₹</p>
-                                                          </InputAdornment>
-                                                        ),
-                                                    }}
-                                                />
-                                            </div>
-                                            <button className="text-primary w-[24px] h-[24px] text-[16px] font-bold border-[1px] border-primary rounded-full" onClick={() => removeEmergencyFund('emergency', index)}>-</button>
-                                        </li>
-                                        )
-                                    )
-                                }
-                            </ul>
-                            <button className="mr-auto text-primary text-[16px] font-medium" onClick={() => addEmergencyFund('emergency')}>+ Add</button>
-                            
-                            {/* Health Insurance Funds */}
-                            <div className="flex text-[#6E6E72] font-medium">
-                                <span className="w-[38%]">Health Insurance</span>
-                                <span className="w-[20%]">Cover</span>
-                                <span className="w-[20%]">Per Year</span>
-                            </div>
-                            <ul className="flex flex-col gap-[20px] w-full">
-                                {
-                                    healthInsuranceFunds.map((fund, index) => (
-                                        <li key={"def"  + index} className="flex font-medium items-center">
-                                            <div className="w-[38%]">
-                                                <CustomTextField 
-                                                    width="500px" 
-                                                    value={editedHealthInsuranceFundsData[index].name}
-                                                    handleChange={(event) => handleInputChange(event, index, 'health', 'name')} 
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                          <InputAdornment position="start" >
-                                                            <Search className="text-[18px]" />
-                                                          </InputAdornment>
-                                                        ),
-                                                      }}
-                                                />
-                                            </div>
-                                            <div className="w-[20%]">
-                                                <CustomTextField 
-                                                    width="240px" 
-                                                    value={editedHealthInsuranceFundsData[index].cover} 
-                                                    handleChange={(event) => handleInputChange(event, index, 'health', 'sip')} 
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                          <InputAdornment position="start" >
-                                                            <p className="font-medium text-black">₹</p>
-                                                          </InputAdornment>
-                                                        ),
-                                                      }}
-                                                />
-                                            </div>
-                                            <div className="w-[18%]">
-                                                <CustomTextField 
-                                                    width="240px" 
-                                                    value={editedHealthInsuranceFundsData[index].perYear} 
-                                                    handleChange={(event) => handleInputChange(event, index, 'health', 'lumpsum')} 
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                          <InputAdornment position="start" >
-                                                            <p className="font-medium text-black">₹</p>
-                                                          </InputAdornment>
-                                                        ),
-                                                    }}
-                                                />
-                                            </div>
-                                            <button className="text-primary w-[24px] h-[24px] text-[16px] font-bold border-[1px] border-primary rounded-full" onClick={() => removeEmergencyFund('health', index)}>-</button>
-                                        </li>
-                                        )
-                                    )
-                                }
-                            </ul>
-                            <button className="mr-auto text-primary text-[16px] font-medium" onClick={() => addEmergencyFund('health')}>+ Add</button>
+            <div className='flex flex-col gap-[20px] bg-white rounded-[10px] p-[20px]'>
+                <h1 className='font-semibold text-[18px]'>Why are we suggesting these funds?</h1>
+                <div className='w-full border-[1px] border-[#E0E0E0] py-[15px] rounded-[10px] flex flex-col gap-[20px]'>
+                    <div className='text-[#6E6E72] text-[12px] flex mx-[20px]'>
+                        <p className='w-[30%]'>Asset Class / Scheme Name</p>
+                        <p className='w-[70%]'>Rationale</p>
+                    </div>
+                    <div className="leading-[15px] text-[16px] font-semibold bg-[#F1F7FD] px-[15px] py-[13px] rounded-[9px] mx-[20px]">
+                        Emergency Fund
+                    </div>
+                    
+                    {/* Mappable */}
+                    <div className='flex px-[35px] py-[15px]'>
+                        <div className='w-[30%] flex flex-col gap-[10px]'>
+                            <p className='leading-[5px] font-semibold'>Kotak Arbitrage Fund</p>
+                            <p className='text-[#6E6E72]'>Blend <span>Star 5</span></p>
+                        </div>
+                        <div className='w-[70%]'>
 
                         </div>
-                        <button className="ml-auto w-[147px] min-h-[50px] bg-primary text-white rounded-[25px] text-[18px] font-semibold" onClick={saveAllData}>Save</button>
                     </div>
                 </div>
-            } 
-        </>
+            </div>
+        </div>
     )
 }
