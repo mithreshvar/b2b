@@ -8,7 +8,7 @@ import remove from '/public/removeOutlined.svg';
 import Image from 'next/image';
 import Bullettedtext from './BullettedText';
 
-export default function SafetyBox({ handleNotificationMessage }) {
+export default function ShortTermBox({ handleNotificationMessage }) {
 
 
     const [emergencyFunds, setEmergencyFunds] = useState(data["Safety Box"]["Emergency Fund"]);

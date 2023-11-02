@@ -3,6 +3,7 @@ import { Edit } from "@mui/icons-material";
 import SafetyBox from "./SuggestedPortfolio/SafetyBox";
 import Image from "next/image";
 import download from '/public/download.svg'
+import ShortTermBox from "./SuggestedPortfolio/ShortTermBox";
 
 export default function SuggestedPortfolio({isEditTriggered, setIsEditTriggered, handleNotificationMessage}) {
 
@@ -27,8 +28,9 @@ export default function SuggestedPortfolio({isEditTriggered, setIsEditTriggered,
 
             </div>
                 {   
-                    plan === 'Safety Box' &&
-                    <SafetyBox isEditTriggered={isEditTriggered} setIsEditTriggered={setIsEditTriggered} handleNotificationMessage={handleNotificationMessage} />
+                    plan === 'Safety Box' && <SafetyBox isEditTriggered={isEditTriggered} setIsEditTriggered={setIsEditTriggered} handleNotificationMessage={handleNotificationMessage} /> ||
+                    plan === 'Short Term Box' && <ShortTermBox isEditTriggered={isEditTriggered} setIsEditTriggered={setIsEditTriggered} handleNotificationMessage={handleNotificationMessage} />
+
                 }
 
         </div>
