@@ -22,6 +22,7 @@ import info from "/public/infoIcon.svg"
 import { ActiveLargeCapHoverPage, DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, MonitorOthersHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, PortfolioExpenseRatioHoverPage, SIPHoverPage, SectorThematicHoverPage, SmallCapHoverPage, SpecificEquityHoverPage, StarRatedHoverPage, YTMHoverPage, AAAHoverPage, SpecificDebtHoverPage, NonDebtWithG3ExposureHoverPage } from "./Hoverpage/Hoverpage";
 import AUMHoverPage from "./Hoverpage/Hoverpage";
 import Cell from "./Cell";
+import close from '/public/close.svg'
 
 export default function Portfolio() {
 
@@ -722,6 +723,7 @@ export default function Portfolio() {
                                 }
                                 {(showDrillDown != null) && 
                                     <div className={` absolute top-[30px] left-0 rounded-[25px] p-[5px] bg-white border-[2px] z-[2] text-[14px] `} style={{width: tablesContainerRef.current.offsetWidth-60+'px', maxHeight: tablesContainerRef.current.offsetHeight+'px' , left: tablesContainerRef.current.scrollLeft +30 +'px', top: showDrillDown.top+'px' }}  >
+                                        <div className="relative"><Image src={close} className="absolute top-[2px] right-[2px]"/></div>
                                         {
                                             (showDrillDown.tableName == 'Basic Details' && showDrillDown.header == 'AUM' ) && <AUMHoverPage height={tablesContainerRef.current.offsetHeight-70+'px'} /> ||
                                             (showDrillDown.tableName == 'Basic Details' && showDrillDown.header == 'Total SIP Value' ) && <SIPHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
