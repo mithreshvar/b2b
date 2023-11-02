@@ -93,7 +93,7 @@ export default function Content() {
                                 <button className='w-[100px] h-[50px] rounded-[25px] text-[18px] text-primary font-semibold bg-white border-[1px] border-primary flex justify-center items-center' onClick={() => navigationArray.indexOf(active) === 0 ? null : setActive(navigationArray[navigationArray.indexOf(active)-1])}>Back</button>
                                 <div className='flex gap-[30px]'>
                                     <button className='text-[18px] text-primary font-semibold flex justify-center items-center' onClick={() => handleNotificationMessage('Progress Saved')}>Save</button>
-                                    <button className='w-[100px] h-[50px] rounded-[25px] text-[18px] text-white font-semibold bg-primary border-[1px] border-primary flex justify-center items-center' onClick={() => navigationArray.indexOf(active) === (navigationArray.length - 1) ? null : setActive(navigationArray[navigationArray.indexOf(active)+1])}>Next</button>
+                                    <button className='px-[30px] py-[16px] leading-[0] rounded-[25px] text-[18px] text-white font-semibold bg-primary border-[1px] border-primary flex justify-center items-center' onClick={() => navigationArray.indexOf(active) === (navigationArray.length - 1) ? null : setActive(navigationArray[navigationArray.indexOf(active)+1])}>{ navigationArray.indexOf(active) === (navigationArray.length - 1) ? "Send Mail" : "Next"}</button>
                                 </div>
                             </div>
                         </div>
