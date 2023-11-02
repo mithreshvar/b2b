@@ -46,7 +46,7 @@ export default function WealthEquation() {
             boxSizing: 'border-box',
         },
     }));
-    
+
     const [showGraph, setShowGraph] = useState(false)
 
     const [inputData, setInputData] = useState({
@@ -224,6 +224,24 @@ export default function WealthEquation() {
 
     const [selected, setSelected] = useState('Total Investment');
 
+    const [units, setUnits] = useState('Default')
+
+    const UnitConversion = (number) => {
+        number = parseInt(number)
+        if (units === 'units(k,l,cr)') {
+            if (number >= 10000000) {
+            return parseInt(number / 10000000) + ' Cr';
+            } else if (number >= 100000) {
+            return parseInt(number / 100000) + ' L';
+            } else if (number >= 1000) {
+            return parseInt(number / 1000) + ' K';
+            } else {
+            return number;
+            }
+        }
+        return number;
+    };
+      
     return(
         <div className="px-[60px] flex flex-col gap-y-[20px] ">
             <div className="flex justify-between">
@@ -275,6 +293,10 @@ export default function WealthEquation() {
                         </div>
 
                         <div className="flex gap-x-[5px] items-center">
+                            <div className="flex h-[34px] w-[172px] bg-[#F5F7FE] rounded-[8px] ga- p-[5px]">
+                                <button className={` h-full w-[80px] text-[12px] font-semibold ${ units == 'Default' && ' bg-white text-primary rounded-[8px] '}`} onClick={()=>setUnits('Default')}>Default</button>
+                                <button className={` h-full w-[80px] text-[12px] font-semibold ${ units == 'units(k,l,cr)' && ' bg-white text-primary rounded-[8px] '}`} onClick={()=>setUnits('units(k,l,cr)')}>units(k,l,cr)</button>
+                            </div>
                             <AntSwitch checked={showGraph} onClick={(event) => setShowGraph(event.target.checked)} inputProps={{ 'aria-label': 'ant design' }} />
                             <h6 className="text-[#6E6E72] text-[12px]">Graph</h6>
                         </div>
@@ -299,219 +321,317 @@ export default function WealthEquation() {
                                                     </thead>
                                                     <tbody>
                                                         {
-                                                            tableData.totalAggregateInvestment.data.map( item => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                                </tr>
+                                                            units == 'Default' &&
+                                                            tableData.totalAggregateInvestment.data.map( item =>{
+                                                                    return(
+                                                                        <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                            <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
+                                                                        </tr>
+                                                                    )
+                                                                }
+                                                            )
+                                                        }{
+                                                            units == 'units(k,l,cr)' &&
+                                                            tableData.totalAggregateInvestment.data.map( item =>{
+                                                                    return(
+                                                                        <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                            <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                                        </tr>
+                                                                    )
+                                                                }
                                                             )
                                                         }
                                                     </tbody>
                                                 </table>
                                             </div>
 
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table >
-                                                    <thead>
-                                                        <tr>
-                                                            <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
-                                                            <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
-                                                        </tr>
-                                                        <tr>
-                                                            {
-                                                                percentage.map( item =>
-                                                                    <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
-                                                                )
-                                                            }
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table >
+                                                <thead>
+                                                    <tr>
+                                                        <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
+                                                        <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
+                                                    </tr>
+                                                    <tr>
                                                         {
-                                                            noOfYears.map( (year, yearIndex) => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{year}</td>
-                                                                    {
-                                                                        percentage.map( percent => 
-                                                                            <td className="h-[44px] text-center">{'₹ ' + tableData.totalAggregateInvestment[percent][yearIndex].toLocaleString()}</td>
+                                                            percentage.map( item =>
+                                                                <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
+                                                            )
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.totalAggregateInvestment[percent][yearIndex].toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => {
+                                                                        return(
+                                                                            <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.totalAggregateInvestment[percent][yearIndex]).toLocaleString()}</td> 
                                                                         )
-                                                                    }
-                                                                </tr>
-                                                            )
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                                    })
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </>
-                                )||
-                                (
-                                    selected == 'One Time Investment' &&
-                                    <>
-                                        <div className="flex gap-x-[10px]">
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table cellPadding={10} >
-                                                    <thead>
-                                                        <th className="text-[#6E6E72] w-[190px] h-[55px] font-semibold">Total Aggregate Investment (in Lakhs)</th>
-                                                    </thead>
-                                                    <tbody>
-                                                        {
-                                                            tableData.oneTimeInvestment.data.map( item => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                                </tr>
-                                                            )
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                    </div>
+                                </>
+                            )||
+                            (
+                                selected == 'One Time Investment' &&
+                                <>
+                                    <div className="flex gap-x-[10px]">
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table cellPadding={10} >
+                                                <thead>
+                                                    <th className="text-[#6E6E72] w-[190px] h-[55px] font-semibold">Total Aggregate Investment (in Lakhs)</th>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        tableData.oneTimeInvestment.data.map( item => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        tableData.oneTimeInvestment.data.map( item => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table >
-                                                    <thead>
-                                                        <tr>
-                                                            <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
-                                                            <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
-                                                        </tr>
-                                                        <tr>
-                                                            {
-                                                                percentage.map( item =>
-                                                                    <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
-                                                                )
-                                                            }
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table >
+                                                <thead>
+                                                    <tr>
+                                                        <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
+                                                        <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
+                                                    </tr>
+                                                    <tr>
                                                         {
-                                                            noOfYears.map( (year, yearIndex) => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{year}</td>
-                                                                    {
-                                                                        percentage.map( percent => 
-                                                                            <td className="h-[44px] text-center">{'₹ ' + tableData.oneTimeInvestment[percent][yearIndex].toLocaleString()}</td>
-                                                                        )
-                                                                    }
-                                                                </tr>
+                                                            percentage.map( item =>
+                                                                <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
                                                             )
                                                         }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.oneTimeInvestment[percent][yearIndex].toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.oneTimeInvestment[percent][yearIndex]).toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </>
-                                )||
-                                (
-                                    selected == 'Monthly Savings' &&
-                                    <>
-                                        <div className="flex gap-x-[10px]">
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table cellPadding={10} >
-                                                    <thead>
-                                                        <th className="text-[#6E6E72] w-[190px] h-[55px] font-semibold">Total Aggregate Investment (in Lakhs)</th>
-                                                    </thead>
-                                                    <tbody>
-                                                        {
-                                                            tableData.monthlySaving.data.map( item => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                                </tr>
-                                                            )
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                    </div>
+                                </>
+                            )||
+                            (
+                                selected == 'Monthly Savings' &&
+                                <>
+                                    <div className="flex gap-x-[10px]">
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table cellPadding={10} >
+                                                <thead>
+                                                    <th className="text-[#6E6E72] w-[190px] h-[55px] font-semibold">Total Aggregate Investment (in Lakhs)</th>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        tableData.monthlySaving.data.map( item => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        tableData.monthlySaving.data.map( item => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table >
-                                                    <thead>
-                                                        <tr>
-                                                            <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
-                                                            <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
-                                                        </tr>
-                                                        <tr>
-                                                            {
-                                                                percentage.map( item =>
-                                                                    <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
-                                                                )
-                                                            }
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table >
+                                                <thead>
+                                                    <tr>
+                                                        <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
+                                                        <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
+                                                    </tr>
+                                                    <tr>
                                                         {
-                                                            noOfYears.map( (year, yearIndex) => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{year}</td>
-                                                                    {
-                                                                        percentage.map( percent => 
-                                                                            <td className="h-[44px] text-center">{'₹ ' + tableData.monthlySaving[percent][yearIndex].toLocaleString()}</td>
-                                                                        )
-                                                                    }
-                                                                </tr>
+                                                            percentage.map( item =>
+                                                                <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
                                                             )
                                                         }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.monthlySaving[percent][yearIndex].toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.monthlySaving[percent][yearIndex]).toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </>
-                                )||
-                                (
-                                    selected == 'Yearly One Time Saving' &&
-                                    <>
-                                        <div className="flex gap-x-[10px]">
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table cellPadding={10} >
-                                                    <thead>
-                                                        <th className="text-[#6E6E72] w-[190px] h-[55px] font-semibold">Total Aggregate Investment (in Lakhs)</th>
-                                                    </thead>
-                                                    <tbody>
-                                                        {
-                                                            tableData.yearlyOneTimeSaving.data.map( item => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                                </tr>
-                                                            )
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                    </div>
+                                </>
+                            )||
+                            (
+                                selected == 'Yearly One Time Saving' &&
+                                <>
+                                    <div className="flex gap-x-[10px]">
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table cellPadding={10} >
+                                                <thead>
+                                                    <th className="text-[#6E6E72] w-[190px] h-[55px] font-semibold">Total Aggregate Investment (in Lakhs)</th>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        tableData.yearlyOneTimeSaving.data.map( item => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        tableData.yearlyOneTimeSaving.data.map( item => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                            <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
-                                                <table >
-                                                    <thead>
-                                                        <tr>
-                                                            <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
-                                                            <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
-                                                        </tr>
-                                                        <tr>
-                                                            {
-                                                                percentage.map( item =>
-                                                                    <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
-                                                                )
-                                                            }
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                        <div className="rounded-[10px] border-[#F2F2F2] border-[1px]">
+                                            <table >
+                                                <thead>
+                                                    <tr>
+                                                        <th rowSpan={2} className="text-[#6E6E72] h-[62px] px-[20px] font-semibold">No of Years</th>
+                                                        <th colSpan={7} className="text-[#6E6E72] w-full font-semibold">Assumed Annual Returns</th>
+                                                    </tr>
+                                                    <tr>
                                                         {
-                                                            noOfYears.map( (year, yearIndex) => 
-                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                    <td className="h-[44px] text-center">{year}</td>
-                                                                    {
-                                                                        percentage.map( percent => 
-                                                                            <td className="h-[44px] text-center">{'₹ ' + tableData.yearlyOneTimeSaving[percent][yearIndex].toLocaleString()}</td>
-                                                                        )
-                                                                    }
-                                                                </tr>
+                                                            percentage.map( item =>
+                                                                <th className="text-[#6E6E72] w-[120px] font-semibold ">{item} %</th>
                                                             )
                                                         }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        units == 'Default' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.yearlyOneTimeSaving[percent][yearIndex].toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    {
+                                                        units == 'units(k,l,cr)' &&
+                                                        noOfYears.map( (year, yearIndex) => 
+                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                <td className="h-[44px] text-center">{year}</td>
+                                                                {
+                                                                    percentage.map( percent => 
+                                                                        <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.yearlyOneTimeSaving[percent][yearIndex]).toLocaleString()}</td>
+                                                                    )
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </>
-                                )
-                            }
-                        </div>
+                                    </div>
+                                </>
+                            )
+                        }
+                    </div>      
                     }
-
                 </div>
             }
         </div>
