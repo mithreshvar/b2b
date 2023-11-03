@@ -14,6 +14,8 @@ import dayjs from "dayjs";
 
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import resetPassword from 'public/resetPassword/resetPassword@2x.png'
+import closeRed from 'public/login/closeRed.svg'
+import image from 'public/login/image.svg'
 
 // Create a reusable AddressFields component
 function AddressFields({ stateOptions, setValueObject, isCorrespondenceAddress }) {
@@ -234,6 +236,16 @@ function Login() {
   const minDob = dayjs().subtract(110, 'year');
   const maxDob = dayjs().subtract(18, 'year');
 
+  const [uploadFiles, setUploadFiles] = useState({
+      pan: false,
+      aadhar: false,
+      arn: false,
+      cancelledCheque: false,
+      signature: false,
+      moaAndAoa: false,
+      authorizedSignatoryList: false
+  })
+
   // Event handlers
   const handleIsLoginChange = (event) => {
     setIsLogin(event.target.value);
@@ -267,8 +279,16 @@ function Login() {
     else
       setPasswordErrorMessage("Email ID or Password doesn't match!");
 
-    setIsSubmitted( isLogin==='register'? true : null);
-    console.log('Submit clicked');
+    if (isLogin==='register') {
+      let uploadFilesAsArray = Object.entries(uploadFiles);
+      for (let i=0; i<5; i++) {
+        if (!uploadFilesAsArray[i][1]) return;
+      }
+      if (isIndividual !== "individual" && (!uploadFilesAsArray[5][1] || !uploadFilesAsArray[6][1])) return;
+
+      setIsSubmitted( isLogin==='register'? true : null);
+      console.log('Submit clicked');
+    }
   
     if (isLogin === 'login') {
       console.log('Email:', email);
@@ -558,6 +578,251 @@ function Login() {
                   <CustomDatePicker label="Issue Date" value={issueDate} handleChange={handleIssueDateChange} />
                   <CustomDatePicker label="Expiry Date" value={expiryDate} handleChange={handleExpiryDateChange} />
                   <CustomTextField label="Status" type="text" value={status} errorMessage={statusErrorMessage} handleChange={handleStatusChange} />
+                </div>
+
+
+                {/* Upload Documents */}
+
+                <div className="-ml-[1px] mb-[5px] font-semibold text-[18px]">
+                    Upload Documents
+                </div>
+
+                <div className="flex flex-wrap gap-x-[50px] gap-y-[30px]">
+                  
+                  <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                    <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">PAN Card (front and back)</h1>
+                    {
+                      (!uploadFiles.pan) ?
+                      <>
+                        <p className="text-[14px] text-[#6E6E72] font-medium ">
+                          Upload your File here or 
+                          <span 
+                            className="text-[#0066CD] cursor-pointer" 
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              pan: true
+                            }))}
+                          > Browse File</span>
+                        </p>
+                        <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                      </>
+                      :
+                      <div className=" w-full h-full flex justify-between items-center">
+                        <div className="flex gap-x-[10px] justify-center items-center">
+                          <Image src={image} />
+                          <p className="text-[#6E6E72] text-[12px]">PAN.jpg</p>
+                        </div>
+                        <Image src={closeRed} className="cursor-pointer"
+                          onClick={() => setUploadFiles( files => ({
+                            ...files,
+                            pan: false
+                          }))}
+                        />
+                      </div>
+                    }
+                  </div>
+
+                  <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                    <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">Aadhaar Card (front and back)</h1>
+                    {
+                      (!uploadFiles.aadhar) ?
+                      <>
+                        <p className="text-[14px] text-[#6E6E72] font-medium ">
+                          Upload your File here or 
+                          <span 
+                            className="text-[#0066CD] cursor-pointer" 
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              aadhar: true
+                            }))}
+                          > Browse File</span>
+                        </p>
+                        <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                      </>
+                      :
+                      <div className=" w-full h-full flex justify-between items-center">
+                        <div className="flex gap-x-[10px] justify-center items-center">
+                          <Image src={image} />
+                          <p className="text-[#6E6E72] text-[12px]">Aadhaar.jpg</p>
+                        </div>
+                        <Image src={closeRed} className="cursor-pointer"
+                          onClick={() => setUploadFiles( files => ({
+                            ...files,
+                            aadhar: false
+                          }))}
+                        />
+                      </div>
+                    }
+                  </div>
+
+                  <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                    <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">ARN Card</h1>
+                    {
+                      (!uploadFiles.arn) ?
+                      <>
+                        <p className="text-[14px] text-[#6E6E72] font-medium ">
+                          Upload your File here or 
+                          <span 
+                            className="text-[#0066CD] cursor-pointer" 
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              arn: true
+                            }))}
+                          > Browse File</span>
+                        </p>
+                        <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                      </>
+                      :
+                      <div className=" w-full h-full flex justify-between items-center">
+                        <div className="flex gap-x-[10px] justify-center items-center">
+                          <Image src={image} />
+                          <p className="text-[#6E6E72] text-[12px]">ARN.jpg</p>
+                        </div>
+                        <Image src={closeRed} className="cursor-pointer"
+                          onClick={() => setUploadFiles( files => ({
+                            ...files,
+                            arn: false
+                          }))}
+                        />
+                      </div>
+                    }
+                  </div>
+
+                  <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                    <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">Cancelled cheque of bank account</h1>
+                    {
+                      (!uploadFiles.cancelledCheque) ?
+                      <>
+                        <p className="text-[14px] text-[#6E6E72] font-medium ">
+                          Upload your File here or 
+                          <span 
+                            className="text-[#0066CD] cursor-pointer" 
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              cancelledCheque: true
+                            }))}
+                          > Browse File</span>
+                        </p>
+                        <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                      </>
+                      :
+                      <div className=" w-full h-full flex justify-between items-center">
+                        <div className="flex gap-x-[10px] justify-center items-center">
+                          <Image src={image} />
+                          <p className="text-[#6E6E72] text-[12px]">Cancelled cheque.jpg</p>
+                        </div>
+                        <Image src={closeRed} className="cursor-pointer"
+                          onClick={() => setUploadFiles( files => ({
+                            ...files,
+                            cancelledCheque: false
+                          }))}
+                        />
+                      </div>
+                    }
+                  </div>
+
+                  <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                    <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">Signature</h1>
+                    {
+                      (!uploadFiles.signature) ?
+                      <>
+                        <p className="text-[14px] text-[#6E6E72] font-medium ">
+                          Upload your File here or 
+                          <span 
+                            className="text-[#0066CD] cursor-pointer" 
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              signature: true
+                            }))}
+                          > Browse File</span>
+                        </p>
+                        <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                      </>
+                      :
+                      <div className=" w-full h-full flex justify-between items-center">
+                        <div className="flex gap-x-[10px] justify-center items-center">
+                          <Image src={image} />
+                          <p className="text-[#6E6E72] text-[12px]">Signature.jpg</p>
+                        </div>
+                        <Image src={closeRed} className="cursor-pointer"
+                          onClick={() => setUploadFiles( files => ({
+                            ...files,
+                            signature: false
+                          }))}
+                        />
+                      </div>
+                    }
+                  </div>
+
+                  { isIndividual !== "individual" &&
+                    <>
+                    <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                      <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">MOA and AOA</h1>
+                      {
+                        (!uploadFiles.moaAndAoa) ?
+                        <>
+                          <p className="text-[14px] text-[#6E6E72] font-medium ">
+                            Upload your File here or 
+                            <span 
+                              className="text-[#0066CD] cursor-pointer" 
+                              onClick={() => setUploadFiles( files => ({
+                                ...files,
+                                moaAndAoa: true
+                              }))}
+                            > Browse File</span>
+                          </p>
+                          <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                        </>
+                        :
+                        <div className=" w-full h-full flex justify-between items-center">
+                          <div className="flex gap-x-[10px] justify-center items-center">
+                            <Image src={image} />
+                            <p className="text-[#6E6E72] text-[12px]">MOA and AOA.jpg</p>
+                          </div>
+                          <Image src={closeRed} className="cursor-pointer"
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              moaAndAoa: false
+                            }))}
+                          />
+                        </div>
+                      }
+                    </div>
+
+                    <div className=" w-[380px] h-[50px] border-[#c4c4c4] border-[1px] rounded-[10px] relative px-[20px] py-[6px]">
+                      <h1 className="text-[12px] text-[#6E6E72] font-medium bg-white px-[2px] absolute top-[-10px] left-[13px]">Authorised Signatory List</h1>
+                      {
+                        (!uploadFiles.authorizedSignatoryList) ?
+                        <>
+                          <p className="text-[14px] text-[#6E6E72] font-medium ">
+                            Upload your File here or 
+                            <span 
+                              className="text-[#0066CD] cursor-pointer" 
+                              onClick={() => setUploadFiles( files => ({
+                                ...files,
+                                authorizedSignatoryList: true
+                              }))}
+                            > Browse File</span>
+                          </p>
+                          <p className="text-[12px] text-[#6E6E72]">File format : JPG, PNG</p>
+                        </>
+                        :
+                        <div className=" w-full h-full flex justify-between items-center">
+                          <div className="flex gap-x-[10px] justify-center items-center">
+                            <Image src={image} />
+                            <p className="text-[#6E6E72] text-[12px]">Authorised Signatory List.jpg</p>
+                          </div>
+                          <Image src={closeRed} className="cursor-pointer"
+                            onClick={() => setUploadFiles( files => ({
+                              ...files,
+                              authorizedSignatoryList: false
+                            }))}
+                          />
+                        </div>
+                      }
+                    </div>
+                    </>
+                  }
                 </div>
 
                 {/* Products and Services */}
