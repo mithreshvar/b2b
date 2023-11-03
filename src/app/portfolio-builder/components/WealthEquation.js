@@ -227,21 +227,17 @@ export default function WealthEquation() {
     const [units, setUnits] = useState('Default')
 
     const UnitConversion = (number) => {
-        number = parseInt(number)
-        if (units === 'units(k,l,cr)') {
-            if (number >= 10000000) {
-            return parseInt(number / 10000000) + ' Cr';
-            } else if (number >= 100000) {
-            return parseInt(number / 100000) + ' L';
-            } else if (number >= 1000) {
-            return parseInt(number / 1000) + ' K';
-            } else {
-            return number;
-            }
-        }
+
+        if (number >= 10000000) 
+            return (number / 10000000).toFixed(1) + ' Cr';
+        if (number >= 100000) 
+            return (number / 100000).toFixed(1) + ' L';
+        if (number >= 1000) 
+            return (number / 1000).toFixed(1) + ' K';
         return number;
+        
     };
-      
+
     return(
         <div className="px-[60px] flex flex-col gap-y-[20px] ">
             <div className="flex justify-between">
@@ -321,24 +317,10 @@ export default function WealthEquation() {
                                                     </thead>
                                                     <tbody>
                                                         {
-                                                            units == 'Default' &&
-                                                            tableData.totalAggregateInvestment.data.map( item =>{
-                                                                    return(
-                                                                        <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                            <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                                        </tr>
-                                                                    )
-                                                                }
-                                                            )
-                                                        }{
-                                                            units == 'units(k,l,cr)' &&
-                                                            tableData.totalAggregateInvestment.data.map( item =>{
-                                                                    return(
-                                                                        <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                            <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
-                                                                        </tr>
-                                                                    )
-                                                                }
+                                                            tableData.totalAggregateInvestment.data.map( item =>
+                                                                <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
+                                                                    <td className="h-[44px] text-center">{(units == 'Default') ? '₹ ' + item.toLocaleString() : '₹ ' + UnitConversion(item) }</td>
+                                                                </tr>
                                                             )
                                                         }
                                                     </tbody>
@@ -362,29 +344,13 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         noOfYears.map( (year, yearIndex) => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
                                                                 <td className="h-[44px] text-center">{year}</td>
                                                                 {
                                                                     percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.totalAggregateInvestment[percent][yearIndex].toLocaleString()}</td>
+                                                                        <td className="h-[44px] text-center">{ (units == 'Default') ? '₹ ' + tableData.totalAggregateInvestment[percent][yearIndex].toLocaleString() : '₹ ' + UnitConversion(tableData.totalAggregateInvestment[percent][yearIndex])}</td>
                                                                     )
-                                                                }
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        noOfYears.map( (year, yearIndex) => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{year}</td>
-                                                                {
-                                                                    percentage.map( percent => {
-                                                                        return(
-                                                                            <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.totalAggregateInvestment[percent][yearIndex]).toLocaleString()}</td> 
-                                                                        )
-                                                                    })
                                                                 }
                                                             </tr>
                                                         )
@@ -406,18 +372,9 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         tableData.oneTimeInvestment.data.map( item => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        tableData.oneTimeInvestment.data.map( item => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                                <td className="h-[44px] text-center">{(units == 'Default') ? '₹ ' + item.toLocaleString() : '₹ ' + UnitConversion(item) }</td>
                                                             </tr>
                                                         )
                                                     }
@@ -442,26 +399,12 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         noOfYears.map( (year, yearIndex) => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
                                                                 <td className="h-[44px] text-center">{year}</td>
                                                                 {
                                                                     percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.oneTimeInvestment[percent][yearIndex].toLocaleString()}</td>
-                                                                    )
-                                                                }
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        noOfYears.map( (year, yearIndex) => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{year}</td>
-                                                                {
-                                                                    percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.oneTimeInvestment[percent][yearIndex]).toLocaleString()}</td>
+                                                                        <td className="h-[44px] text-center">{(units == 'Default') ? '₹ ' + tableData.oneTimeInvestment[percent][yearIndex].toLocaleString() : '₹ ' + UnitConversion(tableData.oneTimeInvestment[percent][yearIndex])}</td>
                                                                     )
                                                                 }
                                                             </tr>
@@ -484,18 +427,9 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         tableData.monthlySaving.data.map( item => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        tableData.monthlySaving.data.map( item => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                                <td className="h-[44px] text-center">{(units == 'Default') ? '₹ ' + item.toLocaleString() : '₹ ' + UnitConversion(item)}</td>
                                                             </tr>
                                                         )
                                                     }
@@ -520,26 +454,12 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         noOfYears.map( (year, yearIndex) => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
                                                                 <td className="h-[44px] text-center">{year}</td>
                                                                 {
                                                                     percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.monthlySaving[percent][yearIndex].toLocaleString()}</td>
-                                                                    )
-                                                                }
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        noOfYears.map( (year, yearIndex) => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{year}</td>
-                                                                {
-                                                                    percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.monthlySaving[percent][yearIndex]).toLocaleString()}</td>
+                                                                        <td className="h-[44px] text-center">{(units == 'Default') ? '₹ ' + tableData.monthlySaving[percent][yearIndex].toLocaleString() : '₹ ' + UnitConversion(tableData.monthlySaving[percent][yearIndex])}</td>
                                                                     )
                                                                 }
                                                             </tr>
@@ -562,18 +482,9 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         tableData.yearlyOneTimeSaving.data.map( item => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{'₹ ' + item.toLocaleString()}</td>
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        tableData.yearlyOneTimeSaving.data.map( item => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{'₹ ' + UnitConversion(item).toLocaleString()}</td>
+                                                                <td className="h-[44px] text-center">{(units == 'Default') ? '₹ ' + item.toLocaleString() : '₹ ' + UnitConversion(item)}</td>
                                                             </tr>
                                                         )
                                                     }
@@ -598,26 +509,12 @@ export default function WealthEquation() {
                                                 </thead>
                                                 <tbody>
                                                     {
-                                                        units == 'Default' &&
                                                         noOfYears.map( (year, yearIndex) => 
                                                             <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
                                                                 <td className="h-[44px] text-center">{year}</td>
                                                                 {
                                                                     percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + tableData.yearlyOneTimeSaving[percent][yearIndex].toLocaleString()}</td>
-                                                                    )
-                                                                }
-                                                            </tr>
-                                                        )
-                                                    }
-                                                    {
-                                                        units == 'units(k,l,cr)' &&
-                                                        noOfYears.map( (year, yearIndex) => 
-                                                            <tr class="even:bg-white odd:bg-[#F9FBFF] text-[14px] font-medium">
-                                                                <td className="h-[44px] text-center">{year}</td>
-                                                                {
-                                                                    percentage.map( percent => 
-                                                                        <td className="h-[44px] text-center">{'₹ ' + UnitConversion(tableData.yearlyOneTimeSaving[percent][yearIndex]).toLocaleString()}</td>
+                                                                        <td className="h-[44px] text-center">{(units == 'Default') ?'₹ ' + tableData.yearlyOneTimeSaving[percent][yearIndex].toLocaleString() : '₹ ' + UnitConversion(tableData.yearlyOneTimeSaving[percent][yearIndex])}</td>
                                                                     )
                                                                 }
                                                             </tr>
