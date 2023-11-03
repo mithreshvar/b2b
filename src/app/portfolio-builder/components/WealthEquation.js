@@ -2,6 +2,10 @@ import { useState } from "react";
 import { CustomTextField } from "./InputFields";
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import LineChart from "./graph/LineChart";
+import { Popper } from "@mui/material";
 
 export default function WealthEquation() {
 
@@ -222,6 +226,18 @@ export default function WealthEquation() {
         }));
     }
 
+
+    const [intervalYears, setIntervalYears] = useState(1);
+    const [selectedGraphPercent, setSelectedGraphPercent] = useState(6);
+    
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
+
+    const openIntervalYearsPopup = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+    };
+
     const [selected, setSelected] = useState('Total Investment');
 
     const [units, setUnits] = useState('Default')
@@ -271,7 +287,7 @@ export default function WealthEquation() {
 
             {
                 (tableData.totalAggregateInvestment) &&
-                <div className="bg-white p-[30px] py-[20px] rounded-[15px] flex flex-col gap-y-[30px]">
+                <div className="bg-white p-[30px] py-[20px] rounded-[15px] flex flex-col gap-y-[20px]">
                     <div className="flex justify-between">
                         <div className="flex gap-x-[20px] ">
                             <button className={`relative h-[34px] rounded-t-[10px] p-[10px] px-[30px] font-semibold shrink-0  ${(selected == 'Total Investment') ? 'bg-[#DCEBFE] text-[#0071E7] ' : 'bg-[#F7F8FF] text-[#BEBEBE]'} `} onClick={() => {setSelected('Total Investment')}} >
@@ -289,9 +305,9 @@ export default function WealthEquation() {
                         </div>
 
                         <div className="flex gap-x-[5px] items-center">
-                            <div className="flex h-[34px] w-[172px] bg-[#F5F7FE] rounded-[8px] ga- p-[5px]">
-                                <button className={` h-full w-[80px] text-[12px] font-semibold ${ units == 'Default' && ' bg-white text-primary rounded-[8px] '}`} onClick={()=>setUnits('Default')}>Default</button>
-                                <button className={` h-full w-[80px] text-[12px] font-semibold ${ units == 'units(k,l,cr)' && ' bg-white text-primary rounded-[8px] '}`} onClick={()=>setUnits('units(k,l,cr)')}>units(k,l,cr)</button>
+                            <div className="flex h-[34px] gap-x-[5px] bg-[#F5F7FE] rounded-[8px] p-[5px] mr-[35px]">
+                                <button className={` h-full min-w-[80px] px-[10px] text-[12px] font-semibold ${ units == 'Default' && ' bg-white text-primary rounded-[8px] '}`} onClick={()=>setUnits('Default')}>Default</button>
+                                <button className={` h-full min-w-[80px] px-[10px] text-[12px] font-semibold ${ units == 'units(k,l,cr)' && ' bg-white text-primary rounded-[8px] '}`} onClick={()=>setUnits('units(k,l,cr)')}>units(k,l,cr)</button>
                             </div>
                             <AntSwitch checked={showGraph} onClick={(event) => setShowGraph(event.target.checked)} inputProps={{ 'aria-label': 'ant design' }} />
                             <h6 className="text-[#6E6E72] text-[12px]">Graph</h6>
@@ -300,8 +316,42 @@ export default function WealthEquation() {
 
                     {
                         (showGraph) ?
-                        <div className="flex">
-                            
+                        <div className="flex flex-col">
+                            <div className="flex justify-between items-center">
+                                <div className="flex items-center gap-x-[30px]">
+                                    <div className="flex gap-x-[13px]">
+                                        {
+                                            percentage.map( percent =>
+                                                <button className={` h-[23px] w-[42px] rounded-[13px] text-[12px] font-semibold flex items-center justify-center ${(percent == selectedGraphPercent)? " bg-[#0171E7] text-white " :" bg-[#F7F8FF] text-[#BEBEBE] "} `} onClick={() => setSelectedGraphPercent(percent)}>{percent}%</button>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="flex gap-x-[]">
+                                        <p className="text-[14px] font-medium">Interval Years: <span className="text-[#0066CD] font-semibold">{intervalYears}</span></p>
+                                        <button onClick={openIntervalYearsPopup} onBlur={() => setAnchorEl(null)} className={` transition-all duration-[0.3s] ${!anchorEl && " [transform:scaleY(-1)] "} `} ><KeyboardArrowUpIcon sx={{ color: "#0171E7"}} /></button>
+                                        <Popper id={id} open={open} anchorEl={anchorEl} >
+                                            <div className=' w-[60px] text-[14px] flex flex-col bg-white rounded-[10px] border-[1px] border-[#F2F2F2] shadow-[0px_10px_20px_#00000014] p-[5px] '>
+                                                {   
+                                                    [1,2,3,4,5].map( n =>
+                                                        <button className="text-left pl-[20px] hover:bg-[#f5f7fe] hover:font-medium rounded-[6px] " onClick={() => {setIntervalYears(n); setAnchorEl(null)}} >{n}</button>
+                                                    )
+                                                }
+                                            </div>
+                                        </Popper>
+                                    </div>
+                                </div>
+                                <div className="flex items-center font-medium gap-x-[40px]">
+                                    <div className="flex items-center gap-x-[7px]">
+                                        <div className=" h-[14px] w-[14px] shrink-0 rounded-full bg-[#B8BAC1] " />
+                                        <p>Invested Amount</p>
+                                    </div>
+                                    <div className="flex items-center gap-x-[6px]">
+                                        <div className=" h-[14px] w-[14px] shrink-0 rounded-full bg-[#0171E7] " />
+                                        <p>Current Amount</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <LineChart data={[[1,1000000],[2,2000000],[3,3000000],[4,4000000],[5,5000000]]} interval={intervalYears} />
                         </div>
                         :
                         <div className="flex flex-col ">
