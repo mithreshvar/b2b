@@ -3,7 +3,6 @@ import { CustomTextField } from "./InputFields";
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LineChart from "./graph/LineChart";
 import { Popper } from "@mui/material";
 
@@ -78,6 +77,8 @@ export default function WealthEquation() {
         }
     })
 
+    const [graphData, setGraphData] = useState({ })
+
     const handleInputDataChange = event => {
         const {id, value, checked} = event.target;
         const newState = {...inputData};
@@ -109,7 +110,7 @@ export default function WealthEquation() {
     const noOfYears = [2,5,7,10,12,15,20,25,30];
     const percentage = [6,8,10,12,15,18,20];
     const [tableData, setTableData] = useState({})
-
+    console.log(graphData)
     function calMonthlySavings (){
         let arr = []
         let monthlySIP = Number(inputData["Monthly SIP (Rs.)"].value)
@@ -122,25 +123,34 @@ export default function WealthEquation() {
             monthlySIP += monthlySIP * yearlyIncreaseEveryYear/100;
         }
         const monthlySaving = {data: arr};
+        const monthlySavingPoints = {};
         
         percentage.forEach( percent => {
             let arr = []
+            let graphArr = []
             let monthlySIP = Number(inputData["Monthly SIP (Rs.)"].value);
             let currentAmount = Number(inputData["Monthly SIP (Rs.)"].value);
+            graphArr.push(currentAmount)
             let yearlyIncreaseEveryYear = Number(inputData["Monthly SIP (Rs.)"]["Increase Every Year by (%)"].value)
             currentAmount += currentAmount*percent/100/12;
             for (let i=2; i<=30*12; i++){
                 currentAmount = (currentAmount+monthlySIP) * (1 + (percent/100/12));
                 // if (noOfYears.includes(i/12)) arr.push( '₹ ' + Math.round(currentAmount).toLocaleString() );
+                if (i%12 == 0) graphArr.push(Math.round(currentAmount))
                 if (noOfYears.includes(i/12)) arr.push( Math.round(currentAmount) );
                 if (i%12 == 0) monthlySIP += monthlySIP * yearlyIncreaseEveryYear/100;
             }
             monthlySaving[percent] = arr;
+            monthlySavingPoints[percent] = graphArr;
         })
         // console.log(monthlySaving)
         setTableData(prevState => ({
             ...prevState,
             monthlySaving
+        }));
+        setGraphData(prevState => ({
+            ...prevState,
+            monthlySaving: monthlySavingPoints
         }));
     }
 
@@ -148,22 +158,31 @@ export default function WealthEquation() {
         // let arr = new Array(9).fill('₹ ' + Math.round(Number(inputData["Current Investment (Rs.)"].value)).toLocaleString())
         let arr = new Array(9).fill(Math.round(Number(inputData["Current Investment (Rs.)"].value)))
         const oneTimeInvestment = {data: arr};
+        const oneTimeInvestmentPoints = {};
         percentage.forEach( percent => {
             let arr = []
+            let graphArr = []
             let yearlyLumpsum = Number(inputData["Current Investment (Rs.)"].value);
             let currentAmount = Number(inputData["Current Investment (Rs.)"].value);
-            for (let i=2; i<=30; i++){
+            graphArr.push(currentAmount);
+            for (let i=1; i<=30; i++){
                 currentAmount = yearlyLumpsum*(1+(percent/100))**i;
                 // if (noOfYears.includes(i)) arr.push( '₹ ' + Math.round(currentAmount).toLocaleString() )
+                graphArr.push(Math.round(currentAmount));
                 if (noOfYears.includes(i)) arr.push( Math.round(currentAmount) )
             }
             
             oneTimeInvestment[percent] = arr;
+            oneTimeInvestmentPoints[percent] = graphArr;
         })
         // console.log(oneTimeInvestment)
         setTableData(prevState => ({
             ...prevState,
             oneTimeInvestment
+        }));
+        setGraphData(prevState => ({
+            ...prevState,
+            oneTimeInvestment : oneTimeInvestmentPoints
         }));
     }
 
@@ -178,25 +197,35 @@ export default function WealthEquation() {
             currentAmount += (currentAmount*yearlyIncreaseEveryYear/100) + yearlyOneTimeInvestment;
         }
         const yearlyOneTimeSaving = {data: arr};
+        const yearlyOneTimeSavingPoints = {};
         
         percentage.forEach( percent => {
             let arr = []
+            let graphArr = [];
             let yearlyLumpsum = Number(inputData["Yearly One Time Investment (Rs.)"].value);
             let currentAmount = Number(inputData["Yearly One Time Investment (Rs.)"].value);
+            graphArr.push(currentAmount)
             let yearlyIncreaseEveryYear = Number(inputData["Yearly One Time Investment (Rs.)"]["Increase Every Year by (%)"].value)
             currentAmount += currentAmount*percent/100;
+            graphArr.push(currentAmount)
             for (let i=2; i<=30; i++){
                 yearlyLumpsum += yearlyLumpsum*yearlyIncreaseEveryYear/100;
                 currentAmount = (currentAmount + yearlyLumpsum)*(1+(percent/100))
                 // if (noOfYears.includes(i)) arr.push( '₹ ' + Math.round(currentAmount).toLocaleString() )
+                graphArr.push(Math.round(currentAmount))
                 if (noOfYears.includes(i)) arr.push( Math.round(currentAmount) )
             }
             yearlyOneTimeSaving[percent] = arr;
+            yearlyOneTimeSavingPoints[percent] = graphArr;
         })
         // console.log(yearlyOneTimeSaving)
         setTableData(prevState => ({
             ...prevState,
             yearlyOneTimeSaving
+        }));
+        setGraphData(prevState => ({
+            ...prevState,
+            yearlyOneTimeSaving : yearlyOneTimeSavingPoints
         }));
     }
 
@@ -333,7 +362,7 @@ export default function WealthEquation() {
                                             <div className=' w-[60px] text-[14px] flex flex-col bg-white rounded-[10px] border-[1px] border-[#F2F2F2] shadow-[0px_10px_20px_#00000014] p-[5px] '>
                                                 {   
                                                     [1,2,3,4,5].map( n =>
-                                                        <button className="text-left pl-[20px] hover:bg-[#f5f7fe] hover:font-medium rounded-[6px] " onClick={() => {setIntervalYears(n); setAnchorEl(null)}} >{n}</button>
+                                                        <button className="text-left pl-[20px] hover:bg-[#f5f7fe] hover:font-medium rounded-[6px] " onMouseDown={() => {setIntervalYears(n); setAnchorEl(null)}} >{n}</button>
                                                     )
                                                 }
                                             </div>
@@ -351,7 +380,7 @@ export default function WealthEquation() {
                                     </div>
                                 </div>
                             </div>
-                            <LineChart data={[[1,1000000],[2,2000000],[3,3000000],[4,4000000],[5,5000000]]} interval={intervalYears} />
+                            <LineChart graphData={graphData} data={[[1,1000000],[10,2000000],[3,3000000],[4,4000000],[5,5000000]]} interval={intervalYears} selectedGraphPercent={selectedGraphPercent} selected={selected} />
                         </div>
                         :
                         <div className="flex flex-col ">
