@@ -29,7 +29,7 @@ import touchicon from '/public/touchicon.png'
 import service from '/public/service.svg'
 import fi from '/public/fi.svg'
 import research from '/public/research.svg'
-import SwiperCustom from './SwiperCustom';
+// import SwiperCustom from './SwiperCustom';
 export default function Home() {
     const data = [["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", "James Bond", "Business"], ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", "James Bond", "Business"], ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", "James Bond", "Business"]]
 
@@ -135,7 +135,7 @@ export default function Home() {
                     </div>
                     <div className={`flex flex-col justify-center items-center bg-white h-screen w-full duration-[0.6s] transition-all overflow-auto z-0`}>
                         <p className='font-medium text-[30px]'>Our <span className='font-bold text-[#0066CD] '>Testimonials</span></p>
-                        <SwiperCustom content={data} />
+                        {/* <SwiperCustom content={data} /> */}
                     </div>
                     <div className={`bg-white h-screen  duration-[0.6s] transition-all overflow-auto z-0`}>
                         <div className='mx-[85px] rounded-[17px] bg-[#F2F8FE] bg-opacity-50 pt-[40px] px-[35px] pb-[77px] flex flex-col'>

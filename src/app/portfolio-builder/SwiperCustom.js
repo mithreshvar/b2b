@@ -57,7 +57,7 @@
 
 import * as React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-// import Carousel from 'react-material-ui-carousel';
+import Carousel from 'react-material-ui-carousel';
 
 const SwiperCustom = () => (
     <div className='w-[500px]'>
