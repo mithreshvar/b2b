@@ -16,6 +16,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
+        globalObject: 'this',
         filename: 'scalextric.js',
         library: 'Scalextric',
         libraryTarget: 'umd',
