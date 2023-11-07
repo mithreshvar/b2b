@@ -19,7 +19,7 @@ import sortedAscending from "/public/sortedAscending.svg"
 import sortedDecending from "/public/sortedDecending.svg"
 import { Search } from "@mui/icons-material";
 import info from "/public/infoIcon.svg"
-import { ActiveLargeCapHoverPage, DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, MonitorOthersHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, PortfolioExpenseRatioHoverPage, SIPHoverPage, SectorThematicHoverPage, SmallCapHoverPage, SpecificEquityHoverPage, StarRatedHoverPage, YTMHoverPage, AAAHoverPage, SpecificDebtHoverPage, NonDebtWithG3ExposureHoverPage } from "./Hoverpage/Hoverpage";
+import { ActiveLargeCapHoverPage, DebtExposureHoverPage, ELSSExposureHoverPage, EquityExposureHoverPage, MonitorOthersHoverPage, FISelectHoverPage, GoldOthersExposureHoverPage, HighestAUMHoverPage, HighestFundHoverPage, OvernightLiquidExposureHoverPage, PortfolioExpenseRatioHoverPage, SIPHoverPage, SectorThematicHoverPage, SmallCapHoverPage, SpecificEquityHoverPage, StarRatedHoverPage, YTMHoverPage, AAAHoverPage, SpecificDebtHoverPage, NonDebtWithG3ExposureHoverPage, PercentPortfolioHoverPage } from "./Hoverpage/Hoverpage";
 import AUMHoverPage from "./Hoverpage/Hoverpage";
 import Cell from "./Cell";
 import close from '/public/close.svg'
@@ -739,6 +739,7 @@ export default function Portfolio() {
                                             (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Highest AMC Exposure' ) && <HighestAUMHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
                                             (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Highest Fund Exposure' ) && <HighestFundHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
                                             (showDrillDown.tableName == 'Diversification Risk' && showDrillDown.header == 'Total Number of Non Debt Funds with <3% Exposure' ) && <NonDebtWithG3ExposureHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
+                                            (showDrillDown.tableName == 'Liquidity' && showDrillDown.header == '% of Portfolio under lock-in' ) && <PercentPortfolioHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
                                             (showDrillDown.tableName == 'Liquidity' && showDrillDown.header == 'ELSS Exposure' ) && <ELSSExposureHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
                                             (showDrillDown.tableName == 'Cost' && showDrillDown.header == 'Portfolio Expense Ratio' ) && <PortfolioExpenseRatioHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
                                             (showDrillDown.tableName == 'Equity Monitor' && showDrillDown.header == 'Equity Exposure' ) && <EquityExposureHoverPage  height={tablesContainerRef.current.offsetHeight-70+'px'}/> ||
