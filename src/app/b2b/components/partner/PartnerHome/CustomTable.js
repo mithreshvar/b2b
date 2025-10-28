@@ -6,8 +6,9 @@ import Table from "./Table.js";
 import { useEffect, useState } from "react";
 import Arrow from "/public/partner/Arrow.js";
 import Logo from '/public/Logo.json'
-import Lottie from "lottie-react";
-
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+// import Lottie from "lottie-react";
 
 export default function CustomTable({data, headers, setActive, pagination=true, headerStyle, download=false, rightNav=false, mergeTable=false, dataType='Users' }) {
 
